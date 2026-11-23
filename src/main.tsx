@@ -10,7 +10,15 @@ createRoot(document.getElementById('root')!).render(
 );
 
 // Offline support (production builds served over https or localhost only; failures are harmless).
-if (import.meta.env.PROD && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
+// Not inside a hosting frame (e.g. a claude.ai artifact), where service workers cannot run.
+const framed = (() => {
+  try {
+    return window.self !== window.top;
+  } catch {
+    return true;
+  }
+})();
+if (import.meta.env.PROD && !framed && 'serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost')) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./sw.js').catch(() => undefined);
   });
