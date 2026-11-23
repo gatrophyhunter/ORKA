@@ -135,7 +135,7 @@ export function PredictTab() {
                   <div style={{ width: `${Math.min(ratio, 1) * 100}%` }} />
                 </div>
               )}
-              {mv && (d.status === 'calibrated' || d.status === 'user-calibrated' || d.status === 'estimated') && (
+              {mv && (d.status === 'calibrated' || d.status === 'estimated') && !d.powder?.user && !(d.powder && d.powder.model?.status === 'user-calibrated') && (
                 <div className={`small ${d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? 'warn-text' : 'muted'}`} data-testid="model-error">
                   Model error on held-out published data: median ±{mv.heldOutPressureP50Pct} %, 1 in 10 worse than ±{mv.heldOutPressureP90Pct} %
                   {mv.heldOutPressureBiasPct < 0 ? ` (on average ${Math.abs(mv.heldOutPressureBiasPct)} % low)` : ''}
