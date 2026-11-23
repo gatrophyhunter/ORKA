@@ -14,7 +14,8 @@ ORKA covers **centerfire rifle** only. These numbers are the honest answer to "i
 - **Held-out test (leave-one-cartridge-out):** each powder is refitted *without* one cartridge's loads and then predicts that cartridge's published velocities and pressures.
   - Only cartridges whose test-case brass capacity is published (by the brass maker or a measured comparison) are held out.
   - Training for the test uses only loads with published capacities, so no inferred quantity leaks into it.
-  - Up to 6 cartridges per powder are held out.
+  - The design holds out up to 6 cartridges per powder, but **in practice only .308 Win and .223 Rem qualify**. They are the only cartridges where the publisher's test brass (Winchester) has a published capacity. Every held-out number below was therefore measured on those two mid-size cartridges. For other cartridges, such as magnums, small-capacity cases and big bores, accuracy is **not measured**, and the app says so on predictions outside the validated set.
+  - One known leak: the shot-start pressure of monolithic bullets (a single global value) was fitted on loads that include the held-out cartridges. Its effect on the reported errors is small, but the test is not perfectly clean.
 
 ## Results (held out)
 
