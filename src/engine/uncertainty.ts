@@ -31,7 +31,7 @@ export const DEFAULT_SPEC_CALIBRATED: UncertaintySpec = {
 
 export const DEFAULT_SPEC_ESTIMATED: UncertaintySpec = {
   ...DEFAULT_SPEC_CALIBRATED,
-  betaRel: 0.15,
+  betaRel: 0.25,
   forceRel: 0.04,
 };
 

@@ -8,9 +8,10 @@ import { ErrorList, EstimateWarning, NumberField, PlainNumber, StatusChip } from
 import { fmtChargeKg, fmtP, fmtPct, fmtV, fmtMs } from './format';
 import { useApp } from './state';
 import { useLoad } from './useLoad';
+import { publishedMatches, ScopeWarnings } from './CrossCheck';
 
 export function LadderTab() {
-  const { prefs, patchInputs } = useApp();
+  const { prefs, patchInputs, db, builder } = useApp();
   const sys = prefs.units;
   const d = useLoad();
   const base = d.setup;
@@ -24,6 +25,10 @@ export function LadderTab() {
   const [velSol, setVelSol] = useState<ChargeSolution | null | 'unreachable'>(null);
   const [busy, setBusy] = useState(false);
   const limit = d.limit.limitPa;
+  const pubMax = (() => {
+    const rowsPub = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr).filter((r) => r.loadType === 'max');
+    return rowsPub.length ? Math.min(...rowsPub.map((r) => r.chargeGr)) : null;
+  })();
 
   if (!base) {
     return (
@@ -62,6 +67,10 @@ export function LadderTab() {
           )}
         </div>
         <EstimateWarning status={d.status} />
+        <ScopeWarnings d={d} chargeGr={builder.inputs.chargeGr} />
+        {pubMax !== null && (
+          <div className="alert info small">Maker's published maximum for these components: <strong>{pubMax.toFixed(1)} gr</strong>. Rows above it are marked “pub max”.</div>
+        )}
         {limit === null && <div className="alert warn">No pressure limit set — rows cannot be flagged. {d.limit.note}</div>}
         <div className="grid-4" style={{ marginTop: 8 }}>
           <NumberField label="Start charge" qty="charge" value={s0} onChange={setStartGr} testId="ladder-start" />
@@ -90,7 +99,8 @@ export function LadderTab() {
               </thead>
               <tbody>
                 {rows.map((r) => {
-                  const over = limit !== null && r.overLimit;
+                  const overPub = pubMax !== null && U.kgToGr(r.chargeKg) > pubMax + 1e-9;
+                  const over = (limit !== null && r.overLimit) || overPub;
                   return (
                     <tr key={r.chargeKg} className={over ? 'over' : ''}>
                       <td className="nowrap">
@@ -100,13 +110,14 @@ export function LadderTab() {
                           </span>
                         )}
                         {fmtChargeKg(r.chargeKg, sys)}
+                        {overPub && <span className="small" style={{ marginLeft: 6, color: 'var(--danger)' }}>pub max</span>}
                       </td>
                       <td className="num">{fmtP(r.result.peakBreechPa, sys)}</td>
                       <td className="num">{limit !== null ? fmtPct(r.pressureRatio, 0) : '—'}</td>
                       <td className="num">{r.result.status === 'muzzle' ? fmtV(r.result.muzzleVelocityMs, sys) : r.result.status}</td>
                       <td className="num">{r.result.fillRatio === null ? '—' : fmtPct(r.result.fillRatio, 0)}</td>
                       <td className="num">{fmtPct(r.result.burntAtMuzzle, 0)}</td>
-                      <td className="num">{fmtMs(r.result.barrelTimeS)}</td>
+                      <td className="num">{fmtMs(r.result.barrelTime10S)}</td>
                       <td>
                         <button className="btn small" onClick={() => applyCharge(r.chargeKg)} disabled={over}>
                           use

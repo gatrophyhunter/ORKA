@@ -1,0 +1,11 @@
+{
+  "name": "ORKA Load Lab",
+  "short_name": "ORKA",
+  "description": "Interior-ballistics load prediction with pressure limits, parametric powder search and a sourced component database.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b6e8a",
+  "theme_color": "#0b6e8a",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

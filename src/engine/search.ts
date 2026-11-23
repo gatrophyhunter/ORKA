@@ -118,6 +118,8 @@ export interface PowderCandidate {
   model: PropellantModel;
   /** Provenance of the model parameters — surfaced in results so users see what they are trusting. */
   status: 'calibrated' | 'user-calibrated' | 'estimated';
+  /** Heat-loss multiplier fitted together with this powder (default 1). */
+  heatScale?: number;
 }
 
 export interface ParametricConstraints {
@@ -156,7 +158,11 @@ export function parametricSearch(
   const rows: ParametricRow[] = [];
   const quietBase: LoadSetup = { ...base, options: { ...base.options, recordTrace: false, rtol: Math.max(base.options.rtol, 1e-6) } };
   candidates.forEach((cand, i) => {
-    const s: LoadSetup = { ...quietBase, propellant: cand.model };
+    const s: LoadSetup = {
+      ...quietBase,
+      propellant: cand.model,
+      options: { ...quietBase.options, heatLoss: { ...quietBase.options.heatLoss, scale: cand.heatScale ?? quietBase.options.heatLoss.scale } },
+    };
     const sol = solveChargeForPressure(s, c.pressureLimitPa, { maxFillRatio: c.maxFillRatio, tolKg: 2e-6 });
     const r = sol.result;
     const reasons: string[] = [];

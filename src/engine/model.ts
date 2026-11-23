@@ -14,6 +14,7 @@ import type { LoadSetup, ModelOptions, SimResult, Trace, BulletGeometry, Propell
 export const DEFAULT_OPTIONS: ModelOptions = {
   shotStartPressurePa: 25e6,
   ignitionPressurePa: 5e6,
+  gaugeDistanceM: 0.025,
   secondaryWorkCoeff: 1.05,
   heatLoss: { enabled: true, scale: 1, wallTempK: 293.15 },
   rtol: 1e-7,
@@ -125,7 +126,9 @@ export function simulate(setup: LoadSetup): SimResult {
   const S = g.S;
   const L = g.travelM;
   const ff = formFunction(burn);
-  const tempFactor = Math.max(0.05, 1 + burn.tempCoeffPerK * (setup.propellantTempC - burn.refTempC));
+  const dT = setup.propellantTempC - burn.refTempC;
+  const kT = dT < 0 && burn.tempCoeffColdPerK !== undefined ? burn.tempCoeffColdPerK : burn.tempCoeffPerK;
+  const tempFactor = Math.max(0.05, 1 + kT * dT);
   const betaEff = burn.beta * tempFactor;
   const n = burn.n;
   const heat = o.heatLoss;
@@ -142,12 +145,14 @@ export function simulate(setup: LoadSetup): SimResult {
     messages,
     peakBreechPa: NaN,
     peakBasePa: NaN,
+    peakGaugePa: NaN,
     timeOfPeakS: NaN,
     travelAtPeakM: NaN,
     muzzleVelocityMs: NaN,
     muzzleBreechPa: NaN,
     barrelTimeS: NaN,
     travelTimeS: NaN,
+    barrelTime10S: NaN,
     shotStartTimeS: NaN,
     burntAtMuzzle: NaN,
     burnoutTravelM: null,
@@ -170,6 +175,10 @@ export function simulate(setup: LoadSetup): SimResult {
   }
 
   const Vf0 = V0 - solidVol;
+  // Gauge station as a fraction of the powder-chamber volume (chamber approximated as a cylinder of the
+  // case's internal length), then expressed in the Lagrange volume coordinate s = V(gauge)/V(total gas).
+  const innerLen = Math.max(setup.caseLengthM - g.seatingDepthM, 1e-3);
+  const gaugeVol = Math.min(1, Math.max(0, o.gaugeDistanceM / innerLen)) * V0;
   const Eig = o.ignitionPressurePa * Vf0;
   const p0 = o.shotStartPressurePa;
   const chemEnergy = (f * C) / theta;
@@ -245,11 +254,17 @@ export function simulate(setup: LoadSetup): SimResult {
   };
 
   const trace: Trace | undefined = o.recordTrace
-    ? { t: [], x: [], v: [], pBreech: [], pBase: [], psi: [] }
+    ? { t: [], x: [], v: [], pBreech: [], pBase: [], pGauge: [], psi: [] }
     : undefined;
 
   const breechOf = (p: number) => (moving ? p * breechFactor : p);
   const baseOf = (p: number) => (moving ? p * baseFactor : p);
+  const gaugeOf = (p: number, yy: Vec) => {
+    if (!moving) return p;
+    const totalVol = V0 + S * yy[1];
+    const s = Math.min(1, gaugeVol / totalVol);
+    return p * baseFactor * (1 + (C / (2 * phi1 * m)) * (1 - s * s));
+  };
 
   let t = 0;
   let y: Vec = [0, 0, 0, 0];
@@ -262,18 +277,24 @@ export function simulate(setup: LoadSetup): SimResult {
   let peakT = 0;
   let peakX = 0;
   let peakBase = -Infinity;
+  let peakGauge = -Infinity;
   let prev1: [number, number] | null = null;
   let peakNeighbors: [[number, number], [number, number], [number, number] | null] | null = null;
 
+  const histT: number[] = [];
+  const histP: number[] = [];
   const record = (tt: number, yy: Vec) => {
     const p = pressure(yy);
     const pb = breechOf(p);
+    histT.push(tt);
+    histP.push(pb);
     if (trace) {
       trace.t.push(tt);
       trace.x.push(yy[1]);
       trace.v.push(yy[2]);
       trace.pBreech.push(pb);
       trace.pBase.push(baseOf(p));
+      trace.pGauge.push(gaugeOf(p, yy));
       trace.psi.push(ff.psi(yy[0]));
     }
     if (pb > peak) {
@@ -286,6 +307,8 @@ export function simulate(setup: LoadSetup): SimResult {
     }
     const bp = baseOf(p);
     if (bp > peakBase) peakBase = bp;
+    const gp = gaugeOf(p, yy);
+    if (gp > peakGauge) peakGauge = gp;
     prev1 = [tt, pb];
   };
 
@@ -370,11 +393,11 @@ export function simulate(setup: LoadSetup): SimResult {
 
     if (!moving && y[0] >= 1) {
       messages.push('All powder burned before the bullet started to move (pressure never reached shot-start). Bullet stuck in bore / squib.');
-      return { ...empty('stuck'), peakBreechPa: peak, peakBasePa: peakBase, burntAtMuzzle: 1 };
+      return { ...empty('stuck'), peakBreechPa: peak, peakBasePa: peakBase, peakGaugePa: peakGauge, burntAtMuzzle: 1 };
     }
     if (t > tLimit) {
       messages.push('Bullet did not exit within 50 ms; treated as stuck.');
-      return { ...empty('stuck'), peakBreechPa: peak, peakBasePa: peakBase };
+      return { ...empty('stuck'), peakBreechPa: peak, peakBasePa: peakBase, peakGaugePa: peakGauge };
     }
     const fac = Math.min(5, Math.max(0.2, 0.9 * Math.pow(Math.max(err, 1e-10), -0.2)));
     h *= fac;
@@ -409,6 +432,17 @@ export function simulate(setup: LoadSetup): SimResult {
     }
   }
 
+  // Barrel time from 10 % of peak breech pressure (linear interpolation on the recorded history).
+  let t10 = NaN;
+  const p10 = 0.1 * peakRefined;
+  for (let i = 1; i < histP.length; i++) {
+    if (histP[i] >= p10) {
+      const a = histP[i - 1];
+      const fr = histP[i] > a ? (p10 - a) / (histP[i] - a) : 0;
+      t10 = histT[i - 1] + Math.min(1, Math.max(0, fr)) * (histT[i] - histT[i - 1]);
+      break;
+    }
+  }
   const pM = pressure(y);
   const vM = y[2];
   const ke = 0.5 * m * vM * vM;
@@ -417,12 +451,14 @@ export function simulate(setup: LoadSetup): SimResult {
     messages,
     peakBreechPa: peakRefined,
     peakBasePa: peakBase,
+    peakGaugePa: peakGauge,
     timeOfPeakS: peakTRefined,
     travelAtPeakM: peakX,
     muzzleVelocityMs: vM,
     muzzleBreechPa: pM * breechFactor,
     barrelTimeS: t,
     travelTimeS: t - shotStartTime,
+    barrelTime10S: t - t10,
     shotStartTimeS: shotStartTime,
     burntAtMuzzle: ff.psi(y[0]),
     burnoutTravelM: burnoutX,

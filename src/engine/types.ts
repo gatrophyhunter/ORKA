@@ -28,8 +28,10 @@ export interface BurnModel {
   n: number;
   lambda: number;
   mu: number;
-  /** Fractional change of beta per kelvin away from refTempC (e.g. 0.002 = 0.2 %/K). */
+  /** Fractional change of beta per kelvin above refTempC (e.g. 0.002 = 0.2 %/K). Also used below refTempC unless tempCoeffColdPerK is set. */
   tempCoeffPerK: number;
+  /** Optional separate coefficient for temperatures below refTempC (burn-rate sensitivity is often asymmetric). */
+  tempCoeffColdPerK?: number;
   refTempC: number;
 }
 
@@ -63,6 +65,8 @@ export interface ModelOptions {
   shotStartPressurePa: number;
   /** Pressure contributed by the primer before the powder burns, Pa (energy p·V placed in the free volume at t=0). */
   ignitionPressurePa: number;
+  /** Distance of the pressure transducer from the breech face, m (C.I.P.: 25 mm where the case allows). */
+  gaugeDistanceM: number;
   /** Secondary-work coefficient phi1 (friction, rotation, engraving) — Lagrange fictitious-mass factor. */
   secondaryWorkCoeff: number;
   heatLoss: HeatLossOptions;
@@ -98,6 +102,7 @@ export interface Trace {
   v: number[];
   pBreech: number[];
   pBase: number[];
+  pGauge: number[];
   psi: number[];
 }
 
@@ -109,6 +114,8 @@ export interface SimResult {
   /** Peak breech (chamber) pressure — the quantity comparable to SAAMI/CIP piezo MAP, Pa. */
   peakBreechPa: number;
   peakBasePa: number;
+  /** Peak pressure at the gauge station (Lagrange distribution, volume coordinate) — between base and breech pressure. */
+  peakGaugePa: number;
   timeOfPeakS: number;
   travelAtPeakM: number;
   muzzleVelocityMs: number;
@@ -117,6 +124,8 @@ export interface SimResult {
   barrelTimeS: number;
   /** Time from shot start to muzzle exit, s. */
   travelTimeS: number;
+  /** Time from the breech pressure first reaching 10 % of its peak to muzzle exit, s (the GRT / QuickLOAD convention). */
+  barrelTime10S: number;
   shotStartTimeS: number;
   burntAtMuzzle: number;
   burnoutTravelM: number | null;

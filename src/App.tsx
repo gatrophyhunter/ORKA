@@ -1,4 +1,5 @@
-import { useRef, type KeyboardEvent } from 'react';
+import { useRef, useState, type KeyboardEvent } from 'react';
+import { decodeBuilder } from './ui/share';
 import { AppProvider, useApp, type TabId, type ThemePref } from './ui/state';
 import { Modal } from './ui/components';
 import { LoadBuilder } from './ui/LoadBuilder';
@@ -43,6 +44,45 @@ function Acknowledge() {
         </button>
       </div>
     </Modal>
+  );
+}
+
+function SharedLoadPrompt() {
+  const { setBuilder, db } = useApp();
+  const [shared, setShared] = useState(() => {
+    try {
+      return decodeBuilder(window.location.hash);
+    } catch {
+      return null;
+    }
+  });
+  if (!shared) return null;
+  const clear = () => {
+    try {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    } catch {
+      /* ignore */
+    }
+    setShared(null);
+  };
+  return (
+    <div className="alert info" role="status" style={{ margin: '8px 16px' }} data-testid="shared-load">
+      <strong>This link contains a shared load.</strong> Loading it replaces your current builder inputs.
+      {shared.dbVersion && shared.dbVersion !== db.version ? ` It was made with database ${shared.dbVersion}; this app has ${db.version}, so component values may differ.` : ''}{' '}
+      <button
+        className="btn small primary"
+        onClick={() => {
+          setBuilder(() => shared.builder);
+          clear();
+        }}
+        data-testid="shared-load-apply"
+      >
+        Load it
+      </button>{' '}
+      <button className="btn small" onClick={clear}>
+        Dismiss
+      </button>
+    </div>
   );
 }
 
@@ -146,6 +186,7 @@ export function App() {
       <div className="safety-banner" role="note">
         <strong>Predictions are estimates.</strong> Always start from published load data and work up.
       </div>
+      <SharedLoadPrompt />
       <Tabs />
       <Panel />
       <footer className="footer">ORKA is a simulation tool, not load data. Open source; data sources are listed per record.</footer>

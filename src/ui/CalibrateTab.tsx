@@ -10,26 +10,17 @@ import { ErrorList, NumberField, PlainNumber, SearchPicker, StatusChip, TextFiel
 import { fmtNum, fmtP, fmtV } from './format';
 import { powderItems } from './LoadBuilder';
 import { useApp } from './state';
+import { PRIOR_SINGLE_BASE, priorParams } from '../engine/defaults';
 import { geometryErrors, modelStatus } from './useLoad';
 
 /**
- * Generic starting point when a powder has no model at all. These are the plausible single-base values used in
- * the engine's own tests — they are NOT sourced data for any real powder. Only the parameters you tick are fitted.
+ * Starting point when a powder has no model: class priors from src/engine/defaults.ts (thermochemistry derived from
+ * the maker's published heat of explosion when available, else a class value). They are priors, not measurements.
  */
-export const PLACEHOLDER_START: PowderModelParams = {
-  forceJg: 1000,
-  flameTempK: 2900,
-  gamma: 1.24,
-  covolumeCm3g: 1.0,
-  solidDensityGcc: 1.6,
-  beta: 5,
-  n: 1,
-  lambda: 0,
-  mu: 0,
-  tempCoeffPerK: 0,
-  refTempC: 21,
-  heatScale: 1,
-};
+export function startParamsFor(powder: { heatOfExplosionJg?: number | null; base?: 'single' | 'double' | 'triple' | null } | null | undefined): PowderModelParams {
+  return priorParams({ heatOfExplosionJg: powder?.heatOfExplosionJg ?? null, base: powder?.base ?? null, beta: 5 });
+}
+export const PLACEHOLDER_START: PowderModelParams = PRIOR_SINGLE_BASE;
 
 interface Row {
   chargeGr: number;
@@ -74,7 +65,7 @@ export function CalibrateTab() {
   useEffect(() => () => workerRef.current?.terminate(), []);
 
   const items = useMemo(() => powderItems(db.powders), [db.powders]);
-  const startParams: PowderModelParams = powder?.model && powder.model.status !== 'none' ? powder.model.params : PLACEHOLDER_START;
+  const startParams: PowderModelParams = powder?.model && powder.model.status !== 'none' ? powder.model.params : startParamsFor(powder);
   const usingPlaceholder = !(powder?.model && powder.model.status !== 'none');
   const valid = rows.filter((r) => r.chargeGr > 0 && (r.velFps > 0 || r.pPsi > 0));
   const nPressure = valid.filter((r) => r.pPsi > 0).length;
@@ -130,8 +121,9 @@ export function CalibrateTab() {
         points: valid.length,
         rmsVelocityFps: result.rmsVelocityMs === null ? null : U.msToFps(result.rmsVelocityMs),
         rmsPressurePct: result.rmsPressureRel === null ? null : result.rmsPressureRel * 100,
-        cartridges: [cart ?? 'custom'],
+        cartridges: [builder.cartridgeId ?? 'custom'],
         sources: ['user measurements'],
+        chargeRangeGr: [Math.min(...valid.map((r) => r.chargeGr)), Math.max(...valid.map((r) => r.chargeGr))],
       },
     };
     updateUser((u) => ({ ...u, powderModels: { ...u.powderModels, [powder.id]: entry } }));
@@ -153,7 +145,7 @@ export function CalibrateTab() {
             Current model: <StatusChip status={modelStatus(powder)} /> {powder.model?.derivation}
             {usingPlaceholder && (
               <div className="alert warn" style={{ marginTop: 6 }}>
-                This powder has no model, so fitting starts from generic placeholder thermochemistry (impetus {PLACEHOLDER_START.forceJg} J/g, γ {PLACEHOLDER_START.gamma}, covolume {PLACEHOLDER_START.covolumeCm3g} cm³/g, density {PLACEHOLDER_START.solidDensityGcc} g/cm³). These are not measured values for this powder. Tick “energy” with pressure data to fit it, or enter known values under Advanced.
+                This powder has no model, so fitting starts from class priors (impetus {fmtNum(startParams.forceJg, 0)} J/g, γ {startParams.gamma}, covolume {startParams.covolumeCm3g} cm³/g, density {startParams.solidDensityGcc} g/cm³ — see Method & limits). These are not measured values for this powder. Tick “energy” with pressure data to fit it, or enter known values under Advanced.
               </div>
             )}
           </div>

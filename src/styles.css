@@ -299,3 +299,13 @@ table.data tr.fail td { color: var(--text-muted); }
 .footer { padding: 16px; text-align: center; font-size: 12px; color: var(--text-muted); }
 
 .builder-summary { font-size: 12.5px; color: var(--text-muted); }
+
+/* Print report */
+.print-only { display: none; }
+@media print {
+  .print-only { display: block; margin: 6px 0 10px; }
+  .no-print, .tabs, .header-controls, .builder-col, .footer, button { display: none !important; }
+  .layout { display: block !important; }
+  body { background: #fff !important; color: #000 !important; }
+  .card { break-inside: avoid; border-color: #999 !important; box-shadow: none !important; }
+}

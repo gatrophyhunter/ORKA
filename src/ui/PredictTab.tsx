@@ -8,6 +8,8 @@ import { ErrorList, EstimateWarning, PlainNumber, StatusChip, Tile, useDebounced
 import { fmtChargeKg, fmtE, fmtLen, fmtMs, fmtNum, fmtP, fmtPct, fmtTempC, fmtV, lenUnit, lenVal, pUnit, pVal, vUnit, vVal } from './format';
 import { LineChart } from './LineChart';
 import { useApp } from './state';
+import { PublishedCrossCheck, ScopeWarnings } from './CrossCheck';
+import { encodeBuilder } from './share';
 import { useLoad } from './useLoad';
 
 export function pressureState(peakPa: number, limitPa: number | null): 'ok' | 'warn' | 'danger' | undefined {
@@ -19,7 +21,7 @@ export function pressureState(peakPa: number, limitPa: number | null): 'ok' | 'w
 }
 
 export function PredictTab() {
-  const { prefs } = useApp();
+  const { prefs, db, builder } = useApp();
   const sys = prefs.units;
   const d = useLoad();
   const setup = useDebounced(d.setup, 150);
@@ -28,11 +30,16 @@ export function PredictTab() {
   const sens = useMemo(() => (setup && res?.status === 'muzzle' ? sensitivities(setup) : null), [setup, res]);
   const sweep = useMemo(() => (setup && res?.status === 'muzzle' ? temperatureSweep(setup, [-20, -10, 0, 10, 20, 30, 40, 50]) : null), [setup, res]);
 
-  const defaultSpec = d.status === 'calibrated' || d.status === 'user-calibrated' ? DEFAULT_SPEC_CALIBRATED : DEFAULT_SPEC_ESTIMATED;
+  const estSigma = d.powder?.model?.betaRelSigma;
+  const defaultSpec =
+    d.status === 'calibrated' || d.status === 'user-calibrated'
+      ? DEFAULT_SPEC_CALIBRATED
+      : { ...DEFAULT_SPEC_ESTIMATED, betaRel: estSigma && estSigma > 0 ? estSigma : DEFAULT_SPEC_ESTIMATED.betaRel };
   const [spec, setSpec] = useState<UncertaintySpec | null>(null);
   const activeSpec = spec ?? defaultSpec;
   const [mc, setMc] = useState<{ r: MonteCarloResult; key: unknown } | null>(null);
   const [mcBusy, setMcBusy] = useState(false);
+  const [shareMsg, setShareMsg] = useState<string | null>(null);
 
   if (!d.setup && !setup) {
     return (
@@ -67,6 +74,16 @@ export function PredictTab() {
   const psiPts = tr ? tr.t.map((t, i) => ({ x: t * 1000, y: tr.psi[i] * 100 })) : [];
   const refLines = limit ? [{ y: pVal(limit, sys), label: 'working limit', color: 'var(--danger)' }] : [];
   const stale = d.setup !== setup;
+  const shareUrl = () => `${window.location.origin}${window.location.pathname}${encodeBuilder(builder, db.version)}`;
+  const copyLink = async () => {
+    const url = shareUrl();
+    try {
+      await navigator.clipboard.writeText(url);
+      setShareMsg('Link copied. It contains only this load’s inputs, in the link itself.');
+    } catch {
+      setShareMsg(url);
+    }
+  };
 
   return (
     <>
@@ -80,9 +97,26 @@ export function PredictTab() {
                 {d.powder.name} <StatusChip status={d.status} />
               </>
             )}
+            <button className="btn small no-print" onClick={copyLink} data-testid="share-link">
+              Copy link
+            </button>
+            <button className="btn small no-print" onClick={() => window.print()}>
+              Print
+            </button>
           </span>
         </div>
+        {shareMsg && (
+          <div className="alert info small no-print" style={{ wordBreak: 'break-all' }}>
+            {shareMsg}
+          </div>
+        )}
+        <div className="print-only small" data-testid="print-summary">
+          <strong>Inputs:</strong> {d.cartridge?.name ?? 'custom chamber'} · case capacity {builder.inputs.caseCapacityGrH2O} gr H₂O ({builder.capacityBasis || 'entered'}) · case length {builder.inputs.caseLengthIn} in · bore/groove {builder.inputs.boreDiameterIn}/{builder.inputs.grooveDiameterIn} in · barrel {builder.inputs.barrelLengthIn} in · bullet {d.bullet ? `${d.bullet.manufacturer} ${d.bullet.name}` : 'custom'} {builder.inputs.bulletWeightGr} gr, {builder.inputs.bulletLengthIn} in long · COAL {builder.inputs.coalIn} in · {d.powder?.manufacturer} {d.powder?.name} ({d.status}) {builder.inputs.chargeGr} gr at {builder.inputs.powderTempF} °F · shot-start {builder.inputs.shotStartPsi} psi · limit {d.limit.label} − {builder.marginPct} %.
+          <br />
+          ORKA database {db.version}. Printed {new Date().toLocaleString()}. A prediction, not load data.
+        </div>
         <EstimateWarning status={d.status} />
+        <ScopeWarnings d={d} chargeGr={builder.inputs.chargeGr} />
         {res && res.messages.length > 0 && (
           <div className={`alert ${res.status === 'muzzle' ? 'info' : 'danger'}`} style={{ marginBottom: 10 }}>
             <strong>{res.status === 'muzzle' ? 'Notes' : `Result: ${res.status}`}</strong>
@@ -101,13 +135,25 @@ export function PredictTab() {
                   <div style={{ width: `${Math.min(ratio, 1) * 100}%` }} />
                 </div>
               )}
+              {d.limit.mapPa !== null && (
+                <div className="small muted" data-testid="pressure-bands">
+                  {res.peakBreechPa > d.limit.mapPa
+                    ? `ABOVE the standard's maximum (${fmtP(d.limit.mapPa, sys)})`
+                    : res.peakBreechPa > d.limit.mapPa * 0.85
+                      ? `within 15 % of the maximum (${fmtP(d.limit.mapPa, sys)})`
+                      : res.peakBreechPa > d.limit.mapPa * 0.75
+                        ? 'between 75 % and 85 % of the maximum'
+                        : 'below 75 % of the maximum'}
+                  {' · '}gauge-station estimate {fmtP(res.peakGaugePa, sys)}
+                </div>
+              )}
             </Tile>
             <Tile k="Muzzle velocity" big v={fmtV(res.muzzleVelocityMs, sys)} s={mcCurrent ? `band ${fmtV(mcCurrent.velocity.p05, sys, false)}–${fmtV(mcCurrent.velocity.p95, sys)}` : undefined} testId="tile-velocity" />
             <Tile k="Muzzle energy" v={fmtE(ke, sys)} />
             <Tile k="Burnt at muzzle" v={fmtPct(res.burntAtMuzzle, 1)} state={res.burntAtMuzzle < 0.85 ? 'warn' : undefined} s={res.burnoutTravelM !== null ? `all burnt at ${fmtLen(res.burnoutTravelM, sys, sys === 'imperial' ? 2 : 0)} travel` : 'not all burnt'} />
             <Tile k="Fill ratio" v={res.fillRatio === null ? '—' : fmtPct(res.fillRatio, 0)} s={res.fillRatio === null ? 'bulk density unknown' : res.fillRatio > 1 ? 'compressed' : undefined} state={res.fillRatio !== null && res.fillRatio > 1.1 ? 'warn' : undefined} />
             <Tile k="Muzzle pressure" v={fmtP(res.muzzleBreechPa, sys)} />
-            <Tile k="Barrel time" v={fmtMs(res.barrelTimeS)} s="ignition → exit" />
+            <Tile k="Barrel time" v={fmtMs(res.barrelTime10S)} s={`from 10 % of peak pressure · ${fmtMs(res.barrelTimeS)} from ignition`} />
             <Tile k="Ballistic efficiency" v={fmtPct(res.ballisticEfficiency, 1)} />
             <Tile k="Load density" v={`${fmtNum(res.loadDensityKgM3 / 1000, 3)} g/cm³`} />
             <Tile k="Seating depth" v={fmtLen(res.seatingDepthM, sys)} />
@@ -116,6 +162,8 @@ export function PredictTab() {
           </div>
         )}
       </div>
+
+      <PublishedCrossCheck db={db} d={d} chargeGr={builder.inputs.chargeGr} bulletWeightGr={builder.inputs.bulletWeightGr} />
 
       {res && tr && (
         <div className="card">

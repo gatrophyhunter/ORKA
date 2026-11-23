@@ -7,6 +7,10 @@ export interface Source {
   url: string;
   type: SourceType | string;
   fields?: string[];
+  /** Page number inside a PDF document, when applicable. */
+  page?: number | string | null;
+  /** Date the document was retrieved (ISO). */
+  retrieved?: string;
 }
 
 export interface Conflict {
@@ -76,12 +80,17 @@ export interface PowderModelEntry {
   params: PowderModelParams;
   /** Plain-language account of where the parameters came from. */
   derivation: string;
+  /** For estimates: 1-sigma relative uncertainty of beta implied by the estimation method. */
+  betaRelSigma?: number;
   calibration?: {
     points: number;
     rmsVelocityFps: number | null;
     rmsPressurePct: number | null;
+    /** Cartridge ids the data came from. */
     cartridges: string[];
     sources: string[];
+    /** Charge range covered by the calibration data, grains (predictions outside it are extrapolations). */
+    chargeRangeGr?: [number, number];
   };
 }
 
@@ -109,7 +118,10 @@ export interface BurnRateChart {
   publisher: string;
   edition: string;
   url: string;
+  /** Powder ids in chart order (fastest first); entries that could not be matched are "name:<as printed>". */
   orderedPowderIds: string[];
+  /** Names exactly as printed on the chart, fastest first. */
+  orderedNames?: string[];
 }
 
 export interface Bullet {
@@ -129,6 +141,9 @@ export interface Bullet {
   tip?: string | null;
   construction?: string | null;
   recommendedTwist?: string | null;
+  /** Boat-tail length (excluding heel), when the maker publishes it. Null = flat base or unknown. */
+  boatTailLengthIn?: number | null;
+  baseToOgiveIn?: number | null;
   status: 'current' | 'discontinued' | 'unknown';
   sources: Source[];
   notes?: string;
