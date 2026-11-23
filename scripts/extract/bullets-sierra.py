@@ -580,6 +580,9 @@ def apply_loaddata_crosscheck(recs, idx):
     n_conf = n_ok = 0
     for r in recs:
         hits = idx.get(r['sku'].upper(), [])
+        base = re.sub(r'[A-Z]+$', '', r['sku'].upper())
+        if not hits and base != r['sku'].upper():
+            hits = idx.get(base, [])     # load data lists the base item number (no packaging suffix)
         if not hits:
             continue
         agree, disagree = [], []
@@ -597,8 +600,9 @@ def apply_loaddata_crosscheck(recs, idx):
                     seen.add(h['url'])
             h0 = agree[0][0]
             r['evidence'] += ' | [load data p.%d] %s' % (h0['page'], h0['line'])
+            item = re.match(r'#(\w+)', h0['line']).group(1)
             r['notes'] = ((r['notes'] or '') + ' Diameter and weight confirmed by the bullet header line for #%s in '
-                          '%d Sierra load-data PDF page(s) (sources[1:]).' % (r['sku'], len(agree))).strip()
+                          '%d Sierra load-data PDF page(s) (listed in sources).' % (item, len(agree))).strip()
         for h, okd, okw in disagree:
             n_conf += 1
             rc = r.setdefault('conflicts', [])
@@ -628,7 +632,7 @@ POSTER_LOCAL = os.path.join(SRC, 'catalog-poster', 'sierra-bullet-poster-page-00
 POSTER_OCR_CACHE = os.path.join(SRC, 'catalog-poster', 'ocr-lines.json')
 
 P_LINE_RE = re.compile(
-    r'(?P<w>\d{2,3})\s*(?:gr|or|of|gor|cr|qr|g)?\.?\s*(?P<type>[A-Za-z][^#]*?)?\s*#\s*(?P<item>\d{4}[A-Z]?)'
+    r'(?:(?P<w1>\d{2,3})\s*[-–—]\s*)?(?P<w>\d{2,3})\s*(?:gr|or|of|gor|cr|qr|g)?\.?\s*(?P<type>[A-Za-z][^#]*?)?\s*#\s*(?P<item>\d{4}[A-Z]?)'
     r'(?:\s*B\.?\s*[CL]\.?\s*(?P<bc>\.?\d{3})(?!\d))?'
     r'(?:\s+(?P<tw>\d{1,2}(?:\.\d)?)\s*(?:["”″\']{1,2})\s*T[WV]?[I1l]?[S5]?T)?'
     r'(?P<mv>\s+MED\.?\s*VEL)?')
@@ -725,7 +729,8 @@ def _parse_poster_all(t):
         if bc is not None and not bc.startswith('.'):
             bc = '.' + bc    # the poster prints every B.C. as ".xxx"; OCR sometimes drops the leading point
         out.setdefault(m.group('item'), {
-            'w': float(m.group('w')), 'bc': float(bc) if bc else None,
+            'w': float(m.group('w')), 'w1': float(m.group('w1')) if m.group('w1') else None,
+            'bc': float(bc) if bc else None,
             'tw': float(m.group('tw')) if m.group('tw') else None, 'mv': bool(m.group('mv')),
             'raw': ws(m.group(0))})
     return out
@@ -755,7 +760,8 @@ def poster_entries():
             if len(got) < 2:
                 continue
             e = {'item': item, 'w': _strict([x['w'] for x in got]), 'bc': _strict([x['bc'] for x in got]),
-                 'w_reads': [x['w'] for x in got], 'bc_reads': [x['bc'] for x in got]}
+                 'w_reads': [x['w'] for x in got], 'bc_reads': [x['bc'] for x in got],
+                 'w1': _strict([x['w1'] for x in got])}
             tws = [x['tw'] for x in got]
             tw = _strict(tws)
             # twist tag reads: the 5 full-line passes plus the 2 colour-mask tag passes on the same row
@@ -791,10 +797,21 @@ def apply_poster(recs):
     for r in recs:
         skus = [r['sku']] + re.findall(r'(\w+) \(\d+ ct\)', (r['notes'] or '').split('Other packagings on the same page (same spec table): ')[-1]) \
             if 'Other packagings' in (r['notes'] or '') else [r['sku']]
-        hits = [e for k in skus for e in by_item.get(k.upper(), [])]
+        keys = []
+        for k in skus:
+            for kk in (k.upper(), re.sub(r'[A-Z]+$', '', k.upper())):   # packaging suffixes C/T/MP/GT...
+                if kk not in keys:
+                    keys.append(kk)
+        hits = [e for k in keys for e in by_item.get(k, [])]
         # attach a poster entry only if its item # matches and >= 2 OCR passes read the product page's weight
-        hits = [e for e in hits if r['weightGr'] is not None
-                and sum(1 for w in e['w_reads'] if w is not None and abs(w - r['weightGr']) < 1e-9) >= 2]
+        # (or a printed weight range "115-117 gr." that contains it)
+        def wmatch(e):
+            if r['weightGr'] is None:
+                return False
+            if e['w1'] is not None and e['w'] is not None:
+                return e['w1'] <= r['weightGr'] <= e['w']
+            return sum(1 for w in e['w_reads'] if w is not None and abs(w - r['weightGr']) < 1e-9) >= 2
+        hits = [e for e in hits if wmatch(e)]
         if not hits:
             continue
         e = hits[0]
@@ -807,6 +824,11 @@ def apply_poster(recs):
         r['sources'].append({'url': POSTER_URL, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED})
         r['evidence'] += ' | [2026 Bullet Guide poster, OCR] ' + ws(best_txt)
         add = []
+        if e['w1'] is not None and e['w'] is not None:
+            add.append(f'CHECK: the 2026 Bullet Guide poster prints a weight range "{e["w1"]:g}-{e["w"]:g} gr." for #{e["item"]} '
+                       f'while the product page gives {r["weightGr"]:g} gr.')
+        if e['item'] != r['sku'].upper():
+            add.append(f'Poster item #{e["item"]} matched to page item {r["sku"]} by base item number + weight.')
         n_same = sum(1 for b in e['bc_reads'] if b is not None and r['bcG1'] is not None and abs(b - r['bcG1']) < 1e-9)
         if n_same >= 2:
             stats['bcAgree'] += 1
@@ -905,6 +927,13 @@ def build():
         u = r['sources'][0]['url']
         docs.append({'url': u, 'localPath': local_of(u), 'title': 'Sierra Bullets product page: ' + r['name'],
                      'date': RETRIEVED})
+    docs.append({'url': BASE + '/catalog/', 'localPath': os.path.join(SRC, 'catalog.html'),
+                 'title': 'Sierra Bullets catalog page ("Download the 2026 catalog")', 'date': RETRIEVED})
+    docs.append({'url': POSTER_URL, 'localPath': POSTER_LOCAL,
+                 'title': 'Sierra "Bullet Guide 2026" poster (JPEG; the catalog download), OCR with tesseract',
+                 'date': '2026'})
+    docs.append({'url': LOADDATA_PAGE, 'localPath': os.path.join(SRC, 'load-data.html'),
+                 'title': 'Sierra Bullets load data index page', 'date': RETRIEVED})
     for lp in LOADDATA_PATHS:
         if os.path.exists(loaddata_local(lp)):
             docs.append({'url': loaddata_url(lp), 'localPath': loaddata_local(lp),
@@ -932,21 +961,36 @@ def build():
 
 
 META_NOTES = (
-    'Source: every bullet product page listed in the sierrabullets.com product sitemap on 2026-11-23. '
-    'Values come from the manufacturer spec table that each product page embeds as JSON '
-    '(window.stencilBootstrap "specsJson" and "customFields": Item #, Bullet Type, Bullet Diameter, '
-    'Bullet Weight (Grains), G1 BC, G7 BC, Bullet Material, Tipped/Non-Tipped); evidence quotes that '
-    'JSON text verbatim (JS string escaping undone, whitespace collapsed). '
-    'Sierra\'s current site publishes ONE G1 and (for some bullets) ONE G7 BC per bullet; it does not publish '
-    'velocity-banded BCs, bullet length, base-to-ogive, boat-tail length or recommended twist in its spec '
-    'tables, so those fields are null unless a product description states them (twist, when parsed, is '
-    'quoted in evidence). The "2026 catalog" offered on https://sierrabullets.com/catalog/ is a single JPEG '
-    'poster image, not a PDF, and was not used for numbers. construction is mapped from the maker\'s '
-    '"Bullet Material" wording ("Jacketed Lead" -> cup-and-core; Bullet Type containing Full Metal Jacket -> FMJ); '
-    'the raw wording is kept in notes. "firearm" (rifle/handgun) is from the site category the product is listed in. '
-    'Conflicts list disagreements between the two copies of the spec table on a page, between packaging '
-    'variants, or between the spec table and the product description text/name. Notes starting with "CHECK:" '
-    'flag a diameter that differs from other products with the same caliber label (flag only; value kept as published).'
+    'PRIMARY SOURCE: every bullet product page in the sierrabullets.com product sitemap (241 pages, retrieved '
+    '2026-11-23). Values come from the manufacturer spec table that each product page embeds as JSON '
+    '(window.stencilBootstrap "specsJson" and "customFields": Item #, Bullet Type, Bullet Diameter, Bullet Weight '
+    '(Grains), G1 BC, G7 BC, Bullet Material, Tipped/Non-Tipped); evidence quotes that JSON text verbatim (JS string '
+    'escaping undone, whitespace collapsed). One record per product page; id = sierra-<page SKU>; other packagings '
+    '(C = 500 ct, MP = 250 ct, T = 50 ct, ...) are listed in notes. '
+    'NOT PUBLISHED BY SIERRA (2026): bullet length, base-to-ogive, boat-tail length and velocity-banded BCs are not in '
+    'the product spec tables, the catalog poster or the load-data headers, so lengthIn/baseToOgiveIn/boatTailLengthIn/'
+    'bcNotes are null for every record (no values from memory or third parties). '
+    'SPEC-TABLE QUALITY: when the page\'s two copies of the spec table for the same item disagree on a numeric field, '
+    'that field is null and both values are in conflicts (notes start with "CHECK:"); disagreements coming from a '
+    'packaging variant block are recorded as conflicts with the item\'s own value kept. "NA" BCs are null. '
+    'CROSS-CHECK 1 (load data): 37 Sierra load-data PDFs (Sierra Reloading Manual 6th ed. pages) were parsed for '
+    'their bullet header lines ("#1700 .264\" 85gr. HP 2.670\"", i.e. item #, diameter, weight, type, C.O.A.L.); '
+    'when the item # matches, diameter and weight must agree -> the PDF page is added to sources (corroboration) or '
+    'a conflict is recorded. C.O.A.L. there is a cartridge length, NOT a bullet length, and is not used. '
+    'CROSS-CHECK 2 (catalog): the "2026 catalog" offered on https://sierrabullets.com/catalog/ is a single JPEG '
+    'poster ("Bullet Guide 2026") with item #, weight, B.C. and twist tags. It has no text layer, so it was OCR\'d '
+    'with tesseract 5 (5 passes with different scaling/binarisation). A poster line is attached to a record only '
+    'when its item # (or base item #) matches and >= 2 passes read the page weight; its B.C. confirms bcG1 when >= 2 '
+    'reads equal the page value, or is recorded as a conflict when all reads agree on a different value (page value '
+    'kept). A poster twist tag becomes recommendedTwist only when no product-description twist exists, >= 2 reads give '
+    'the same value and every other read shows the same digits (reads outside 5-20" are treated as OCR misreads). '
+    'Poster OCR text in evidence is labelled "[2026 Bullet Guide poster, OCR]" and may contain OCR noise. '
+    'TWIST otherwise comes from product-description sentences ("This bullet requires a barrel twist rate of 1x8\" '
+    'or faster."), quoted in evidence; recommendedTwist "1:N" means 1 turn in N inches (minimum/fastest-needed). '
+    'construction is mapped from the maker\'s "Bullet Material" wording ("Jacketed Lead" -> cup-and-core; Bullet Type '
+    'containing Full Metal Jacket -> FMJ; Full Profile Jacket -> null); tip from "Tipped/Non-Tipped" plus the tip '
+    'material named in the description (acetal resin / polymer). Extra field "firearm" (rifle/handgun) = the site '
+    'category. Notes starting with "CHECK:" flag items needing human review.'
 )
 
 

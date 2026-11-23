@@ -95,7 +95,7 @@ function fitClass(bullets: Bullet[], feats: LengthFeatures[]): ClassModel | null
 }
 
 /** Maximum leave-one-out error for a class model to be used at all. */
-export const MAX_LENGTH_LOO = 0.065;
+export const MAX_LENGTH_LOO = 0.08;
 
 export function fitLengthModel(bullets: Bullet[]): LengthModel | null {
   const train = bullets.filter((b) => b.lengthIn && b.lengthIn > b.diameterIn && b.weightGr > 0);

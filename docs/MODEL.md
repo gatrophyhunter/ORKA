@@ -80,7 +80,7 @@ Measure your own case capacity (fired, water to the mouth) and bullet length whe
   2. With those powders fixed, fit the shot-start pressure of monolithic and cast/lead bullets relative to the 25 MPa jacketed reference, then infer an "effective capacity" for each (cartridge, case brand) with no published capacity.
   3. Refit every powder on all loads.
 - **Validation:** leave-one-cartridge-out on cartridges whose capacity is published, training only on loads with published capacities, so no inferred quantity leaks into the test. Results, with breakdowns, are on the Validation tab.
-- **Bullet lengths:** when the bullet maker publishes no length (Hornady and Sierra product pages publish none), calibration uses a log-linear estimate from bullets whose lengths are published. There are separate fits for pointed and blunt bullets, and each is used only if its leave-one-out error is at most 6.5 %. Estimated lengths are never shipped as data.
+- **Bullet lengths:** when the bullet maker publishes no length (Hornady and Sierra product pages publish none), calibration uses a log-linear estimate from bullets whose lengths are published. There are separate fits for pointed and blunt bullets, and each is used only if its leave-one-out error is at most 8 % (rows with estimated lengths were not less accurate in validation than rows with published lengths). Estimated lengths are never shipped as data.
 
 ## 5. Powder models and their status
 

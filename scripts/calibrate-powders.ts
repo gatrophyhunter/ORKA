@@ -634,7 +634,7 @@ async function main() {
         `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. ` +
         `Shot-start fitted per bullet construction: ${Object.entries(shotFits).map(([k, v]) => `${k} ${v ? `${v.value} MPa (${v.n} loads)` : 'not enough data'}`).join(', ')}; jacketed reference 25 MPa. ` +
         `Bullet lengths: ${prepared.filter((r) => r.lengthEstimated).length} of ${prepared.length} prepared loads use an ESTIMATED length because the bullet maker publishes none ` +
-        `(estimator fitted on ${LENGTH_MODEL?.n ?? 0} bullets with published lengths, leave-one-out error: pointed ${LENGTH_MODEL?.looRelRmsPointed != null ? (LENGTH_MODEL.looRelRmsPointed * 100).toFixed(1) : '—'} %, blunt ${LENGTH_MODEL?.looRelRmsBlunt != null ? (LENGTH_MODEL.looRelRmsBlunt * 100).toFixed(1) : '—'} %; a class is used only when its error is at most 5 %). ` +
+        `(estimator fitted on ${LENGTH_MODEL?.n ?? 0} bullets with published lengths, leave-one-out error: pointed ${LENGTH_MODEL?.looRelRmsPointed != null ? (LENGTH_MODEL.looRelRmsPointed * 100).toFixed(1) : '—'} %, blunt ${LENGTH_MODEL?.looRelRmsBlunt != null ? (LENGTH_MODEL.looRelRmsBlunt * 100).toFixed(1) : '—'} %; a class is used only when its error is at most 8 %). ` +
         `Loads skipped: ${JSON.stringify(skipped)}.`,
       interpolationBetaRelSigma: rmsLog,
     },
