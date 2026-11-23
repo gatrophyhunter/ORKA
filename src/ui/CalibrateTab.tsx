@@ -22,6 +22,38 @@ export function startParamsFor(powder: { heatOfExplosionJg?: number | null; base
 }
 export const PLACEHOLDER_START: PowderModelParams = PRIOR_SINGLE_BASE;
 
+/** Parse pasted chronograph lines (charge, velocity[, pressure][, label]) given in display units. */
+export function parseMeasurements(text: string, sys: 'imperial' | 'metric'): { rows: Row[]; errors: string[] } {
+  const rows: Row[] = [];
+  const errors: string[] = [];
+  for (const raw of text.split(/\r?\n/)) {
+    const line = raw.trim();
+    if (!line) continue;
+    const sep = line.includes('\t') ? '\t' : line.includes(';') ? ';' : ',';
+    const cells = line.split(sep).map((c) => c.trim());
+    const num = (c: string | undefined) => {
+      if (c === undefined || c === '') return NaN;
+      const n = Number(sep === ',' ? c : c.replace(',', '.'));
+      return Number.isFinite(n) ? n : NaN;
+    };
+    const ch = num(cells[0]);
+    const v = num(cells[1]);
+    if (!(ch > 0) || !(v > 0)) {
+      if (/\d/.test(line) && rows.length) errors.push(`"${line.slice(0, 40)}"`);
+      continue;
+    }
+    const pr = num(cells[2]);
+    const label = cells.slice(Number.isFinite(pr) ? 3 : 2).join(' ').trim();
+    rows.push({
+      chargeGr: sys === 'imperial' ? ch : U.gToGr(ch),
+      velFps: sys === 'imperial' ? v : U.msToFps(v),
+      pPsi: Number.isFinite(pr) && pr > 0 ? (sys === 'imperial' ? pr : U.mpaToPsi(pr)) : NaN,
+      label,
+    });
+  }
+  return { rows, errors };
+}
+
 interface Row {
   chargeGr: number;
   velFps: number;
@@ -52,6 +84,18 @@ export function CalibrateTab() {
   const [powderId, setPowderId] = useState<string | null>(builder.powderId);
   const powder = powderId ? db.powders.find((p) => p.id === powderId) ?? null : null;
   const [rows, setRows] = useState<Row[]>([emptyRow(), emptyRow(), emptyRow()]);
+  const [paste, setPaste] = useState('');
+  const [pasteMsg, setPasteMsg] = useState<string | null>(null);
+  const addPasted = () => {
+    const parsed = parseMeasurements(paste, sys);
+    if (!parsed.rows.length) {
+      setPasteMsg(parsed.errors[0] ?? 'Nothing to add.');
+      return;
+    }
+    setRows((rs) => [...rs.filter((r) => r.chargeGr > 0 || r.velFps > 0 || r.pPsi > 0), ...parsed.rows]);
+    setPasteMsg(`Added ${parsed.rows.length} row(s).${parsed.errors.length ? ` Skipped ${parsed.errors.length} line(s): ${parsed.errors.slice(0, 3).join('; ')}` : ''}`);
+    setPaste('');
+  };
   const [fitLambda, setFitLambda] = useState(false);
   const [fitForce, setFitForce] = useState(false);
   const [fitHeat, setFitHeat] = useState(false);
@@ -199,6 +243,19 @@ export function CalibrateTab() {
           </button>
           <span className="small muted">Pressure must be piezo (psi / MPa), never CUP.</span>
         </div>
+        <details className="collapsible" style={{ marginTop: 8 }}>
+          <summary>Paste chronograph data</summary>
+          <p className="small muted">
+            One shot or one charge per line: <code>charge, velocity[, pressure][, label]</code> in your current units ({sys === 'imperial' ? 'gr, fps, psi' : 'g, m/s, MPa'}). Commas, semicolons or tabs separate columns; with semicolons or tabs a decimal comma is accepted. Lines that are not numbers (headers) are skipped.
+          </p>
+          <textarea value={paste} onChange={(e) => setPaste(e.target.value)} rows={5} style={{ width: '100%', fontFamily: 'monospace' }} aria-label="Paste chronograph data" data-testid="cal-paste" />
+          <div className="row">
+            <button className="btn small" onClick={addPasted} disabled={!paste.trim()} data-testid="cal-paste-add">
+              Add rows
+            </button>
+            {pasteMsg && <span className="small">{pasteMsg}</span>}
+          </div>
+        </details>
         <div className="section">
           <div className="section-title">Fit</div>
           <div className="row">

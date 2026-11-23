@@ -79,7 +79,7 @@ const dropped: Record<string, number> = {};
 const drop = (k: string) => (dropped[k] = (dropped[k] ?? 0) + 1);
 
 // ---------------------------------------------------------------- cartridges
-function buildCartridges(files: { key: string; data: any }[]): Cartridge[] {
+export function buildCartridges(files: { key: string; data: any }[]): Cartridge[] {
   const byKey = new Map<string, Cartridge>();
   for (const f of files) {
     for (const r of arr<any>(f.data.cartridges)) {
@@ -135,7 +135,7 @@ function buildCartridges(files: { key: string; data: any }[]): Cartridge[] {
 }
 
 // ---------------------------------------------------------------- powders + charts
-function buildPowders(files: { key: string; data: any }[]): { powders: Powder[]; charts: (BurnRateChart & { orderedNames: string[] })[] } {
+export function buildPowders(files: { key: string; data: any }[]): { powders: Powder[]; charts: (BurnRateChart & { orderedNames: string[] })[] } {
   const byKey = new Map<string, Powder>();
   for (const f of files) {
     for (const r of arr<any>(f.data.powders)) {
@@ -207,7 +207,7 @@ function buildPowders(files: { key: string; data: any }[]): { powders: Powder[];
 }
 
 // ---------------------------------------------------------------- bullets
-function buildBullets(files: { key: string; data: any }[]): Bullet[] {
+export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
   const byId = new Map<string, Bullet>();
   for (const f of files) {
     for (const r of arr<any>(f.data.bullets)) {
@@ -253,7 +253,7 @@ function buildBullets(files: { key: string; data: any }[]): Bullet[] {
 }
 
 // ---------------------------------------------------------------- brass
-function buildBrass(files: { key: string; data: any }[], cartridges: Cartridge[]): { brands: BrassBrand[]; cases: BrassCase[] } {
+export function buildBrass(files: { key: string; data: any }[], cartridges: Cartridge[]): { brands: BrassBrand[]; cases: BrassCase[] } {
   const brands: BrassBrand[] = [];
   const cases: BrassCase[] = [];
   const cartByKey = new Map<string, Cartridge>();
@@ -299,7 +299,7 @@ function buildBrass(files: { key: string; data: any }[], cartridges: Cartridge[]
 }
 
 // ---------------------------------------------------------------- validation loads
-function buildLoads(files: { key: string; data: any }[], cartridges: Cartridge[], powders: Powder[]): ValidationLoad[] {
+export function buildLoads(files: { key: string; data: any }[], cartridges: Cartridge[], powders: Powder[]): ValidationLoad[] {
   const out: ValidationLoad[] = [];
   for (const f of files) {
     for (const r of arr<any>(f.data.loads)) {
@@ -354,6 +354,16 @@ function main() {
   const bullets = buildBullets(files);
   const { brands, cases } = buildBrass(files, cartridges);
   const validationLoads = buildLoads(files, cartridges, powders);
+
+  // Model-inferred effective capacities of publishers' test cases (scripts/calibrate-powders.ts), labelled as such.
+  const inferredCaps: any[] = readJson(path.join(ROOT, 'src/data/inferred-capacities.json')) ?? [];
+  for (const ic of inferredCaps) {
+    const c = cartridges.find((x) => x.id === ic.cartridgeId);
+    if (!c || !(ic.grH2O > 0)) continue;
+    const brand = String(ic.caseBrand ?? '').replace(/\b\w/g, (m: string) => m.toUpperCase());
+    if (c.caseCapacityGrH2O.some((e) => (e.brand ?? '').toLowerCase() === brand.toLowerCase() && !/inferred/i.test(e.basis))) continue;
+    c.caseCapacityGrH2O.push({ value: ic.grH2O, brand, basis: ic.basis, source: null });
+  }
 
   // Attach powder models: calibrated (scripts/calibrate-powders.ts) then chart-interpolated estimates.
   const models: Record<string, PowderModelEntry> = readJson(MODELS)?.models ?? {};
@@ -413,4 +423,5 @@ function main() {
   }, null, 2));
 }
 
-main();
+// Run only when executed directly (the build functions are also imported by tests).
+if (process.argv[1] && path.resolve(process.argv[1]) === path.resolve(new URL(import.meta.url).pathname)) main();

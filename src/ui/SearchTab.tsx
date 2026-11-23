@@ -22,6 +22,7 @@ export function SearchTab() {
   const [includeEstimated, setIncludeEstimated] = useState(false);
   const [mfr, setMfr] = useState('');
   const [form, setForm] = useState('');
+  const [similarTo, setSimilarTo] = useState('');
   const [progress, setProgress] = useState<{ done: number; total: number } | null>(null);
   const [rows, setRows] = useState<ParametricRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -110,6 +111,23 @@ export function SearchTab() {
 
   const powderById = useMemo(() => new Map<string, Powder>(db.powders.map((p) => [p.id, p])), [db.powders]);
 
+  // "Similar to" mode: distance of each powder's behaviour at the limit from a chosen reference powder
+  // (velocity, burn completion, fill and barrel time, each scaled by a tolerance of practical significance).
+  const baseRow = rows && similarTo ? rows.find((r) => r.candidate.id === similarTo) ?? null : null;
+  const similarity = (r: ParametricRow): number | null => {
+    if (!baseRow || baseRow.result.status !== 'muzzle' || r.result.status !== 'muzzle') return null;
+    const b = baseRow.result;
+    const x = r.result;
+    const terms = [
+      (x.muzzleVelocityMs - b.muzzleVelocityMs) / b.muzzleVelocityMs / 0.01,
+      (x.burntAtMuzzle - b.burntAtMuzzle) / 0.05,
+      (x.barrelTime10S - b.barrelTime10S) / b.barrelTime10S / 0.03,
+      x.fillRatio !== null && b.fillRatio !== null ? (x.fillRatio - b.fillRatio) / 0.05 : 0,
+    ];
+    return Math.sqrt(terms.reduce((s, t) => s + t * t, 0) / terms.length);
+  };
+  const shownRows = rows && baseRow ? rows.slice().sort((a, b) => (similarity(a) ?? 1e9) - (similarity(b) ?? 1e9)) : rows;
+
   const columns: Column<ParametricRow>[] = [
     { key: 'powder', label: 'Powder', render: (r) => r.candidate.label, sortValue: (r) => r.candidate.label },
     { key: 'status', label: 'Model', render: (r) => <StatusChip status={r.candidate.status} />, sortValue: (r) => r.candidate.status },
@@ -119,7 +137,7 @@ export function SearchTab() {
     { key: 'fill', label: 'Fill', num: true, render: (r) => (r.result.fillRatio === null ? '—' : fmtPct(r.result.fillRatio, 0)), sortValue: (r) => r.result.fillRatio },
     { key: 'burnt', label: 'Burnt', num: true, render: (r) => fmtPct(r.result.burntAtMuzzle, 0), sortValue: (r) => r.result.burntAtMuzzle },
     { key: 'pm', label: 'Muzzle p', num: true, render: (r) => fmtP(r.result.muzzleBreechPa, sys), sortValue: (r) => r.result.muzzleBreechPa },
-    { key: 'bt', label: 'Barrel time', num: true, render: (r) => fmtMs(r.result.barrelTimeS), sortValue: (r) => r.result.barrelTimeS },
+    { key: 'bt', label: 'Barrel time', num: true, render: (r) => fmtMs(r.result.barrelTime10S), sortValue: (r) => r.result.barrelTime10S },
     ...(targetFps > 0
       ? [
           {
@@ -128,6 +146,20 @@ export function SearchTab() {
             num: true,
             render: (r: ParametricRow) => (r.atTarget ? `${fmtChargeKg(r.atTarget.chargeKg, sys)} @ ${fmtP(r.atTarget.peakPa, sys)}` : '—'),
             sortValue: (r: ParametricRow) => (r.atTarget ? r.atTarget.peakPa : null),
+          } as Column<ParametricRow>,
+        ]
+      : []),
+    ...(baseRow
+      ? [
+          {
+            key: 'sim',
+            label: 'Distance',
+            num: true,
+            render: (r: ParametricRow) => {
+              const s = similarity(r);
+              return s === null ? '—' : r.candidate.id === similarTo ? 'reference' : s.toFixed(2);
+            },
+            sortValue: (r: ParametricRow) => similarity(r),
           } as Column<ParametricRow>,
         ]
       : []),
@@ -174,6 +206,17 @@ export function SearchTab() {
               <option value="disc">disc</option>
             </select>
           </div>
+          <div className="field">
+            <label htmlFor="s-sim">Similar to (optional)</label>
+            <select id="s-sim" value={similarTo} onChange={(e) => setSimilarTo(e.target.value)} data-testid="similar-to">
+              <option value="">— rank by velocity —</option>
+              {usable.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.manufacturer} {p.name}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="field" style={{ justifyContent: 'flex-end' }}>
             <label className="check">
               <input type="checkbox" checked={includeEstimated} onChange={(e) => setIncludeEstimated(e.target.checked)} data-testid="include-estimated" /> include estimates
@@ -214,9 +257,14 @@ export function SearchTab() {
       {rows && (
         <div className="card" data-testid="search-results">
           <h3>Results</h3>
+          {baseRow && (
+            <p className="small">
+              Ranked by similarity to <strong>{baseRow.candidate.label}</strong> at the pressure limit (velocity ±1 %, burn ±5 points, barrel time ±3 %, fill ±5 points ≈ distance 1).
+            </p>
+          )}
           <p className="small muted">Passing powders first, fastest first. Click a row to load that powder and charge into the builder. These are model maxima, never load recommendations.</p>
           <DataTable
-            rows={rows}
+            rows={shownRows ?? []}
             columns={columns}
             rowKey={(r) => r.candidate.id}
             rowClass={(r) => (r.passes ? '' : 'fail')}

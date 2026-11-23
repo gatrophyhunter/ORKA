@@ -54,16 +54,21 @@ export function capacityOptions(db: Database, cartridge: Cartridge | null): Capa
     });
   });
   cartridge.caseCapacityGrH2O.forEach((e, i) => {
+    // Skip entries already listed from the brass table (same brand and value).
+    const dup = out.some((o) => o.value === e.value && (e.brand ?? '').toLowerCase() !== '' && o.label.toLowerCase().startsWith((e.brand ?? '').toLowerCase()));
+    if (dup) return;
+    const inferred = /inferred/i.test(e.basis);
     out.push({
       key: `cart:${i}:${e.value}`,
-      label: `${e.brand ?? 'Brand not stated'} (cartridge record)`,
+      label: inferred ? `${e.brand ?? 'Case'} — model-inferred, not measured` : `${e.brand ?? 'Brand not stated'} (cartridge record)`,
       value: e.value,
       basis: e.basis,
       brandId: null,
       sourceUrl: e.source,
     });
   });
-  return out;
+  // Published / measured values first, model-inferred last.
+  return out.sort((a, b) => Number(/inferred/i.test(a.basis)) - Number(/inferred/i.test(b.basis)));
 }
 
 export interface Limit {

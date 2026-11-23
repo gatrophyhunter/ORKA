@@ -1,46 +1,58 @@
 // Calibrate powder models against published, pressure-tested load data and measure accuracy honestly.
 //
-//   npx tsx scripts/calibrate-powders.ts      (after scripts/build-data.ts has produced src/data/db.json)
+//   npx tsx scripts/calibrate-powders.ts      (after scripts/build-data.ts)
+//   env: ORKA_POWDERS=id1,id2 (subset)  ORKA_PROCS=n (parallel processes)
 //
-// For every powder with usable published loads:
-//   1. Build each load's setup from the database (cartridge bore/groove, case capacity for the stated case brand,
-//      bullet length from the maker's catalog, COAL and barrel length from the load data).
-//   2. Fit the burn-rate coefficient (beta), progressivity (lambda, ≥3 loads) and energy (force, ≥4 loads with
-//      ≥2 pressures) to measured velocity and peak pressure. Model breech pressure is fitted to transducer readings.
-//   3. Cross-validate: refit without one cartridge at a time and predict that cartridge's loads (held-out error).
-// Outputs src/data/powder-models.json and src/data/validation-report.json.
+// Each published load needs: cartridge bore/groove (standards), bullet length (maker catalog), COAL/barrel/charge/
+// velocity/pressure (the load data) and the capacity of the case brand the publisher tested with. Capacity tiers:
+//   A  capacity published for that case brand (maker or measured)        → used as is; only tier A is validated
+//   B  capacity published only for other brands of the cartridge         → median used as a prior (σ 3 %)
+//   C  no published capacity                                             → inferred ("effective capacity")
+// Stages:
+//   1. fit each powder on tier-A rows (plus tier-B rows when tier A is thin)
+//   2. with those powders fixed, infer an effective capacity per (cartridge, case brand) for tier B/C groups
+//   3. refit every powder on all rows; leave-one-cartridge-out validation on tier-A cartridges, training only on
+//      rows whose capacity is published (A/B with prior), so no inferred quantity leaks into the held-out test.
+// Outputs: src/data/powder-models.json, src/data/validation-report.json, src/data/inferred-capacities.json
 
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
 import { spawn } from 'node:child_process';
 import { calibrate, type FitParam, type Observation } from '../src/engine/calibrate';
-import { simulate } from '../src/engine/model';
+import { simulate, bulletVolumeBelow } from '../src/engine/model';
 import { propellantFromParams, paramsFromPropellant, toSetup, type LoadInputs } from '../src/engine/adapter';
 import { defaultShotStartPsi, priorParams } from '../src/engine/defaults';
 import * as U from '../src/engine/units';
-import type { Bullet, Cartridge, Database, Powder, PowderModelEntry, ValidationLoad } from '../src/data/schema';
+import type { Bullet, Cartridge, Database, Powder, PowderModelEntry, PowderModelParams, ValidationLoad } from '../src/data/schema';
 import { estimateFromCharts } from './estimate';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const db: Database = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/db.json'), 'utf8'));
 db.validationLoads = JSON.parse(fs.readFileSync(path.join(ROOT, 'research/build/validation-loads.json'), 'utf8'));
 
-const SIGMA_V_MS = U.fpsToMs(25); // published velocities are rounded / lot-dependent
+const SIGMA_V_MS = U.fpsToMs(25); // published velocities are rounded and lot-dependent
 const SIGMA_P_REL = 0.05;
+const CAP_PRIOR_SIGMA = 0.03;
+const MAX_LOCO = 6;
+const RTOL = 1e-6;
 
 const skipped: Record<string, number> = {};
 const skip = (why: string) => (skipped[why] = (skipped[why] ?? 0) + 1);
-
 const words = (s: string) => new Set(s.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter((w) => w.length > 1));
+const median = (v: number[]) => {
+  const s = v.slice().sort((a, b) => a - b);
+  return s.length % 2 ? s[(s.length - 1) / 2] : (s[s.length / 2 - 1] + s[s.length / 2]) / 2;
+};
 
 function findBullet(l: ValidationLoad, diameterIn: number): { bullet: Bullet | null; note: string } {
-  const mk = l.bulletMfr.toLowerCase().split(/\s+/)[0];
+  const mk = (l.bulletMfr ?? '').toLowerCase().split(/\s+/)[0];
+  if (!mk) return { bullet: null, note: 'bullet maker not stated' };
   const cands = db.bullets.filter(
     (b) => b.manufacturer.toLowerCase().includes(mk) && Math.abs(b.diameterIn - diameterIn) <= 0.003 && Math.abs(b.weightGr - l.bulletWeightGr) <= 0.5 && b.lengthIn,
   );
   if (!cands.length) return { bullet: null, note: 'no catalog bullet with length' };
-  const want = words(l.bulletModel);
+  const want = words(l.bulletModel ?? '');
   const scored = cands.map((b) => ({ b, s: [...words(`${b.line} ${b.name}`)].filter((w) => want.has(w)).length })).sort((a, b) => b.s - a.s);
   const best = scored.filter((x) => x.s === scored[0].s).map((x) => x.b);
   const lens = best.map((b) => b.lengthIn as number);
@@ -48,27 +60,28 @@ function findBullet(l: ValidationLoad, diameterIn: number): { bullet: Bullet | n
   return { bullet: best[0], note: scored[0].s > 0 ? 'matched by maker/weight/model words' : 'matched by maker/weight only' };
 }
 
-function capacityFor(l: ValidationLoad, c: Cartridge): { cap: number; basis: string } | null {
-  const brand = (l.caseBrand ?? '').toLowerCase();
-  const byBrand = c.caseCapacityGrH2O.filter((e) => brand && e.brand && (brand.includes(e.brand.toLowerCase()) || e.brand.toLowerCase().includes(brand)));
-  if (byBrand.length) {
-    const v = byBrand.map((e) => e.value).sort((a, b) => a - b);
-    return { cap: v[Math.floor(v.length / 2)], basis: `${byBrand[0].brand} (${byBrand[0].basis})` };
-  }
-  if (c.caseCapacityGrH2O.length) {
-    const v = c.caseCapacityGrH2O.map((e) => e.value).sort((a, b) => a - b);
-    return { cap: v[Math.floor(v.length / 2)], basis: `median of ${v.length} published capacities (case brand ${l.caseBrand ?? 'unstated'} not matched)` };
-  }
-  return null;
-}
+type Tier = 'A' | 'B' | 'C';
 
 interface Prepared {
   load: ValidationLoad;
   cartridgeId: string;
+  groupKey: string;
+  tier: Tier;
+  capPrior: number | null;
+  capBasis: string;
   inputs: LoadInputs;
   peakPa?: number;
   label: string;
   notes: string[];
+}
+
+function capacityFor(l: ValidationLoad, c: Cartridge): { tier: Tier; cap: number | null; basis: string } {
+  const brand = (l.caseBrand ?? '').toLowerCase().trim();
+  const published = c.caseCapacityGrH2O.filter((e) => !/inferred/i.test(e.basis));
+  const byBrand = published.filter((e) => brand && e.brand && (brand.includes(e.brand.toLowerCase()) || e.brand.toLowerCase().includes(brand)));
+  if (byBrand.length) return { tier: 'A', cap: median(byBrand.map((e) => e.value)), basis: `${byBrand[0].brand} (${byBrand[0].basis}, ${byBrand.length} value(s))` };
+  if (published.length) return { tier: 'B', cap: median(published.map((e) => e.value)), basis: `median of ${published.length} published capacities of other brands (test case: ${l.caseBrand ?? 'unstated'})` };
+  return { tier: 'C', cap: null, basis: 'no published capacity' };
 }
 
 function prepare(l: ValidationLoad): Prepared | null {
@@ -78,14 +91,14 @@ function prepare(l: ValidationLoad): Prepared | null {
   const caseLen = l.caseTrimLengthIn ?? c.trimLengthIn ?? c.caseLengthMaxIn;
   if (!caseLen) return skip('case length unknown'), null;
   if (!Number.isFinite(l.coalIn) || !Number.isFinite(l.barrelLengthIn)) return skip('COAL or barrel length missing'), null;
-  const cap = capacityFor(l, c);
-  if (!cap) return skip('no published case capacity for cartridge'), null;
+  if (!(l.velocityFps > 0) || !(l.chargeGr > 0) || !(l.bulletWeightGr > 0)) return skip('incomplete load'), null;
   const d = l.bulletDiameterIn ?? c.bulletDiameterIn;
   if (!d) return skip('bullet diameter unknown'), null;
+  const cap = capacityFor(l, c);
   let len = l.bulletLengthIn ?? null;
   let bt = 0;
   let construction: string | null = null;
-  const notes: string[] = [`capacity ${cap.cap} gr H2O: ${cap.basis}`];
+  const notes: string[] = [`capacity: ${cap.basis}`];
   const fb = findBullet(l, d);
   if (fb.bullet) {
     len = len ?? fb.bullet.lengthIn;
@@ -95,17 +108,21 @@ function prepare(l: ValidationLoad): Prepared | null {
   }
   if (!len) return skip(`bullet length unknown (${fb.note})`), null;
   let peakPa: number | undefined;
-  if (l.pressure !== null && l.pressureUnit === 'psi' && (l.pressureMethod ?? '').toLowerCase() !== 'cup') peakPa = U.psiToPa(l.pressure);
+  if (l.pressure !== null && l.pressureUnit === 'psi') peakPa = U.psiToPa(l.pressure);
   else if (l.pressure !== null && l.pressureUnit === 'bar') peakPa = U.barToPa(l.pressure);
-  // CUP readings are never converted; such loads contribute velocity only.
+  // CUP readings are never converted: such loads contribute velocity only.
   return {
     load: l,
     cartridgeId: c.id,
+    groupKey: `${c.id}|${(l.caseBrand ?? 'unstated').toLowerCase()}`,
+    tier: cap.tier,
+    capPrior: cap.cap,
+    capBasis: cap.basis,
     inputs: {
       boreDiameterIn: c.boreDiameterIn,
       grooveDiameterIn: c.grooveDiameterIn,
       caseLengthIn: caseLen,
-      caseCapacityGrH2O: cap.cap,
+      caseCapacityGrH2O: cap.cap ?? NaN,
       barrelLengthIn: l.barrelLengthIn,
       bulletWeightGr: l.bulletWeightGr,
       bulletDiameterIn: d,
@@ -118,33 +135,41 @@ function prepare(l: ValidationLoad): Prepared | null {
       shotStartPsi: defaultShotStartPsi(construction, c.type),
     },
     peakPa,
-    label: `${c.name} · ${l.bulletMfr} ${l.bulletWeightGr} gr ${l.bulletModel} · ${l.chargeGr} gr (${l.loadType})`,
+    label: `${c.name} · ${l.bulletMfr ?? ''} ${l.bulletWeightGr} gr ${l.bulletModel ?? ''} · ${l.chargeGr} gr (${l.loadType})`,
     notes,
   };
 }
 
+// ---------------------------------------------------------------- fitting helpers
+
+interface FittedModel {
+  params: PowderModelParams;
+}
+
+function startModel(p: Powder) {
+  return propellantFromParams(priorParams({ heatOfExplosionJg: p.heatOfExplosionJg ?? null, base: p.base, beta: 5 }), p.bulkDensityGcc ?? null);
+}
+
 function fitPowder(p: Powder, rows: Prepared[]) {
-  const start = propellantFromParams(priorParams({ heatOfExplosionJg: p.heatOfExplosionJg ?? null, base: p.base, beta: 5 }), p.bulkDensityGcc ?? null);
-  const obs: Observation[] = rows.map((r) => ({
-    setup: toSetup(r.inputs, start, { rtol: 1e-6 }),
-    velocityMs: U.fpsToMs(r.load.velocityFps),
-    peakPa: r.peakPa,
-    label: r.label,
-  }));
+  const start = startModel(p);
+  const obs: Observation[] = rows.map((r) => ({ setup: toSetup(r.inputs, start, { rtol: RTOL }), velocityMs: U.fpsToMs(r.load.velocityFps), peakPa: r.peakPa, label: r.label }));
   const nP = rows.filter((r) => r.peakPa !== undefined).length;
+  const barrels = new Set(rows.map((r) => r.inputs.barrelLengthIn)).size;
   const params: FitParam[] = ['beta'];
   if (rows.length >= 3) params.push('lambda');
   if (rows.length >= 4 && nP >= 2) params.push('force');
-  return calibrate({ start, observations: obs, params, sigmaVelocityMs: SIGMA_V_MS, sigmaPressureRel: SIGMA_P_REL });
+  if (rows.length >= 12 && barrels >= 3) params.push('heat');
+  const fit = calibrate({ start, observations: obs, params, sigmaVelocityMs: SIGMA_V_MS, sigmaPressureRel: SIGMA_P_REL });
+  return { fit, params };
 }
 
-function predict(model: ReturnType<typeof fitPowder>, r: Prepared, bulk: number | null | undefined) {
-  const prop = { ...model.model, bulkDensityKgM3: bulk ? bulk * 1000 : undefined };
-  return simulate(toSetup(r.inputs, prop, { rtol: 1e-6 }, model.heatScale));
+function simulateRow(m: FittedModel, r: Prepared, bulk: number | null | undefined, capOverride?: number) {
+  const prop = propellantFromParams(m.params, bulk ?? null);
+  const inputs = capOverride !== undefined ? { ...r.inputs, caseCapacityGrH2O: capOverride } : r.inputs;
+  return simulate(toSetup(inputs, prop, { rtol: RTOL }, m.params.heatScale ?? 1));
 }
 
-/** Deterministic, cartridge-stratified subsample: up to `perCart` rows per cartridge (spread over bullet weights,
- * both start and max loads), at most `cap` rows in total (cartridges taken round-robin). */
+/** Deterministic, cartridge-stratified subsample. */
 function subsample(rows: Prepared[], perCart = 6, cap = 48): Prepared[] {
   const byCart = new Map<string, Prepared[]>();
   for (const r of rows) byCart.set(r.cartridgeId, [...(byCart.get(r.cartridgeId) ?? []), r]);
@@ -170,49 +195,39 @@ function subsample(rows: Prepared[], perCart = 6, cap = 48): Prepared[] {
   return picked;
 }
 
-interface PowderJob {
-  powderId: string;
-  rows: Prepared[];
-}
+// ---------------------------------------------------------------- worker jobs
 
-interface PowderResult {
+type Job =
+  | { kind: 'powder'; stage: 1 | 3; powderId: string; rows: Prepared[]; locoRows?: Prepared[]; locoCartridges?: string[] }
+  | { kind: 'capacity'; groupKey: string; rows: Prepared[]; models: Record<string, FittedModel> };
+
+interface PowderOut {
+  kind: 'powder';
   powderId: string;
-  entry: PowderModelEntry;
+  params: PowderModelParams;
+  fitted: FitParam[];
+  points: number;
+  rmsVelocityFps: number | null;
+  rmsPressurePct: number | null;
+  warnings: string[];
   rows: any[];
   heldOutV: number[];
   heldOutP: number[];
   inSampleV: number[];
   inSampleP: number[];
 }
+interface CapacityOut {
+  kind: 'capacity';
+  groupKey: string;
+  capGrH2O: number | null;
+  n: number;
+  powders: number;
+  prior: number | null;
+  rmsPressurePct: number | null;
+}
 
-const MAX_LOCO = 6;
-
-function runPowder(job: PowderJob): PowderResult {
-  const p = db.powders.find((x) => x.id === job.powderId)!;
-  const prs = job.rows;
-  const fitRows = subsample(prs);
-  const fit = fitPowder(p, fitRows);
-  const cartridges = [...new Set(prs.map((r) => r.cartridgeId))];
-  const nP = fitRows.filter((r) => r.peakPa !== undefined).length;
-  const entry: PowderModelEntry = {
-    status: 'calibrated',
-    params: paramsFromPropellant(fit.model, fit.heatScale),
-    derivation:
-      `Fitted to ${fitRows.length} of ${prs.length} usable published pressure-tested loads (cartridge-stratified sample) across ${cartridges.length} cartridge(s). ` +
-      `Fitted: ${['beta', fitRows.length >= 3 ? 'lambda' : null, fitRows.length >= 4 && nP >= 2 ? 'force' : null].filter(Boolean).join(', ')}; ` +
-      `other thermochemistry from class priors${p.heatOfExplosionJg ? ` and the maker's heat of explosion (${p.heatOfExplosionJg} J/g)` : ''}. ` +
-      `${fit.warnings.join(' ')}`.trim(),
-    calibration: {
-      points: fitRows.length,
-      rmsVelocityFps: fit.rmsVelocityMs === null ? null : U.msToFps(fit.rmsVelocityMs),
-      rmsPressurePct: fit.rmsPressureRel === null ? null : fit.rmsPressureRel * 100,
-      cartridges,
-      sources: [...new Set(prs.flatMap((r) => r.load.sources.map((s) => s.url)))],
-      chargeRangeGr: [Math.min(...prs.map((r) => r.load.chargeGr)), Math.max(...prs.map((r) => r.load.chargeGr))],
-    },
-  };
-  const out: PowderResult = { powderId: p.id, entry, rows: [], heldOutV: [], heldOutP: [], inSampleV: [], inSampleP: [] };
-  const row = (r: Prepared, res: ReturnType<typeof simulate>, heldOut: boolean) => ({
+function rowReport(p: Powder, r: Prepared, res: ReturnType<typeof simulate>, heldOut: boolean) {
+  return {
     label: r.label,
     cartridge: r.load.cartridge,
     powder: p.name,
@@ -223,82 +238,225 @@ function runPowder(job: PowderJob): PowderResult {
     pObsUnit: r.load.pressureUnit,
     pPredPsi: Number.isFinite(res.peakBreechPa) ? Math.round(U.paToPsi(res.peakBreechPa)) : null,
     heldOut,
+    capacityTier: r.tier,
     page: r.load.sources[0]?.page ?? null,
     notes: r.notes.join('; '),
-  });
-  for (const r of fitRows) {
-    const res = predict(fit, r, p.bulkDensityGcc);
-    out.inSampleV.push(U.msToFps(res.muzzleVelocityMs) - r.load.velocityFps);
-    if (r.peakPa) out.inSampleP.push((res.peakBreechPa - r.peakPa) / r.peakPa);
-    out.rows.push(row(r, res, false));
-  }
-  // Leave-one-cartridge-out on the cartridges with the most data.
-  if (cartridges.length >= 2) {
-    const counts = cartridges.map((c) => [c, prs.filter((r) => r.cartridgeId === c).length] as const).sort((a, b) => b[1] - a[1]);
-    for (const [cid] of counts.slice(0, MAX_LOCO)) {
-      const train = subsample(prs.filter((r) => r.cartridgeId !== cid));
-      const test = subsample(prs.filter((r) => r.cartridgeId === cid), 8, 8);
-      const f2 = fitPowder(p, train);
+  };
+}
+
+function runPowder(job: Extract<Job, { kind: 'powder' }>): PowderOut {
+  const p = db.powders.find((x) => x.id === job.powderId)!;
+  const fitRows = subsample(job.rows);
+  const { fit, params } = fitPowder(p, fitRows);
+  const model: FittedModel = { params: paramsFromPropellant(fit.model, fit.heatScale) };
+  const out: PowderOut = {
+    kind: 'powder',
+    powderId: p.id,
+    params: model.params,
+    fitted: params,
+    points: fitRows.length,
+    rmsVelocityFps: fit.rmsVelocityMs === null ? null : U.msToFps(fit.rmsVelocityMs),
+    rmsPressurePct: fit.rmsPressureRel === null ? null : fit.rmsPressureRel * 100,
+    warnings: fit.warnings,
+    rows: [],
+    heldOutV: [],
+    heldOutP: [],
+    inSampleV: [],
+    inSampleP: [],
+  };
+  if (job.stage === 3) {
+    for (const r of fitRows) {
+      const res = simulateRow(model, r, p.bulkDensityGcc);
+      out.inSampleV.push(U.msToFps(res.muzzleVelocityMs) - r.load.velocityFps);
+      if (r.peakPa) out.inSampleP.push((res.peakBreechPa - r.peakPa) / r.peakPa);
+      out.rows.push(rowReport(p, r, res, false));
+    }
+    // Leave-one-cartridge-out on tier-A cartridges; training uses only rows with published capacity.
+    const pool = job.locoRows ?? [];
+    for (const cid of job.locoCartridges ?? []) {
+      const train = subsample(pool.filter((r) => r.cartridgeId !== cid));
+      const test = subsample(pool.filter((r) => r.cartridgeId === cid && r.tier === 'A'), 8, 8);
+      if (train.length < 3 || !test.length) continue;
+      const f2 = fitPowder(p, train).fit;
+      const m2: FittedModel = { params: paramsFromPropellant(f2.model, f2.heatScale) };
       for (const r of test) {
-        const res = predict(f2, r, p.bulkDensityGcc);
+        const res = simulateRow(m2, r, p.bulkDensityGcc);
         if (Number.isFinite(res.muzzleVelocityMs)) out.heldOutV.push(U.msToFps(res.muzzleVelocityMs) - r.load.velocityFps);
         if (r.peakPa && Number.isFinite(res.peakBreechPa)) out.heldOutP.push((res.peakBreechPa - r.peakPa) / r.peakPa);
-        out.rows.push(row(r, res, true));
+        out.rows.push(rowReport(p, r, res, true));
       }
     }
   }
   return out;
 }
 
+function runCapacity(job: Extract<Job, { kind: 'capacity' }>): CapacityOut {
+  const rows = subsample(job.rows.filter((r) => job.models[r.load.powderId!]), 40, 40);
+  const prior = job.rows[0].capPrior;
+  if (rows.length < 3) return { kind: 'capacity', groupKey: job.groupKey, capGrH2O: null, n: rows.length, powders: 0, prior, rmsPressurePct: null };
+  // Lower bound: the solid charge plus the seated bullet must fit.
+  let lo = 0;
+  for (const r of rows) {
+    const solidCm3 = U.grToG(r.inputs.chargeGr) / 1.6;
+    const seat = Math.max(0, r.inputs.bulletLengthIn - (r.inputs.coalIn - r.inputs.caseLengthIn));
+    const intr = bulletVolumeBelow({ massKg: 1, diameterM: U.inToM(r.inputs.bulletDiameterIn), lengthM: U.inToM(r.inputs.bulletLengthIn) }, U.inToM(seat)) * 1e6;
+    lo = Math.max(lo, U.cm3ToGrH2O((solidCm3 + intr) * 1.02));
+  }
+  let a = Math.log(prior ? Math.max(lo, prior * 0.85) : lo);
+  let b = Math.log(prior ? prior * 1.15 : lo * 3.5);
+  if (a >= b) b = a + 0.3;
+  const cost = (logCap: number) => {
+    const cap = Math.exp(logCap);
+    let s = 0;
+    for (const r of rows) {
+      const m = job.models[r.load.powderId!];
+      const p = db.powders.find((x) => x.id === r.load.powderId)!;
+      const res = simulateRow(m, r, p.bulkDensityGcc, cap);
+      const v = res.status === 'muzzle' ? res.muzzleVelocityMs : 0;
+      s += ((v - U.fpsToMs(r.load.velocityFps)) / SIGMA_V_MS) ** 2;
+      if (r.peakPa) s += ((Number.isFinite(res.peakBreechPa) ? res.peakBreechPa : 1e10) - r.peakPa) ** 2 / (r.peakPa * SIGMA_P_REL) ** 2;
+    }
+    if (prior) s += (Math.log(cap / prior) / CAP_PRIOR_SIGMA) ** 2;
+    return s;
+  };
+  const g = (Math.sqrt(5) - 1) / 2;
+  let c = b - g * (b - a);
+  let d = a + g * (b - a);
+  let fc = cost(c);
+  let fd = cost(d);
+  for (let i = 0; i < 28; i++) {
+    if (fc < fd) {
+      b = d;
+      d = c;
+      fd = fc;
+      c = b - g * (b - a);
+      fc = cost(c);
+    } else {
+      a = c;
+      c = d;
+      fc = fd;
+      d = a + g * (b - a);
+      fd = cost(d);
+    }
+  }
+  const cap = Math.exp((a + b) / 2);
+  const pErr: number[] = [];
+  for (const r of rows) {
+    if (!r.peakPa) continue;
+    const p = db.powders.find((x) => x.id === r.load.powderId)!;
+    const res = simulateRow(job.models[r.load.powderId!], r, p.bulkDensityGcc, cap);
+    pErr.push((res.peakBreechPa - r.peakPa) / r.peakPa);
+  }
+  return {
+    kind: 'capacity',
+    groupKey: job.groupKey,
+    capGrH2O: cap,
+    n: rows.length,
+    powders: new Set(rows.map((r) => r.load.powderId)).size,
+    prior,
+    rmsPressurePct: pErr.length ? Math.sqrt(pErr.reduce((s, v) => s + v * v, 0) / pErr.length) * 100 : null,
+  };
+}
+
 const SHARD_DIR = path.join(os.tmpdir(), 'orka-calib');
 
-async function runWorkers(jobs: PowderJob[], nProc: number): Promise<PowderResult[]> {
+async function runJobs<T>(jobs: Job[], nProc: number, tag: string): Promise<T[]> {
+  if (!jobs.length) return [];
   fs.mkdirSync(SHARD_DIR, { recursive: true });
-  // Largest jobs first, dealt round-robin so shards finish at similar times.
   const sorted = jobs.slice().sort((a, b) => b.rows.length - a.rows.length);
-  const shards: PowderJob[][] = Array.from({ length: nProc }, () => []);
-  sorted.forEach((j, i) => shards[i % nProc].push(j));
+  const n = Math.max(1, Math.min(nProc, sorted.length));
+  const shards: Job[][] = Array.from({ length: n }, () => []);
+  sorted.forEach((j, i) => shards[i % n].push(j));
   const procs = shards.map(
     (shard, i) =>
-      new Promise<PowderResult[]>((resolve, reject) => {
-        const inF = path.join(SHARD_DIR, `in-${i}.json`);
-        const outF = path.join(SHARD_DIR, `out-${i}.json`);
+      new Promise<T[]>((resolve, reject) => {
+        const inF = path.join(SHARD_DIR, `${tag}-in-${i}.json`);
+        const outF = path.join(SHARD_DIR, `${tag}-out-${i}.json`);
         fs.writeFileSync(inF, JSON.stringify(shard));
         const child = spawn(process.execPath, [...process.execArgv, new URL(import.meta.url).pathname, '--worker', inF, outF], { stdio: ['ignore', 'inherit', 'inherit'] });
-        child.on('exit', (code) => (code === 0 ? resolve(JSON.parse(fs.readFileSync(outF, 'utf8'))) : reject(new Error(`worker ${i} exited ${code}`))));
+        child.on('exit', (code) => (code === 0 ? resolve(JSON.parse(fs.readFileSync(outF, 'utf8'))) : reject(new Error(`worker ${tag}-${i} exited ${code}`))));
       }),
   );
   return (await Promise.all(procs)).flat();
 }
 
+// ---------------------------------------------------------------- main
+
 async function main() {
   if (process.argv[2] === '--worker') {
-    const jobs: PowderJob[] = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
-    const res: PowderResult[] = [];
+    const jobs: Job[] = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
+    const res: (PowderOut | CapacityOut)[] = [];
     for (const j of jobs) {
       const t0 = Date.now();
-      res.push(runPowder(j));
-      console.log(`  fitted ${j.powderId} (${j.rows.length} rows) in ${((Date.now() - t0) / 1000).toFixed(1)} s`);
+      res.push(j.kind === 'powder' ? runPowder(j) : runCapacity(j));
+      console.log(`  ${j.kind} ${j.kind === 'powder' ? `${j.powderId} stage ${j.stage}` : j.groupKey} (${j.rows.length} rows) ${((Date.now() - t0) / 1000).toFixed(1)} s`);
       fs.writeFileSync(process.argv[4], JSON.stringify(res));
     }
     fs.writeFileSync(process.argv[4], JSON.stringify(res));
     return;
   }
   const only = process.env.ORKA_POWDERS ? new Set(process.env.ORKA_POWDERS.split(',')) : null;
+  const nProc = Math.max(1, Number(process.env.ORKA_PROCS ?? os.cpus().length - 1));
   const prepared = db.validationLoads.map(prepare).filter((x): x is Prepared => x !== null);
-  const byPowder = new Map<string, Prepared[]>();
+  const rowsOf = new Map<string, Prepared[]>();
   for (const r of prepared) {
     if (!r.load.powderId) {
       skip('powder not matched to database');
       continue;
     }
     if (only && !only.has(r.load.powderId)) continue;
-    byPowder.set(r.load.powderId, [...(byPowder.get(r.load.powderId) ?? []), r]);
+    rowsOf.set(r.load.powderId, [...(rowsOf.get(r.load.powderId) ?? []), r]);
   }
-  const jobs = [...byPowder.entries()].map(([powderId, rows]) => ({ powderId, rows }));
-  const nProc = Math.max(1, Math.min(Number(process.env.ORKA_PROCS ?? os.cpus().length - 1), jobs.length));
-  console.log(`Calibrating ${jobs.length} powders from ${prepared.length} prepared loads on ${nProc} processes…`);
-  const results = await runWorkers(jobs, nProc);
+  const tierCount = prepared.reduce<Record<string, number>>((a, r) => ((a[r.tier] = (a[r.tier] ?? 0) + 1), a), {});
+  console.log(`Prepared ${prepared.length} loads (capacity tiers ${JSON.stringify(tierCount)}), ${rowsOf.size} powders, ${nProc} processes.`);
+
+  // Stage 1: powders on rows with published capacity.
+  const stage1Jobs: Job[] = [];
+  for (const [pid, rows] of rowsOf) {
+    const a = rows.filter((r) => r.tier === 'A');
+    const ab = rows.filter((r) => r.tier !== 'C');
+    const use = a.length >= 6 ? a : ab;
+    if (use.length >= 3) stage1Jobs.push({ kind: 'powder', stage: 1, powderId: pid, rows: use });
+  }
+  console.log(`Stage 1: ${stage1Jobs.length} powders with ≥3 rows of published capacity.`);
+  const s1 = await runJobs<PowderOut>(stage1Jobs, nProc, 's1');
+  const models1: Record<string, FittedModel> = Object.fromEntries(s1.map((o) => [o.powderId, { params: o.params }]));
+
+  // Stage 2: effective capacity per (cartridge, case brand) for groups without a brand-matched capacity.
+  const groups = new Map<string, Prepared[]>();
+  for (const rows of rowsOf.values()) for (const r of rows) if (r.tier !== 'A') groups.set(r.groupKey, [...(groups.get(r.groupKey) ?? []), r]);
+  const capJobs: Job[] = [...groups.entries()].map(([groupKey, rows]) => ({ kind: 'capacity', groupKey, rows, models: models1 }));
+  console.log(`Stage 2: inferring effective capacity for ${capJobs.length} cartridge/case groups.`);
+  const caps = await runJobs<CapacityOut>(capJobs, nProc, 's2');
+  const capOf = new Map(caps.filter((c) => c.capGrH2O !== null).map((c) => [c.groupKey, c]));
+
+  // Apply inferred capacities (tier C rows without one are dropped).
+  for (const [pid, rows] of rowsOf) {
+    const kept: Prepared[] = [];
+    for (const r of rows) {
+      if (r.tier === 'A') kept.push(r);
+      else {
+        const c = capOf.get(r.groupKey);
+        if (c) {
+          kept.push({ ...r, inputs: { ...r.inputs, caseCapacityGrH2O: c.capGrH2O! }, notes: [...r.notes, `effective capacity ${c.capGrH2O!.toFixed(1)} gr H2O inferred from ${c.n} loads / ${c.powders} powders`] });
+        } else if (r.tier === 'B') kept.push(r);
+        else skip('no capacity (could not infer)');
+      }
+    }
+    rowsOf.set(pid, kept);
+  }
+
+  // Stage 3: final fits + validation.
+  const stage3Jobs: Job[] = [];
+  for (const [pid, rows] of rowsOf) {
+    if (rows.length < 1) continue;
+    const pool = rows.filter((r) => r.tier !== 'C').map((r) => (r.tier === 'B' ? { ...r, inputs: { ...r.inputs, caseCapacityGrH2O: r.capPrior! } } : r));
+    const aCarts = [...new Set(rows.filter((r) => r.tier === 'A').map((r) => r.cartridgeId))];
+    const ranked = aCarts.map((c) => [c, rows.filter((r) => r.cartridgeId === c).length] as const).sort((x, y) => y[1] - x[1]).map((x) => x[0]);
+    stage3Jobs.push({ kind: 'powder', stage: 3, powderId: pid, rows, locoRows: pool, locoCartridges: new Set(pool.map((r) => r.cartridgeId)).size >= 2 ? ranked.slice(0, MAX_LOCO) : [] });
+  }
+  console.log(`Stage 3: final fits for ${stage3Jobs.length} powders.`);
+  const s3 = await runJobs<PowderOut>(stage3Jobs, nProc, 's3');
 
   const models: Record<string, PowderModelEntry> = {};
   const rows: any[] = [];
@@ -306,31 +464,69 @@ async function main() {
   const heldOutP: number[] = [];
   const inSampleV: number[] = [];
   const inSampleP: number[] = [];
-  for (const r of results) {
-    models[r.powderId] = r.entry;
-    rows.push(...r.rows);
-    heldOutV.push(...r.heldOutV);
-    heldOutP.push(...r.heldOutP);
-    inSampleV.push(...r.inSampleV);
-    inSampleP.push(...r.inSampleP);
+  for (const o of s3) {
+    const p = db.powders.find((x) => x.id === o.powderId)!;
+    const all = rowsOf.get(o.powderId)!;
+    const carts = [...new Set(all.map((r) => r.cartridgeId))];
+    const nInferred = all.filter((r) => r.tier !== 'A').length;
+    models[o.powderId] = {
+      status: 'calibrated',
+      params: o.params,
+      derivation:
+        `Fitted to ${o.points} of ${all.length} usable published pressure-tested loads (cartridge-stratified sample) across ${carts.length} cartridge(s); ` +
+        `${nInferred ? `${nInferred} of those loads use an inferred or other-brand case capacity. ` : ''}` +
+        `Fitted: ${o.fitted.join(', ')}; other thermochemistry from class priors${p.heatOfExplosionJg ? ` and the maker's heat of explosion (${p.heatOfExplosionJg} J/g)` : ''}. ` +
+        `${o.warnings.join(' ')}`.trim(),
+      calibration: {
+        points: o.points,
+        rmsVelocityFps: o.rmsVelocityFps,
+        rmsPressurePct: o.rmsPressurePct,
+        cartridges: carts,
+        sources: [...new Set(all.flatMap((r) => r.load.sources.map((s) => s.url)))],
+        chargeRangeGr: [Math.min(...all.map((r) => r.load.chargeGr)), Math.max(...all.map((r) => r.load.chargeGr))],
+      },
+    };
+    rows.push(...o.rows);
+    heldOutV.push(...o.heldOutV);
+    heldOutP.push(...o.heldOutP);
+    inSampleV.push(...o.inSampleV);
+    inSampleP.push(...o.inSampleP);
   }
 
-  // How good is chart interpolation? Leave each calibrated powder out, re-estimate it from its neighbours.
-  const powdersWithModels = db.powders.map((p) => (models[p.id] ? { ...p, model: models[p.id] } : { ...p, model: undefined }));
+  // Inferred capacities for the app (clearly labelled, never preferred over a published value).
+  const inferred = caps
+    .filter((c) => c.capGrH2O !== null)
+    .map((c) => {
+      const [cartridgeId, caseBrand] = c.groupKey.split('|');
+      return {
+        cartridgeId,
+        caseBrand,
+        grH2O: Math.round(c.capGrH2O! * 10) / 10,
+        loads: c.n,
+        powders: c.powders,
+        priorFromOtherBrands: c.prior,
+        rmsPressurePct: c.rmsPressurePct,
+        basis: `model-inferred effective capacity of the ${caseBrand} cases used in published pressure tests (${c.n} loads, ${c.powders} powders) — not a measurement`,
+      };
+    });
+
+  // How good is chart interpolation? Re-estimate each calibrated powder from its chart neighbours.
+  const withModels = db.powders.map((p) => (models[p.id] ? { ...p, model: models[p.id] } : { ...p, model: undefined }));
   const interpErr: number[] = [];
   for (const pid of Object.keys(models)) {
-    const without = powdersWithModels.map((p) => (p.id === pid ? { ...p, model: undefined } : p));
+    const without = withModels.map((p) => (p.id === pid ? { ...p, model: undefined } : p));
     const est = estimateFromCharts(without, db.burnRateCharts as any)[pid];
     if (est) interpErr.push(Math.log(est.params.beta / models[pid].params.beta));
   }
   const rmsLog = interpErr.length >= 3 ? Math.sqrt(interpErr.reduce((s, v) => s + v * v, 0) / interpErr.length) : null;
 
   const mae = (a: number[]) => (a.length ? a.reduce((s, v) => s + Math.abs(v), 0) / a.length : null);
-  const pct = (a: number[], q: number) => {
+  const q = (a: number[], f: number) => {
     if (!a.length) return null;
     const s = a.map(Math.abs).sort((x, y) => x - y);
-    return s[Math.min(s.length - 1, Math.floor(q * s.length))];
+    return s[Math.min(s.length - 1, Math.floor(f * s.length))];
   };
+  const pctTxt = (v: number | null) => (v === null ? '—' : `${(v * 100).toFixed(1)} %`);
   const report = {
     generated: new Date().toISOString(),
     metrics: {
@@ -338,23 +534,24 @@ async function main() {
       velocityMaeFps: mae(heldOutV),
       velocityMapePct: null as number | null,
       pressureMapePct: heldOutP.length ? (mae(heldOutP) as number) * 100 : null,
-      pressureP67Pct: heldOutP.length ? (pct(heldOutP, 0.67) as number) * 100 : null,
-      pressureP95Pct: heldOutP.length ? (pct(heldOutP, 0.95) as number) * 100 : null,
-      velocityP95Fps: pct(heldOutV, 0.95),
+      pressureP67Pct: heldOutP.length ? (q(heldOutP, 0.67) as number) * 100 : null,
+      pressureP95Pct: heldOutP.length ? (q(heldOutP, 0.95) as number) * 100 : null,
+      velocityP95Fps: q(heldOutV, 0.95),
       notes:
-        `Held-out = leave-one-cartridge-out: each powder is refitted without one cartridge's loads, then predicts them (up to ${MAX_LOCO} cartridges per powder). ` +
-        `${heldOutV.length} held-out velocity and ${heldOutP.length} held-out pressure comparisons over ${results.length} powders. ` +
-        `Held-out |pressure error|: 67th percentile ${heldOutP.length ? ((pct(heldOutP, 0.67) as number) * 100).toFixed(1) : '—'} %, 95th ${heldOutP.length ? ((pct(heldOutP, 0.95) as number) * 100).toFixed(1) : '—'} %. ` +
-        `In-sample (fitted data): velocity MAE ${mae(inSampleV)?.toFixed(0) ?? '—'} fps, pressure MAPE ${inSampleP.length ? ((mae(inSampleP) as number) * 100).toFixed(1) : '—'} %. ` +
-        `Chart-interpolation check (calibrated powders re-estimated from chart neighbours): ${rmsLog === null ? 'too few powders to measure' : `RMS burn-rate error ${(rmsLog * 100).toFixed(0)} % over ${interpErr.length} powders`}. ` +
-        `Loads skipped while preparing: ${JSON.stringify(skipped)}.`,
+        `Held-out = leave-one-cartridge-out: each powder is refitted without one cartridge (only rows whose case capacity is published are used for this test), then predicts that cartridge's loads. ` +
+        `${heldOutV.length} held-out velocity and ${heldOutP.length} held-out pressure comparisons over ${s3.length} powders. ` +
+        `Held-out |pressure error|: median-ish MAPE ${heldOutP.length ? ((mae(heldOutP) as number) * 100).toFixed(1) : '—'} %, 67th percentile ${pctTxt(q(heldOutP, 0.67))}, 95th ${pctTxt(q(heldOutP, 0.95))}. ` +
+        `In-sample (fitted rows, including inferred capacities): velocity MAE ${mae(inSampleV)?.toFixed(0) ?? '—'} fps, pressure MAPE ${inSampleP.length ? ((mae(inSampleP) as number) * 100).toFixed(1) : '—'} %. ` +
+        `Chart interpolation (calibrated powders re-estimated from chart neighbours): ${rmsLog === null ? 'too few to measure' : `RMS burn-rate error ${(rmsLog * 100).toFixed(0)} % over ${interpErr.length} powders`}. ` +
+        `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. Loads skipped: ${JSON.stringify(skipped)}.`,
       interpolationBetaRelSigma: rmsLog,
     },
     rows,
   };
   fs.writeFileSync(path.join(ROOT, 'src/data/powder-models.json'), JSON.stringify({ generated: report.generated, models }, null, 1));
   fs.writeFileSync(path.join(ROOT, 'src/data/validation-report.json'), JSON.stringify(report));
-  console.log(JSON.stringify({ powdersCalibrated: Object.keys(models).length, prepared: prepared.length, skipped, metrics: { ...report.metrics, notes: undefined } }, null, 2));
+  fs.writeFileSync(path.join(ROOT, 'src/data/inferred-capacities.json'), JSON.stringify(inferred, null, 1));
+  console.log(JSON.stringify({ powdersCalibrated: Object.keys(models).length, inferredCapacities: inferred.length, skipped, metrics: { ...report.metrics, notes: undefined } }, null, 2));
 }
 
 main();
