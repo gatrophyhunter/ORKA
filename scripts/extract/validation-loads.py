@@ -5,15 +5,25 @@ handload data (cartridge / bullet / case / primer / COL / barrel / powder /
 charge / velocity / measured pressure) used to calibrate and validate the
 interior-ballistics model.
 
-Sources handled here:
-  * Hodgdon Annual Manual 2025 (public PDF in the Hodgdon "Reloading Manuals
-    Library").  Every Rifle Data and Pistol Data row (start + max loads) and the
-    SubSonic / Reduced Recoil "recommended load" rows are parsed from word
-    coordinates (pdftotext -bbox), so the two-column layout is split by
-    geometry, never by retyping values.
+Sources (all public manufacturer PDFs, cached in the scratchpad SRC_DIR):
+  * Hodgdon 2025 Annual Manual (Hodgdon, IMR, Winchester, Accurate, Ramshot):
+    start + max load with pressure in psi (transducer) or CUP (crusher).
+    Rows are rebuilt from word coordinates (pdftotext -bbox) so the two-column
+    layout is split by geometry.
+  * Reload Swiss "Ladedaten / Reloading Data" 2025: official RS tables with
+    start + max charge, V5 velocity (m/s) and pressure (bar), barrel (mm),
+    C.O.L. (mm).  Customer-data section is not used.
+  * Shooters World manual (2023): start + max charge/velocity, max pressure
+    (psi).  Wrapped cells are re-attached from word coordinates.
+  * Vihtavuori Reloading Guide 2026: start + max charge/velocity with test
+    barrel, twist, case and primer type (no pressure values published).
 
-Run:  python3 -I scripts/extract/validation-loads.py
-Downloads are cached in the scratchpad SRC_DIR (not committed).
+Every value is parsed from the document text; rows that do not fit the strict
+patterns or fail an internal unit cross-check are skipped and logged in
+meta.parseLog (nothing is guessed).  Only the 13 priority cartridges are kept
+unless run with --all.
+
+Run:  python3 -I scripts/extract/validation-loads.py [--all]
 Output: research/raw2/validation-loads.json
 """
 import html
@@ -1084,7 +1094,11 @@ def vihtavuori_parse(doc, log, keep_all=False):
                     unparsed.append({"page": p, "text": ws(line), "why": "powder row does not match the strict "
                                      "column pattern; skipped"})
                 continue
-            canon = VV_CANON.get(st["cart"]) if st["cart"] else None
+            if st["cart"] is None:
+                unparsed.append({"page": p, "text": ws(line), "why": "load row outside a recognised section (e.g. "
+                                 "after a continuation header that did not match the running section); skipped"})
+                continue
+            canon = VV_CANON.get(st["cart"])
             prefix = line[:ml.start()]
             mbl = VV_BULLET_RE.match(line)
             if mbl:

@@ -65,14 +65,20 @@ NOSLER_PAGES = os.path.join(SRC, 'nosler-pages')
 SWIFT_PAGES = os.path.join(SRC, 'swift-pages')
 
 _last = {}
+# Per-host politeness delay (s).  Swift answered one burst with HTTP 429, so it
+# gets a much slower pace; after a 429 the host is left alone for this run.
+HOST_DELAY = {'www.swiftbullets.com': 8.0}
+_blocked = set()
 
 
 def fetch(url, dest, force=False):
-    """Download url to dest with plain curl (default UA); >= DELAY s per host."""
+    """Download url to dest with plain curl (default UA); >= delay s per host."""
     if os.path.exists(dest) and os.path.getsize(dest) > 0 and not force:
         return True
     host = re.match(r'https?://([^/]+)', url).group(1)
-    wait = DELAY - (time.time() - _last.get(host, 0.0))
+    if host in _blocked:
+        return False
+    wait = HOST_DELAY.get(host, DELAY) - (time.time() - _last.get(host, 0.0))
     if wait > 0:
         time.sleep(wait)
     os.makedirs(os.path.dirname(dest), exist_ok=True)
@@ -85,6 +91,9 @@ def fetch(url, dest, force=False):
         sys.stderr.write('FETCH %s -> %s %s\n' % (url, code, r.stderr.strip()))
         if os.path.exists(tmp):
             os.remove(tmp)
+        if code == '429':
+            sys.stderr.write('  rate-limited: leaving %s alone for this run\n' % host)
+            _blocked.add(host)
         return False
     os.replace(tmp, dest)
     return True
