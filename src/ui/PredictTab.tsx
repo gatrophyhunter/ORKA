@@ -9,6 +9,7 @@ import { fmtChargeKg, fmtE, fmtLen, fmtMs, fmtNum, fmtP, fmtPct, fmtTempC, fmtV,
 import { LineChart } from './LineChart';
 import { useApp } from './state';
 import { PublishedCrossCheck, ScopeWarnings } from './CrossCheck';
+import { modelValidation } from '../engine/defaults';
 import { encodeBuilder } from './share';
 import { useLoad } from './useLoad';
 
@@ -70,6 +71,7 @@ export function PredictTab() {
   const psiPts = tr ? tr.t.map((t, i) => ({ x: t * 1000, y: tr.psi[i] * 100 })) : [];
   const refLines = limit ? [{ y: pVal(limit, sys), label: 'working limit', color: 'var(--danger)' }] : [];
   const stale = d.setup !== setup;
+  const mv = modelValidation();
   const shareUrl = () => `${window.location.origin}${window.location.pathname}${encodeBuilder(builder, db.version)}`;
   const copyLink = async () => {
     const url = shareUrl();
@@ -129,6 +131,15 @@ export function PredictTab() {
               {ratio !== null && Number.isFinite(ratio) && (
                 <div className={`meter ${pState === 'danger' ? 'danger' : pState === 'warn' ? 'warn' : ''}`} aria-hidden="true">
                   <div style={{ width: `${Math.min(ratio, 1) * 100}%` }} />
+                </div>
+              )}
+              {mv && (d.status === 'calibrated' || d.status === 'user-calibrated' || d.status === 'estimated') && (
+                <div className={`small ${d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? 'warn-text' : 'muted'}`} data-testid="model-error">
+                  Model error on held-out published data: median ±{mv.heldOutPressureP50Pct} %, 1 in 10 worse than ±{mv.heldOutPressureP90Pct} %
+                  {mv.heldOutPressureBiasPct < 0 ? ` (on average ${Math.abs(mv.heldOutPressureBiasPct)} % low)` : ''}
+                  {typeof d.powder?.model?.calibration?.heldOutPressurePct === 'number' ? `; this powder: median ±${d.powder.model.calibration.heldOutPressurePct} %` : ''}.
+                  {' '}Upper estimate {fmtP(res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100), sys)}
+                  {d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? ' — above the maximum.' : '.'}
                 </div>
               )}
               {d.limit.mapPa !== null && (

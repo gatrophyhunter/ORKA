@@ -19,9 +19,20 @@ Open-source handload prediction: interior ballistics with pressure limits, a par
 
 The app runs entirely in the browser: no account, no server, and no network requests after loading. It works offline once loaded. Your entries stay in local storage, and share links carry the load inside the URL fragment.
 
+## Accuracy: read this before using predictions
+
+Measured on published pressure-tested data the model never saw (leave-one-cartridge-out, rifle cartridges, see [docs/VALIDATION.md](docs/VALIDATION.md)):
+
+- **Pressure error:** median **±12.7 %**, and 1 in 10 predictions is off by more than **±31 %**.
+- **Bias:** on average the model reads **5 % low**, which is the unsafe direction.
+- **Velocity error:** median 71 fps.
+- **Handguns:** accuracy could not be validated on held-out data.
+
+That is not accurate enough to develop loads from. ORKA shows this error on every prediction, sizes its uncertainty band from each powder's own fit, and puts the maker's published loads for your components beside every prediction.
+
 ## How it compares with GRT and QuickLOAD
 
-These are verified differences, not claims of better accuracy. ORKA's accuracy is whatever the **Validation** tab measures, and you can check it.
+These are verified differences, not claims of better accuracy. On accuracy ORKA is behind: GRT users report about 3 % with well-developed powder models (an unverified forum claim), while ORKA measures about 13 % held-out. ORKA's accuracy is whatever the **Validation** tab measures, and you can check it.
 
 - **Provenance on every number.** Each cartridge, bullet and brass value links to the maker's or standard's document and the exact table line it came from. Each powder model states what it was fitted to and its residuals.
 - **Uncertainty is shown.** Sensitivity bands and one-at-a-time sensitivities come with every prediction, and estimated powders carry the measured error of the estimation method.

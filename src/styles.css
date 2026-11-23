@@ -313,3 +313,5 @@ table.data tr.fail td { color: var(--text-muted); }
 .chip.fit-good { background: var(--ok-soft); border-color: var(--ok); }
 .chip.fit-fair { background: var(--warn-soft); border-color: var(--warn); }
 .chip.fit-poor { background: var(--danger-soft); border-color: var(--danger); }
+
+.warn-text { color: var(--danger); }

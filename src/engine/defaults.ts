@@ -113,3 +113,17 @@ export function priorParams(opts: { heatOfExplosionJg?: number | null; base?: 's
 /** Starting point for a user calibration of a powder that has no model yet. */
 export const PRIOR_SINGLE_BASE: PowderModelParams = priorParams({ base: 'single', beta: 5 });
 export const PRIOR_DOUBLE_BASE: PowderModelParams = priorParams({ base: 'double', beta: 5 });
+
+export interface ModelValidationSummary {
+  heldOutPressureN: number;
+  heldOutPressureP50Pct: number;
+  heldOutPressureP90Pct: number;
+  heldOutPressureBiasPct: number;
+  heldOutWithin10Pct: number;
+  scope: string;
+}
+/** Headline held-out validation of the calibrated models (scripts/validation-summary.ts), or null before calibration. */
+export function modelValidation(): ModelValidationSummary | null {
+  const v = (modelConstants as any)?.validation;
+  return v && typeof v.heldOutPressureP90Pct === 'number' ? (v as ModelValidationSummary) : null;
+}

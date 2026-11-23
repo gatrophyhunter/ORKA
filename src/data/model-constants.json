@@ -13,5 +13,14 @@
       "value": 30,
       "basis": "Third-party default (OpenReloading [48]); replaced by a value fitted to published pressure-tested loads when scripts/calibrate-powders.ts has run."
     }
+  },
+  "validation": {
+    "heldOutPressureN": 359,
+    "heldOutPressureP50Pct": 12.7,
+    "heldOutPressureP90Pct": 31.4,
+    "heldOutPressureBiasPct": -5.3,
+    "heldOutWithin10Pct": 38,
+    "scope": "rifle cartridges whose test-case capacity is published (no handgun cartridge qualified)",
+    "generated": "2026-11-23T15:24:33.396Z"
   }
 }

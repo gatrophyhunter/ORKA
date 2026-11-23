@@ -28,14 +28,18 @@ function Breakdown({ rows }: { rows: ValidationRow[] }) {
       return o !== null && r.pPredPsi !== null ? Math.abs((r.pPredPsi - o) / o) : null;
     }).filter((x): x is number => x !== null).sort((a, b) => a - b);
     const ve = rs.filter((r) => r.velPredFps !== null && r.velObsFps > 0).map((r) => Math.abs((r.velPredFps as number) - r.velObsFps)).sort((a, b) => a - b);
+    const signed = rs.map((r) => {
+      const o = obsPsi(r);
+      return o !== null && r.pPredPsi !== null ? (r.pPredPsi - o) / o : null;
+    }).filter((x): x is number => x !== null);
     const q = (a: number[], f: number) => (a.length ? a[Math.min(a.length - 1, Math.floor(f * a.length))] : null);
-    return { nP: pe.length, p50: q(pe, 0.5), p90: q(pe, 0.9), nV: ve.length, v50: q(ve, 0.5), v90: q(ve, 0.9) };
+    return { nP: pe.length, p50: q(pe, 0.5), p90: q(pe, 0.9), bias: signed.length ? signed.reduce((s, v) => s + v, 0) / signed.length : null, nV: ve.length, v50: q(ve, 0.5), v90: q(ve, 0.9) };
   };
   if (!held.length || held[0].cartType === undefined) return null;
   return (
     <div className="card" data-testid="validation-breakdown">
       <h3>Held-out error by group</h3>
-      <p className="small muted">Absolute errors of held-out predictions. p50 = median, p90 = 90th percentile (one prediction in ten is worse than this).</p>
+      <p className="small muted">Absolute errors of held-out predictions. p50 = median, p90 = 90th percentile (one prediction in ten is worse than this). Bias is the mean signed pressure error: negative means the model predicts <strong>lower</strong> pressure than was measured — the unsafe direction.</p>
       <div className="table-wrap">
         <table className="data">
           <thead>
@@ -44,6 +48,7 @@ function Breakdown({ rows }: { rows: ValidationRow[] }) {
               <th className="num">Pressure n</th>
               <th className="num">Pressure p50</th>
               <th className="num">Pressure p90</th>
+              <th className="num" title="Mean signed error: negative = model predicts lower pressure than published (the unsafe direction)">Pressure bias</th>
               <th className="num">Velocity n</th>
               <th className="num">Velocity p50</th>
               <th className="num">Velocity p90</th>
@@ -58,6 +63,7 @@ function Breakdown({ rows }: { rows: ValidationRow[] }) {
                   <td className="num">{s.nP}</td>
                   <td className="num">{s.p50 === null ? '—' : `${fmtNum(s.p50 * 100, 1)} %`}</td>
                   <td className="num">{s.p90 === null ? '—' : `${fmtNum(s.p90 * 100, 1)} %`}</td>
+                  <td className="num" style={s.bias !== null && s.bias < 0 ? { color: 'var(--danger)' } : undefined}>{s.bias === null ? '—' : `${s.bias >= 0 ? '+' : ''}${fmtNum(s.bias * 100, 1)} %`}</td>
                   <td className="num">{s.nV}</td>
                   <td className="num">{s.v50 === null ? '—' : `${fmtNum(s.v50, 0)} fps`}</td>
                   <td className="num">{s.v90 === null ? '—' : `${fmtNum(s.v90, 0)} fps`}</td>
