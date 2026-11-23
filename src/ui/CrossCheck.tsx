@@ -116,7 +116,7 @@ const TYPE_LABEL: Record<string, string> = {
   start: 'start',
   other: 'single load',
   reduced: 'reduced (not a max)',
-  'section-max': 'max for a firearm-class section (not the cartridge standard)',
+  'section-max': 'max for a higher-pressure firearm section (e.g. lever or modern rifles), not the cartridge standard',
 };
 
 /** Warnings about how far the current prediction is from the powder model's calibration data. */

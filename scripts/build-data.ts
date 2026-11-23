@@ -586,7 +586,7 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
         loadType:
           r.loadType === 'max' && /garand/i.test(`${r.cartridge} ${r.notes ?? ''} ${r.dataSection ?? ''}`)
             ? 'reduced'
-            : r.loadType === 'max' && /\(.+\)/.test(String(r.cartridge)) && cart && cartridgeKey(r.cartridge) !== cart.id
+            : r.loadType === 'max' && cart && isHigherPressureSection(String(r.cartridge))
               ? 'section-max'
               : r.loadType ?? 'other',
         compressed: r.compressed ?? null,
@@ -596,6 +596,18 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
     }
   }
   return out;
+}
+
+/**
+ * A "max" row belongs to a firearm-class section loaded ABOVE the cartridge standard (e.g. Hodgdon's
+ * "45-70 Government (Lever Actions)" / "(Modern Rifles)") only when the parenthesis names such a firearm class.
+ * Parentheses that hold an alternative name ("7,62 x 53R (7,62 Russian)", "8 x 57 IS (8 mm Mauser)") or the
+ * standard-level section ("(Trapdoor Rifles)", at the SAAMI 28,000 level) stay ordinary maxima: keeping a row as a
+ * max can only lower the published reference (the lowest max), which is the conservative direction.
+ */
+export function isHigherPressureSection(label: string): boolean {
+  const m = /\(([^)]*)\)/.exec(label);
+  return !!m && /\b(lever|modern|ruger|marlin|contender|encore|handi)\b/i.test(m[1]);
 }
 
 function main() {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { applyCatalogCrossChecks, buildBullets, buildCartridges, buildPowders, buildLoads } from '../scripts/build-data';
+import { applyCatalogCrossChecks, isHigherPressureSection, buildBullets, buildCartridges, buildPowders, buildLoads } from '../scripts/build-data';
 
 const src = [{ url: 'https://example.invalid/catalog.pdf', type: 'manufacturer', page: 3 }];
 
@@ -90,5 +90,13 @@ describe('data build policy', () => {
     expect(by('mk-9').tip).toBe('polymer tip');
     // Evidence keeps its inner separators out of the note-part separator.
     expect(by('mk-1').notes).toContain('Evidence: a · b');
+  });
+  it('demotes only higher-pressure firearm sections, never aliases or the standard-level section', () => {
+    expect(isHigherPressureSection('45-70 Government (Lever Actions)')).toBe(true);
+    expect(isHigherPressureSection('45-70 Government (Modern Rifles)')).toBe(true);
+    expect(isHigherPressureSection('45-70 Government (Trapdoor Rifles)')).toBe(false);
+    expect(isHigherPressureSection('7,62 x 53R (7,62 Russian)')).toBe(false);
+    expect(isHigherPressureSection('8 x 57 IS (8 mm Mauser)')).toBe(false);
+    expect(isHigherPressureSection('308 Winchester')).toBe(false);
   });
 });
