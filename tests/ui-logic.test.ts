@@ -160,7 +160,7 @@ describe('shot-start construction classes', () => {
 });
 
 import { pressureState } from '../src/ui/PredictTab';
-import { fmtP } from '../src/ui/format';
+
 describe('runaway results', () => {
   it('flags an infinite (diverged) peak as danger and names it', () => {
     expect(pressureState(Infinity, 400e6)).toBe('danger');
