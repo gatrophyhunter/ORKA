@@ -14,7 +14,9 @@ import { encodeBuilder } from './share';
 import { useLoad } from './useLoad';
 
 export function pressureState(peakPa: number, limitPa: number | null): 'ok' | 'warn' | 'danger' | undefined {
-  if (limitPa === null || !Number.isFinite(peakPa)) return undefined;
+  if (limitPa === null) return undefined;
+  if (peakPa === Infinity) return 'danger'; // runaway ('diverged') result
+  if (!Number.isFinite(peakPa)) return undefined;
   const r = peakPa / limitPa;
   if (r > 1) return 'danger';
   if (r > 0.95) return 'warn';

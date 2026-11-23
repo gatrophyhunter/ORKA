@@ -49,7 +49,11 @@ export function fmtInput(q: InputQty, sys: UnitSystem, imp: number | null | unde
 export const pUnit = (sys: UnitSystem) => (sys === 'imperial' ? 'psi' : 'MPa');
 export const pVal = (pa: number, sys: UnitSystem) => (sys === 'imperial' ? U.paToPsi(pa) : pa / 1e6);
 export const fmtP = (pa: number | null | undefined, sys: UnitSystem, withUnit = true) =>
-  pa === null || pa === undefined || !Number.isFinite(pa) ? '—' : `${fmtNum(pVal(pa, sys), sys === 'imperial' ? 0 : 1)}${withUnit ? ' ' + pUnit(sys) : ''}`;
+  pa === Infinity
+    ? 'runaway (far above any limit)'
+    : pa === null || pa === undefined || !Number.isFinite(pa)
+      ? '—'
+      : `${fmtNum(pVal(pa, sys), sys === 'imperial' ? 0 : 1)}${withUnit ? ' ' + pUnit(sys) : ''}`;
 
 export const vUnit = (sys: UnitSystem) => (sys === 'imperial' ? 'fps' : 'm/s');
 export const vVal = (ms: number, sys: UnitSystem) => (sys === 'imperial' ? U.msToFps(ms) : ms);

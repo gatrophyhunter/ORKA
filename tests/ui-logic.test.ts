@@ -158,3 +158,13 @@ describe('shot-start construction classes', () => {
     expect(defaultShotStartPsi('Barnes TSX')).toBeGreaterThan(defaultShotStartPsi('cup-and-core'));
   });
 });
+
+import { pressureState } from '../src/ui/PredictTab';
+import { fmtP } from '../src/ui/format';
+describe('runaway results', () => {
+  it('flags an infinite (diverged) peak as danger and names it', () => {
+    expect(pressureState(Infinity, 400e6)).toBe('danger');
+    expect(pressureState(NaN, 400e6)).toBeUndefined();
+    expect(fmtP(Infinity, 'imperial')).toMatch(/runaway/);
+  });
+});
