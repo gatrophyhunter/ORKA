@@ -111,14 +111,16 @@ WORD_RE = re.compile(
 PAGE_RE = re.compile(r'<page width="([\d.]+)" height="([\d.]+)">(.*?)</page>', re.S)
 
 NUM_CH = r"\d+(?:\.\d+)?"
+PRES = r"\d{1,3}(?:,\d{3})+|\d{3,6}"
+UNIT = r"(?i:PSI|CUP)"
 ROW6_RE = re.compile(
     r"^(?P<powder>.+?)\s+"
-    r"(?P<sg>" + NUM_CH + r")(?P<sc>C?)(?P<sa>\*?)\s+(?P<sv>\d{3,4})\s+(?P<sp>\d{1,3}(?:,\d{3})+|\d{3,6})\s+(?P<spu>PSI|CUP)\s+"
-    r"(?P<mg>" + NUM_CH + r")(?P<mc>C?)(?P<ma>\*?)\s+(?P<mv>\d{3,4})\s+(?P<mp>\d{1,3}(?:,\d{3})+|\d{3,6})\s+(?P<mpu>PSI|CUP)$"
+    r"(?P<sg>" + NUM_CH + r")(?P<sc>\s?C?)(?P<sa>\*?)\s+(?P<sv>\d{3,4})\s+(?P<sp>" + PRES + r")\s*(?P<spu>" + UNIT + r")\s+"
+    r"(?P<mg>" + NUM_CH + r")(?P<mc>\s?C?)(?P<ma>\*?)\s+(?P<mv>\d{3,4})\s+(?P<mp>" + PRES + r")\s*(?P<mpu>" + UNIT + r")$"
 )
 ROW3_RE = re.compile(
     r"^(?P<powder>.+?)\s+"
-    r"(?P<g>" + NUM_CH + r")(?P<c>C?)(?P<a>\*?)\s+(?P<v>\d{3,4})\s+(?P<p>\d{1,3}(?:,\d{3})+|\d{3,6})\s+(?P<pu>PSI|CUP)$"
+    r"(?P<g>" + NUM_CH + r")(?P<c>\s?C?)(?P<a>\*?)\s+(?P<v>\d{3,4})\s+(?P<p>" + PRES + r")\s*(?P<pu>" + UNIT + r")$"
 )
 BARREL_RE = re.compile(
     r"^Barrel:\s*(?P<bbl>\d+(?:\.\d+)?)\s*[”\"]?\s*Twist:\s*(?P<tw>[^\s”\"]+)\s*[”\"]?\s*Trim:\s*(?P<trim>\d*\.\d+|\d+)\s*[”\"]?\s*$",
@@ -139,13 +141,50 @@ def norm_key(s):
 def parse_toc(pages_text):
     """Canonical cartridge names from the table of contents ('name .....page')."""
     names = {}
+    pat = re.compile(r"([0-9A-Za-z](?:(?!\s{3})[^.\n]|\.(?!\.))*?[^.\s])\s*\.{2,}\s*(\d{1,3})")
     for p in pages_text[:8]:
-        for m in re.finditer(r"([0-9A-Za-z][^.\n]*?[^.\s])\s*\.{3,}\s*(\d{2,3})", p):
-            nm = ws(m.group(1))
-            # TOC lines are 3 columns: keep only the trailing part after a page number of a previous entry
-            nm = re.sub(r"^\d{1,3}\s+(?=[0-9])", "", nm) if re.match(r"^\d{1,3}\s+\d", nm) and False else nm
-            names[norm_key(nm.rstrip("*"))] = nm.rstrip("*").strip()
+        for m in pat.finditer(p):
+            nm = ws(m.group(1)).rstrip("*").strip()
+            names[norm_key(nm)] = nm
     return names
+
+
+def collapse(k):
+    return re.sub(r"(.)\1+", r"\1", k)
+
+
+TITLE_KEEP = {"ACP", "SPC", "ARC", "GT", "PRC", "FN", "TCM", "AAC", "SOCOM", "SIG", "WSM", "RPM", "H&R", "S&W",
+              "H", "T/C", "BMG"}
+
+
+def canon_cartridge(raw, toc):
+    """Map a printed (small-caps, glyph-split) section title to the manual's own TOC spelling."""
+    r = raw.rstrip("*").strip()
+    note = None
+    m = re.match(r"^(.*?)\s+-\s+(Pistol|Rifle)$", r, re.I)
+    if m:
+        r = m.group(1)
+        note = "Printed section title '%s' (%s data); TOC spelling used." % (raw, m.group(2).title())
+    k = norm_key(r)
+    if k in toc:
+        return toc[k], note, True
+    ck = collapse(k)
+    hits = [v for kk, v in toc.items() if collapse(kk) == ck]
+    if len(set(hits)) == 1:
+        return hits[0], note or ("Printed section title '%s'; TOC spelling used." % raw), True
+    hits = sorted({v for kk, v in toc.items() if collapse(kk).startswith(ck) and len(k) >= 4})
+    if len(hits) == 1:
+        return hits[0], "Printed section title '%s'; matched to TOC entry '%s'." % (raw, hits[0]), True
+    # fallback: tidy small-caps casing, keep as printed otherwise
+    toks = []
+    for t in r.split():
+        if t.upper() in TITLE_KEEP:
+            toks.append(t.upper())
+        elif re.search(r"[A-Za-z]", t) and not re.match(r"^\d", t):
+            toks.append(t[:1].upper() + t[1:].lower())
+        else:
+            toks.append(t.lower() if re.match(r"^\d", t) else t)
+    return " ".join(toks), "Printed section title '%s' not found in TOC; casing normalised." % raw, False
 
 
 def parse_legend(page_text):
@@ -253,6 +292,9 @@ def hodgdon_parse(doc, log):
         hdr = [w for w in words if w["y0"] < 70]
         powders = sorted([w for w in hdr if w["t"] == "Powder"], key=lambda w: w["x0"])
         split = powders[1]["x0"] - 4 if len(powders) >= 2 else width / 2
+        if len(powders) < 2:
+            unparsed.append({"page": pno, "text": "", "why": "column split fell back to page middle"})
+        page_flat = ws(ptxt)
         cols = [[w for w in words if w["x0"] < split], [w for w in words if w["x0"] >= split]]
         for ci, cw in enumerate(cols):
             grs = sorted([w for w in cw if w["t"] == "Grs" and w["y0"] < 70], key=lambda w: w["x0"])
@@ -264,15 +306,11 @@ def hodgdon_parse(doc, log):
                 mb = BARREL_RE.match(t)
                 if mb:
                     name_raw = pending_name
-                    key = norm_key((name_raw or "").rstrip("*"))
-                    canon = toc.get(key)
-                    if canon is None and name_raw:
-                        # try without trailing qualifier text
-                        canon = None
-                    state.update({"cartridge_raw": name_raw, "cartridge": canon or name_raw,
+                    canon, cnote, ok = canon_cartridge(name_raw, toc) if name_raw else (None, None, False)
+                    state.update({"cartridge_raw": name_raw, "cartridge": canon,
                                   "barrel": float(mb.group("bbl")), "twist": mb.group("tw"),
                                   "trim": float(mb.group("trim")), "barrel_line": t, "cart_line": name_raw,
-                                  "bullet": None, "case": None, "cart_canon_ok": canon is not None})
+                                  "bullet": None, "case": None, "cart_note": cnote})
                     pending_name = None
                     continue
                 mbu = BULLET_RE.match(t)
@@ -334,11 +372,11 @@ def hodgdon_parse(doc, log):
                             notes.append("Bullet description '%s' does not start with a maker abbreviation from the "
                                          "manual legend; bulletMfr left null, description kept in bulletModel."
                                          % b["model"])
-                        if not state.get("cart_canon_ok"):
-                            notes.append("Cartridge name not matched to table of contents; kept as printed.")
+                        if state.get("cart_note"):
+                            notes.append(state["cart_note"])
                         if printed:
                             notes.append("Printed page %d." % printed)
-                        unit = "psi" if pu == "PSI" else "CUP"
+                        unit = "psi" if pu.upper() == "PSI" else "CUP"
                         rec = {
                             "cartridge": state["cartridge"],
                             "bulletMfr": b["mfr"],
@@ -358,28 +396,36 @@ def hodgdon_parse(doc, log):
                             "velocityFps": int(v),
                             "pressure": int(p.replace(",", "")),
                             "pressureUnit": unit,
-                            "pressureMethod": ("piezo/force transducer (PSI), per manual introduction" if unit == "psi"
+                            "pressureMethod": ("electronic transducer (PSI), per manual introduction" if unit == "psi"
                                                else "copper crusher (CUP), per manual introduction"),
                             "loadType": lt,
-                            "compressed": bool(c),
+                            "compressed": "C" in c,
                             "dataSection": section,
                             "sources": [{"url": doc["url"], "type": "manufacturer", "page": pno,
                                          "retrieved": RETRIEVED}],
                             "evidence": ws(" | ".join(x for x in [state["cart_line"], state["barrel_line"], b["line"],
                                                                    k["line"], t] if x)),
                             "notes": " ".join(notes) or None,
+                            "_layout_ok": t in page_flat,
                         }
                         records.append(rec)
                     continue
                 if m6 or m3:
                     unparsed.append({"page": pno, "text": t, "why": "data row without bullet/case/cartridge context"})
                     continue
+                if re.match(r"^(Case|Bullet|Barrel|Primer)\b", t, re.I):
+                    # a context line we could not parse: drop context so later rows are not mis-attributed
+                    unparsed.append({"page": pno, "text": t, "why": "unparsed context line; context reset"})
+                    state["case"] = None
+                    if t.lower().startswith(("bullet", "barrel")):
+                        state["bullet"] = None
+                    if t.lower().startswith("barrel"):
+                        state["cartridge"] = None
+                    continue
                 # anything else: candidate cartridge title (confirmed only if a Barrel: row follows)
                 if pending_name and pending_name != t:
                     unparsed.append({"page": pno, "text": pending_name, "why": "unrecognised row"})
                 pending_name = t
-        if pending_name and not re.match(r"^[0-9]", pending_name) and False:
-            pending_name = None
     log["hodgdon_" + doc["key"]] = {
         "legendBrands": brands, "legendBulletTypes": bullet_abbr, "pressureMethodEvidence": method_evidence,
         "unparsedRows": unparsed,
@@ -411,6 +457,27 @@ def self_check(records):
                 bad += 1
                 print("CHECK FAIL", f, v, ev)
     print("evidence check failures:", bad)
+    nl = [r for r in records if not r.pop("_layout_ok", True)]
+    print("rows not found verbatim in the page's -layout text:", len(nl))
+    for r in nl[:10]:
+        print("   LAYOUT?", r["sources"][0]["page"], r["evidence"].split(" | ")[-1])
+    # start/max consistency per printed row
+    pairs = {}
+    for r in records:
+        pairs.setdefault((r["sources"][0]["url"], r["sources"][0]["page"], r["evidence"]), {})[r["loadType"]] = r
+    anomalies = 0
+    for k, d in pairs.items():
+        if "start" in d and "max" in d:
+            s_, m_ = d["start"], d["max"]
+            if not (s_["chargeGr"] <= m_["chargeGr"] and s_["velocityFps"] <= m_["velocityFps"]
+                    and (s_["pressureUnit"] != m_["pressureUnit"] or s_["pressure"] <= m_["pressure"])):
+                anomalies += 1
+                print("   ORDER ANOMALY (kept, as printed):", k[2].split(" | ")[-1], "page", k[1])
+    print("start>max anomalies:", anomalies)
+    for r in records:
+        if (r["pressureUnit"] == "psi" and not 5000 <= r["pressure"] <= 70000) or \
+                (r["pressureUnit"] == "CUP" and not 5000 <= r["pressure"] <= 56000):
+            print("   PRESSURE RANGE?", r["cartridge"], r["pressure"], r["pressureUnit"], r["evidence"].split(" | ")[-1])
     random.seed(7)
     for r in random.sample(records, min(5, len(records))):
         print(json.dumps({k: r[k] for k in ("cartridge", "bulletMfr", "bulletModel", "bulletWeightGr", "caseBrand",
@@ -420,12 +487,20 @@ def self_check(records):
     return bad
 
 
+PRIORITY = ["223 Remington", "308 Winchester", "6.5 Creedmoor", "30-06 Springfield", "300 Winchester Magnum",
+            "243 Winchester", "6mm Creedmoor", "270 Winchester", "7mm Remington Magnum", "9mm Luger", "45 ACP",
+            "357 Magnum", "44 Remington Magnum"]
+
+
 def main():
     log = {}
     records = []
     docs_meta = []
+    keep_all = "--all" in sys.argv
     for d in HODGDON_DOCS:
         recs = hodgdon_parse(d, log)
+        if not keep_all:
+            recs = [r for r in recs if r["cartridge"] in PRIORITY]
         records += recs
         docs_meta.append({"url": d["url"], "localPath": os.path.join(SRC_DIR, d["local"]), "title": d["title"],
                           "date": d["date"], "landingPage": d["landing"], "records": len(recs)})
@@ -441,10 +516,12 @@ def main():
         },
         "loads": records,
     }
+    bad = self_check(records)
+    for r in records:
+        r.pop("_layout_ok", None)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)
-    bad = self_check(records)
     print("unknown powder brands:", unknown_powders)
     for k, v in log.items():
         print(k, "unparsed rows:", len(v["unparsedRows"]))

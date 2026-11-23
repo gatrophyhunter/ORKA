@@ -9,6 +9,7 @@ import { fmtChargeKg, fmtP, fmtPct, fmtV, fmtMs } from './format';
 import { useApp } from './state';
 import { useLoad } from './useLoad';
 import { publishedMatches, ScopeWarnings } from './CrossCheck';
+import { usePublishedLoads } from './published';
 
 export function LadderTab() {
   const { prefs, patchInputs, db, builder } = useApp();
@@ -25,8 +26,9 @@ export function LadderTab() {
   const [velSol, setVelSol] = useState<ChargeSolution | null | 'unreachable'>(null);
   const [busy, setBusy] = useState(false);
   const limit = d.limit.limitPa;
+  const published = usePublishedLoads();
   const pubMax = (() => {
-    const rowsPub = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr).filter((r) => r.loadType === 'max');
+    const rowsPub = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr, published).filter((r) => r.loadType === 'max');
     return rowsPub.length ? Math.min(...rowsPub.map((r) => r.chargeGr)) : null;
   })();
 

@@ -20,6 +20,10 @@ const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..')
 const RAW = path.join(ROOT, 'research/raw2');
 const OUT = path.join(ROOT, 'src/data/db.json');
 const MODELS = path.join(ROOT, 'src/data/powder-models.json');
+const PUBLISHED = path.join(ROOT, 'src/data/published-loads.json');
+const BUILD_DIR = path.join(ROOT, 'research/build');
+/** Set ORKA_SHIP_PUBLISHED=0 to build without the published-load cross-check table. */
+const SHIP_PUBLISHED = process.env.ORKA_SHIP_PUBLISHED !== '0';
 
 interface Review {
   excludeSources?: string[];
@@ -368,15 +372,42 @@ function main() {
     bullets,
     brassBrands: brands,
     brassCases: cases,
-    validationLoads,
+    // Published loads are large: the full set (with evidence) goes to research/build for calibration, and a compact
+    // copy is loaded lazily by the app for the published-data cross-check. db.json itself stays small.
+    validationLoads: [],
   };
-  fs.writeFileSync(OUT, JSON.stringify(db, null, 1));
+  fs.writeFileSync(OUT, JSON.stringify(db));
+  fs.mkdirSync(BUILD_DIR, { recursive: true });
+  fs.writeFileSync(path.join(BUILD_DIR, 'validation-loads.json'), JSON.stringify(validationLoads));
+  const compact = validationLoads
+    .filter((l) => l.cartridgeId && l.powderId)
+    .map((l) => ({
+      c: l.cartridgeId,
+      p: l.powderId,
+      w: l.bulletWeightGr,
+      bm: l.bulletMfr,
+      bt: l.bulletModel,
+      t: l.loadType,
+      ch: l.chargeGr,
+      v: l.velocityFps,
+      pr: l.pressure,
+      pu: l.pressureUnit,
+      b: Number.isFinite(l.barrelLengthIn) ? l.barrelLengthIn : null,
+      oal: Number.isFinite(l.coalIn) ? l.coalIn : null,
+      cs: l.caseBrand,
+      pm: l.primer,
+      u: l.sources[0]?.url ?? null,
+      pg: l.sources[0]?.page ?? null,
+      cp: l.compressed ?? null,
+    }));
+  fs.writeFileSync(PUBLISHED, JSON.stringify(SHIP_PUBLISHED ? compact : []));
   const modelCounts: Record<string, number> = {};
   for (const p of powders) modelCounts[p.model?.status ?? 'none'] = (modelCounts[p.model?.status ?? 'none'] ?? 0) + 1;
   console.log(JSON.stringify({
     sourcesUsed: files.map((f) => f.key),
     excludedSources: [...excluded],
-    counts: { cartridges: cartridges.length, powders: powders.length, charts: charts.length, bullets: bullets.length, brassBrands: brands.length, brassCases: cases.length, validationLoads: validationLoads.length },
+    counts: { cartridges: cartridges.length, powders: powders.length, charts: charts.length, bullets: bullets.length, brassBrands: brands.length, brassCases: cases.length, validationLoads: validationLoads.length, publishedShipped: SHIP_PUBLISHED ? compact.length : 0 },
+    bytes: { db: fs.statSync(OUT).size, published: fs.statSync(PUBLISHED).size },
     powderModels: modelCounts,
     dropped,
   }, null, 2));

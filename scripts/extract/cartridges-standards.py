@@ -115,6 +115,410 @@ def download_all():
     print('download done', flush=True)
 
 
-if __name__ == '__main__' and '--download' in sys.argv:
-    download_all()
-    sys.exit(0)
+
+
+# ----------------------------------------------------------------------------------------------
+# generic helpers
+# ----------------------------------------------------------------------------------------------
+
+def ws(s):
+    """Collapse whitespace (evidence strings are stored whitespace-collapsed)."""
+    return re.sub(r'\s+', ' ', s).strip()
+
+
+def pdftotext_pages(pdf):
+    txt = pdf[:-4] + '.txt'
+    if not os.path.exists(txt) or os.path.getmtime(txt) < os.path.getmtime(pdf):
+        subprocess.run(['pdftotext', '-layout', pdf, txt], check=True, capture_output=True)
+    return open(txt, encoding='utf-8', errors='replace').read().split('\f')
+
+
+def norm_key(name):
+    """Normalisation used only for exact-match linking of the same cartridge across tables."""
+    s = name.upper().replace('’', '').replace("'", '').replace('”', '').replace('"', '')
+    s = s.replace('&', ' AND ')
+    return re.sub(r'[^0-9A-Z+]', '', s)
+
+
+def slug(name):
+    s = name.lower().replace('’', '').replace("'", '').replace('”', 'in').replace('"', 'in')
+    s = s.replace('+p', ' plus-p').replace('&', ' and ').replace(',', '.')
+    s = re.sub(r'(\d)\.(\d)', r'\1-\2', s)
+    s = re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+    return s
+
+
+def src(url, typ, page):
+    return {'url': url, 'type': typ, 'page': page, 'retrieved': RETRIEVED}
+
+
+# ----------------------------------------------------------------------------------------------
+# SAAMI: velocity & pressure table
+# ----------------------------------------------------------------------------------------------
+NUMP = r'\d{2,4}(?:\(\d\))?'
+RIFLE_P1 = re.compile(r'Crusher Pressures Not Established\s+(' + NUMP + r')\s+(' + NUMP + r')\s+(' + NUMP + r')\s*$')
+RIFLE_P2 = re.compile(r'(?<![\d,])(' + NUMP + r')\s+(' + NUMP + r')\s+(' + NUMP + r')\s+Piezo Pressures Not Established\s*$')
+TOK6 = r'(N/E|' + NUMP + r')'
+SIX = re.compile(r'(?<![\d,/])' + r'\s+'.join([TOK6] * 6) + r'\s*$')
+FOOTNOTE_START = re.compile(r'^\s*(\(1\)|1\s*[-–]\s*Based|η=10)')
+
+
+def _pval(tok):
+    if tok is None or tok == 'N/E':
+        return None, None
+    m = re.match(r'^(\d+)(?:\((\d)\))?$', tok)
+    return int(m.group(1)), (m.group(2) and int(m.group(2)))
+
+
+def parse_pressure_line(line):
+    """Return dict(cup=(MAP,MPLM,MPSM) or None, psi=(...) or None, col=start col) or None."""
+    m = RIFLE_P1.search(line)
+    if m:
+        return {'cup': None, 'psi': m.groups(), 'col': m.start()}
+    m = RIFLE_P2.search(line)
+    if m:
+        return {'cup': m.groups(), 'psi': None, 'col': m.start()}
+    m = SIX.search(line)
+    if m and m.start() >= 55:
+        g = m.groups()
+        cup = None if g[0] == 'N/E' else g[0:3]
+        psi = None if g[3] == 'N/E' else g[3:6]
+        return {'cup': cup, 'psi': psi, 'col': m.start()}
+    return None
+
+
+def clean_table_name(n):
+    n = ws(n)
+    while True:
+        n2 = re.sub(r'\s*\(\d\)\s*$', '', n)
+        if n2 == n:
+            break
+        n = n2
+    return n
+
+
+def saami_vp_table(doc_key, pages):
+    """Parse the SAAMI 'Velocity & Pressure Data' table pages. One pressure line per cartridge."""
+    out = []
+    problems = []
+    for pi, page in enumerate(pages):
+        if 'VELOCITY & PRESSURE DATA' not in page or 'Cartridge' not in page:
+            continue
+        lines = page.split('\n')
+        # header line with psi/100 / CUP/100 units (kept verbatim for evidence)
+        unit_hdr = next((ws(l) for l in lines if 'TRANSDUCER Pressure' in l), None)
+        try:
+            start = next(i for i, l in enumerate(lines) if re.match(r'^\s*Cartridge\s{3,}', l)) + 1
+        except StopIteration:
+            continue
+        names = []   # [first_line_idx, [text parts], [line idxs]]
+        plines = []  # (idx, parsed)
+        for i in range(start, len(lines)):
+            l = lines[i]
+            if FOOTNOTE_START.match(l):
+                break
+            if not l.strip():
+                continue
+            p = parse_pressure_line(l)
+            if p:
+                plines.append((i, p))
+            lead = len(l) - len(l.lstrip())
+            body = l.lstrip()
+            if lead <= 1 and re.match(r'\d', body):
+                nm = re.match(r'^(\S.*?)(?:\s{3,}|$)', body).group(1)
+                names.append([i, [nm], [i]])
+            elif 1 <= lead <= 8 and re.match(r'[A-Za-z(]', body) and names:
+                nm = re.match(r'^(\S.*?)(?:\s{3,}|$)', body).group(1)
+                names[-1][1].append(nm)
+                names[-1][2].append(i)
+        if len(names) != len(plines):
+            problems.append(f'{doc_key} pdf p{pi+1}: {len(names)} names vs {len(plines)} pressure lines')
+            continue
+        for k, ((ni, parts, nidx), (pidx, p)) in enumerate(zip(names, plines)):
+            prev_n = names[k - 1][0] if k else start - 1
+            next_n = names[k + 1][0] if k + 1 < len(names) else len(lines)
+            if not (prev_n < pidx < next_n):
+                problems.append(f'{doc_key} pdf p{pi+1}: pressure line {pidx} outside block of {parts}')
+                continue
+            name = clean_table_name(' '.join(parts))
+            ev_lines = sorted(set(nidx + [pidx]))
+            evidence = (unit_hdr + ' | ' if unit_hdr else '') + ' | '.join(ws(lines[j]) for j in ev_lines)
+            rec = {'name': name, 'pdfPage': pi + 1, 'evidence': evidence, 'doc': doc_key}
+            if p['psi']:
+                v, fn = _pval(p['psi'][0])
+                rec['mapPsi100'] = v
+                rec['mapPsiFootnote'] = fn
+            if p['cup']:
+                v, fn = _pval(p['cup'][0])
+                rec['mapCup100'] = v
+            out.append(rec)
+    return out, problems
+
+
+# ----------------------------------------------------------------------------------------------
+# SAAMI: table of contents -> drawing / test-barrel page numbers
+# ----------------------------------------------------------------------------------------------
+
+def footer_page(page):
+    ls = [l for l in page.split('\n') if l.strip()]
+    f = None
+    for l in ls[-4:]:
+        m = re.match(r'^\s*(\d{1,3})\s*(?:NOTICE.*)?$', l)
+        if m:
+            f = int(m.group(1))
+    return f
+
+
+def saami_toc(pages):
+    """Returns {'drawings': [(name, docpage)], 'barrels': [(name, docpage)]}."""
+    res = {'drawings': [], 'barrels': []}
+    state = None
+    for page in pages[:16]:
+        if 'TABLE OF CONTENTS' not in page:
+            continue
+        for l in page.split('\n'):
+            s = l.strip()
+            if s.startswith('Cartridge and Chamber Drawings'):
+                state = 'drawings'
+                continue
+            if s.startswith('Standard Velocity and Pressure Test Barrels'):
+                state = 'barrels'
+                continue
+            if re.match(r'^(Miscellaneous|SECTION|Standard V&P Test Barrels - General)', s):
+                state = None
+                continue
+            m = re.match(r'^(.+?)\s*\.{3,}\s*(\d+)$', s)
+            if m and state:
+                for nm in m.group(1).split(' / '):
+                    res[state].append((ws(nm), int(m.group(2))))
+    return res
+
+
+# ----------------------------------------------------------------------------------------------
+# SAAMI: dimension tokens on drawings (inch <-> mm pairs verified by the 25.4 ratio)
+# ----------------------------------------------------------------------------------------------
+DASH = '-–‒─—'
+NUM = r'(?:\d*\.\d+|\d+)'
+TOLRE = r'(?:\s*([+' + DASH + r'±])\s*(\d*\.\d+))?'
+TOKRE = re.compile(r'\(\s*(' + NUM + r')' + TOLRE + r'\s*\)|(?<![\d./:°])(' + NUM + r')(?![\d°\'"/])' + TOLRE)
+
+
+def tokens(line, li):
+    line = re.sub(r'\((\d)\)', lambda m: ' ' * len(m.group(0)), line)  # footnote markers -> blanks
+    toks = []
+    for m in TOKRE.finditer(line):
+        if m.group(1) is not None:
+            v, sg, tv, paren = m.group(1), m.group(2), m.group(3), True
+        else:
+            v, sg, tv, paren = m.group(4), m.group(5), m.group(6), False
+        try:
+            val = float(v)
+        except ValueError:
+            continue
+        sign = None
+        if sg:
+            sign = '+' if sg == '+' else ('±' if sg == '±' else '-')
+        toks.append({'v': val, 'raw': m.group(0).strip(), 'sign': sign, 'tol': float(tv) if tv else None,
+                     'paren': paren, 's': m.start(), 'e': m.end(), 'li': li})
+    return toks
+
+
+def pair_err(inch, mm):
+    return abs(inch * 25.4 - mm)
+
+
+def consistent(inch, mm):
+    # printed values are rounded (inch to .001/.0001, mm to .01/.001): allow 0.02 mm, or 0.05 % for large values
+    return pair_err(inch, mm) <= max(0.02, 0.0005 * mm)
+
+
+def make_pair(a, b):
+    """a, b tokens with exactly one in parentheses. Return pair dict or None."""
+    if a['paren'] == b['paren']:
+        return None
+    if consistent(a['v'], b['v']):
+        i, m = a, b
+    elif consistent(b['v'], a['v']):
+        i, m = b, a
+    else:
+        return None
+    sign = i['sign'] or m['sign']
+    return {'in': i['v'], 'mm': m['v'], 'sign': sign, 'tolIn': i['tol'],
+            'err': pair_err(i['v'], m['v']),
+            'li': min(a['li'], b['li']), 'li2': max(a['li'], b['li']),
+            's': min(a['s'], b['s']), 'e': max(a['e'], b['e']),
+            'raw': (a['raw'] + ' ' + b['raw']) if a['li'] == b['li'] else (a['raw'] + ' / ' + b['raw']),
+            'inTok': i, 'mmTok': m}
+
+
+def page_pairs(lines):
+    """Pair every inch value with its millimetre twin (one of them in parentheses).
+
+    Candidates are horizontal neighbours (only blanks / reference markers between them) and
+    vertical neighbours (next 1-2 non-blank lines, overlapping columns).  A candidate is kept
+    only if inch*25.4 == mm within rounding; candidates are accepted globally in order of the
+    smallest conversion error, so a token is never paired with a worse partner."""
+    toks_by_line = [tokens(l, i) for i, l in enumerate(lines)]
+    cands = []
+    for li, toks in enumerate(toks_by_line):
+        for k in range(len(toks) - 1):
+            a, b = toks[k], toks[k + 1]
+            gap = lines[li][a['e']:b['s']]
+            if len(gap) > 8 or re.sub(r'[\s∆*B]', '', gap):
+                continue
+            p = make_pair(a, b)
+            if p:
+                cands.append((p['err'], 0, 0, p, (li, k), (li, k + 1)))
+    for li, toks in enumerate(toks_by_line):
+        nxt = [j for j in range(li + 1, min(li + 4, len(lines))) if lines[j].strip()][:2]
+        for k, a in enumerate(toks):
+            for j in nxt:
+                for kk, b in enumerate(toks_by_line[j]):
+                    ca, cb = (a['s'] + a['e']) / 2, (b['s'] + b['e']) / 2
+                    if abs(ca - cb) > 5 and not (a['s'] <= b['e'] and b['s'] <= a['e']):
+                        continue
+                    p = make_pair(a, b)
+                    if p:
+                        cands.append((p['err'], 1, abs(ca - cb), p, (li, k), (j, kk)))
+    cands.sort(key=lambda c: (round(c[0], 4), c[1], c[2]))
+    used = set()
+    pairs = []
+    for err, kind, dist, p, ta, tb in cands:
+        if ta in used or tb in used:
+            continue
+        used.add(ta)
+        used.add(tb)
+        pairs.append(p)
+    return pairs
+
+
+TWIST_RE = re.compile(r'TWIST:\s*(\d*\.?\d+)\s*[\(\[]\s*(\d*\.?\d+)\s*[\)\]]\s*(R\.?\s?H\.?|L\.?\s?H\.?)')
+
+
+def drawing_dims(page):
+    """Extract machine-readable dimensions from one SAAMI cartridge & chamber drawing page."""
+    lines = page.split('\n')
+    pairs = page_pairs(lines)
+    res = {'warnings': []}
+    metric = ('METRIC ORIGIN' in page) or ('= INCHES' in page)
+    res['metricOrigin'] = metric
+    # title line
+    iss = next((i for i, l in enumerate(lines) if 'ISSUED:' in l), None)
+    res['titleLines'] = [ws(l) for l in lines[:12] if l.strip()]
+    start = iss if iss is not None else 0
+    # end of cartridge half: first 'BREECH' or a stand-alone 'CHAMBER' label after the title
+    end = None
+    for i in range(start + 1, len(lines)):
+        if 'BREECH' in lines[i] or re.match(r'^\s*CHAMBER\s*$', lines[i]):
+            end = i
+            break
+    if end is None:
+        res['warnings'].append('could not locate end of cartridge drawing (no BREECH/CHAMBER label)')
+    # ---- twist
+    m = TWIST_RE.search(page)
+    if m:
+        a, b = float(m.group(1)), float(m.group(2))
+        inch, mm = (a, b) if a < b else (b, a)
+        if consistent(inch, mm):
+            res['twistIn'] = inch
+            res['twistDir'] = 'LH' if m.group(3).upper().startswith('L') else 'RH'
+            res['twistEv'] = ws(m.group(0))
+        else:
+            res['warnings'].append('twist values not consistent: ' + m.group(0))
+    # ---- bore / groove diameters (value directly above the label, same columns)
+    for key, label in (('boreIn', 'Bore Di'), ('grooveIn', 'Groove Di')):
+        hits = [(i, lines[i].find(label)) for i in range(len(lines)) if label in lines[i]]
+        vals = []
+        for (i, c) in hits:
+            cands = [p for p in pairs if p['li2'] < i and i - p['li2'] <= 3 and abs(p['s'] - c) <= 7]
+            if cands:
+                p = max(cands, key=lambda p: (p['li2'], -abs(p['s'] - c)))
+                vals.append((p, i))
+        if len(vals) >= 1:
+            v = {round(p['in'], 4) for p, _ in vals}
+            if len(v) == 1:
+                p, i = vals[0]
+                res[key] = p['in']
+                res[key + 'Mm'] = p['mm']
+                res[key + 'Ev'] = ws(lines[p['li']][max(0, p['s'] - 2):p['e'] + 2]) + ' / ' + ws(lines[i][max(0, lines[i].find(label) - 2):lines[i].find(label) + 12])
+            else:
+                res['warnings'].append(f'{key}: multiple values {sorted(v)}')
+        elif hits:
+            res['warnings'].append(f'{key}: label found but no value pair above it')
+    # ---- bullet diameter(s)
+    blabels = [(i, m.start(), m.end()) for i, l in enumerate(lines) for m in re.finditer(r'BULLET(?!\s+PROFILE)', l)]
+    bullets = []
+    for (i, cs, ce) in blabels:
+        cands = []
+        for p in pairs:
+            if p['sign'] != '-':
+                continue
+            dl = min(abs(p['li'] - i), abs(p['li2'] - i))
+            if dl > 3:
+                continue
+            # same columns (+-15) or on the same line right before the label
+            colok = (p['s'] <= ce + 15 and p['e'] >= cs - 15) or (p['li2'] == i and p['e'] <= cs and cs - p['e'] < 4)
+            if not colok or p['in'] > 1.0:
+                continue
+            cands.append((dl, abs((p['s'] + p['e']) / 2 - (cs + ce) / 2), p))
+        if cands:
+            cands.sort(key=lambda x: (x[0], x[1]))
+            p = cands[0][2]
+            # variant word (LEAD / JACKETED) printed next to the value
+            seg = ' '.join(lines[j][p['s']:p['e'] + 14] for j in range(p['li'], p['li2'] + 1))
+            var = re.search(r'\b(LEAD|JACKETED|PLATED)\b', seg)
+            bullets.append({'in': p['in'], 'mm': p['mm'], 'tolIn': p['tolIn'], 'variant': var.group(1) if var else None,
+                            'ev': ws(' / '.join(lines[j][max(0, p['s'] - 1):p['e'] + 14] for j in range(p['li'], p['li2'] + 1)))
+                            + ' / ' + ws(lines[i][cs:ce + 3])})
+    uniq = {}
+    for b in bullets:
+        uniq.setdefault(round(b['in'], 4), b)
+    res['bullets'] = list(uniq.values())
+    # ---- lengths in the cartridge half: COAL = largest, case length = nearest line above COAL
+    if end is not None:
+        half = [p for p in pairs if start < p['li'] < end and p['in'] >= 0.25]
+        if half:
+            top = max(half, key=lambda p: p['in'])
+            coal_line = top['li']
+            on_line = [p for p in half if p['li'] == coal_line]
+            ltxt = lines[coal_line]
+            if 'MAX' in ltxt or top['sign'] == '-':
+                res['coalMaxIn'] = top['in']
+                res['coalMaxMm'] = top['mm']
+                if 'MIN' in ltxt and len(on_line) >= 2:
+                    res['coalMinIn'] = min(p['in'] for p in on_line)
+                res['coalEv'] = ws(ltxt)
+                res['coalLine'] = coal_line
+            else:
+                res['warnings'].append('largest cartridge length has neither MAX nor minus tolerance: ' + ws(ltxt))
+            others = [p for p in half if p['li'] != coal_line and p['li2'] != coal_line]
+            above = [p for p in others if p['li'] < coal_line]
+            if 'coalMaxIn' in res and above:
+                near_li = max(p['li'] for p in above)
+                near = [p for p in above if p['li'] == near_li]
+                second = max(above, key=lambda p: p['in'])
+                if len(near) == 1 and near[0] is second and near[0]['sign'] == '-' and near[0]['in'] < res['coalMaxIn']:
+                    res['caseLenIn'] = near[0]['in']
+                    res['caseLenMm'] = near[0]['mm']
+                    res['caseLenTolIn'] = near[0]['tolIn']
+                    res['caseLenEv'] = ws(lines[near_li])
+                else:
+                    res['warnings'].append('case length not unambiguous (nearest-above-COAL != second-largest or no minus tol): '
+                                           + ws(lines[near_li]) + ' vs ' + second['raw'])
+    return res
+
+
+def barrel_transducer(page):
+    """Transducer location from a SAAMI V&P test-barrel drawing (dimension from breech face)."""
+    lines = page.split('\n')
+    pairs = page_pairs(lines)
+    labs = [i for i, l in enumerate(lines) if 'TRANSDUCER LOCATION' in l]
+    if not labs:
+        return None
+    i = labs[0]
+    cands = [p for p in pairs if i - 1 <= p['li'] <= i + 4 and p['sign'] == '-' and 0.3 <= p['in'] <= 3.0]
+    if not cands:
+        return {'warning': 'TRANSDUCER LOCATION label without a minus-toleranced dimension nearby'}
+    p = min(cands, key=lambda p: (0 if p['li'] >= i else 1, abs(p['li'] - i)))
+    ev = ' | '.join(ws(lines[j]) for j in sorted({i, p['li'], p['li2']}))
+    return {'in': p['in'], 'mm': p['mm'], 'tolIn': p['tolIn'], 'ev': ev}

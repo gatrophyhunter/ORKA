@@ -5,18 +5,21 @@
 import type { Database, ValidationLoad } from '../data/schema';
 import type { DerivedLoad } from './useLoad';
 import { fmtNum } from './format';
+import { usePublishedLoads } from './published';
 
-export function publishedMatches(db: Database, cartridgeId: string | null, powderId: string | null, bulletWeightGr: number): ValidationLoad[] {
+export function publishedMatches(db: Database, cartridgeId: string | null, powderId: string | null, bulletWeightGr: number, published?: ValidationLoad[] | null): ValidationLoad[] {
   if (!cartridgeId || !powderId) return [];
-  return db.validationLoads
+  return [...db.validationLoads, ...(published ?? [])]
     .filter((l) => l.cartridgeId === cartridgeId && l.powderId === powderId)
     .filter((l) => !(bulletWeightGr > 0) || Math.abs(l.bulletWeightGr - bulletWeightGr) <= 1)
     .sort((a, b) => a.bulletWeightGr - b.bulletWeightGr || a.chargeGr - b.chargeGr);
 }
 
 export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: Database; d: DerivedLoad; chargeGr: number; bulletWeightGr: number }) {
-  const rows = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, bulletWeightGr);
+  const published = usePublishedLoads();
+  const rows = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, bulletWeightGr, published);
   if (!d.cartridge || !d.powder) return null;
+  if (published === null) return <div className="small muted">Loading published maker data…</div>;
   if (!rows.length) {
     return (
       <div className="alert info small" data-testid="published-none">
@@ -69,8 +72,8 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
                 <td>{[r.caseBrand, r.primer].filter(Boolean).join(' / ') || '—'}</td>
                 <td>
                   {r.sources[0] ? (
-                    <a href={r.sources[0].url} target="_blank" rel="noopener noreferrer">
-                      maker
+                    <a href={`${r.sources[0].url}${r.sources[0].page ? `#page=${r.sources[0].page}` : ''}`} target="_blank" rel="noopener noreferrer">
+                      maker{r.sources[0].page ? ` p.${r.sources[0].page}` : ''}
                     </a>
                   ) : (
                     '—'

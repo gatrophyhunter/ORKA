@@ -4,3 +4,5 @@ dist/
 .DS_Store
 coverage/
 tsconfig.tsbuildinfo
+research/build/
+research/raw2/validation-loads.json
