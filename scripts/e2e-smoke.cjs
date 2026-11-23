@@ -3,6 +3,8 @@ const { chromium } = require('playwright');
 const OUT = process.env.ORKA_E2E_OUT || require('path').join(require('os').tmpdir(), 'orka-e2e');
 require('fs').mkdirSync(OUT, { recursive: true });
 const URL = process.env.ORKA_E2E_URL || 'http://localhost:4173/';
+// Requests are "local" when they stay on the page's own server, or (for the offline file) are the file itself.
+const LOCAL = URL.startsWith('file:') ? URL.split('#')[0] : new (require('url').URL)(URL).origin;
 
 (async () => {
   const browser = await chromium.launch();
@@ -12,7 +14,7 @@ const URL = process.env.ORKA_E2E_URL || 'http://localhost:4173/';
   const external = [];
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`console: ${m.text()}`); });
   page.on('pageerror', (e) => errors.push(`pageerror: ${e.message}`));
-  page.on('request', (r) => { const u = r.url(); if (!u.startsWith('http://localhost:4173') && !u.startsWith('data:') && !u.startsWith('blob:')) external.push(u); });
+  page.on('request', (r) => { const u = r.url(); if (!u.startsWith(LOCAL) && !u.startsWith('data:') && !u.startsWith('blob:')) external.push(u); });
   const step = async (name, fn) => {
     try { await fn(); console.log('PASS', name); }
     catch (e) { console.log('FAIL', name, '-', e.message.split('\n')[0]); await page.screenshot({ path: `${OUT}/fail-${name.replace(/\W+/g, '_')}.png`, fullPage: true }); }

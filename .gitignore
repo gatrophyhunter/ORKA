@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 research/build/
 research/raw2/validation-loads.json
 __pycache__/
+dist-offline

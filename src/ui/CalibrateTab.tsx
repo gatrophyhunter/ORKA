@@ -10,6 +10,7 @@ import { ErrorList, NumberField, PlainNumber, SearchPicker, StatusChip, TextFiel
 import { fmtNum, fmtP, fmtV } from './format';
 import { powderItems } from './LoadBuilder';
 import { useApp } from './state';
+import { createCalibrateWorker } from './workers';
 import { PRIOR_SINGLE_BASE, priorParams } from '../engine/defaults';
 import { geometryErrors, modelStatus } from './useLoad';
 
@@ -140,7 +141,7 @@ export function CalibrateTab() {
     }));
     const input: CalibrationInput = { start, startHeatScale: heat, observations, params, sigmaVelocityMs: U.fpsToMs(sigmaV || 15), sigmaPressureRel: (sigmaP || 4) / 100 };
     workerRef.current?.terminate();
-    const w = new Worker(new URL('../workers/calibrate.worker.ts', import.meta.url), { type: 'module' });
+    const w = createCalibrateWorker();
     workerRef.current = w;
     setBusy(true);
     setError(null);

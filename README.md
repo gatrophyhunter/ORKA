@@ -4,6 +4,16 @@ Open-source **centerfire rifle** handload prediction: interior ballistics with p
 
 > **Safety.** ORKA is a simulation tool, not load data. Real pressure depends on your rifle, components and powder lot, none of which a model can see. Use published load data as your primary reference, start low, work up, and never exceed a published maximum because a prediction says it is safe.
 
+## Open it (no install)
+
+- **Offline copy:** [`release/orka-offline.html`](release/orka-offline.html) is the whole app in one 8 MB HTML file.
+  - Download it, then double-click it to open it in a desktop browser.
+  - It needs no server and no internet, and it makes no network requests.
+  - Printing and the CSV/JSON exports work.
+  - It was tested in Chromium (Chrome/Edge engine) only. Phones are unreliable at running local HTML files; use the hosted page there.
+- **Hosted page:** the same build is published as a private page on the owner's claude.ai account. On that host, printing, downloads and share links do not work.
+- **Your saved data** (your own components, calibrations, load book) lives in the browser that opened the app, not in the file. Back it up with **Export my data** on the Database tab, and load it back with Import.
+
 ## What it does
 
 | Area | What you get |
@@ -55,6 +65,7 @@ npm install
 npm run dev          # local dev server
 npm test             # engine + UI-logic tests
 npm run build        # static build in dist/
+npm run build:offline  # one self-contained file: release/orka-offline.html
 npx tsx scripts/build-data.ts          # rebuild src/data/db.json from research/raw2/
 npx tsx scripts/calibrate-powders.ts   # refit powder models + validation report
 ```

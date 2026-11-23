@@ -9,6 +9,7 @@ import type { SearchMessage, SearchRequest } from '../workers/search.worker';
 import { DataTable, ErrorList, FitGrade, NumberField, PlainNumber, StatusChip, type Column } from './components';
 import { fmtChargeKg, fmtMs, fmtP, fmtPct, fmtV } from './format';
 import { useApp } from './state';
+import { createSearchWorker } from './workers';
 import { geometryErrors, modelStatus, powderPropellant, setupForPowder, useLoad } from './useLoad';
 
 export function SearchTab() {
@@ -76,7 +77,7 @@ export function SearchTab() {
     const base = setupForPowder(builder, any.model);
     if (!base) return;
     workerRef.current?.terminate();
-    const w = new Worker(new URL('../workers/search.worker.ts', import.meta.url), { type: 'module' });
+    const w = createSearchWorker();
     workerRef.current = w;
     setRows(null);
     setError(null);
