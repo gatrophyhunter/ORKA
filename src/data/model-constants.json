@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-23T15:24:33.396Z",
+  "generated": "2026-11-23T17:04:42.269Z",
   "shotStartMPa": {
     "jacketed": {
       "value": 25,
       "basis": "Reference value: widely reported QuickLOAD default for jacketed lead-core bullets (research/raw/physics.md [50][150][151]); within the 24-44 MPa first engraving peak reported for 6.5-9.3 mm jacketed bullets [47]."
     },
     "monolithic": {
-      "value": 47.3,
+      "value": 49.5,
       "basis": "Fitted to 60 published pressure-tested loads with monolithic bullets (33 powders), relative to the 25 MPa jacketed reference, by scripts/calibrate-powders.ts."
     },
     "lead": {
@@ -16,11 +16,11 @@
   },
   "validation": {
     "heldOutPressureN": 359,
-    "heldOutPressureP50Pct": 12.7,
-    "heldOutPressureP90Pct": 31.4,
-    "heldOutPressureBiasPct": -5.3,
-    "heldOutWithin10Pct": 38,
-    "scope": "rifle cartridges whose test-case capacity is published (no handgun cartridge qualified)",
-    "generated": "2026-11-23T15:24:33.396Z"
+    "heldOutPressureP50Pct": 12.8,
+    "heldOutPressureP90Pct": 31.2,
+    "heldOutPressureBiasPct": -4.8,
+    "heldOutWithin10Pct": 37,
+    "scope": "centerfire rifle cartridges whose test-case capacity is published",
+    "generated": "2026-11-23T17:04:42.269Z"
   }
 }

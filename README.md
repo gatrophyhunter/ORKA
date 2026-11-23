@@ -23,7 +23,7 @@ The app runs entirely in the browser: no account, no server, and no network requ
 
 Measured on published pressure-tested data the model never saw (leave-one-cartridge-out, rifle cartridges, see [docs/VALIDATION.md](docs/VALIDATION.md)):
 
-- **Pressure error:** median **±12.7 %**, and 1 in 10 predictions is off by more than **±31 %**.
+- **Pressure error:** median **±12.8 %**, and 1 in 10 predictions is off by more than **±31 %**.
 - **Bias:** on average the model reads **5 % low**, which is the unsafe direction.
 - **Velocity error:** median 71 fps.
 

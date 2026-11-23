@@ -19,7 +19,7 @@ const summary = {
   heldOutPressureP90Pct: Math.round(q(0.9) * 1000) / 10,
   heldOutPressureBiasPct: Math.round((signed.reduce((s, v) => s + v, 0) / signed.length) * 1000) / 10,
   heldOutWithin10Pct: Math.round((abs.filter((v) => v <= 0.1).length / abs.length) * 100),
-  scope: 'rifle cartridges whose test-case capacity is published (no handgun cartridge qualified)',
+  scope: 'centerfire rifle cartridges whose test-case capacity is published',
   generated: rep.generated,
 };
 const p = path.join(ROOT, 'src/data/model-constants.json');
