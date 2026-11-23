@@ -459,7 +459,8 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
         pressure: num(r.pressure),
         pressureUnit: unit,
         pressureMethod: r.pressureMethod ?? 'unknown',
-        loadType: r.loadType ?? 'other',
+        // Reduced loads for gas-operated service rifles (e.g. M1 Garand) are not cartridge maximums.
+        loadType: /garand/i.test(`${r.cartridge} ${r.notes ?? ''} ${r.dataSection ?? ''}`) && r.loadType === 'max' ? 'reduced' : r.loadType ?? 'other',
         compressed: r.compressed ?? null,
         sources: sourcesOf(r),
         notes: [str(r.notes), `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
@@ -547,6 +548,8 @@ function main() {
       u: l.sources[0]?.url ?? null,
       pg: l.sources[0]?.page ?? null,
       cp: l.compressed ?? null,
+      // Section label as printed (e.g. "45-70 Government (Trapdoor Rifles)"), when it differs from the cartridge name.
+      cn: l.cartridge,
     }));
   // Dictionary-encode repeated strings: { s: [strings], r: [[...fields with string indices...]] }.
   const strings: string[] = [];
