@@ -1,0 +1,3258 @@
+{
+  "meta": {
+    "documents": [
+      {
+        "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+        "details": "https://archive.org/details/DTIC_ADB117104",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/ibhvg2_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/ibhvg2_ocr.txt",
+        "title": "Anderson, R. D. & Fickie, K. D., IBHVG2 - A User's Guide, BRL-TR-2829 (DTIC ADB117104), US Army Ballistic Research Laboratory",
+        "date": "1987-07"
+      },
+      {
+        "url": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt",
+        "details": "https://archive.org/details/DTIC_ADA276059",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/etc_ibhvg2_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/etc_ibhvg2_ocr.txt",
+        "title": "Earnhart, J., Winsor, N. & Wren, G. P., Electrothermal-Chemical (ETC) Extensions to IBHVG2 With a New User's Tutorial, ARL-TR-348 (DTIC ADA276059), US Army Research Laboratory",
+        "date": "1994-01"
+      },
+      {
+        "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+        "details": "https://archive.org/details/DTIC_AD0462060",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/amcp706150_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/amcp706150_ocr.txt",
+        "title": "AMCP 706-150, Engineering Design Handbook, Ballistics Series: Interior Ballistics of Guns (DTIC AD0462060), US Army Materiel Command",
+        "date": "1965-02"
+      },
+      {
+        "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+        "details": "https://archive.org/details/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/corner_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/corner_ocr.txt",
+        "title": "Corner, J., Theory of the Interior Ballistics of Guns, John Wiley & Sons, New York",
+        "date": "1950"
+      },
+      {
+        "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+        "details": "https://archive.org/details/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE.",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/hunt_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/hunt_ocr.txt",
+        "title": "Hunt, F. R. W. (ed.), Internal Ballistics, HMSO (Ministry of Supply / Ministry of Defence, UK)",
+        "date": "1951"
+      },
+      {
+        "url": "https://archive.org/stream/DTIC_ADA086093/DTIC_ADA086093_djvu.txt",
+        "details": "https://archive.org/details/DTIC_ADA086093",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/smallarms_props_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/stiefel_ocr.txt",
+        "title": "Stiefel, L., Thermochemical and Burning Rate Properties of Deterred US Small Arms Propellants, ARSCD-TR-80005 (DTIC ADA086093), US Army ARRADCOM",
+        "date": "1980-06"
+      },
+      {
+        "url": "https://archive.org/stream/DTIC_ADA076175/DTIC_ADA076175_djvu.txt",
+        "details": "https://archive.org/details/DTIC_ADA076175",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/goldstein_stream.html",
+        "textPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/physics-primary/goldstein_ocr.txt",
+        "title": "Goldstein, S., Interior Ballistics Modeling Applied to Small Arms Systems, ARSCD-TR-79001 (DTIC ADA076175), US Army ARRADCOM",
+        "date": "1979-06"
+      }
+    ],
+    "items": [
+      {
+        "item": "a",
+        "status": "resolved-partial",
+        "summary": "IBHVG2 heat-loss model structure (Black & Comenetz / Nordheim-Soodak-Nordheim + h0, thin shell, Newton cooling) and all $HEAT defaults (clean via ARL-TR-348 SI list) resolved; gauge (CLEN/NGAG/GLOC/GRAD) and $RES1 resistance inputs resolved; equations C.01-C.22 and D.16-D.27 are only partly legible in the OCR (D.18/D.21 errata illegible)."
+      },
+      {
+        "item": "b",
+        "status": "resolved",
+        "summary": "Resal/Taylor energy equation with M = [(1+theta)W + C/3]/g, theta = 0.05, heat loss via adjusted gamma (f ~ 0.15, larger in small arms), u = 17.5 and eta = 27.7 in3/lb; heat-transfer eqs 3-1..3-3 (lambda = (13.2 + 4 log10 d_cm)^-2, checked by worked example); Lagrange p(y) quadratic distribution from Hunt eqs 7,06/7,07/7,13 and Corner eq. 13. AMCP's own eqs 5-1..5-7 garbled."
+      },
+      {
+        "item": "c",
+        "status": "partial",
+        "summary": "Hunt sec. 6.10 and Corner sec. 10.41 Thornhill formulas located and partly transcribed (0.38, 0.6, C^0.8375, d^1.5, roughness 1.25 guns / 1.4+ small arms, eq. 41/42 checked); the d exponent in the denominator and Corner's H/theta exponents are illegible in the OCR."
+      },
+      {
+        "item": "d",
+        "status": "resolved",
+        "summary": "Hunt 1951 Table 1.01 densities at 20 C: single-base 1.57-1.62 g/cm3 (NCT, NH, FNH/P), double-base cordites 1.54-1.61 g/cm3; AMCP generic 17.5 in3/lb = 1.58 g/cm3. 1940s gun propellants, not modern canister powders."
+      },
+      {
+        "item": "e",
+        "status": "partial",
+        "summary": "n: small-arms ball-propellant closed-bomb constant-exponent n = 0.8053 (Riefler & Lowery via Stiefel 1980; one OCR variant 0.8033); gun-propellant alpha 0.8-0.9 (AMCP), ~0.9 (Corner), per-propellant Hunt Table 5.01. K1: only artillery-oriented values (AMCP 1+theta = 1.05; Hunt 1.05 w + C/3; Corner rotation m 1.005-1.02); no small-arms K1 found."
+      }
+    ],
+    "blockedHosts": [
+      "https://apps.dtic.mil/ (robots.txt and PDFs answered 'The request is blocked' WAF page; not circumvented)",
+      "https://dn720003.ca.archive.org/0/items/DTIC_ADB117104/DTIC_ADB117104.pdf (archive.org data node; proxy CONNECT 403)",
+      "https://ia600409.us.archive.org/BookReader/BookReaderImages.php?id=DTIC_ADB117104 (archive.org page images; proxy CONNECT 403)",
+      "https://diverdi.colostate.edu/ (host not on the allowed list; copies of AMCP 706-150 and BRL-TR-2829)"
+    ],
+    "notes": "All documents read as archive.org OCR full text (stream pages); page images/PDFs were not reachable. 'page' is the printed page number of the document, located from page markers in the OCR text (or an override with page_basis when markers are missing). 'status': legible = numbers read from clean OCR; reconstructed = equation structure read from garbled OCR and checked for internal consistency; ocr_ambiguous = some tokens unreadable or conflicting; illegible = cannot be transcribed. 'reading' fields are transcriptions/interpretations of the evidence, never values from memory. 'derived' entries are exact unit arithmetic done by this script. Nothing here is a load-data pressure limit.",
+    "script": "scripts/extract/physics-primary.py",
+    "retrieved": "2026-11-23"
+  },
+  "records": [
+    {
+      "id": "a01",
+      "item": "a",
+      "topic": "IBHVG2 heat-loss routine is the Black & Comenetz treatment",
+      "status": "legible",
+      "values": {},
+      "reading": "Subroutine HIRATE: 'calculate heat-loss rate from treatment of Black and Comenetz in Chap. 5, vol. 1 of NDRC hypervelocity report (See Reference [7])'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "34",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 2514",
+      "ocr_line": 2482,
+      "evidence": "calculate heat-loss rate from treatment of Black and Comenetz in Chap. 5, vol.\n1 of NDRC hypervelocity report (See Reference (7])",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a02",
+      "item": "a",
+      "topic": "IBHVG2 references [7] Black & Comenetz and [8] Nordheim-Soodak-Nordheim",
+      "status": "legible",
+      "values": {},
+      "reading": "[7] H.L. Black and G. Comenetz, 'Heating of Guns During Firing', Hypervelocity Guns and the Control of Gun Erosion, Summary Technical Report of Division 1, NDRC, J.S. Burlew (ed.), 1946. [8] L.W. Nordheim, H. Soodak, G. Nordheim, 'Thermal Effects of Propellant Gases in Erosion Vents and in Guns', Armor and Ordnance Report A-262 (OSRD No. 3447), 1944. Neither primary report was found on an allowed host in this pass.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "163",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 31036",
+      "ocr_line": 31019,
+      "evidence": "[7] H.L. Black and G. Comcnetz, “Herting of Guns During Firing,\" Hypervelocity Guns and\nthe Control of Gun Erosion. Summary Technical Report of Division 1, National Defense\nResearch Committee, J.S. Burlew (ed.), 1946.\n[8J L.W. Nordhcim, H. Soodak, and G. Nordheim, “Thermal Effects of Propellant Gases in\nErosion Vents and in Guns,” Armor and Ordnance Report Number A-262 (OSRD No.\n3447), 1944.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a03",
+      "item": "a",
+      "topic": "IBHVG2 $HEAT input deck: variables and defaults (English units, OCR)",
+      "status": "ocr_ambiguous",
+      "values": {
+        "TSHL_default_in": {
+          "raw": "0.004",
+          "value": 0.004,
+          "unit": "in"
+        },
+        "CSHL_default_raw": {
+          "raw": "1S48.0",
+          "value": null,
+          "unit": "in-lbf/lbm-K"
+        },
+        "RSHL_default_raw": {
+          "raw": "0.244",
+          "value": null,
+          "unit": "lbm/in3"
+        },
+        "TWAL_default_K": {
+          "raw": "293.0",
+          "value": 293.0,
+          "unit": "K"
+        },
+        "HO_default_raw": {
+          "raw": "0.0048",
+          "value": null,
+          "unit": "lbf/in-sec-K (unit OCR-garbled)"
+        }
+      },
+      "reading": "$HEAT deck: TSHL tube-shell thickness for heat sink [in] default 0.004; CSHL shell specific heat [in-lbf/lbm-K] 'covering a broad range of steels' (OCR '1S48.0'); RSHL shell material density [lbm/in3] (OCR '0.244'); TWAL initial wall temperature [K] default 293.0; HO free-convective heat-transfer coefficient for air in the tube (OCR '0.0048'); HL = 0 ignore heat losses in energy balance, 1 (default) include. The CSHL/RSHL/HO OCR tokens are resolved against ARL-TR-348 (record a04) in 'conflicts'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "11",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Deck description follows the page-10 marker; printed page markers 11-13 are absent from the OCR, so the page is the first page after p. 10 (inferred).",
+      "ocr_line": 801,
+      "evidence": "For heat-loss-related variables, namely:\nTSHL\ntube shell thickness for heat sink [in ) (default • 0.004j\nCSHL\nshell specific heat lin—lbf/lbm—K) covering a broad range of\nsteels [default - 1S48.0]\nRSHL\nshell material density [/$„//* *] [default «* 0.244)\nTWAL\ninitial wall tempera e [AT] [default * 293.0)\nHO\nfree convective heat transfer coefficient for air in the tube\n/in*~sec~/C) [default «* 0.0048)\nHL\n0 to ignore heat losses in energy balance\nI [default) to include heat losses",
+      "conflicts": [
+        {
+          "field": "CSHL_default",
+          "values": [
+            {
+              "value": "1S48.0 (OCR token, in-lbf/lbm-K)",
+              "source": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt p. 11"
+            },
+            {
+              "value": "460.316318 J/kg-K = 1848.00 in-lbf/lbm-K [DERIVED]",
+              "source": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt p. 31"
+            }
+          ],
+          "resolution": "OCR '1S48.0' is consistent with 1848.0 (converted ARL-TR-348 value 1848.00); page image not seen."
+        },
+        {
+          "field": "RSHL_default",
+          "values": [
+            {
+              "value": "0.244 (OCR token, lbm/in3)",
+              "source": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt p. 11"
+            },
+            {
+              "value": "7861.0916 kg/m3 = 0.28400 lbm/in3 [DERIVED]",
+              "source": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt p. 31"
+            }
+          ],
+          "resolution": "OCR '0.244' disagrees with the converted ARL-TR-348 value 0.28400; probably an OCR misread of 0.284 (unverified)."
+        },
+        {
+          "field": "HO_default",
+          "values": [
+            {
+              "value": "0.0048 (OCR token, lbf/in-sec-K)",
+              "source": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt p. 11"
+            },
+            {
+              "value": "11.34821852 W/m2-K = 0.064800 lbf/(in-s-K) [DERIVED]",
+              "source": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt p. 31"
+            }
+          ],
+          "resolution": "OCR '0.0048' disagrees with the converted ARL-TR-348 value 0.0648; probably an OCR misread of 0.0648 (unverified). Use the ARL-TR-348 SI value."
+        }
+      ],
+      "derived": [
+        {
+          "what": "TSHL 0.0001016 m in inches",
+          "value": 0.004,
+          "unit": "in",
+          "calc": "0.0001016 / 0.0254",
+          "matches_ibhvg2_ocr": "0.004"
+        },
+        {
+          "what": "CSHL 460.316318 J/kg-K in in-lbf/lbm-K",
+          "value": 1848.0,
+          "unit": "in-lbf/lbm-K",
+          "calc": "460.316318 * 0.45359237 / (0.0254*0.45359237*9.80665)",
+          "ibhvg2_ocr_token": "1S48.0"
+        },
+        {
+          "what": "RSHL 7861.0916 kg/m3 in lbm/in3",
+          "value": 0.284,
+          "unit": "lbm/in3",
+          "calc": "7861.0916 * 0.0254^3 / 0.45359237",
+          "ibhvg2_ocr_token": "0.244"
+        },
+        {
+          "what": "HO 11.34821852 W/m2-K in lbf/(in-s-K)",
+          "value": 0.0648,
+          "unit": "lbf/(in-s-K)",
+          "calc": "11.34821852 * 0.0254^2 / (0.0254*0.45359237*9.80665)",
+          "ibhvg2_ocr_token": "0.0048"
+        }
+      ]
+    },
+    {
+      "id": "a04",
+      "item": "a",
+      "topic": "IBHVG2 $HEAT input defaults in SI (ARL-TR-348 input reference)",
+      "status": "legible",
+      "values": {
+        "TSHL_default_m": {
+          "raw": "0.0001016",
+          "value": 0.0001016,
+          "unit": "m"
+        },
+        "CSHL_default_J_per_kgK": {
+          "raw": "460.316318",
+          "value": 460.316318,
+          "unit": "J/kg-K"
+        },
+        "RSHL_default_kg_per_m3": {
+          "raw": "7861.0916",
+          "value": 7861.0916,
+          "unit": "kg/m3"
+        },
+        "TWAL_default_K": {
+          "raw": "293.0",
+          "value": 293.0,
+          "unit": "K"
+        },
+        "HO_default_W_per_m2K": {
+          "raw": "11.34821852",
+          "value": 11.34821852,
+          "unit": "W/m2-K"
+        }
+      },
+      "reading": "TSHL = 0.0001016 m, CSHL = 460.316318 J/kg-K, RSHL = 7861.0916 kg/m3, TWAL = 293.0 K, HO = 11.34821852 W/m2-K, HL = 1 (include heat loss) by default.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt",
+          "type": "government",
+          "page": "31",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 1518",
+      "ocr_line": 1439,
+      "evidence": "For heat-loss-related variables, namely:\nTSHL\ntube shell thickness for heat sink [m] [default = 0.0001016]\nCSHL\nshell specific heat (J/kg-K] covering a broad range of steels\n[default s 460.316318]\nRSHL\nshell material density (kg/m3) (default = 7861.0916)\nTWAL\ninitial wall temperature [K] (default = 293.0]\nHO\nfree convective heat transfer coefficient for air in the tube\n[W/m2-K] (default = 11.34821852]\nHL\n0 to ignore heat losses in energy balance",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "TSHL 0.0001016 m in inches",
+          "value": 0.004,
+          "unit": "in",
+          "calc": "0.0001016 / 0.0254",
+          "matches_ibhvg2_ocr": "0.004"
+        },
+        {
+          "what": "CSHL 460.316318 J/kg-K in in-lbf/lbm-K",
+          "value": 1848.0,
+          "unit": "in-lbf/lbm-K",
+          "calc": "460.316318 * 0.45359237 / (0.0254*0.45359237*9.80665)",
+          "ibhvg2_ocr_token": "1S48.0"
+        },
+        {
+          "what": "RSHL 7861.0916 kg/m3 in lbm/in3",
+          "value": 0.284,
+          "unit": "lbm/in3",
+          "calc": "7861.0916 * 0.0254^3 / 0.45359237",
+          "ibhvg2_ocr_token": "0.244"
+        },
+        {
+          "what": "HO 11.34821852 W/m2-K in lbf/(in-s-K)",
+          "value": 0.0648,
+          "unit": "lbf/(in-s-K)",
+          "calc": "11.34821852 * 0.0254^2 / (0.0254*0.45359237*9.80665)",
+          "ibhvg2_ocr_token": "0.0048"
+        }
+      ]
+    },
+    {
+      "id": "a05",
+      "item": "a",
+      "topic": "ARL-TR-348 prose: HO default 11.35 W/m2-K, thin-shell heat sink, TWAL 293 K",
+      "status": "legible",
+      "values": {
+        "HO_default_prose": {
+          "raw": "1 1.35",
+          "value": null,
+          "unit": "W/m2-K"
+        }
+      },
+      "reading": "'Heat is transferred from the combustion gases to the barrel through a convective heat transfer coefficient, HO (default is 11.35 W/m2-K)'; heat sink modelled as a thin shell; shell initially at TWAL = 293 K. (OCR '1 1.35' has a stray space.)",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA276059/DTIC_ADA276059_djvu.txt",
+          "type": "government",
+          "page": "14",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 886",
+      "ocr_line": 874,
+      "evidence": "3-8 SHEAT Deck. Heat loss from the combustion gases to the gun barrel is defined in the SHEA7\ninput deck. The parameter HL is the toggle switch for including heat loss (HL=1). To turn off this\noption, set HL=0. Heat is transferred from the combustion gases to the barrel through a convective heat\ntransfer coeffi:icni, HO (default is 1 1.35 W/m2- K). Over the lime scJc of >h '’muiations (milliseconds),\nthe gun band heat sink is modeled as a thin shell (default. TSHL=0. 1 . a given specific heat.\nThe shell is initially at room temperature (TWAL=293 K) by default For guns in different Uv*rre?l",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a06",
+      "item": "a",
+      "topic": "IBHVG2 heat-loss model: thin shell, Newton's law of cooling (eqs D.16-D.17)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Verbatim prose: a metal shell of thickness delta, initially at T0, surrounds the system; it is assumed to come to thermal equilibrium instantaneously radially and axially as projectile motion exposes more shell; heat-transfer rate proportional to (mean gas temperature T_mean - average shell temperature T_w) by Newton's law of cooling. READING of the OCR-garbled D.16/D.17 (verify on page image): Q = integral of Qdot dt, Qdot = A_w * h * (T_mean - T_w).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "48-49",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Equations D.16-D.27 span printed pp. 48-50; the OCR lacks the p. 48 and p. 49 markers (errata places D.18 and D.21 on p. 49).",
+      "ocr_line": 3471,
+      "evidence": "The last energy loss considered is that due to heat transfer to the gun barrel. The model\nemploys a metal shell of thickness 6 which is initially at temperature T0 surrounding the inte¬\nrior ballistic system. As heat is transfered to the shell via convection from the combustion\ngases, it is assumed to come to thermal equilibrium instantaneously not only radially, but axi¬\nally as the motion of the projectile exposes greater portions of the shell to heating. The rate of\nheat transfer is taken to be proportional to the difference between the mean temperature of\nthe system, Tmmm, and the average temperature of the shell, Tw, by Newton’s Law of Cooling.\nThat is.\nijrwjni jnuns ****** mutu* ** a* a* o m a* a* k* o a* m.* k* :\n*»«*- / Q*\n(D.16)\nQ - A9h\n[r^-r.]",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a07",
+      "item": "a",
+      "topic": "IBHVG2 wetted area and heat-transfer coefficient (eqs D.18-D.20): Nordheim-Soodak-Nordheim plus natural-convection term h0",
+      "status": "reconstructed",
+      "values": {
+        "friction_factor_const_Z": {
+          "raw": "13.2",
+          "value": 13.2,
+          "unit": "-"
+        },
+        "friction_factor_log_term_raw": {
+          "raw": "+41ofio",
+          "value": null,
+          "unit": "-"
+        },
+        "friction_factor_argument_raw": {
+          "raw": "[i* Dfc]J",
+          "value": null,
+          "unit": "-"
+        }
+      },
+      "reading": "Wall area = chamber wall area + bore area uncovered by projectile travel (D.18; errata sheet gives a corrected D.18 that is illegible in the OCR). h = lambda*c_p*rho_m*v_m + h0 (D.19, READING of OCR 'A - A Cpfif +h.'), i.e. Nordheim, Soodak & Nordheim [8] 'with the addition of a natural convective term, h0, to allow heat transfer in the absence of projectile motion'. Friction factor (D.20) READING: lambda = [13.2 + 4*log10(<bore diameter term>)]^-2, 'based on studies with rifled and unrifled tubes'; the argument and exponent are illegible in the OCR ('[i* Dfc]J'). AMCP 706-150 eq. 3-3 (record b10) gives the same constants with d in cm.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "49",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Errata sheet: D.18 is on p. 49.",
+      "ocr_line": 3499,
+      "evidence": "where the wall area of the shell exposed to the system is that of the chamber plus that which\nhas been exposed by the motion of the projectile, or\nAm * ~ ir/)» + 2/4* + */>* |x^ + s,J\n* ^\n(D.18)\nand the heat transfer coefficient\nA - A Cpfif +h.\n(D.19)\nis that of Nordheim, Soodak, and Nordheim(8] with the additioo of a natural convective term,\nAq, to allow heat transfer in the absence of projectile motion. In the work cited, the authors\nselected a friction factor of\nA- 13.2 +41ofio\n[i* Dfc]J\n(D.20)\nbased on studies with rilled and unrilled tubes. The mean gas velocity is",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a08",
+      "item": "a",
+      "topic": "IBHVG2 mean gas velocity, density and c_p for the heat-transfer coefficient (D.21-D.24)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Mean gas velocity (D.21) is taken 'from the linear gas velocity distribution in the Lagrange model (C.06)' (errata: D.21 corrected, illegible in OCR). Mean gas density (D.22) = 'total weight of propellant burned divided by the volume of the system'. c_p (D.23-D.24) = 'charge-weight-burned weighted average' over the propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "49",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Errata sheet: D.21 is on p. 49.",
+      "ocr_line": 3533,
+      "evidence": "based on studies with rilled and unrilled tubes. The mean gas velocity is\n(D.21)\nfrom the linear gas velocity distribution in the Lagrange model (C06X The mean gas density\nis the total weight of propellant burned divided by the volume of the system, or\n- h\nPm ~\nJ l J mkdt +m.\n(D,22)\nNow (A.03) and (A.06) imply",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a09",
+      "item": "a",
+      "topic": "IBHVG2 shell heat balance and shell temperature (D.25-D.27); friction pre-heating fraction",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Heat in shell = Q + f*E_fr (D.25/D.26) where 'f is that fraction of work done against bore friction which pre-heats the shell' (input HTFR, record a11). READING of OCR-garbled D.27: T_w = (Q + f*E_fr)/(c_w*rho_w*A_w*delta) + T0, i.e. shell temperature from its heat capacity, density, thickness and exposed area (the prose says 'Knowledge of the heat capacity, density, and thickness of the shell permit calculation of the temperature of the shell').",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "49-50",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: D.27 precedes the p. 50 marker; D.25 follows D.24 on p. 49 (inferred).",
+      "ocr_line": 3582,
+      "evidence": "At any instant, the heat already transfered to the shell is\nQ + / El** = |r. - r0J\n(D.25)\nor\nQ + / f/nt - <•* p- * [t*. - To ] (D.26)\nwhere / is that fraction of work done against bore friction which pre-heats the shell.\nKnowledge of the heat capacity, density, and thickness of the shell permit calculation of the\ntemperature of the shell\nQ + f E,~,\nTm - “ — ~TT + To • (D.27)\n/>„ Am o",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a10",
+      "item": "a",
+      "topic": "IBHVG2 errata for the heat-loss equations",
+      "status": "illegible",
+      "values": {},
+      "reading": "The errata sheet replaces equations D.18 and D.21 (p. 49); the replacement equations are illegible in the OCR. Any transcription of D.18/D.21 must use the errata version from a page image.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "errata sheet (unnumbered front matter)",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Errata sheet bound before the report documentation page; it lists corrections for printed p. 49.",
+      "ocr_line": 131,
+      "evidence": "49 Equation (D. 18) should be:\n* 4* 2\nEquation (D.21) should be:",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a11",
+      "item": "a",
+      "topic": "IBHVG2 bore-resistance input deck $RES1",
+      "status": "legible",
+      "values": {
+        "NPTS_max": {
+          "raw": "20",
+          "value": 20.0,
+          "unit": "-"
+        },
+        "TRAV_array_size": {
+          "raw": "20",
+          "value": 20.0,
+          "unit": "-"
+        },
+        "PRES_array_size": {
+          "raw": "20",
+          "value": 20.0,
+          "unit": "-"
+        },
+        "HTFR_default": {
+          "raw": "0.0",
+          "value": 0.0,
+          "unit": "-"
+        }
+      },
+      "reading": "$RES1: NPTS = number of travel/pressure pairs (0..20); TRAV = projectile travel array [in]; PRES = resistance pressure array [psi]; AIR = 0 suppress / 1 include air resistance (default 1); HTFR = fraction of work done against barrel resistance used to pre-heat the tube wall, 0 < HTFR < 1, default 0.0.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "24",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 1769",
+      "ocr_line": 1744,
+      "evidence": "This precedes resistance pressure inputs. The variables are:\nNPTS\nnumber of travel/pressure pairs [min » 0, max - 20]\nTRAV\nprojectile travel array of size 20 [in )\nPRES\nresistance pressure array of size 20 [psi ]\nAIR\n0 to suppress adding in air resistance\nl to include air resistance [default]\nHTFR\nfraction of work done to overcome barrel resistance which is\nused to pre-heat tube wall; 0.0 < HTFR < 1.0 [default * 0.0]",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a12",
+      "item": "a",
+      "topic": "IBHVG2 bore resistance in the model: tabular P_r(x) and work integral (D.13)",
+      "status": "legible",
+      "values": {},
+      "reading": "Barrel frictional resistance pressure is tabular input vs projectile displacement; 'These resistance profiles have been experimentally determined from measurements of force required to push projectiles through gun tubes or ... via instrumented projectiles'. Work against resistance E_r = A * integral P_r(x) dx (D.13, READING; the OCR of the integral is garbled), displacement measured relative to the barrel.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "47",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Text precedes the p. 47 marker.",
+      "ocr_line": 3442,
+      "evidence": "Currently, IBHVG2 requires tabular input of barrel frictional resistance pressure as a func¬\ntion of projectile displacement to compute the work done. These resistance profiles have been\nexperimentally determined from measurements of force required to push projectiles through\ngun tubes or, perhaps more realistically, via instrumented projectiles used in actual firings\nwhich transmit data from onboard accelerometers and pressure gages. Given such tabular\ndata, P^iz ), the work required to overcome the frictional resistance of the gun tube is",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a13",
+      "item": "a",
+      "topic": "IBHVG2 resistance interpolation and shot start",
+      "status": "legible",
+      "values": {},
+      "reading": "'Resistance pressure due to engraving of the rotating band is interpolated from tabular resistance pressures as a function of the tube-referenced projectile displacement'. Subroutine SHOTGO 'set[s] a shot-start flag based on initial chamber pressures' (record a14). No separate shot-start-pressure input variable appears in the deck descriptions read; the first $RES1 point (TRAV=0) is the resistance at zero travel (inference from the deck definition, not an explicit statement).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "43",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3112",
+      "ocr_line": 3054,
+      "evidence": "breech and base pressure are taken up in section 1ILC. Resistance pressure due to engraving\nof the routing band is interpolated from ubular resistance pressures as a function of the\ntube-referenced projectile displacement x, + xr",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a14",
+      "item": "a",
+      "topic": "IBHVG2 SHOTGO subroutine (shot start)",
+      "status": "legible",
+      "values": {},
+      "reading": "SHOTGO: 'set a shot-start flag based on initial chamber pressures and prepares for first search for maximum pressure'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "37-38",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Between the p. 36 and p. 38 markers; the p. 37 marker is absent from the OCR.",
+      "ocr_line": 2718,
+      "evidence": "set a shot-start flag based on initial chamber pressures and prepares for first\nsearch for maximum pressure",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a15",
+      "item": "a",
+      "topic": "IBHVG2 sample $RES1 resistance profile (155-mm test case, illustrative only)",
+      "status": "legible",
+      "values": {
+        "PRWT_lb": {
+          "raw": "52",
+          "value": 52.0,
+          "unit": "lb"
+        },
+        "TRAV_in_raw": {
+          "raw": "0, 0.3, 3. 600",
+          "value": null,
+          "unit": "in"
+        },
+        "PRES_psi_raw": {
+          "raw": "100, 4000, 1800, 800",
+          "value": null,
+          "unit": "psi"
+        }
+      },
+      "reading": "Example deck (large-calibre plastic lab sabot, 52 lb): resistance 100 psi at 0 in, 4000 psi at 0.3 in, 1800 psi at 3 in, 800 psi at 600 in. Format illustration only; NOT a small-arms value.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "63",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 4472",
+      "ocr_line": 4452,
+      "evidence": "NOMINAL PROJECTILE AND RESISTANCE PROFILE\nSPROJ\nNAME-' PLASTIC LAB SABOT' PRWT-52\nSRESI\nNPTS-4\nTRAV-0, 0.3, 3. 600\nPRES- 100, 4000, 1800, 800",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a16",
+      "item": "a",
+      "topic": "IBHVG2 gauge-location inputs (pressure at gauges)",
+      "status": "ocr_ambiguous",
+      "values": {
+        "NGAG_max": {
+          "raw": "30",
+          "value": 30.0,
+          "unit": "-"
+        }
+      },
+      "reading": "CLEN = effective chamber length [in] for scaling in-chamber pressure gauge locations (default = chamber volume / bore area); NGAG = number of gauge locations (default 0, max 30); GLOC = gauge location array [in], measured (+) downtube from the breech or (-) into the chamber from the initial position of the projectile base. ARL-TR-348 repeats this with GLOC in metres (max 30).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "10",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 796",
+      "ocr_line": 778,
+      "evidence": "effective chamber k ** m) for scaling in-chamber pressure\ngage Jocetioos [defa» jV/bore area)\nNGAG\nnumber of gage locations [default • 0 x - 30]\nGLOC\ngauge location array of size NGAG [/*) [defaults - 00). Dis¬\ntance is measured (♦) downtube from the breech or (-) into\nchamber from the initial position of the projectile base.\nCAUTION: IBHVC2 will discard duplicate or out-of-range\nvalue* pad will rearrange distances in ascending order, if neces -\nstay. This should be kept in mind when using, for example, a\nSSAVE deck -the position you reference may not be the one the",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a17",
+      "item": "a",
+      "topic": "IBHVG2 gradient option",
+      "status": "legible",
+      "values": {},
+      "reading": "$INFO GRAD = 1 Lagrange gradient (default), 2 Pidduck-Kent gradient.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "11",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: In the $INFO deck that follows $HEAT after the p. 10 marker; markers 11-13 absent from the OCR (inferred p. 11).",
+      "ocr_line": 865,
+      "evidence": "1 for Lagrange gradient [default)\n2 for Pidduck'Kent gradient",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a18",
+      "item": "a",
+      "topic": "IBHVG2 Lagrange gradient assumptions (section III.C)",
+      "status": "legible",
+      "values": {},
+      "reading": "Lagrange approximation 'with the added assumption that the introduction of recoil does not appreciably disturb the gradient'; central assumptions: 'the entire charge may at any time be treated as gaseous - that is, all burned - and that the density of the gas is uniformly distributed along the gun tube at any given time'. Equations C.01-C.16 are illegible in the OCR.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "43",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3112",
+      "ocr_line": 3062,
+      "evidence": "We will consider two ways of calculating the pressure gradient in the system from the\nbreech to the projectile base. The first is the so-called Lagrange approximation with the added\nassumption that the introduction of recoil does not appreciably disturb the gradient so\nderived. The central assumptions of this model are that the entire charge may at any time be\ntreated as gaseous— that is, all burned— and that the density of the gas is uniformly distributed\nalong the gun tube at any given time. The derivation in a tube-based frame of reference is as\nfollows ( Xp si xp + xr X",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a19",
+      "item": "a",
+      "topic": "IBHVG2 Lagrange result and Pidduck-Kent option (C.16-C.22)",
+      "status": "legible",
+      "values": {},
+      "reading": "'according to the Lagrange model, knowledge of the charge-to-projectile weight ratio, the mean pressure, and the resistance pressures is sufficient to calculate the entire pressure gradient down the tube and, in particular, the desired base and breech pressures.' Pidduck-Kent option uses C/m, gamma and space-mean pressure; Pidduck-Kent constant fitted (Grollman & Baer, BRL Report 1519) as a fifth-order polynomial in charge-to-mass ratio scaled with gamma, max error 0.21% over gamma in [1.2, 1.3].",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "45",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3282",
+      "ocr_line": 3253,
+      "evidence": "Thus, according to the Lagrange model, knowledge of the charge-to-pro jectile weight ratio,\nthe mean pressure, and the resistance pressures is sufficient to calculate the entire pressure\ngradient down the tube and, in particular, the desired base and breech pressures. Alterna¬\ntively, the Pidduck-Kent gradient model may be employed",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a20",
+      "item": "a",
+      "topic": "IBHVG2 Pidduck-Kent fit accuracy",
+      "status": "legible",
+      "values": {
+        "max_error_pct": {
+          "raw": "0.21",
+          "value": 0.21,
+          "unit": "%"
+        }
+      },
+      "reading": "Fit max error 0.21% over gamma in [1.2, 1.3] (theta range OCR-garbled).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "46",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3345",
+      "ocr_line": 3315,
+      "evidence": "surprisingly with ten parameters, the regression error is quite smalt. The report states that the\nmaximum error was 0.21% over the rectangular domain of 7 € [ 1.2 , 1.3 ] and © e { 0 . 26 J,\nThis is more than adequate for modeling consideration!",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a21",
+      "item": "a",
+      "topic": "IBHVG2 energy-loss terms included in L(t)",
+      "status": "legible",
+      "values": {},
+      "reading": "L(t) includes: projectile translational KE, translational KE of propellant and gases, projectile rotational KE, recoiling-barrel KE, work against barrel friction, work against air resistance in the tube, heat lost to the gun tube. Neglected: barrel deformation energy, work against propellant-bed friction / gas friction on the wall.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "46",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3345",
+      "ocr_line": 3322,
+      "evidence": "The term L(i) in (A.09) comprises the total work done by the interior ballistic system less\nthe energy transfered from the system at time t. In IBHVG2, L(l) includes contributions\nfrom: the translational kinetic energy of the proj xtile, the translational kinetic energy of the\npropellants and gases, the rotational kinetic energy of the projectile, the kinetic energy of the\nrecoiling barrel, work done against barrel friction, work done against the resistance of the air\nin the tube opposing projectile motion, and heat lost to the gun tube. We neglect the amount of\nenergy expended in the deformation of the gun barrel and any work done in overcoming the\nfrictional resistance of the propellant bed or the combustion gases moving against the tube\nwall.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "a22",
+      "item": "a",
+      "topic": "IBHVG2 projectile moment of inertia assumption",
+      "status": "legible",
+      "values": {},
+      "reading": "Rotational KE uses I_p of a solid cylinder of bore diameter and uniform density for all projectiles; twist r in calibers per turn.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADB117104/DTIC_ADB117104_djvu.txt",
+          "type": "government",
+          "page": "47",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3407",
+      "ocr_line": 3393,
+      "evidence": "where the moment of inertia of the projectile is taken to be that of a solid cylinder of bore\ndiameter and uniform density, that is\n-T O>-0«)",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b01",
+      "item": "b",
+      "topic": "AMCP 706-150 general energy equation (eq. 1-10) and gas equation of state (1-8)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Eq. 1-8: P(U_c - c*eta) = c*n*R*T. Eq. 1-10 READING of OCR 'cF / P(.u. - crj) / + K / 7 - 1 7 - 1': c*F/(gamma-1) = P*(U_c - c*eta)/(gamma-1) + K, 'where K is the energy expended by the gas in the doing of work and in heat conducted to the gun'. U_c = actual gas volume, c = mass burned, eta = covolume, F = force (impetus).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "1-16",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 2234",
+      "ocr_line": 2190,
+      "evidence": "P(U, - c-n) = cnRT (1-8)\nn and r are also variable, but less so, so that average\nvalues can be used.\nIf it is assumed that the internal energy, I, of the\ngas can be represented by cC,T with sufficient\naccuracy, then\n1 = ~(iy gZ~T^ (!-9)\nwhere c is the mass of propellant burned, equal\nto the mass of gas, and U, is the actual volume\nof the gas. Actually the pressure is not uniform\nthroughout the mass of gas, nor is the temperature,\nso both P and T are unknown average values\nconsistent with the equation as written, and P. U0, c\nand T are rapidly varying functions cf the time.\nand the general energy equation of interior ballistics\ncan be written",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b02",
+      "item": "b",
+      "topic": "AMCP 706-150 energy equation statement (eq. 2-1) and internal energy (2-3)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Eq. 2-1: T = K + I, T = energy released by the charge burned, K = work done by the gas plus energy lost by heating the barrel, I = internal energy of the gas. Eq. 2-3 READING: I = P(U_g - c*eta)/(gamma-1). Taylor system units: inch, pound (weight), second.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-3",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Between the 2-2 and 2-3 page markers (a spurious '7-1' OCR token was ignored).",
+      "ocr_line": 2897,
+      "evidence": "The energy equation may be stated simply as\nT = K + / (2-1)\nwhere\nT is the energy released by the amount cf charge\nwhich has been burned\nK the work done by the gas, plus energy lost by\nheating the barrel\nI the internal energy of the gas\nBy Equation 1-10\nwhere F is now defined as the energy per unit\nweight of propellant (specific force) and by Equa¬\ntion 1-9\nI =\nP(U. - cv)",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b03",
+      "item": "b",
+      "topic": "AMCP 706-150 gas + unburnt propellant kinetic energy (Lagrange)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Lagrange approximation, density independent of position, 'may be used for ordinary velocities'; gas velocity linear from 0 at breech to V at the base; mean-square velocity V^2/3; hence kinetic energy of unburnt propellant and gas = C*V^2/(6g) (OCR 'CV 2/%'; READING consistent with mean-square V^2/3 and the C/3 term of eq. 2-11).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-4",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3114",
+      "ocr_line": 2946,
+      "evidence": "an approximation cf Lagrange in which the density\ncf the fluid is assumed independent cf position may\nbe used for ordinary velocities. Then the velocity\ncf this fluid increases linearly from 0 at the breech\nto F at the base of the projectile; the average\nvelocity is F/2, and the mean square velocity' is\nF2/3. Hence, the kinetic energy cf the unburned\npropellant and the gas is CV 2/%, where C is the",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b04",
+      "item": "b",
+      "topic": "AMCP 706-150 rotation and friction factors; effective mass (eqs 2-8 to 2-11) = secondary-work factor",
+      "status": "reconstructed",
+      "values": {
+        "twist_calibers_low": {
+          "raw": "18",
+          "value": 18.0,
+          "unit": "calibers"
+        },
+        "twist_calibers_high": {
+          "raw": "32",
+          "value": 32.0,
+          "unit": "calibers"
+        },
+        "k_over_d_sq_solid_cylinder": {
+          "raw": "0.125",
+          "value": 0.125,
+          "unit": "-"
+        },
+        "k_over_d_sq_HE_shell": {
+          "raw": "0.14",
+          "value": 0.14,
+          "unit": "-"
+        },
+        "rotation_factor_approx": {
+          "raw": "0.01",
+          "value": 0.01,
+          "unit": "-"
+        },
+        "theta1_friction": {
+          "raw": "0.04",
+          "value": 0.04,
+          "unit": "-"
+        },
+        "theta_total": {
+          "raw": "0.05",
+          "value": 0.05,
+          "unit": "-"
+        }
+      },
+      "reading": "Rotational KE factor (2*pi*k/(n*d))^2 ~ 0.01 (n 18-32 calibers, say 25; (k/d)^2 = 0.125 solid cylinder, ~0.14 HE shell). Friction/engraving work = theta1*W*V^2/(2g), theta1 ~ 0.04 ('equivalent to assuming that the resistance is proportional to the pressure'). Eq. 2-10: theta = (2*pi*k/(n*d))^2 + theta1, taken = 0.05. Eq. 2-11 (READING of OCR): M = [(1 + theta)*W + C/3]/g ('effective mass'). Recoil term dropped as negligible (ratio (W + C/2)/R ~ 0.02 for standard weapons). These are artillery-oriented values, not small-arms measurements.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-4",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3114",
+      "ocr_line": 3051,
+      "evidence": "For most guns, n is between 18 and 32 calibers,\nsay 25. For a solid cylinder, (k/d)2 is 0.125; but\nfor high explosive projectiles, it is about 0.14. There¬\nfore, the factor (2w k/nd)2 is approximately 0.01.\ne. The w ork done against the frictional resistance\nto the motion cf the projectile, including the en¬\ngraving cf the rotating band, is equal to a small\nproportion of the translational kinetic energy, say\nflJFF2\n2 g\nF 9, is taken to be constant, this is equivalent to\nassuming that the resistance is proportional to the\npressure. The value of 9 , is usually cf the order\ncf 0.04.\nf. The heat transferred from the hot gas to the\ngun is denoted by Q. Adding the contributions a. to f .\nK= IFF2 CV2 (IF + C/2)2 F2\n2 g 6ff 2 gR\n+\n’2nk)2 IFF2 ....\n,nd ) 2 q 2 g\n+ Q\n(2-9)\nEquation 2-9 is complicated but can be simplified\nin the following manner. Drop the third term on the\nright as negligible, and let\n9 = (2-Kkfndf + 6 , (2-10)\nIn the calculations. 9 will be taken equal to 0.05.\nAlso, let an \"effective\" mass be defined as\nI, is the axial moment cf inertia and\nN is the angular velocity.\nM\n(1 + d)W + C/3\n9\n(2-11)\n2-4\nThen, if 0 is neglected or accounted for in soiiie\nother manner, K takes the simple form",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b05",
+      "item": "b",
+      "topic": "AMCP 706-150 heat loss via adjusted gamma (eqs 2-12 to 2-14); f larger in small arms",
+      "status": "reconstructed",
+      "values": {
+        "f_heat_loss_typical": {
+          "raw": "0.15",
+          "value": 0.15,
+          "unit": "-"
+        },
+        "taylor_adjusted_gamma": {
+          "raw": "1.30",
+          "value": 1.3,
+          "unit": "-"
+        }
+      },
+      "reading": "Eq. 2-13 READING: Q = f*M*V^2/2 (heat loss proportional to projectile-system KE). Eq. 2-14 READING: (gamma_bar - 1)/(gamma - 1) = 1 + f. 'In practice f is about 0.15 but may be considerably larger than this especially in small arms.' Taylor assumed adjusted gamma = 1.30. For detail see References 2 and 6 and Corner p. 141.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-5",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3256",
+      "ocr_line": 3124,
+      "evidence": "It is customary to take account of the heat loss\nQ by adjusting the value of y upward so that the\nestimated total available energy of the gas is reduced.\nThe effect cf the heat loss is to reduce the kinetic\nenergy produced by the gas and has an effect similar\nto an increase in the effective mass. Assuming that\nthe effect can be taken account of by simply in¬\ncreasing the effective niass by a constant factor,\nQ = f-^TT (2-13)\nThen, omitting the covoluiiie term for simplicity\ni MV2 -l\n-PU.) = ^-(1 + /),\nand if y is the adjusted value of y\nMV'2\n2\nso that\nI - \\ = 1 + / (2-14)\ny — 1\nIn practice / is about 0.15 but may be considerably\nlarger than this especially in small arms. To take\naccount of heat loss then, one simply substitutes\nthe value of 7 for y wherever the latter occurs.\nTaylor assumed an adjusted value cf y equal to\n1.30. In what follows it will be assumed that 7\nhas been adjusted so that, in the subsequent text,\ny represents the adjusted value, unless the heat\nloss, Q, occurs explicitly in the equation. Tor more\ndetailed discussion of the heat loss problem, see",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b06",
+      "item": "b",
+      "topic": "AMCP 706-150 free volume, propellant specific volume and covolume (eqs 2-16 to 2-18a)",
+      "status": "reconstructed",
+      "values": {
+        "u_specific_volume_in3_per_lb": {
+          "raw": "17.5",
+          "value": 17.5,
+          "unit": "in3/lb"
+        },
+        "eta_covolume_in3_per_lb": {
+          "raw": "27.7",
+          "value": 27.7,
+          "unit": "in3/lb"
+        },
+        "eta_over_u": {
+          "raw": "1.5",
+          "value": 1.5,
+          "unit": "-"
+        }
+      },
+      "reading": "Eq. 2-16 READING: U = A*X + U_ch - C*u + c*(u - eta). Initial (2-17): U_0 = U_ch - C*u + c_0*(u - eta), c_0 = charge burned before shot start. u ~ 17.5 in3/lb (specific volume of solid propellant), eta ~ 27.7 in3/lb (covolume), ~1.5x; the handbook then assumes eta = u for simplicity, 'but its validity becomes questionable for high ratios of charge to chamber volume'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-5",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3256",
+      "ocr_line": 3189,
+      "evidence": "The complete expression for the free volume is\nU = AX + Uch - Cu + cu _ cv (2-1G)\nwhere\nA is the area cf the cross section of the bore\nX the travel of the projectile\nUeh the chamber voluiiie\nu the specific volunie of the solid propellant and\ni) the specific covolume cf the gas.\nInitially X = 0, the free volunie is then\nUq = Uch — Cu \"I\" ca(u — v) (2-17)\nwhere c0 is the weight cf the sniall amount of charge\nburned before start cf projectile motion. Substituting\nU from Eq. 2-16 in Eq. 2-15 the equation for the\ninternal energy cf the gas is\n7 = _ y [AX + Uch — Cu + c(u — ??)] (2-18)\nThe specific voluiiie of the propellant (u) is about\n17.5 in3/lb. The specific covolunie (17) (the volunie\napparently occupied by the molecules in a unit\nweight cf gas) is approximately 27.7 in3/lb. The\nspecific covolume cf the gas is thus about 1.5 times\nthe specific voluiiie of the solid propellant!. It is\nassumed here that they are equal, 1? = u for the\nsake cf simplicity. This assumption is often made\nin interior ballistics, but its validity becomes ques¬\ntionable for high ratios cf charge to chamber volume.\nWith this assumption, Equation 2-17 becomes\nU0 = UcK — Cu (2-17a)\nand from Eqs. 2-16 and 2-18\nU = U0 + AX (2-lGa)\n/ = (AX + Uch - Cu) (2-18a)\nSubstituting from Equations 2-2. 2-12 and 2-18a\nin Equation 2-1 the energy equation becomes\nFc M V2 P\n— 1 = — + 7TTT (AX + u« ~ Cu ) (2-19>",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b07",
+      "item": "b",
+      "topic": "AMCP 706-150 Taylor energy equation (eq. 2-19)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "READING of OCR 'Fc M V2 P / - 1 = - + 7TTT (AX + u« ~ Cu ) (2-19>': F*c/(gamma-1) = M*V^2/2 + P*(A*X + U_ch - C*u)/(gamma-1), with eta = u assumed and gamma the heat-loss-adjusted value. Built from eqs 2-1, 2-2, 2-12 and 2-18a as the handbook states.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-5",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3256",
+      "ocr_line": 3235,
+      "evidence": "in Equation 2-1 the energy equation becomes\nFc M V2 P\n— 1 = — + 7TTT (AX + u« ~ Cu ) (2-19>",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b08",
+      "item": "b",
+      "topic": "AMCP 706-150 breech : mean : base pressure relation (eq. 2-20) and its restriction",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Eq. 2-20 READING (OCR garbled): P_c : P : P_s = [1 + C/(2(1+theta)W)] : [1 + C/(3(1+theta)W)] : 1. Consistent with eq. 2-21 as OCR'd: P_s/P = (1+theta)W/((1+theta)W + C/3) = (1+theta)W/(M*g). VERBATIM restriction: 'This relation is an approximation based on a special solution of the Lagrange problem ... Its use is restricted to artillery weapons firing at moderate velocities. When applied to treatments of high velocity weapons or to small arms, it yields poor results.'",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-6",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3428",
+      "ocr_line": 3259,
+      "evidence": "the result in terms of the measured pressure. Pc,\nsome assumption niust be made concerning the\nrelations between the different pressmes. An assump¬\ntion commonly used is that\nC f!\nP ■ p ■ p =1-1 - - - • 1 -4 - - - • 1\nc ' ‘ ^ 2(1 + d)W T 3(1 + 6)W '\n(2-20)\nThis relation is an approximation based on a\nspecial solution of the Lagrange problem which is\ndiscussed more fully in Chapter 5. Its use is re¬\nstricted to artillery weapons firing at moderate\nvelocities. When applied to treatments of high\nvelocity weapons or to sniall amis, it yields poor",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b09",
+      "item": "b",
+      "topic": "AMCP 706-150 burning-rate law and exponent used in the Taylor system (eq. 2-27)",
+      "status": "legible",
+      "values": {
+        "alpha_assumed": {
+          "raw": "0.8",
+          "value": 0.8,
+          "unit": "-"
+        }
+      },
+      "reading": "dc/dt = rho*S*B*P^alpha (eq. 2-27), alpha 'here assumed to be 0.8'; B 'should be determined for each type of propellant under actual conditions of use ... by adjusting its value for best fit of the theory to actual firing records'; closed-chamber B 'usually yield poor results when used in gun calculations'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-6",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3428",
+      "ocr_line": 3319,
+      "evidence": "a is the burning rate pressure exponent, which is\nhere assumed to be 0.8.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b10",
+      "item": "b",
+      "topic": "AMCP 706-150 heat-transfer coefficient (Nordheim, Soodak & Nordheim): eqs 3-1 to 3-3",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "Eq. 3-1: H' = h*(theta_g - theta_s) (H' time rate of heat flow per area, theta_g gas temperature beyond the boundary layer, theta_s surface temperature).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "3-2",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 11186",
+      "ocr_line": 11122,
+      "evidence": "heat transfer equation\nH' = A(0„ - 0.) (3-1)\nwhere\nII ’ is the tinic rate of heat flow\ne„ the temperature of the fluid in the flow beyond\nthe boundary layer\ne, the temperature cf the surface and\n/? the heat transfer coefficient\n3-1.2 Heat Transfer Coefficient\nNordheim, Soodak and Nordhcim made an exten¬\nsive study cf thermal effects cf propellant gases.'\nThey assumed that Equation 3-1 is valid, in the\nsense that it is valid at each instant of tune. Although\nthis assumption is doubtful, the results appear to",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b11",
+      "item": "b",
+      "topic": "AMCP 706-150 h = 0.5*lambda*Cp*rho*v and lambda for caliber .50",
+      "status": "reconstructed",
+      "values": {
+        "h_coefficient": {
+          "raw": "0.5",
+          "value": 0.5,
+          "unit": "-"
+        },
+        "lambda_cal50_MG_raw": {
+          "raw": "5 X 10-3",
+          "value": null,
+          "unit": "-"
+        }
+      },
+      "reading": "Eq. 3-2: h = 0.5*lambda*C_p*rho*v (C_p gas specific heat at constant pressure, rho and v gas density and velocity; Reynolds analogy). lambda = friction factor, 'must be determined by comparison with experiment'. From calorimetric measurements just beyond the forcing cone of a caliber .50 machine gun (Machler), lambda ~ 5 x 10^-3; unburnt propellant assumed uniformly distributed in the gas.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "3-2",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 11186",
+      "ocr_line": 11151,
+      "evidence": "was adopted by the investigators, namely :\nh = 0.5 \\Cppv (3-2)\nwhere C„ is the specific heat cf tlic gas at constant\npressure, and p and v its density and velocity,\nrespectively. The dimensionless factor. A, is called\nthe friction factor. It is related to the frictional force\non the surface due to the flow cf the gas and hence\non the momentum transfer to the surface. Equation\n3-2 expresses the analogy between the momentum\ntransfer and the heat transfer and is called the\nReynolds analogy. A depends on the surface condi¬\ntion, particularly on the roughness. It is not possible\nto specify the roughness, or its effect upon A, in\nany simple way so that A iiiust be determined by\ncomparison w ith experiment.\nThe only experimental data on guns available at\nthe time were data derived from calorimetric meas¬\nurements iiiadc. just beyond the forcing cone on a\ncaliber .50 machine gun. by Machler.2 Based on\nthese measurements a value cf A for this weapon,\nequal approximately to 5 X 10-3, was derived. Two\nassumptions were made concerning the distribution\ncf the unburnt propellant; (a) that it was uniformly\ndistributed in the gas, and (b) that it remained in\nthe chamber, so that the value cf A depends on\nthe assumption used. Assumption (a) is the better\nassumption and is assuiiied in all the systems pre¬\nsented in this handbook.\nTo evaluate A for other calibers a formula based\n3-2",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b12",
+      "item": "b",
+      "topic": "AMCP 706-150 friction factor vs caliber (eq. 3-3) and 105-mm example",
+      "status": "reconstructed",
+      "values": {
+        "Z_constant": {
+          "raw": "13.2",
+          "value": 13.2,
+          "unit": "-"
+        }
+      },
+      "reading": "Eq. 3-3 READING of OCR 'X = (Z + 4 log,,, tf)'2': lambda = (Z + 4*log10 d)^-2, d = caliber in centimetres, Z = 13.2 (empirical). 'This formula asserts that lambda depends only on d. Later experiment has shown that this is not so ... The validity of Equation 3-3 is doubtful, but it will be used here.' Worked example (record b13): d = 10.5 cm gives lambda = 1/300.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "3-3",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 11360",
+      "ocr_line": 11192,
+      "evidence": "ou licat transfer in pipes was modified aiid stated\nin tlic foriii\nX = (Z + 4 log,,, tf)’2 (3-3)\nwhere d is tlic caliber arid Z is an empirical constant.\nWhcii d is expressed in centimeters, Z has the value\n13.2. This formula asserts that X depends oiily on d.\nLater experiment has shown that this is not so,\nas X is also a function of position along the tube.\nIt will also depend on the condition cf tlic bore\nsurface. The validity cf Equation 3-3 is doubtful,\nbut it will be used here.",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "lambda = (13.2 + 4*log10(10.5))^-2",
+          "value": 0.003347,
+          "as_fraction": "1/298.8",
+          "printed": "1/300",
+          "conclusion": "reading of eq. 3-3 reproduces the handbook's worked example"
+        }
+      ]
+    },
+    {
+      "id": "b13",
+      "item": "b",
+      "topic": "AMCP 706-150 worked example: lambda = 1/300 for d = 10.5 cm; h values",
+      "status": "legible",
+      "values": {
+        "Z": {
+          "raw": "13.2",
+          "value": 13.2,
+          "unit": "-"
+        },
+        "d_cm": {
+          "raw": "10.5",
+          "value": 10.5,
+          "unit": "cm"
+        },
+        "lambda_result_raw": {
+          "raw": "1/300",
+          "value": null,
+          "unit": "-"
+        },
+        "Cp_raw": {
+          "raw": "199",
+          "value": null,
+          "unit": "cal/lb-K (OCR 'cal Tb-°K')"
+        },
+        "h_chamber": {
+          "raw": "0.187",
+          "value": 0.187,
+          "unit": "cal/in2-s-K"
+        },
+        "h_muzzle": {
+          "raw": "1.493",
+          "value": 1.493,
+          "unit": "cal/in2-s-K"
+        }
+      },
+      "reading": "105-mm howitzer example: Z = 13.2, d = 10.5 cm -> lambda = 1/300; C_p = 199 cal/lb-K; h = 0.187 cal/in2-s-K at the front of the chamber, 1.493 at the muzzle. Large-calibre example; used here only to check eq. 3-3.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "3-3",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 11360",
+      "ocr_line": 11241,
+      "evidence": "By Equation 3-3, with\nZ = 13.2\nid = 10.5 cm\nt he friction factor is\nX = 1/300\nThe effective chamber\nlength is Uci,/X\nThe total travel is Km\nDistance from tlic breech\nto the iiiuzzlc\nThe iiiuzzlc velocity is V,„\nTherefore, assuiiiing the gas velocity to vary linearly\nfroiii the breech to the projectile when the projectile\nis at the muzzle, the estimated gas velocity at the\nfront ciid cf the chamber is\nc = ~ 878!) =1100 in/'sec\nUsing a value cf C„ equal to 199 cal Tb-°K and\nsubstituting these values in Equation 3-2 gives\nh = 0.187 eal/in\"-see-°K at the front\nend cf the chaiiiber\nh = 1.493 eal/in2-see-°K at the niuzzle\nb. Temperature Before Ejection. The temperature\nof the propellant gas needs also to be known. With\nsubstitution cf Equation 2-14 in Equation 9 of\nReference 3 aiid the assumption that the specific\ncovoluiiic cf the gas is equal to the specific voluiiic",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "lambda = (13.2 + 4*log10(10.5))^-2",
+          "value": 0.003347,
+          "as_fraction": "1/298.8",
+          "printed": "1/300",
+          "conclusion": "reading of eq. 3-3 reproduces the handbook's worked example"
+        }
+      ]
+    },
+    {
+      "id": "b14",
+      "item": "b",
+      "topic": "AMCP 706-150 Lagrange/Pidduck-Kent relations: validity statement (sec. 5-1.1)",
+      "status": "legible",
+      "values": {},
+      "reading": "'When all the terms in the expansions beyond those in the first power of e are dropped, Equations 5-1, 5-2 and 5-3 result. These equations are, therefore, only valid, even as approximations, for small values of e - that is, for relatively low velocity guns.' (e = C/M). Equations 5-1..5-7 themselves are OCR-garbled.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "5-2",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 16918",
+      "ocr_line": 16894,
+      "evidence": "The Pidduck-Kent solutions for the pressure and\nkinetic energy ratios can be expanded in powers of\ne and are given in Corner,2 When all the terms in\nthe expansions beyond those in the first power cf e\nare dropped. Equations 5-1 , 5-2 and 5-3 result. These\nequations are. therefore, only valid, even as approx¬\nimations, for small values cf r,- that is, for relatively\nlow velocity guns.\nThe complete Pidduck-Kent solutions for the\npressure and kinetic energy ratios can be stated in",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b15",
+      "item": "b",
+      "topic": "Hunt 1951: equation of motion with W = 1.05 w (eq. 7,01)",
+      "status": "reconstructed",
+      "values": {
+        "W_over_w_raw": {
+          "raw": "T05",
+          "value": null,
+          "unit": "-"
+        }
+      },
+      "reading": "'the loss of energy due to recoil and mechanical friction can be represented by an increase in the mass of the projectile of about 5 per cent': A*p_s = W dv/dt (7,01) with W = 1.05 w (OCR 'T05' = 1.05, cf. eq. 6,19 OCR '1-05').",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "74",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Chapter VII opens on p. 74 (page number printed at the foot of p. 74 in the OCR).",
+      "ocr_line": 7418,
+      "evidence": "where W = T05 w and p, is the pressure on the base of the shot. In Section 6.06 it was",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b16",
+      "item": "b",
+      "topic": "Hunt 1951: quadratic (Lagrange) pressure distribution and space-mean pressure (eqs 7,05-7,07)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "sigma = fraction of the breech-to-base volume behind the section (0 at breech, 1 at shot base). Eq. 7,05: (p - p_s)/p_s = (1 - sigma^2) * C/(2W) * d(zv)/dv. Eq. 7,06: p - p_s = (1 - sigma^2)(p_b - p_s). Eq. 7,07: p_m = integral_0^1 p d(sigma) = (1/3)(2 p_b + p_s). 'The quadratic distribution of pressure given by 7,06 is the best simple approximation known for the form of the pressure gradient due to the inertia of the gases'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "75",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7480",
+      "ocr_line": 7520,
+      "evidence": "and obtain, by integrating,\nP — P> (1— o 2 )C d(zv)\np s ~ 2W dv\nIf pb is the pressure on the breech (for which cr = 0)\np — pi = (1 — a 2 ) (pb — pi) 7,06\nWith this pressure distribution the space-mean of pressure, p m , is\np„ = pda = £ (2 p b + pi) 7,07\n^ o\nThe quadratic distribution of pressure given by 7,06 is the best simple approximation",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b17",
+      "item": "b",
+      "topic": "Hunt 1951: gas-friction pressure drop (eq. 7,10)",
+      "status": "ocr_ambiguous",
+      "values": {},
+      "reading": "p_b - p_s = k*C*v^2/d^3 (7,10), k non-dimensional; the numerical k is OCR-garbled ('M0 x 10- 3'; k1*mu^(2/(n+3)) quoted as 9.53e-3 c.g.s. / 6.53e-3 ft-lb-sec). Not transcribed as a number.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "77",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7636",
+      "ocr_line": 7677,
+      "evidence": "Then, approximately,\npb — -pt = kCv 2 jd 1 7,10\nwhere k = k x k 2 is again a non-dimensional constant.\nComparison between these expressions and detailed calculations of the expression 7,09\nshows that good agreement is obtained in all cases with\nk x p 2/(n+3) = k x p 014 = 9-53 x 10~ 3 in c'.g.s. units.\n= 6-53 X 10\" 3 in ft. lb. sec. units.\nor, more simply,\nk = M0 x 10- 3\nThe simplified expression 7,10 is therefore quite adequate for estimating the theoretical",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b18",
+      "item": "b",
+      "topic": "Hunt 1951: combined distribution, modified masses and pressure ratios (eqs 7,13-7,17)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "7,13: p = p_s[1 + (1/2)(1 - sigma^2) F(t) C/W]; space mean p_m = p_s[1 + (1/3) F(t) C/W] = (1/3)(2 p_b + p_s); 7,14: A*p_m = w1 dv/dt; 7,15: w1 = 1.05 w + (1/3) C F(t) (OCR 'T05' = 1.05). F(t) is defined in 7,12 (inertia term d(zv)/dv before all-burnt, 1 + 2kWv^2/(d^3 p_s) at and after all-burnt).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "79",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7759",
+      "ocr_line": 7783,
+      "evidence": "Then 7,06 becomes\nP=P>[ 1 + i(l — a 2 ) F(z) C/W] 7,13\nand the space-mean of pressure at any time is\np m = f pda = p,[ 1 + *F (t) C/W] = $[2 p b + p,]\n^ o\nThe equation of motion 7,01 may then be written\nA p m = w x dv\\dt 7,14\nwhere the modified shot mass w x is given by\nw x = T05 w -f ^CF(Z) 7,15\n7.07. The kinetic energy term in Resal's equation",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b18b",
+      "item": "b",
+      "topic": "Hunt 1951: KE term in Resal's equation and pressure ratios with w1 = w2 = 1.05 w + C/3 (eqs 7,16-7,17)",
+      "status": "reconstructed",
+      "values": {
+        "w2_factor": {
+          "raw": "1-05",
+          "value": 1.05,
+          "unit": "-"
+        }
+      },
+      "reading": "Gas KE = (1/2)(1/3) C z v^2 (Lagrange, solid portion neglected); KE term in Resal's equation (1/2) w2 v^2 with 7,16: w2 = 1.05 w + (1/3) C z. 'Lagrange's approximation will not give so good a value for the kinetic energy of the gases as it does for their momentum ... w2 may exceed the above value by a small amount.' 7,17 (mean value unity for F(t) and z): w1 = w2 = 1.05 w + (1/3) C ('the result foreshadowed in Section 6.14'). Pressure relations READING of OCR 'Pb P™ p / 1 + i C/W~ 1 + i C/W “ 1 + } (1 — a 2 ) C/W ~ p ‘': p_b/(1 + C/2W) = p_m/(1 + C/3W) = p/(1 + (1/2)(1 - sigma^2) C/W) = p_s (the '1/2' vs '1/3' fractions are OCR 'i'/'}' and are read from eqs 7,05-7,07 and 7,13), with W = 1.05 w.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "79-80",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Section 7.07 starts on p. 79; eq. 7,17 and the pressure ratios follow the p. 80 head.",
+      "ocr_line": 7802,
+      "evidence": "7.07. The kinetic energy term in Resal's equation\nThe kinetic energy of an element of the gases is 1 pVcr 2 v 2 da ; hence the kinetic energy\nof the gases at any moment is\n£ pVo 2 v 2 da\n* o\nAs in Section 7.02 the variation of p with a may be neglected as a second-order effect\nand pV may be replaced by C z. The integral then becomes JCs^ 2 and, combining this with\nthe kinetic energy of the shot and the work done on recoil and against mechanical friction,\nwe have, for the kinetic energy term in Resal’s equation, i w 2 v 2\nwhere\nw 2 = 1-05 w -f- z\n7,16\n80\nINTERNAL BALLISTICS\nIt should be noted, however, that Lagrange’s approximation will not give so good a value\nfor the kinetic energy of the gases as it does for their momentum, since it takes no account\nof radial motion and turbulence. The true kinetic energy term may therefore be slightly\ngreater and w 2 may exceed the above value by a small amount.\nIt will be seen in the next chapter that if w x and w 2 can be assumed to be constant and\nequal, the solution of the ballistic equations is facilitated. Since in each case the varying\nterm is in the nature of a correction this may be done without serious loss of accuracy. The\nfunction F(/) increases with time from zero to something greater than unity, while z increases\nfrom zero to unity at all-burnt and thereafter remains at that value ; moreover, the true w 2\nmay be somewhat greater than the value given in 7,16.\nWe approximate by assuming a mean value, unity, for both these functions and so obtain\nk>i = w 2 = T05 to T 7,17\nThis is the result foreshadowed in Section 6.14.\nWith this approximation the relations between the pressures become\nPb P™ p\n1 + i C/W~ 1 + i C/W “ 1 + } (1 — a 2 ) C/W ~ p ‘\nIf it is assumed that the solid portion of the charge is always evenly\nthe breech and the base of the shot during the burning, so that the mean",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b19",
+      "item": "b",
+      "topic": "Hunt 1951: validity of Lagrange ratios in C/W",
+      "status": "legible",
+      "values": {},
+      "reading": "'a constant value of the ratio p_b/p_s is deduced which is not significantly different from (1 + C/2W) for values of C/W up to unity, even when second and third order terms in C/W are taken into account.'",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "80",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7827",
+      "ocr_line": 7874,
+      "evidence": "Throughout this chapter, it has always been assumed that the ratio C/W is not greater\nthan that for conventional guns. Various writers* have agreed that, considering inertia effects\nonly, and neglecting the effect of the unburnt portion of the charge, a constant value of the\nratio pb/pi is deduced which is not significantly different from (1 £ C/W) for values of\nC/W up to unity, even when second and third order terms in C/W are taken into account.\nIt seems probable therefore that the results outlined in this chapter may be applied for values",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b20",
+      "item": "b",
+      "topic": "Corner 1950: Lagrange pressure distribution with bore resistance (eq. 13) and ratios (eq. 16, 17)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "x = distance from breech, y = shot-base position, p_r = bore resistance as equivalent pressure. Eq. 13 READING of OCR 'p = Ps + Sir V - iV (ps \" w)': p(x) = p_s + (C/2W)(1 - x^2/y^2)(p_s - p_r). With no bore resistance, eq. 16: (mean pressure)/p_s = 1 + C/(3W), compared with eq. 17: total KE/shot KE = 1 + C/(3W); 'The similarity of equations 16 and 17 holds only to this order of approximation.' Gas KE = (1/6) C V^2 (eq. 9).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "344-345",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Eq. 13 on p. 344; eqs 16-17 after the p. 345 header.",
+      "ocr_line": 31560,
+      "evidence": "Let the pressure at the shot be ps, at the breech be pa, and let the re-\nsistance to the motion of the shot be written as an equivalent pressure\nPr over the bore area A. Then,\n(Py\ndt2\nW-£ = A(ps-pB)\nand, from equation 12 with x = y,\ngiving the pressure as a function of distance:\nC ( x2\\\np “ Ps + Sir V - iV (ps \" w) (13)\nIn particular, the breech pressure is\nand the mean pressure is\nThe Conventional Solution\n345\nIf there is no bore resistance,\nP c\n— = 1 +\nPs 3IF\n(16)\nwhich should be compared with the ratio of the kinetic energy of the\nsystem to the kinetic energy of the shot alone:\nTotal KE C\n1 + — (17)\nShotKK 3IF\nThe similarity of equations 16 and 17 holds only to this order of approxi-\nmation.\nFrom equations 14 and 15 we find the ratio of breech to mean pres-\nsure, already used many times in this book,",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b21",
+      "item": "b",
+      "topic": "Corner 1950: Lagrange approximation validity",
+      "status": "legible",
+      "values": {},
+      "reading": "'the Lagrange corrections derived from equations 9 and 10 are correct to the order of C/W, if the common assumptions of these theories are correct.'",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "343",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Precedes the p. 344 header; the preceding marker is a spurious '0'.",
+      "ocr_line": 31503,
+      "evidence": "More exact analytical solutions usually give for velocity and density\nthe Lagrange approximations with other terms of higher order in C/W.\nHence it is usual to find that the energy and momentum differ from those\nin equations 9 and 10 by terms of the relative order of (C/W)2] that is,\nthe Lagrange corrections derived from equations 9 and 10 are correct\nto the order of C/W, if the common assumptions of these theories are",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b22",
+      "item": "b",
+      "topic": "Corner 1950: Resal energy equation with heat-loss factor (sec. 5.1, eqs 1-6)",
+      "status": "reconstructed",
+      "values": {},
+      "reading": "KE of shot + gas = (1/2)(W + C/3)V^2 (eq. 1), corrected for rotation, resistance and recoil to (1/2)(W1 + C/3)V^2 (eq. 2). Heat loss up to any time = fraction x of this KE; total energy loss (1/2)(1 + x)(W1 + C/3)V^2. Effective gamma: gamma_bar - 1 = (1 + x)(gamma - 1) (eq. 3). Eq. 4 READING: phi(1 - T') = ((gamma_bar - 1)/2)(W1/C + 1/3) V^2/(R T0). 'Either equation 4 or equation 6 may be regarded as the basic energy equation for orthodox guns ... equation 6 is usually called the Resal equation.' 'Heat losses to the walls of the bore have been taken into account by a suitable choice of gamma. A resistance to shot motion, proportional to the instantaneous pressure, requires an adjustment to W1.'",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "175-176",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Section 5.1 starts on p. 175; eqs 5-6 continue on p. 176.",
+      "ocr_line": 14450,
+      "evidence": "The kinetic energy of the shot at any time is %WV2. If it is assumed\nthat the propellant gas is distributed with uniform density between\nbreech and shot and that its velocity at any point is proportional to the\ndistance from the breech face, the kinetic energy of the gases is y&CV2.\nThis is the conventional assumption and is consistent with our other\nassumptions about pressure gradient; whether it is accurate is discussed\nin chapter 9 (Lagrange corrections), but the matter is not important in\npractice until C/W approaches unity, that is, at muzzle velocities\naround 4000 ft/sec. The sum of these kinetic energies is\n\\(W + iC)V 2 (1)\nto which we must add corrections for rotation of the shot, resistance to\nmotion, and recoil of the gun. These have been discussed in chapter 4,\nand the effect is to replace equation 1 by\ni(W, + iC)F2 (2)\nIf it is assumed that the heat loss up to any time is a fraction x of this\nkinetic energy, the total loss of energy by the propellant gases up to\nany particular time is\n1(1 + x)0F, + JC)F2\nThe specific heat, at constant volume, of these gases is R/(y — 1), and\nthe temperature attained when the gases do no work is T0. Hence, the\ntemperature T at any time is given by\n4>CR\ny - 1\n(T0 -T) =\n1 + x\n2\n(,F1+i\nV2\nWriting T/T0 = T', a “reduced temperature,” and\nwe have\n7 — 1 = (1 + x)(7 — 1)\n«(i - n\n7-1 (Wi 1\\ V2\n2 \\ C + 3/ RT0\n(3)\n(4)\nFrom this it is clear that a ballistically important property of a pro-\npellant is RT0/(y — 1), which is usually known as the “potential” and\nhas already been mentioned in § 3.4. This has the dimensions of energy\nper unit mass, or the square of a velocity, and the range covered by",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b23",
+      "item": "b",
+      "topic": "Corner 1950: effective gamma and size of heat-loss ratio x (eq. 33)",
+      "status": "legible",
+      "values": {
+        "x_rarely_exceeds": {
+          "raw": "0.3",
+          "value": 0.3,
+          "unit": "-"
+        },
+        "gamma_practical_low": {
+          "raw": "1.22",
+          "value": 1.22,
+          "unit": "-"
+        },
+        "gamma_practical_high": {
+          "raw": "1.28",
+          "value": 1.28,
+          "unit": "-"
+        },
+        "gamma_bar_low": {
+          "raw": "1.22",
+          "value": 1.22,
+          "unit": "-"
+        },
+        "gamma_bar_high": {
+          "raw": "1.36",
+          "value": 1.36,
+          "unit": "-"
+        },
+        "gamma_bar_large_hot": {
+          "raw": "1.25",
+          "value": 1.25,
+          "unit": "-"
+        },
+        "gamma_bar_medium": {
+          "raw": "1.3",
+          "value": 1.3,
+          "unit": "-"
+        }
+      },
+      "reading": "gamma_bar - 1 = (gamma - 1)(1 + x) (eq. 33, Kent & Vinti: heat loss proportional to shot KE). x 'is biggest for small calibers and high muzzle velocities and rarely exceeds 0.3'; thermochemical gamma 1.22-1.28; gamma_bar 1.22-1.36; 1.25 for large calibres and hot propellants; 1.3 for most medium-calibre firings; exact value can be calculated from sec. 10.41.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "141",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 12343",
+      "ocr_line": 12352,
+      "evidence": "X is biggest for small calibers and high muzzle velocities and rarely\nexceeds 0.3. 7 is greatest for cool propellants, the practical range being\n1.22 to 1.28. Hence 7 may vary from 1.22 to 1.36. For large calibers\nand “hot” propellants a convenient figure is 1.25; for the majority of\nfirings in guns of medium caliber 7 can be taken as 1.3. The exact value\nis not of great importance in this method but can be calculated from\n§ 10.41.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "b24",
+      "item": "b",
+      "topic": "Corner 1950: effect of heat loss example (sec. 5.27)",
+      "status": "legible",
+      "values": {
+        "x_3p7in_AA": {
+          "raw": "0.21",
+          "value": 0.21,
+          "unit": "-"
+        }
+      },
+      "reading": "x = heat loss / KE of shot and gas; 3.7-in AA gun example uses x = 0.21; omitting heat loss changes MV by 57 ft/s in 2700 ft/s at constant charge and pressure.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "189",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 15810",
+      "ocr_line": 15835,
+      "evidence": "where x is the ratio of the heat loss at any time to the kinetic energy\nof shot and gas at that time. In the 3.7-in. AA gun we have used\nX = 0.21, which is perhaps slightly overestimated. Repetition of the\ncalculations without heat loss shows that, to give the same peak pressure\nas before, the web size must be increased by 1.8 per cent. The travel\nat “burnt” increases by 2 in., and the velocity rises by 57 ft/sec. Thus\nat constant charge weight and constant pressure, the heat loss lowers the\nmuzzle velocity by 57 ft/sec in 2700 ft/sec.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "c01",
+      "item": "c",
+      "topic": "Hunt 1951 sec. 6.10: Thornhill semi-empirical heat loss E_h (eq. 6,15)",
+      "status": "ocr_ambiguous",
+      "values": {
+        "coef": {
+          "raw": "0-38",
+          "value": 0.38,
+          "unit": "-"
+        },
+        "d_exponent_raw": {
+          "raw": "1 5",
+          "value": null,
+          "unit": "-"
+        },
+        "denominator_raw": {
+          "raw": "1 + 0-6 175/0 8375",
+          "value": null,
+          "unit": "-"
+        }
+      },
+      "reading": "Thornhill formula, heat lost to the gun proportional to the square of shot velocity. READING of OCR: E_h = [0.38 d^1.5 (x3 + x0)(T0 - T1) / (1 + 0.6 d^a / C^0.8375)] * v^2/v3^2 ft-lb, (numerator exponent 1.5 read from OCR 'd 1 5'; Corner's p. 426 heat/KE ratio shows 'd3/2', consistent) where the exponent a of d in the denominator is NOT legible (OCR '175'; eq. 6,22 shows \"rf 2 ' 1 ”\"). T0 = adiabatic flame temperature, T1 = initial gun temperature (both deg C), C = charge [lb], d = calibre [in], x3 = shot travel to muzzle [in], x0 = K0/A [in], v3 = muzzle velocity [ft/s]. Refinement: for travels > ~20 calibres E_h ~ (x + x0), for < ~20 calibres E_h ~ x. DO NOT implement until the exponents are read from a page image.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "71",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7166",
+      "ocr_line": 7203,
+      "evidence": "6.10. Heat energy lost to the gun (E h )\nThe derivation of the heat transfer equations and their solution are more completely\ndiscussed in Appendix II. We shall here quote a semi-empirical formula, proposed by\nC. K. Thornhill, which gives the amount of heat lost to the gun as proportional to the square of\nthe shot velocity, i.e., proportional to the shot energy ; it is\nE h\n0-38 d 1 5 (x 3 + x 0 ) ( T 0 — T,)\n1 + 0-6 175/0 8375\n— r ft. lbs.\nv 3 2\n6,15\nwhere T 0 is the adiabatic flame temperature, T, is the initial temperature of the gun (both in\n°C.), C is the charge weight in lbs., d is the calibre of the gun in inches, x 3 is the shot travel\nto the muzzle in inches, x 0 is an equivalent chamber length, defined as x 0 = K 0 /A inches,\nv is the velocity of the shot at any instant and v 3 is the muzzle velocity, both in ft./sec. For\npresent purposes (see Section 6.14), it is convenient to take E/, proportional to the shot-energy,\nwhich is a fairly good approximation and so formula 6,15 is quoted. A better approximation,\nalso proposed by Thornhill, is to use the value at the muzzle as given by 6,15, in\nconjunction with the approximations that, for shot-travels greater than some 20 calibres, E*\nis nearly proportional to (x -f- x 0 ), and, for shot-travels less than some 20 calibres, E* is nearly\nproportional to x, x being the shot-travel at any instant.\n6.11. Strain energy of the gun (E,)\nIt can be shown* that the application of a pressure p inside a closed cylinder whose",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "c02",
+      "item": "c",
+      "topic": "Hunt 1951 sec. 6.14: modified Resal equation; w1 = 1.05 w + C/3; heat factor k (eqs 6,19-6,24)",
+      "status": "reconstructed",
+      "values": {
+        "w1_factor": {
+          "raw": "1-05",
+          "value": 1.05,
+          "unit": "-"
+        },
+        "k_coef": {
+          "raw": "0-76",
+          "value": 0.76,
+          "unit": "-"
+        },
+        "recoil_pct": {
+          "raw": "one",
+          "value": null,
+          "unit": "-"
+        },
+        "friction_pct": {
+          "raw": "four",
+          "value": null,
+          "unit": "-"
+        }
+      },
+      "reading": "Secondary energies replace A*int p_s dx by 1.05 x (1/2) w v^2 + (1/2)(1/3) C v^2 + E_h; w1 = 1.05 w + (1/3) C (6,19); footnote: 1.05 'includes an energy loss of one per cent to allow for recoil (Section 6.09) and four per cent to allow for friction (Section 6.12)'. Heat loss written E_h = (1/2) w1 v^2 k/g (6,21) with k = 0.76 d^... (x3 + x0)(T0 - T1) g / [w1 (1 + 0.6 d^.../C^0.8375) v3^2] (6,22; exponents OCR-garbled), and gamma' - 1 = (gamma - 1)(1 + k) (6,23).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "73",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7325",
+      "ocr_line": 7333,
+      "evidence": "1 -05 x \\ tw 2 + | Cv 2 + E*\nIf therefore we write\nv\\ — 1-05 w -f ^C,\nwe shall have, as the modified form of equation 6,12\nFCsr\n[ A (* + l)~Cz(b- 1/8)] + i zv lV 2 +\nEh\n6,19\n6,20\nso that the form of 6,12 has been preserved except for the term E*.\nThe form can be completely preserved by writing formula 6,15 in the form\nE* = \\ o>i v 2 k/g ft.lbs.\nwhere w l is in lbs., v in ft./sec. and\nk =\n0-76 d” (* 3 + * 0 ) (T 0 - T,) g\nWj (1 + 0-6 rf 2 ' 1 ”/ C 08375 ) v 3 2\n6,21\n6,22\na rough estimate of the value of v 3 sufficing for the evaluation of k. If now we insert this\nvalue of Eh in 6,20 and write\nwe have\ny'-i =(r-i)(i +*)\n7^ = |jA (* + /) — Cz ( b — 1/8) J + £ toi V 2\n6.23\n6.24\nwhere to 1 is given by 6,19 and y' by 6,23 and 6,22.\n• This includes an energy loss of one per cent, to allow for recoil (Section 6.09) and four per cent, to allow for\nfriction (Section 6.12).",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "c03",
+      "item": "c",
+      "topic": "Hunt 1951 sec. 6.12: engraving/shot-start and friction work",
+      "status": "legible",
+      "values": {
+        "sugot_shot_start_kg_cm2": {
+          "raw": "400",
+          "value": 400.0,
+          "unit": "kg/cm2"
+        },
+        "sugot_shot_start_tsi": {
+          "raw": "2-5",
+          "value": 2.5,
+          "unit": "tons/sq in"
+        },
+        "friction_fraction": {
+          "raw": "0-04",
+          "value": 0.04,
+          "unit": "-"
+        }
+      },
+      "reading": "Sugot's rough empirical shot-start pressure 400 kg/cm2 or 2.5 tons/sq in ('the actual value must vary for different equipments'); friction work 'unlikely to exceed about 4 or 5 per cent of the kinetic energy of the shot'; taken as E_f = 0.04 x (1/2) w v^2/g (6,17), which 'implies a resistive pressure proportional to the gas pressure and thus gives a resistance too small at the beginning and end of shot travel'. Artillery context (driving band).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "72",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head (even 'NN INTERNAL BALLISTICS' / odd 'TITLE NN') at OCR line 7252",
+      "ocr_line": 7278,
+      "evidence": "rough empirical value of the pressure developed in the chamber before the shot begins to\naccelerate freely has been given by Sugot as 400 kg./cm. 2 or 2-5 tons/sq. in., but the actual\nvalue must vary for different equipments.\nAfter the band is fully engraved the frictional resistance probably drops to a small value\nbut precise experimental results are not at present available. Such results as are available\nare discussed in Chapter XVI.\nThe work done against friction is unlikely to exceed about 4 or 5 per cent, of the kinetic\nenergy of the shot. In what follows we shall take\nEj = 0-04 x \\ vw z lg ft.lbs. 6,17",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "c04",
+      "item": "c",
+      "topic": "Corner 1950 sec. 10.41: Thornhill semi-empirical heat-loss formulas",
+      "status": "ocr_ambiguous",
+      "values": {
+        "H_coef_raw": {
+          "raw": "1.27 X lO_20",
+          "value": null,
+          "unit": "cal/sq cm"
+        },
+        "theta_denominator_raw": {
+          "raw": "1.7 + 0.38dH",
+          "value": null,
+          "unit": "-"
+        },
+        "roughness_guns": {
+          "raw": "1.25",
+          "value": 1.25,
+          "unit": "-"
+        },
+        "roughness_small_arms": {
+          "raw": "1.4",
+          "value": 1.4,
+          "unit": "-"
+        },
+        "eq41_coef": {
+          "raw": "10.13",
+          "value": 10.13,
+          "unit": "cal"
+        },
+        "eq41_cm2_per_in2": {
+          "raw": "6.451",
+          "value": 6.451,
+          "unit": "cm2/in2"
+        },
+        "eq42_coef_raw": {
+          "raw": "5.03 X I0~3",
+          "value": null,
+          "unit": "cal"
+        },
+        "whole_firing_chamber_peak": {
+          "raw": "1.2",
+          "value": 1.2,
+          "unit": "-"
+        }
+      },
+      "reading": "d [in] calibre, C [lb] charge, T0 [K] uncooled explosion temperature, U [cu in] total internal volume, A [sq in] bore area, theta [K] max temperature rise at the commencement of rifling above 300 K. theta = (T0 - 300)/(1.7 + 0.38 d^? ...) and H = 1.27 x 10^-? d^? ... Omega [cal/sq cm per round at the start of rifling] are OCR-garbled (exponents illegible). LEGIBLE: Omega = roughness factor > 1, 'usually about 1.25 in guns, rising to 1.4 or more in small arms'. Total heat loss to shot ejection (eq. 41, READING, triangular distribution zero at breech -> H at start of rifling -> zero at muzzle): (U/(2A)) * pi * d * H * 6.451 cal = 10.13 U H d / A cal. Shot + charge KE (eq. 42, READING): 5.03 x 10^-3 (W + C/3) V^2 cal (W lb, V ft/s). Heat-loss/KE factor x at the muzzle = ratio of (41) to (42) (garbled). Whole-firing estimate: linear from zero to 1.2 H in the chamber, falling linearly in the bore.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "425-426",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Section 10.41 begins on p. 425 (header 'Semiempirical Formulas for Heat Loss 425'); eq. 42 onward is on p. 426.",
+      "ocr_line": 37682,
+      "evidence": "Thornhill has fitted formulas, whose form has a rough theoretical\nbacking, to the heat transfers calculated for a number of guns. His re-\nsults are as follows. Let d in. be the caliber, C lb the charge, T0°K the\ntemperature of uncooled explosion of the propellant, U cu in. the total\ninternal volume of the gun, and A sq in. its bore area. Let 0°K be the\nmaximum rise of temperature at the commencement of rifling (above\nthe ambient temperature of 300°K). Then Thornhill finds, as a best\nrepresentation of a number of theoretical results,\nT0 - 300\n0\n1.7 + 0.38dH\nThe heat transfer at this point, up to shot ejection, is H cal/sq cm per\nround, where\nH = 1.27 X lO_20d}ifl (40)\nwith Q a roughness factor, greater than unity, which is usually about\n1.25 in guns, rising to 1.4 or more in small arms.\nThe total heat loss to the barrel up to shot ejection can be estimated\nby taking the heat transfer to increase linearly with distance along the\nchamber, from zero at the breech to II at the start of the rifling, and to\ndecrease linearly in the bore, down to zero at the muzzle. The total\nheat loss up to shot ejection is then\nU 10.13(7 lid\n— 7 r dH X 6.451 cal = cal (41)\n2.1 A '\nThe kinetic energy of the shot and charge at the muzzle is\n5.03 X I0~3 (W -I- ±C)V2 cal (42)\n7 Strictly speaking, Tg here should be ( Tg -f the ambient temperature), but the\nerror is small.\n©\n426\nHeat Transfer to Gun Barrels\nwhere W is in pounds and V in feet per second. The factor x used in\nthis book for heat loss/kinetic energy is therefore, at the muzzle,\n25.6£/d3/2(7o — 300)ft\nx “ / i \\ r /d2\\om\nAV2{\\V + -C)[ 1.7 + 0.38dH J\nTo calculate an approximate value for the total heat loss over the\nwhole of the firing, Thornhill uses a heat transfer varying linearly in the\nchamber from zero to 1.2 H, falling linearly in the bore to at the\nmuzzle.\nEXAMPLES\n1 . The heat transfer per square centimeter from the propellant gas to the bore by\nradiation is\n1.4 X io-'VW “ TV)\nwhere tt and e, are the coefficients of emissivity of gas and surface and Tg and T, the\ncorresponding temperatures. Giving their emissivities their maximum values, unity,\nshow that radiation plays a negligible part in the heating of a gun barrel.\n2. Show from the integral solution that for ballistically similar guns the maximum",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "pi * 6.451 / 2 (eq. 41 reading: (U/2A) * pi*d*H * 6.451)",
+          "value": 10.133,
+          "printed": "10.13"
+        },
+        {
+          "what": "(1/2) lb*(ft/s)^2 in thermochemical cal",
+          "value": 0.005036,
+          "printed": "5.03 x 10^-3 (eq. 42)"
+        }
+      ]
+    },
+    {
+      "id": "c05",
+      "item": "c",
+      "topic": "Goldstein 1979 (small arms): Hunt/Corner semi-empirical heat loss used in small-arms IB models",
+      "status": "legible",
+      "values": {},
+      "reading": "In Trafton's small-arms model: 'Energy losses resulting from heat loss are estimated by a semi-empirical relationship described by Hunt (ref. 42) and Corner (ref. 43). This is the same equation that is used in the Baer and Frankle model.'",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA076175/DTIC_ADA076175_djvu.txt",
+          "type": "government",
+          "page": "13-15",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Between the printed p. 12 and p. 16 markers; markers 13-15 absent from the OCR.",
+      "ocr_line": 1513,
+      "evidence": "Energy losses resulting from heat loss are estimated by a semi-\nempirical relationship described by Hunt (ref. 42) and Comer (ref. 43)\nThis is the same equation that is used in the Baer and Frankie model.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "c06",
+      "item": "c",
+      "topic": "Goldstein 1979 (small arms): Pidduck-Kent gradient in small arms; base/breech ratio varies with travel",
+      "status": "legible",
+      "values": {},
+      "reading": "'This approximation appears to work satisfactorily for small arms systems ... However, recent tests (ref. 41) have shown that the ratio of projectile base pressure to breech pressure (which the Pidduck-Kent describes as a constant) does indeed vary as the projectile travels down the barrel.' Inputs listed: bullet pull, primer thermochemistry, empirical ignition delay, engraving and frictional resistance.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA076175/DTIC_ADA076175_djvu.txt",
+          "type": "government",
+          "page": "13-15",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Between the printed p. 12 and p. 16 markers; markers 13-15 absent from the OCR.",
+      "ocr_line": 1500,
+      "evidence": "Trafton used the Pidduck-Kent function (refs. 38,39) in his\nmodel to describe the pressure gradient in a small arms weapon. This\napproximation appears to work satisfactorily for small anus systems.\nHe later (ref. 40) included frictional effects between the barrel and\ngas. However, recent tests (ref. 41) have shown that the ratio of\nprojectile base pressure to breech pressure (which the Pidduck-Kent\ndescribes as a constant.) does indeed vary as the projettile travels",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d02",
+      "item": "d",
+      "topic": "AMCP 706-150: specific volume of solid propellant ~17.5 in3/lb",
+      "status": "legible",
+      "values": {
+        "u_in3_per_lb": {
+          "raw": "17.5",
+          "value": 17.5,
+          "unit": "in3/lb"
+        }
+      },
+      "reading": "u ~ 17.5 in3/lb for 'the propellant' (generic; no composition given). [DERIVED] density = 1/u (see 'derived').",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "2-5",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 3256",
+      "ocr_line": 3214,
+      "evidence": "The specific voluiiie of the propellant (u) is about\n17.5 in3/lb. The specific covolunie (17) (the volunie",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "density = 1/u",
+          "value": 1.5817,
+          "unit": "g/cm3",
+          "calc": "(453.59237 g / 16.387064 cm3) / 17.5"
+        }
+      ]
+    },
+    {
+      "id": "d03",
+      "item": "d",
+      "topic": "AMCP 706-150 Table 1-1 density row (column alignment lost in OCR)",
+      "status": "ocr_ambiguous",
+      "values": {
+        "density_row_raw": {
+          "raw": "0.0567 | 0.0597 | 0.0596 | 0.0571 | 0.0582 | 0.0600 | 0.0603 | 0.0602 | 1.0588 | 0.0585 | 0.0585",
+          "value": null,
+          "unit": "lbs/in3 (unassignable)"
+        }
+      },
+      "reading": "Table 1-1 'Calculated thermochemical values for standard propellants' has 18 columns (M1, M2, M5, M6, M14, M15, M17, T20, M10, T18, T25, M26, M7, M8, M9, IMR, M12, M18) but the OCR density row holds only 11 values (blank cells dropped), so values cannot be assigned to propellants. Range only; see 'derived'.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "1-13/1-14",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Table 1-1 is a fold-out at the back of the handbook, labelled 1-13/1-14.",
+      "ocr_line": 20384,
+      "evidence": "Density, lbs/in3\n0.0567\n0.0597\n0.0596\n0.0571\n0.0582\n0.0600\n0.0603\n0.0602\n1.0588\n0.0585\n0.0585",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "range of clean density-row tokens (lb/in3 -> g/cm3)",
+          "lb_in3_min": 0.0567,
+          "lb_in3_max": 0.0603,
+          "g_cm3_min": 1.569,
+          "g_cm3_max": 1.669,
+          "n_clean_tokens": 10,
+          "n_columns_in_table": 18
+        }
+      ]
+    },
+    {
+      "id": "d04",
+      "item": "d",
+      "topic": "Corner 1950: propellant densities in worked examples",
+      "status": "legible",
+      "values": {
+        "density_flashless_g_cc": {
+          "raw": "1.64",
+          "value": 1.64,
+          "unit": "g/cm3"
+        }
+      },
+      "reading": "3.7-in AA gun example: 'a flashless propellant with covolume 1.0 cc/g, density 1.64 g/cc' (composition not stated; base type not stated).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "146",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 12706",
+      "ocr_line": 12739,
+      "evidence": "1.0 cc/g, density 1.64 g/cc, RT0 = 61.7 (tons/sq in.) X (cc/g), and",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d05",
+      "item": "d",
+      "topic": "Corner 1950: 'hot' cord propellant density 1.57 g/cc",
+      "status": "legible",
+      "values": {
+        "density_hot_cord_g_cc": {
+          "raw": "1.57",
+          "value": 1.57,
+          "unit": "g/cm3"
+        }
+      },
+      "reading": "Naval gun cord charges: 'a relatively \"hot\" type, with RT0 = 70.9 (ton/sq in.) x (cc/g), density 1.57 g/cc, and thermochemical gamma = 1.24' (base type not stated).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "155",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 13295",
+      "ocr_line": 13304,
+      "evidence": "(ton/sq in.) X (cc/g), density 1.57 g/cc, and thermochemical y = 1.24;\nallowing a heat loss of 25 per cent of the projectile energy, 7 = 1.3.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d06",
+      "item": "d",
+      "topic": "Corner 1950 conversion 1 lb/cu in = 27.681 g/cc",
+      "status": "legible",
+      "values": {
+        "lb_per_in3_to_g_cc": {
+          "raw": "27.681",
+          "value": 27.681,
+          "unit": "g/cm3 per lb/in3"
+        }
+      },
+      "reading": "Conversion printed by Corner: 1 lb/cu in = 27.681 g/cc (exact value from the definitions of lb and in is 27.6799; see derived).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "431-432",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Appendix B follows the 'Appendix A 431' header; no later page marker before it in the OCR.",
+      "ocr_line": 38045,
+      "evidence": "1 ft = 30.480 cm; 1 lb/cu in. = 27.681 g/cc",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "exact lb/in3 -> g/cm3",
+          "value": 27.6799,
+          "calc": "453.59237 / 16.387064"
+        }
+      ]
+    },
+    {
+      "id": "e01",
+      "item": "e",
+      "topic": "AMCP 706-150: burning-rate pressure index range",
+      "status": "legible",
+      "values": {
+        "alpha_low": {
+          "raw": "0.8",
+          "value": 0.8,
+          "unit": "-"
+        },
+        "alpha_high": {
+          "raw": "0.9",
+          "value": 0.9,
+          "unit": "-"
+        }
+      },
+      "reading": "'The burning rate pressure index, alpha, varies for different propellants, but the latest experiments indicate that it lies between 0.8 and 0.9. A figure as low as 2/3 [OCR 'i'] has been used by some authors, and frequently it is assumed to be equal to unity.' Gun propellants generally, not small-arms specific.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_AD0462060/DTIC_AD0462060_djvu.txt",
+          "type": "government",
+          "page": "1-12",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 2045",
+      "ocr_line": 2034,
+      "evidence": "The burning rate pressure index, a, varies for\ndifferent propellants, but the latest experiments\nindicate that it lies between 0.8 and 0.9. A figure\nas low as i has been used by some authors, and\nfrequently it is assumed to be equal to unity. In the",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e02",
+      "item": "e",
+      "topic": "Corner 1950: pressure index alpha near 0.9; highest production value 1.02",
+      "status": "legible",
+      "values": {
+        "alpha_typical": {
+          "raw": "0.9",
+          "value": 0.9,
+          "unit": "-"
+        }
+      },
+      "reading": "'The \"pressure index\" alpha is commonly near 0.9, and is almost always less than unity.' Footnote 14: 'Among production propellants, the highest alpha recorded has been 1.02.' (British service propellants; not small-arms specific.)",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "40",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 2594",
+      "ocr_line": 2631,
+      "evidence": "The constants depend on the composition; Fx is usually quoted as of\nthe order of 1 ton/sq in., and is, at any rate, positive. The “pressure\nindex” a is commonly near 0.9, and is almost always less than unity.14",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e03",
+      "item": "e",
+      "topic": "Corner 1950 footnote: highest production alpha",
+      "status": "legible",
+      "values": {
+        "alpha_highest_production": {
+          "raw": "1.02",
+          "value": 1.02,
+          "unit": "-"
+        }
+      },
+      "reading": "Highest alpha recorded among production propellants: 1.02.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "40",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 2594",
+      "ocr_line": 2644,
+      "evidence": "14 Among production propellants, the highest a recorded has been 1.02. Values",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e04",
+      "item": "e",
+      "topic": "Corner 1950: rotational effective-mass factor m",
+      "status": "legible",
+      "values": {
+        "m_n30": {
+          "raw": "1.005",
+          "value": 1.005,
+          "unit": "-"
+        },
+        "m_n15_proof_shot": {
+          "raw": "1.02",
+          "value": 1.02,
+          "unit": "-"
+        }
+      },
+      "reading": "W1 = m*W (eq. 11); 'In guns the twist n is usually of the order of 30, making m ~ 1.005. This is hardly worth bothering about.' 'For n = 15, for example, m is about 1.02 for proof shot.' Bore friction may be included 'by simply increasing the effective mass' (resistance proportional to gas pressure).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt",
+          "type": "third-party",
+          "page": "136",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 11928",
+      "ocr_line": 11940,
+      "evidence": "ally of the order of 30, making m ^ 1.005. This is hardly worth bother-\ning about. Long shell need a more rapid spin for stability just outside\nthe muzzle, and howitzers also have steeper twists than n = 30. The\ndependence of m on n2 makes the effect increase rapidly as n decreases.\nFor n = 15, for example, m is about 1.02 for proof shot. The lowest\nvalues of n used in practice are around 10.",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e05",
+      "item": "e",
+      "topic": "Stiefel 1980 (US small-arms propellants): Riefler & Lowery constant-exponent burning-rate model, n = 0.8053",
+      "status": "ocr_ambiguous",
+      "values": {
+        "n_constant_exponent": {
+          "raw": "0.8053",
+          "value": 0.8053,
+          "unit": "-"
+        },
+        "n_OCR_variant_raw": {
+          "raw": "0.8033",
+          "value": null,
+          "unit": "-"
+        },
+        "bv_fit_slope_raw": {
+          "raw": "0.064 x 10~6",
+          "value": null,
+          "unit": "in/s/psi^n per K"
+        }
+      },
+      "reading": "r = b*P^n (De Saint Robert). Riefler & Lowery (Olin, BRL CR-172, 1974, 'Linear Burn Rates of Ball Propellants Based on Closed Bomb Firings'), 16 propellants, flame temperatures 1802-3131 K, closed-bomb data; constant-exponent model n = 0.8053 with r in in/s and P in psi (the OCR shows 0.8053 four times and '0.8033' once: OCR conflict, see conflicts). Stiefel's linear fit: b = -0.0006 + 0.064e-6*T_v (in/s, psi, n = 0.8053) (OCR-uncertain). The DBP/NG composition coefficients are OCR-garbled ('%NC' vs prose 'nitroglycerin'; 0.015970 vs 0.015907) and are not transcribed.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA086093/DTIC_ADA086093_djvu.txt",
+          "type": "government",
+          "page": "31",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 6420",
+      "ocr_line": 6367,
+      "evidence": "Two models are offered by Riefler and Lowery (ref 13),\na constant coefficient model and a constant exponent model.\nThe constant exponent model is:\nr _ e- (-6.61872) + (%DBP) (-0.052882) + (%NC) (0.015970) 0.8053\nwhere\nr = in./s, p = psi\nin metric units:\nr = (1 390 x 103) e(-6-61872) + (%DBP) (-0.052882) + (ZNCJ) (0.015907) 0.8053\nwhere\nr = mm/s p = MPa\nIn the present study, a further correlation of the flame\ntemperature versus the burning rate coefficient was made with\nthe Riefler and Lowery experimental data. A constant exponent\n(n - 0.8033) was assumed.\nA least-squares method was used to fit the flame temperature\nand burning rate coefficient data (constant exponent, n ■\n0.8053). The best fit was obtained with a linear equation as\nfollows :\nb = -0.0006 + 0.064 x 10~6T\nv\nwhere",
+      "conflicts": [
+        {
+          "field": "n_constant_exponent",
+          "values": [
+            {
+              "value": "0.8053",
+              "source": "https://archive.org/stream/DTIC_ADA086093/DTIC_ADA086093_djvu.txt p. 31 (appears 4 times)"
+            },
+            {
+              "value": "0.8033",
+              "source": "https://archive.org/stream/DTIC_ADA086093/DTIC_ADA086093_djvu.txt p. 31 (appears once, 'A constant exponent (n - 0.8033) was assumed')"
+            }
+          ],
+          "resolution": "majority OCR reading 0.8053; page image not seen."
+        }
+      ],
+      "derived": []
+    },
+    {
+      "id": "e06",
+      "item": "e",
+      "topic": "Stiefel 1980: burning-rate law statement",
+      "status": "legible",
+      "values": {},
+      "reading": "'r = bP^n, known as the De Saint Robert equation' (exponent superscript lost in OCR).",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA086093/DTIC_ADA086093_djvu.txt",
+          "type": "government",
+          "page": "21",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "printed page marker in OCR text at line 4088",
+      "ocr_line": 4071,
+      "evidence": "by means of an equation of the following form: r = bP , known\nas the De Saint Robert equation (ref 21).",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e07",
+      "item": "e",
+      "topic": "Goldstein 1979: small-arms burning-rate coefficient and exponent from closed bombs (no values given)",
+      "status": "legible",
+      "values": {},
+      "reading": "Riefler and Lowery obtained 'the burning rate coefficient and exponent for the burning rate equation of the form R = AP^n ... in terms of the percentage of deterrent (DBP) and the percentage of nitroglycerin (NG) and polynomials involving web size.' No numeric exponent in Goldstein.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/DTIC_ADA076175/DTIC_ADA076175_djvu.txt",
+          "type": "government",
+          "page": "6",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "override: Precedes the printed p. 6 marker.",
+      "ocr_line": 1061,
+      "evidence": "rate data on deterred small arms propellants was probably achieved\nby Riefler and Lowery (ref. 16). They used specially prepared pro¬\npellant samples of various homogeneous compositions in a closed bomb.\nData from the ignition and burnout phase are neglected so that the\nempirical constants during the complete burning phase alone are cal¬\nculated. Using statistical techniques, they obtain the burning rate\ncoefficient and exponent for the burning rate equation of the form\nR * APn. These factors are described in terms of the percentage of",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-MD",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: MD",
+      "status": "legible",
+      "propellant": "MD",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-58",
+          "value": 1.58,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "940",
+          "value": 940.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "1025",
+          "value": 1025.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "30 | 65 (131) | 5",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18146,
+      "evidence": "MD\n30\n65 (131)\n5\n1-58\n940\n1025",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-W",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: W",
+      "status": "legible",
+      "propellant": "W",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-60",
+          "value": 1.6,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "910",
+          "value": 910.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "1025",
+          "value": 1025.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "29 | 65 (13-1) | 6",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18165,
+      "evidence": "W\n29\n65 (13-1)\n6\n1-60\n910\n1025",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-WM",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: WM",
+      "status": "legible",
+      "propellant": "WM",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1 -59",
+          "value": 1.59,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "934",
+          "value": 934.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "1013",
+          "value": 1013.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "29-5 | 65 (13-1) | 2 | 3-5",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18184,
+      "evidence": "WM\n29-5\n65 (13-1)\n2\n3-5\n1 -59\n934\n1013",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-SC",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: SC",
+      "status": "legible",
+      "propellant": "SC",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-57",
+          "value": 1.57,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "957",
+          "value": 957.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "970",
+          "value": 970.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "41 -5 | 49-5 (12-2) | 9",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18204,
+      "evidence": "SC\n41 -5\n49-5 (12-2)\n9\n1-57\n957\n970",
+      "conflicts": [],
+      "derived": [
+        {
+          "what": "cross-check: Hunt text quotes the Table 1.01 calorific value for Cordite SC",
+          "text_evidence": "well with the experimental value, 970 cals./gm. in Table 1.01.",
+          "text_page": "16-17 (running head of p. 17 absent in OCR)",
+          "table_value": 970.0
+        }
+      ]
+    },
+    {
+      "id": "d01-HSC",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: HSC",
+      "status": "legible",
+      "propellant": "HSC",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1 -61",
+          "value": 1.61,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "866",
+          "value": 866.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "1175",
+          "value": 1175.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "47 | 49-5 (12-2) | 3-5",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18223,
+      "evidence": "HSC\n47\n49-5 (12-2)\n3-5\n1 -61\n866\n1175",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-A",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: A",
+      "status": "legible",
+      "propellant": "A",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-54",
+          "value": 1.54,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1026",
+          "value": 1026.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "810",
+          "value": 810.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "25-5 | 56-5 (13-1) | 4-5 | 3-5 | 10",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18242,
+      "evidence": "A\n25-5\n56-5 (13-1)\n4-5\n3-5\n10\n1-54\n1026\n810",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-AN",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: AN",
+      "status": "legible",
+      "propellant": "AN",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-54",
+          "value": 1.54,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1018",
+          "value": 1018.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "825",
+          "value": 825.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "25-5 | 56-5 (13-1) | 4-5 | 3-5 | 10 #",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18263,
+      "evidence": "AN\n25-5\n56-5 (13-1)\n4-5\n3-5\n10 #\n1-54\n1018\n825",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-ASN",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: ASN",
+      "status": "legible",
+      "propellant": "ASN",
+      "base_type_from_composition": "double-base (nitroglycerine + nitrocellulose)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1 -57",
+          "value": 1.57,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1021",
+          "value": 1021.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "785",
+          "value": 785.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "36-25 | 50 (12-2) | 5-75",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18284,
+      "evidence": "ASN\n36-25\n50 (12-2)\n5-75\n1 -57\n1021\n785",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-N",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: N",
+      "status": "legible",
+      "propellant": "N",
+      "base_type_from_composition": "triple-base (nitroglycerine + nitrocellulose + picrite 55%)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-66",
+          "value": 1.66,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1058",
+          "value": 1058.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "765",
+          "value": 765.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "18-7 | 19 (13-1) | 7-3 | 55$",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18303,
+      "evidence": "N\n18-7\n19 (13-1)\n7-3\n55$\n1-66\n1058\n765",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-NQ",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: NQ",
+      "status": "legible",
+      "propellant": "NQ",
+      "base_type_from_composition": "triple-base (nitroglycerine + nitrocellulose + picrite 55%)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-68",
+          "value": 1.68,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1001",
+          "value": 1001.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "880",
+          "value": 880.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "20-6 | 20-8 (13-1) | 3-6 | 55$",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18323,
+      "evidence": "NQ\n20-6\n20-8 (13-1)\n3-6\n55$\n1-68\n1001\n880",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-NFQ",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: NFQ",
+      "status": "legible",
+      "propellant": "NFQ",
+      "base_type_from_composition": "triple-base (nitroglycerine + nitrocellulose + picrite 55%)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-64",
+          "value": 1.64,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1066",
+          "value": 1066.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "755",
+          "value": 755.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "21 | 16-5 (12-2) | 7-5 | 55$",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18343,
+      "evidence": "NFQ\n21\n16-5 (12-2)\n7-5\n55$\n1-64\n1066\n755",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-NCT",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: NCT",
+      "status": "legible",
+      "propellant": "NCT",
+      "base_type_from_composition": "single-base (nitrocellulose; no nitroglycerine column value)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-62",
+          "value": 1.62,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "893",
+          "value": 893.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "780",
+          "value": 780.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "99-5 (13-0) | 0*5",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18363,
+      "evidence": "NCT\n99-5 (13-0)\n0*5\n1-62\n893\n780",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-NH",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: NH",
+      "status": "legible",
+      "propellant": "NH",
+      "base_type_from_composition": "single-base (nitrocellulose; no nitroglycerine column value)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-57",
+          "value": 1.57,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "978",
+          "value": 978.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "765",
+          "value": 765.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "86 (1315) | i | 10 | 3",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18381,
+      "evidence": "NH5\n86 (1315)\ni\n10\n3\n1-57\n978\n765",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "d01-FNH_P",
+      "item": "d",
+      "topic": "Hunt 1951 Table 1.01 density at 20 C: FNH/P",
+      "status": "legible",
+      "propellant": "FNH/P",
+      "base_type_from_composition": "single-base (nitrocellulose; no nitroglycerine column value)",
+      "values": {
+        "density_g_cm3_at_20C": {
+          "raw": "1-57",
+          "value": 1.57,
+          "unit": "g/cm3"
+        },
+        "gas_volume_cc_per_g": {
+          "raw": "1005",
+          "value": 1005.0,
+          "unit": "c.c./gm"
+        },
+        "calorific_value_cal_per_g_water_liquid": {
+          "raw": "740",
+          "value": 740.0,
+          "unit": "cals/gm"
+        },
+        "composition_tokens_raw": {
+          "raw": "83 (13-15) | i | 10 | 5««",
+          "value": null,
+          "unit": "% (column alignment of minor ingredients not reliable in OCR)"
+        }
+      },
+      "reading": "Hunt Table 1.01 'Composition and Physical Properties of Propellants'; columns: Nitroglycerine, Nitro-cellulose (N content), Carbamite, Mineral Jelly, Diphenylamine, Picrite, Dinitrotoluene, Dibutylphthalate, Density at 20 C gm/c.c., Gas volume c.c./gm, Calorific value (water liquid) cals/gm. 'The thermal data in this table are always subject to revision.' Base type inferred by the script from whether the first composition value is the nitrocellulose entry (carries '(N%)') and whether the 55% picrite entry is present.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "216",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 18104",
+      "ocr_line": 18401,
+      "evidence": "FNH/P\n83 (13-15)\ni\n10\n5««\n1-57\n1005\n740",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-MD",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: MD",
+      "status": "legible",
+      "propellant": "MD",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-91",
+          "value": 0.91,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-91 | 1-50 | 119 | • | 015",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21683,
+      "evidence": "MD\n0-91\n1-50\n119\n•\n015",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-W",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: W",
+      "status": "legible",
+      "propellant": "W",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-97",
+          "value": 0.97,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-97 | 1-16 | 1-08 | 1-6 | 015",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21695,
+      "evidence": "W\n0-97\n1-16\n1-08\n1-6\n015",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-WM",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: WM",
+      "status": "ocr_ambiguous",
+      "propellant": "WM",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "105",
+          "value": null,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "105 | 1-03 | 115 | 2-2 | 0-15",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": "alpha token '105': decimal separator lost or token garbled in OCR; not interpreted",
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21707,
+      "evidence": "WM\n105\n1-03\n115\n2-2\n0-15",
+      "conflicts": [
+        {
+          "field": "alpha_pressure_index",
+          "values": [
+            {
+              "value": "105 (OCR, decimal lost)",
+              "source": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt p. 226"
+            },
+            {
+              "value": "Corner: highest alpha recorded among production propellants 1.02",
+              "source": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt p. 41 fn. 14 (see e03)"
+            }
+          ],
+          "resolution": "unresolved: Hunt Table 5.01 lists ASN at a legible 1.05 and WM/SC/AN tokens '105'/'104'/'106' (decimal lost), all above Corner's 1.02; the two books may describe different lots, eras or measurement methods."
+        }
+      ],
+      "derived": []
+    },
+    {
+      "id": "e08-SC",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: SC",
+      "status": "ocr_ambiguous",
+      "propellant": "SC",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "104",
+          "value": null,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "104 | 0-91 | 1-00 | 2 0 | 017",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": "alpha token '104': decimal separator lost or token garbled in OCR; not interpreted",
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21719,
+      "evidence": "SC\n104\n0-91\n1-00\n2 0\n017",
+      "conflicts": [
+        {
+          "field": "alpha_pressure_index",
+          "values": [
+            {
+              "value": "104 (OCR, decimal lost)",
+              "source": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt p. 226"
+            },
+            {
+              "value": "Corner: highest alpha recorded among production propellants 1.02",
+              "source": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt p. 41 fn. 14 (see e03)"
+            }
+          ],
+          "resolution": "unresolved: Hunt Table 5.01 lists ASN at a legible 1.05 and WM/SC/AN tokens '105'/'104'/'106' (decimal lost), all above Corner's 1.02; the two books may describe different lots, eras or measurement methods."
+        }
+      ],
+      "derived": []
+    },
+    {
+      "id": "e08-HSC",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: HSC",
+      "status": "legible",
+      "propellant": "HSC",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-97",
+          "value": 0.97,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-97 | 1-63 | 1-52 | 20 | 013",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21731,
+      "evidence": "HSC\n0-97\n1-63\n1-52\n20\n013",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-A",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: A",
+      "status": "ocr_ambiguous",
+      "propellant": "A",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "Ml",
+          "value": null,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "Ml | 0-66 | 0-84 | 1-9 | 018",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": "alpha token 'Ml': decimal separator lost or token garbled in OCR; not interpreted",
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21743,
+      "evidence": "A\nMl\n0-66\n0-84\n1-9\n018",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-AN",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: AN",
+      "status": "ocr_ambiguous",
+      "propellant": "AN",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "106",
+          "value": null,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "106 | 0-72 | 0-82 | 1-8 | 0-20",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": "alpha token '106': decimal separator lost or token garbled in OCR; not interpreted",
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21755,
+      "evidence": "AN\n106\n0-72\n0-82\n1-8\n0-20",
+      "conflicts": [
+        {
+          "field": "alpha_pressure_index",
+          "values": [
+            {
+              "value": "106 (OCR, decimal lost)",
+              "source": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt p. 226"
+            },
+            {
+              "value": "Corner: highest alpha recorded among production propellants 1.02",
+              "source": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt p. 41 fn. 14 (see e03)"
+            }
+          ],
+          "resolution": "unresolved: Hunt Table 5.01 lists ASN at a legible 1.05 and WM/SC/AN tokens '105'/'104'/'106' (decimal lost), all above Corner's 1.02; the two books may describe different lots, eras or measurement methods."
+        }
+      ],
+      "derived": []
+    },
+    {
+      "id": "e08-ASN",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: ASN",
+      "status": "legible",
+      "propellant": "ASN",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "1-05",
+          "value": 1.05,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "1-05 | 0-69 | 0-77 | 0-9 | 0-22",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21767,
+      "evidence": "ASN\n1-05\n0-69\n0-77\n0-9\n0-22",
+      "conflicts": [
+        {
+          "field": "alpha_pressure_index",
+          "values": [
+            {
+              "value": "1-05 (OCR, decimal lost)",
+              "source": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt p. 226"
+            },
+            {
+              "value": "Corner: highest alpha recorded among production propellants 1.02",
+              "source": "https://archive.org/stream/THEORYOFTHEINTERIORBALLISTICSOFGUNS.J.CORNERPHD._201611/THEORY+OF+THE+INTERIOR+BALLISTICS+OF+GUNS.+J.CORNER+PHD._djvu.txt p. 41 fn. 14 (see e03)"
+            }
+          ],
+          "resolution": "unresolved: Hunt Table 5.01 lists ASN at a legible 1.05 and WM/SC/AN tokens '105'/'104'/'106' (decimal lost), all above Corner's 1.02; the two books may describe different lots, eras or measurement methods."
+        }
+      ],
+      "derived": []
+    },
+    {
+      "id": "e08-N",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: N",
+      "status": "legible",
+      "propellant": "N",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-93",
+          "value": 0.93,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-93 | 0-75 | 0-63 | 1-0 | 0-22",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21779,
+      "evidence": "N\n0-93\n0-75\n0-63\n1-0\n0-22",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-NQ",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: NQ",
+      "status": "legible",
+      "propellant": "NQ",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-89",
+          "value": 0.89,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-89 | 0-98 | 0-75 | 0-9 | 0-19",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21791,
+      "evidence": "NQ\n0-89\n0-98\n0-75\n0-9\n0-19",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-NFQ",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: NFQ",
+      "status": "legible",
+      "propellant": "NFQ",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-91",
+          "value": 0.91,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-91 | 0-79 | 0-63 | 1-0 | 0-22",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21803,
+      "evidence": "NFQ\n0-91\n0-79\n0-63\n1-0\n0-22",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-NCT",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: NCT",
+      "status": "legible",
+      "propellant": "NCT",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-80",
+          "value": 0.8,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-80 | 1*46 | 0-84 | • | 017",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21815,
+      "evidence": "NCT\n0-80\n1*46\n0-84\n•\n017",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-NH",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: NH (Dupont)",
+      "status": "legible",
+      "propellant": "NH (Dupont)",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "0-99",
+          "value": 0.99,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "0-99 | 0-78 | 0-76 | 0-9 | 0-17",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21827,
+      "evidence": "NH (Dupont)\n0-99\n0-78\n0-76\n0-9\n0-17",
+      "conflicts": [],
+      "derived": []
+    },
+    {
+      "id": "e08-FNH_P",
+      "item": "e",
+      "topic": "Hunt 1951 Table 5.01 pressure index alpha: FNH/P (Dupont)",
+      "status": "legible",
+      "propellant": "FNH/P (Dupont)",
+      "values": {
+        "alpha_pressure_index": {
+          "raw": "1-02",
+          "value": 1.02,
+          "unit": "-"
+        },
+        "row_tokens_raw": {
+          "raw": "1-02 | 0-68 | 0-71 | 0-7 | 0-21",
+          "value": null,
+          "unit": "alpha | beta (non-linear coeff.) | beta1 (linear-law coeff.) | d(beta1)/beta1 % per 10 F | dF/F % per 10 F"
+        }
+      },
+      "note": null,
+      "reading": "Hunt Table 5.01 'Rate-of-burning Indices and Coefficients with Initial Temperature Effects'. 'The figures give the rate of reduction of the least grain dimension in inches per second when the pressure is in tons/sq. in. They are always subject to revision.' British/US gun propellants of the 1940s; NOT small-arms propellants.",
+      "sources": [
+        {
+          "url": "https://archive.org/stream/INTERIORBALLISTICSF.R.HUNT1951MINISTRYOFDEFENSE./INTERIOR%20BALLISTICS%20F.R.HUNT%201951%20MINISTRY%20OF%20DEFENSE._djvu.txt",
+          "type": "government",
+          "page": "226",
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "page_basis": "Hunt running head nearest the table title, OCR line 21639",
+      "ocr_line": 21839,
+      "evidence": "FNH/P (Dupont)\n1-02\n0-68\n0-71\n0-7\n0-21",
+      "conflicts": [],
+      "derived": []
+    }
+  ]
+}

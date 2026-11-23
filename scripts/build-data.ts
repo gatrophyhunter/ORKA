@@ -13,7 +13,7 @@ import path from 'node:path';
 import type {
   Bullet, BrassBrand, BrassCase, BurnRateChart, Cartridge, Database, Powder, PowderModelEntry, Source, ValidationLoad,
 } from '../src/data/schema';
-import { cartridgeKey, makerKey, powderKey, slug } from './names';
+import { cartridgeKey, cartridgeKeyLoose, makerKey, powderKey, slug } from './names';
 import { estimateFromCharts } from './estimate';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
@@ -81,6 +81,18 @@ const cleanName = (s: string) => s.replace(/[®™]/g, '').replace(/\s+/g, ' ').
 const drop = (k: string) => (dropped[k] = (dropped[k] ?? 0) + 1);
 
 // ---------------------------------------------------------------- cartridges
+/** C.I.P. names of cartridges that SAAMI lists under another name (same cartridge; found by the verifier). */
+const CIP_SAAMI_TWINS: Record<string, string> = {
+  '9 mm Browning court': '380 Automatic',
+  '7,65 mm Browning': '32 Automatic',
+  '6,35 Browning': '25 Automatic',
+  '7,65 Parabellum': '30 Luger (7.65mm)',
+  '9 mm Makarov': '9x18 Makarov',
+  '8 x 57 IS': '8mm Mauser (8x57)',
+  '32 S&W Long': '32 Smith &Wesson Long (32 Colt New Police)',
+  '38 S&W': '38 Smith &Wesson (38 Colt New Police)',
+  '9,3 x 66 Sako': '370 Sako Magnum',
+};
 export function buildCartridges(files: { key: string; data: any }[]): Cartridge[] {
   const byKey = new Map<string, Cartridge>();
   for (const f of files) {
@@ -89,7 +101,9 @@ export function buildCartridges(files: { key: string; data: any }[]): Cartridge[
         drop('cartridge (no source/evidence)');
         continue;
       }
-      const key = cartridgeKey(r.name);
+      const key = cartridgeKey(CIP_SAAMI_TWINS[r.name] ?? r.name);
+      // C.I.P. Pmax measured by the crusher method is not comparable with piezo limits: never ship it as Pmax.
+      const crusher = /crusher/i.test(String(r.cip?.sheetMethod ?? r.cip?.method ?? ''));
       const c: Cartridge = {
         id: key,
         name: r.name,
@@ -104,13 +118,18 @@ export function buildCartridges(files: { key: string; data: any }[]): Cartridge[
         maxCoalIn: num(r.maxCoalIn),
         saamiMapPsi: num(r.saamiMapPsi),
         saamiMapCup: num(r.saamiMapCup),
-        cipPmaxBar: num(r.cipPmaxBar),
+        cipPmaxBar: crusher ? null : num(r.cipPmaxBar),
         saamiTwist: str(r.saamiTwist),
         primerSize: str(r.primerSize),
         caseCapacityGrH2O: [],
         sources: sourcesOf(r),
         conflicts: arr(r.conflicts),
-        notes: [str(r.notes), r.transducerLocation ? `Transducer: ${r.transducerLocation}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [
+          str(r.notes),
+          crusher && r.cipPmaxBar ? `C.I.P. Pmax ${r.cipPmaxBar} bar was measured by the crusher method and is not used as a piezo limit.` : null,
+          r.transducerLocation ? `Transducer: ${typeof r.transducerLocation === 'string' ? r.transducerLocation : JSON.stringify(r.transducerLocation)}` : null,
+          `Evidence: ${r.evidence}`,
+        ].filter(Boolean).join(' | '),
       };
       const prev = byKey.get(key);
       if (!prev) {
@@ -306,6 +325,52 @@ export function buildBrass(files: { key: string; data: any }[], cartridges: Cart
 }
 
 // ---------------------------------------------------------------- validation loads
+/** Match a cartridge name from load data: exact key, then key without parentheses, then a unique token-subset match. */
+const keyCache = new WeakMap<Cartridge[], { keys: Set<string>[]; looseKeys: Set<string>[]; loose: string[][] }>();
+const nameCache = new Map<string, Cartridge | undefined>();
+export function findCartridge(cartridges: Cartridge[], name: string): Cartridge | undefined {
+  let idx = keyCache.get(cartridges);
+  if (!idx) {
+    idx = {
+      keys: cartridges.map((c) => new Set([c.id, cartridgeKey(c.name), ...c.aliases.map(cartridgeKey)])),
+      looseKeys: cartridges.map((c) => new Set([cartridgeKeyLoose(c.name), ...c.aliases.map(cartridgeKeyLoose)])),
+      loose: cartridges.map((c) => cartridgeKeyLoose(c.name).split('-')),
+    };
+    keyCache.set(cartridges, idx);
+    nameCache.clear();
+  }
+  if (nameCache.has(name)) return nameCache.get(name);
+  const I = idx;
+  const pick = (): Cartridge | undefined => {
+    const k = cartridgeKey(name);
+    const exact = cartridges.filter((_, i) => I.keys[i].has(k));
+    if (exact.length === 1) return exact[0];
+    const kl = cartridgeKeyLoose(name);
+    const strict2 = cartridges.filter((_, i) => I.keys[i].has(kl));
+    if (strict2.length === 1) return strict2[0];
+    const loose = cartridges.filter((_, i) => I.looseKeys[i].has(kl));
+    if (loose.length === 1) return loose[0];
+    // Token subset: every token of the cartridge key appears in the load's key (e.g. "7.62x39 russian" ⊇ "7.62x39").
+    const toks = new Set(kl.split('-'));
+    const sub = cartridges
+      .map((c, i) => ({ c, t: I.loose[i] }))
+      .filter(({ t }) => t.length >= 1 && /\d/.test(t[0]) && t.every((x) => toks.has(x)))
+      .sort((a, b) => b.t.length - a.t.length);
+    if (sub.length === 1 || (sub.length > 1 && sub[0].t.length > sub[1].t.length)) return sub[0].c;
+    // Reverse subset (load name is an abbreviation of the cartridge name): accept the unique shortest superset.
+    const lt = kl.split('-');
+    const sup = cartridges
+      .map((c, i) => ({ c, t: I.loose[i] }))
+      .filter(({ t }) => lt.length >= 2 && lt.every((x) => t.includes(x)))
+      .sort((a, b) => a.t.length - b.t.length);
+    if (sup.length === 1 || (sup.length > 1 && sup[0].t.length < sup[1].t.length)) return sup[0].c;
+    return undefined;
+  };
+  const r = pick();
+  nameCache.set(name, r);
+  return r;
+}
+
 export function buildLoads(files: { key: string; data: any }[], cartridges: Cartridge[], powders: Powder[]): ValidationLoad[] {
   const out: ValidationLoad[] = [];
   for (const f of files) {
@@ -316,8 +381,7 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
         drop('load (incomplete or unsourced)');
         continue;
       }
-      const ck = cartridgeKey(r.cartridge);
-      const cart = cartridges.find((c) => c.id === ck || c.aliases.some((a) => cartridgeKey(a) === ck));
+      const cart = findCartridge(cartridges, r.cartridge);
       const pk = powderKey(r.powder);
       const mk = r.powderMfr ? makerKey(r.powderMfr) : null;
       const pw = powders
@@ -419,7 +483,23 @@ function main() {
       pg: l.sources[0]?.page ?? null,
       cp: l.compressed ?? null,
     }));
-  fs.writeFileSync(PUBLISHED, JSON.stringify(SHIP_PUBLISHED ? compact : []));
+  // Dictionary-encode repeated strings: { s: [strings], r: [[...fields with string indices...]] }.
+  const strings: string[] = [];
+  const sIdx = new Map<string, number>();
+  const si = (v: string | null | undefined) => {
+    if (v === null || v === undefined) return -1;
+    let i = sIdx.get(v);
+    if (i === undefined) {
+      i = strings.length;
+      strings.push(v);
+      sIdx.set(v, i);
+    }
+    return i;
+  };
+  const rowsOut = (SHIP_PUBLISHED ? compact : []).map((x) => [
+    si(x.c), si(x.p), x.w, si(x.bm), si(x.bt), si(x.t), x.ch, x.v, x.pr, si(x.pu), x.b, x.oal, si(x.cs), si(x.pm), si(x.u), x.pg ?? null, x.cp === null ? -1 : x.cp ? 1 : 0,
+  ]);
+  fs.writeFileSync(PUBLISHED, JSON.stringify({ v: 1, s: strings, r: rowsOut }));
   const modelCounts: Record<string, number> = {};
   for (const p of powders) modelCounts[p.model?.status ?? 'none'] = (modelCounts[p.model?.status ?? 'none'] ?? 0) + 1;
   console.log(JSON.stringify({

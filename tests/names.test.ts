@@ -26,3 +26,17 @@ describe('powderKey', () => {
     expect(powderKey('Varget®')).toBe('varget');
   });
 });
+
+import { cartridgeKeyLoose } from '../scripts/names';
+describe('cartridgeKey (European and qualifier forms)', () => {
+  it('normalises decimal commas, spaced x and mm suffixes on decimal calibres', () => {
+    expect(cartridgeKey('6,5 x 55 Swedish')).toBe(cartridgeKey('6.5x55 Swedish'));
+    expect(cartridgeKey('6.5mm Grendel')).toBe(cartridgeKey('6.5 Grendel'));
+    expect(cartridgeKey('7.62x39mm')).toBe(cartridgeKey('7.62x39'));
+    expect(cartridgeKey('9mm Luger')).toBe(cartridgeKey('9mm Luger'));
+    expect(cartridgeKey('9mm Luger')).not.toBe(cartridgeKey('9mm Makarov'));
+  });
+  it('drops parenthetical qualifiers in the loose key', () => {
+    expect(cartridgeKeyLoose('45-70 Government (Lever Actions)')).toBe(cartridgeKey('45-70 Government'));
+  });
+});

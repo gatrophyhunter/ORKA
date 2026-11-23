@@ -126,7 +126,14 @@ HODG_PAGES = {
     'hodgdon': f'{HODG}/hodgdon/',
     'imr': f'{HODG}/imr/',
     'winchester': f'{HODG}/winchester/',
+    'reloading-manuals-library': f'{HODG}/reloading-manuals-library/',
 }
+
+
+def annual_manual_url():
+    """Latest Hodgdon Annual Manual PDF (AMnn) published on the reloading-manuals-library page."""
+    links = hodg_links(read(hodg_page_local('reloading-manuals-library')), r'/AM\d\d[^/]*\.pdf$')
+    return max(links, key=lambda u: int(re.search(r'/AM(\d\d)', u).group(1)))
 
 
 def hodg_page_local(key):
@@ -248,6 +255,7 @@ def download():
     ref = read(hodg_page_local('reference-data'))
     for u in hodg_links(ref, r'Burn-Rate-Chart.*\.pdf$|temperature-sensitivity.*\.pdf$'):
         fetch(u, local_for(u, 'hodgdon/pdf'))
+    fetch(annual_manual_url(), local_for(annual_manual_url(), 'hodgdon/manual'))
     for u in hodg_sds_urls():
         if fetch(u, local_for(u, 'hodgdon/sds')):
             ocr_page(local_for(u, 'hodgdon/sds'), 1)
@@ -265,6 +273,7 @@ def download():
 
 # ---------------------------------------------------------------- parsers
 DOCS = []  # meta.documents
+AM_UNMATCHED = []  # Annual Manual description paragraphs that matched no record
 
 
 def add_doc(url, local, title, date):
@@ -279,17 +288,13 @@ def src(url, typ='manufacturer', page=None):
 CHART_BRANDS = ['VIHTAVUORI', 'WINCHESTER', 'ACCURATE', 'ALLIANT', 'HODGDON', 'RAMSHOT', 'NORMA', 'IMR']
 
 
-def parse_hodgdon_chart():
-    url = [u for u in hodg_links(read(hodg_page_local('reference-data')), r'Burn-Rate-Chart.*\.pdf$')][0]
-    local = local_for(url, 'hodgdon/pdf')
-    pages = pdfpages(local)
-    text = pages[0]
+def parse_numbered_chart(text):
+    """Parse a multi-column 'N NAME' burn-rate list. Returns (title_line, entries list, raw lines)."""
     lines = text.split('\n')
     title_line = next(l for l in lines if 'RELATIVE BURN RATES' in l)
-    edition = re.search(r'\((rev\.[^)]*)\)', title_line).group(1)
     entries = {}
     raw_line = {}
-    for l in lines:
+    for l in lines[lines.index(title_line) + 1:]:
         for m in re.finditer(r'(?:(?<=\s)|^)(\d{1,3}) (\S.*?)(?=\s{2,}\d{1,3} \S|\s*$)', l):
             pos = int(m.group(1))
             name = m.group(2).strip()
@@ -299,22 +304,6 @@ def parse_hodgdon_chart():
             raw_line[pos] = ws(l)
     n = max(entries)
     assert sorted(entries) == list(range(1, n + 1)), 'chart positions not contiguous'
-    ordered = [entries[i] for i in range(1, n + 1)]
-    first = next(l for l in lines if re.match(r'\s*1 ', l))
-    last_pos_line = raw_line[n]
-    chart = {
-        'publisher': 'Hodgdon Powder Company',
-        'edition': f'2026 Smokeless Relative Burn Rate Chart ({edition})',
-        'url': url,
-        'orderedNames': ordered,
-        'count': n,
-        'evidence': ws(title_line) + ' | ' + ws(first) + ' | ... | ' + last_pos_line,
-        'sources': [src(url, 'manufacturer', 1)],
-        'notes': 'Three-column, numbered list "FROM FASTEST TO SLOWEST"; covers Hodgdon, IMR, Winchester, Accurate, '
-                 'Ramshot, Alliant, Vihtavuori and Norma powders. Names kept exactly as printed (brand prefix included). '
-                 'Entry "HODGDON H4831 & H4831SC" is a single position on the chart.',
-    }
-    add_doc(url, local, 'Hodgdon 2026 Smokeless Relative Burn Rate Chart', edition + ' (PDF created 2026-08-17)')
     out = []
     for pos in range(1, n + 1):
         printed = entries[pos]
@@ -322,7 +311,176 @@ def parse_hodgdon_chart():
         brand = next((b for b in CHART_BRANDS if up.startswith(b + ' ')), None)
         rest = printed[len(brand) + 1:].strip() if brand else printed
         out.append({'pos': pos, 'printed': printed, 'brand': brand, 'rest': rest, 'line': raw_line[pos]})
+    first = raw_line[1]
+    return title_line, out, first, raw_line[n]
+
+
+def parse_hodgdon_chart():
+    url = [u for u in hodg_links(read(hodg_page_local('reference-data')), r'Burn-Rate-Chart.*\.pdf$')][0]
+    local = local_for(url, 'hodgdon/pdf')
+    pages = pdfpages(local)
+    title_line, out, first, last = parse_numbered_chart(pages[0])
+    edition = re.search(r'\((rev\.[^)]*)\)', title_line).group(1)
+    n = len(out)
+    chart = {
+        'publisher': 'Hodgdon Powder Company',
+        'edition': f'2026 Smokeless Relative Burn Rate Chart ({edition})',
+        'chartId': 'hodgdon-2026',
+        'url': url,
+        'orderedNames': [e['printed'] for e in out],
+        'count': n,
+        'evidence': ws(title_line) + ' | ' + first + ' | ... | ' + last,
+        'sources': [src(url, 'manufacturer', 1)],
+        'notes': 'Three-column, numbered list "FROM FASTEST TO SLOWEST"; covers Hodgdon, IMR, Winchester, Accurate, '
+                 'Ramshot, Alliant, Vihtavuori and Norma powders. Names kept exactly as printed (brand prefix included). '
+                 'Entry "HODGDON H4831 & H4831SC" is a single position on the chart.',
+    }
+    add_doc(url, local, 'Hodgdon 2026 Smokeless Relative Burn Rate Chart', edition + ' (PDF created 2026-08-17)')
     return chart, out, url
+
+
+def am_pages():
+    url = annual_manual_url()
+    local = local_for(url, 'hodgdon/manual')
+    return url, local, pdfpages(local)
+
+
+def am_title(url):
+    yy = re.search(r'/AM(\d\d)', url).group(1)
+    return f'Hodgdon 20{yy} Annual Manual', f'20{yy}'
+
+
+def parse_am_chart():
+    url, local, pages = am_pages()
+    pi = next(i for i, p in enumerate(pages) if 'RELATIVE BURN RATES FROM FASTEST TO SLOWEST' in p)
+    title_line, out, first, last = parse_numbered_chart(pages[pi])
+    title, year = am_title(url)
+    chart = {
+        'publisher': 'Hodgdon Powder Company',
+        'edition': f'{title}, "Relative Burn Rates from Fastest to Slowest" (PDF page {pi + 1})',
+        'chartId': f'hodgdon-{year}-annual-manual',
+        'url': url,
+        'orderedNames': [e['printed'] for e in out],
+        'count': len(out),
+        'evidence': ws(title_line) + ' | ' + first + ' | ... | ' + last,
+        'sources': [src(url, 'manufacturer', pi + 1)],
+        'notes': 'Four-column numbered list in the Annual Manual; earlier edition of the Hodgdon chart. Names kept '
+                 'exactly as printed (mixed case in this edition).',
+    }
+    add_doc(url, local, title + ' (full PDF published on hodgdonpowderco.com/reloading-manuals-library/)',
+            'PDF created 2026-02-26; Last-Modified 2026-04-16')
+    return chart, out, url, pi + 1
+
+
+AM_BRANDS = {'Hodgdon': 'Hodgdon', 'IMR': 'IMR', 'Winchester': 'Winchester', 'Accurate': None, 'Ramshot': None}
+
+
+def parse_am_usage():
+    """'Powder Usage' matrix: SHOTGUN / PISTOL / RIFLE sections, rows grouped by brand."""
+    url, local, pages = am_pages()
+    start = next(i for i, p in enumerate(pages) if re.search(r'^\s*Powder Usage\s*$', p, re.M))
+    rows = []
+    section = None
+    cols = None
+    header = None
+    brand = None
+    for pi in range(start, start + 3):
+        for l in pages[pi].split('\n'):
+            m = re.match(r'^\s*(SHOTGUN|PISTOL|RIFLE)\b(.*)$', l)
+            if m:
+                section = m.group(1)
+                header = ws(l)
+                cols = None
+                if section in ('PISTOL', 'RIFLE'):
+                    cols = [(mm.group(0), (mm.start() + mm.end() - 1) / 2)
+                            for mm in re.finditer(r'[A-Z0-9]+(?: [A-Z]+)?', l[len(m.group(1)) + l.index(m.group(1)):])]
+                    off = len(m.group(1)) + l.index(m.group(1))
+                    cols = [(c, x + off) for c, x in cols]
+                continue
+            bm = re.match(r'^\s*(Hodgdon|IMR|Winchester|Accurate|Ramshot) Smokeless Propellant\s*$', l)
+            if bm:
+                brand = AM_BRANDS[bm.group(1)]
+                continue
+            rm = re.match(r'^\s*(\S.*?)\s{2,}•', l)
+            if rm and section and brand:
+                uses = []
+                bad = False
+                if cols:
+                    for b in re.finditer('•', l):
+                        c, x = min(cols, key=lambda cx: abs(cx[1] - b.start()))
+                        if abs(x - b.start()) > 6:
+                            bad = True
+                        uses.append(c)
+                rows.append({'brand': brand, 'name': rm.group(1).strip(), 'section': section,
+                             'uses': (sorted(set(uses), key=uses.index) if cols and not bad else None),
+                             'line': ws(l), 'header': header, 'page': pi + 1})
+    return rows, url, local
+
+
+def dehyphen(t):
+    """Join words split by end-of-line hyphenation ('dou- ble-base' -> 'double-base')."""
+    return re.sub(r'(\w)- (?=[a-z])', r'\1', t)
+
+
+def parse_am_descriptions():
+    """Per-powder description paragraphs, two-column layout, Hodgdon/IMR/Winchester sections."""
+    url, local, pages = am_pages()
+    first = next(i for i, p in enumerate(pages) if re.search(r'^HODGDON Smokeless Pistol and Shotgun Powders', p, re.M))
+    paras = []
+    brand = None
+    section = None
+    for pi in range(first, len(pages)):
+        lines = pages[pi].split('\n')
+        # right-column start: most common start index of a text run that follows >=3 spaces beyond column 50
+        starts = {}
+        for l in lines:
+            for m in re.finditer(r'(?<=\S)\s{3,}(\S)', l):
+                if m.start(1) > 50:
+                    starts[m.start(1)] = starts.get(m.start(1), 0) + 1
+            m = re.match(r'^(\s{50,})(\S)', l)
+            if m:
+                starts[m.start(2)] = starts.get(m.start(2), 0) + 1
+        rc = None
+        if starts:
+            best = max(starts.values())
+            rc = min(k for k, v in starts.items() if v >= max(2, best // 2)) if best >= 2 else None
+        colbuf = {'L': [], 'R': []}
+
+        def flush(c):
+            if colbuf[c] and brand:
+                paras.append({'brand': brand, 'section': section, 'page': pi + 1, 'lines': list(colbuf[c])})
+            colbuf[c] = []
+        stop = False
+        for l in lines:
+            hm = re.match(r'^(HODGDON|IMR|WINCHESTER|ACCURATE|RAMSHOT) Smokeless (.*?Powders)', l)
+            if hm:
+                flush('L'); flush('R')
+                if hm.group(1) in ('ACCURATE', 'RAMSHOT'):
+                    stop = True
+                    break
+                brand = {'HODGDON': 'Hodgdon', 'IMR': 'IMR', 'WINCHESTER': 'Winchester'}[hm.group(1)]
+                section = ws(l.split('»')[0])
+                continue
+            if re.match(r'^\s*In Order of Approximate Burn', l) or re.search(r'hodgdon\.com\s*\d*\s*$', l):
+                flush('L'); flush('R')
+                continue
+            left = l[:rc] if rc else l
+            right = l[rc:] if rc and len(l) > rc else ''
+            if left.strip():
+                colbuf['L'].append(left.strip())
+            else:
+                flush('L')
+            if right.strip():
+                colbuf['R'].append(right.strip())
+            else:
+                flush('R')
+        flush('L'); flush('R')
+        if stop:
+            break
+    for p in paras:
+        p['raw'] = ws(' '.join(p['lines']))
+        p['text'] = dehyphen(re.sub(r'^»\s*', '', p['raw']))
+    return paras, url
 
 
 def parse_alliant_guide():
@@ -410,6 +568,7 @@ def parse_alliant_guide():
     chart = {
         'publisher': 'Alliant Powder',
         'edition': '2023 Alliant Powder Reloader\'s Guide (AP399), "Smokeless Powders for Reloading" table',
+        'chartId': 'alliant-2023-guide',
         'url': url,
         'orderedNames': [r['printed'] for r in rows],
         'count': len(rows),
@@ -697,14 +856,14 @@ def app_categories(text):
     return cats
 
 
-TEMP_RE = re.compile(r'temperat|hot/cold|thermal stability|any weather|environmental stability', re.I)
+TEMP_RE = re.compile(r'temperat|hot/cold|hot or cold|thermal stability|any weather|environmental stability', re.I)
 
 
 def temp_sentences(texts):
     out = []
     for t in texts:
         for s in re.split(r'(?<=[.!])\s+(?=[A-Z])', t):
-            if TEMP_RE.search(s) and s not in out:
+            if TEMP_RE.search(re.sub(r'(?i)(flame|ambient) temperature', '', s)) and s not in out:
                 out.append(s.strip())
     return out
 
@@ -726,6 +885,7 @@ def new_record(brand, name, manufacturer):
         'principalUse': None,
         'secondaryUse': None,
         'temperatureStableClaim': None,
+        'temperatureClaims': [],
         'bulkDensityGcc': None,
         'heatOfExplosionJg': None,
         'grainDimensions': None,
@@ -753,7 +913,16 @@ def add_fe(rec, field, evidence, url, page=None):
 
 
 def set_field(rec, field, value, evidence, url, page=None):
-    """Set a field; if a different value is already present keep the first and record a conflict."""
+    """Set a field; if a different value is already present keep the first and record a conflict.
+    temperatureStableClaim is free text: the first claim is kept and every claim goes to temperatureClaims."""
+    if field == 'temperatureStableClaim':
+        if rec[field] is None:
+            rec[field] = value
+        tc = rec.setdefault('temperatureClaims', [])
+        if not any(c['text'] == value for c in tc):
+            tc.append({'text': value, 'source': url, 'page': page})
+        add_fe(rec, field, evidence, url, page)
+        return
     cur = rec[field]
     if cur is None or cur == [] or cur == value:
         rec[field] = value
@@ -833,7 +1002,86 @@ def build():
                 if len(parts) > 1:
                     rec['notes'].append(f'Shares chart position {e["pos"]} with the other name in "{e["printed"]}".')
         elif e['brand'] == 'ALLIANT':
-            alliant_chart_entries.append(e)
+            alliant_chart_entries.append((e, hchart, hurl, 1))
+
+    # 1b. Hodgdon Annual Manual: burn-rate chart (earlier edition), Powder Usage matrix, powder descriptions
+    amchart, amentries, amurl, ampage = parse_am_chart()
+    for e in amentries:
+        if e['brand'] in ('HODGDON', 'IMR', 'WINCHESTER'):
+            brand = BRANDCASE[e['brand']]
+            parts = [p.strip() for p in e['rest'].split(' & ')] if ' & ' in e['rest'] else [e['rest']]
+            for p in parts:
+                rec = get(brand, p, MFR[brand], create=False)
+                if rec is None:
+                    rec = get(brand, p, MFR[brand])
+                    rec['notes'].append(f'Listed on the {amchart["edition"]} burn-rate chart but not on the 2026 chart.')
+                rec['burnRateRanks'].append({'chart': amchart['chartId'], 'position': e['pos'], 'of': amchart['count'],
+                                             'printedAs': e['printed']})
+                add_source(rec, src(amurl, 'manufacturer', ampage))
+                add_fe(rec, 'burnRateRanks', f"{e['pos']} {e['printed']}", amurl, ampage)
+                alias(rec, p)
+        elif e['brand'] == 'ALLIANT':
+            alliant_chart_entries.append((e, amchart, amurl, ampage))
+    usage_rows, _, _ = parse_am_usage()
+    SECT = {'SHOTGUN': 'shotshell', 'PISTOL': 'handgun', 'RIFLE': 'rifle'}
+    for r in usage_rows:
+        if not r['brand']:
+            continue
+        rec = get(r['brand'], r['name'], MFR[r['brand']], create=False)
+        if rec is None:
+            rec = get(r['brand'], r['name'], MFR[r['brand']])
+            rec['notes'].append('Name from the Annual Manual "Powder Usage" table did not match any burn-rate chart '
+                                'entry by normalized name.')
+        alias(rec, r['name'])
+        add_source(rec, src(amurl, 'manufacturer', r['page']))
+        ev = f"Powder Usage | {r['header']} | ... | {r['line']}"
+        add_apps(rec, [SECT[r['section']]], ev, amurl, r['page'])
+        rec.setdefault('usage', {})[SECT[r['section']]] = r['uses']
+        add_fe(rec, 'usage', ev, amurl, r['page'])
+    paras, _ = parse_am_descriptions()
+    for para in paras:
+        brand = para['brand']
+        body = re.sub(r'^»\s*', '', para['raw'])
+        pk = key_for(brand, body[:80])
+        best = None
+        for k, rid in keymap.items():
+            if records[rid]['brand'] != brand or not pk.startswith(k):
+                continue
+            if len(pk) > len(k) and pk[len(k)].isdigit():
+                continue
+            if best is None or len(k) > len(best):
+                best = k
+        if best is None:
+            AM_UNMATCHED.append(para['raw'][:120])
+            continue
+        rec = records[keymap[best]]
+        add_source(rec, src(amurl, 'manufacturer', para['page']))
+        ev = f"{para['section']} | {para['raw']}"
+        add_fe(rec, 'description', ev, amurl, para['page'])
+        t = para['text']
+        form = None
+        if re.search(r'geometry of an extruded|extruded-shaped', t):
+            form = 'extruded'
+        elif re.search(r'\bspherical\b|\bBall powder\b', t):
+            form = 'spherical'
+        elif re.search(r'\bflake\b', t):
+            form = 'flake'
+        elif re.search(r'\bextruded\b', t, re.I):
+            form = 'extruded'
+        if form:
+            set_field(rec, 'form', form, ev, amurl, para['page'])
+        if re.search(r'\bdouble-base\b', t):
+            set_field(rec, 'base', 'double', ev, amurl, para['page'])
+        elif re.search(r'\bsingle-base\b', t):
+            set_field(rec, 'base', 'single', ev, amurl, para['page'])
+        ts = temp_sentences([t])
+        if ts:
+            set_field(rec, 'temperatureStableClaim', ' '.join(ts), ev, amurl, para['page'])
+        # explicit "<...> pistol/rifle/shotshell/shotgun powder|propellant" wording in the description
+        for mm in re.finditer(r'\b(pistol|handgun|rifle|shotshell|shotgun)\s+(?:powder|propellant)\b', t, re.I):
+            cat = {'pistol': 'handgun', 'handgun': 'handgun', 'rifle': 'rifle', 'shotshell': 'shotshell',
+                   'shotgun': 'shotshell'}[mm.group(1).lower()]
+            add_apps(rec, [cat], ev, amurl, para['page'])
 
     # 2. Hodgdon brand pages: featured products + family claims
     feats, fam = parse_brand_pages()
@@ -860,10 +1108,11 @@ def build():
             set_field(rec, 'temperatureStableClaim',
                       'This temperature-insensitive, double-base, BALL® Powder is stable in extremely hot or cold conditions',
                       fa['evidence'], fa['url'])
-            rec['notes'].append('form/base/temperature claim come from the Winchester brand-page statement about the '
-                                '"Staball family"; applied to every Winchester powder whose name contains "StaBALL".')
+            rec['notes'].append('The Winchester brand-page statement about the "Staball family" (temperature-'
+                                'insensitive, double-base, BALL powder) was applied to every Winchester powder whose '
+                                'name contains "StaBALL".')
 
-    # 3. Hodgdon SDS covers (OCR)
+    # 3. Hodgdon SDS covers (OCR) -- processed after the Annual Manual so manual wording wins on conflicts
     covers = parse_hodgdon_sds_covers()
     for c in covers:
         fn = c['file'].lower()
@@ -1036,14 +1285,20 @@ def build():
         add_fe(rec, 'guideUse', r['evidence'], gurl, r['page'])
         add_apps(rec, app_categories(' '.join(x for x in (r['principal'], r['secondary']) if x)), r['evidence'], gurl, r['page'])
     # powder information paragraph (p. 10): explicit NG % for two powders
-    for m in re.finditer(r'(“near” single-base|double-base) ([A-Z][A-Za-z ]+?) \((\d+)% nitroglycerin\)', info_par):
-        rec = get('Alliant', m.group(2), MFR['Alliant'], create=False)
+    # two phrasings on p. 10: '"near" single-base American Select (2% nitroglycerin)' and
+    # 'high nitroglycerin (40%) double-base Bullseye'
+    ng_stmts = [(m.group(1), m.group(2), m.group(3), m.group(0)) for m in re.finditer(
+        r'(“near” single-base|double-base) ([A-Z][A-Za-z ]+?) \((\d+)% nitroglycerin\)', info_par)]
+    ng_stmts += [('double-base', m.group(2), m.group(1), m.group(0)) for m in re.finditer(
+        r'nitroglycerin \((\d+)%\) double-base ([A-Z][A-Za-z]+)', info_par)]
+    for kind, pname, pct, whole in ng_stmts:
+        rec = get('Alliant', pname, MFR['Alliant'], create=False)
         if rec is None:
             continue
-        sent = next(s for s in re.split(r'(?<=\.)\s+', info_par) if m.group(0) in s)
+        sent = next(s for s in re.split(r'(?<=\.)\s+', info_par) if whole in s)
         add_source(rec, src(gurl, 'manufacturer', info_page))
-        set_field(rec, 'nitroglycerinPct', int(m.group(3)), sent, gurl, info_page)
-        if m.group(1) == 'double-base':
+        set_field(rec, 'nitroglycerinPct', int(pct), sent, gurl, info_page)
+        if kind == 'double-base':
             set_field(rec, 'base', 'double', sent, gurl, info_page)
             rec['baseBasis'] = 'stated'
         else:
@@ -1068,17 +1323,17 @@ def build():
             set_field(rec, 'base', 'double', rec['fieldEvidence']['nitroglycerinPctRange'][0]['evidence'] + ' || ' + defin,
                       rec['fieldEvidence']['nitroglycerinPctRange'][0]['url'])
             rec['baseBasis'] = 'sds-composition'
-    # Alliant names on the Hodgdon chart
-    for e in alliant_chart_entries:
+    # Alliant names on the Hodgdon charts (third-party listing for Alliant)
+    for e, ch, curl, cpage in alliant_chart_entries:
         rec = get('Alliant', e['rest'], MFR['Alliant'], create=False)
         if rec is None:
             rec = get('Alliant', e['rest'], MFR['Alliant'])
-            rec['notes'].append('Only source is the Hodgdon 2026 burn-rate chart (third-party listing for Alliant); '
+            rec['notes'].append('Only source is the Hodgdon burn-rate chart(s) (third-party listing for Alliant); '
                                 'no Alliant product page or guide entry found.')
-        rec['burnRateRanks'].append({'chart': 'hodgdon-2026', 'position': e['pos'], 'of': hchart['count'],
+        rec['burnRateRanks'].append({'chart': ch['chartId'], 'position': e['pos'], 'of': ch['count'],
                                      'printedAs': e['printed']})
-        add_source(rec, src(hurl, 'third-party', 1))
-        add_fe(rec, 'burnRateRanks', f"{e['pos']} {e['printed']}", hurl, 1)
+        add_source(rec, src(curl, 'third-party', cpage))
+        add_fe(rec, 'burnRateRanks', f"{e['pos']} {e['printed']}", curl, cpage)
         alias(rec, e['rest'])
 
     # names that differ only by one inserted letter (e.g. "7828SC" vs "7828SSC") are NOT merged; flag them
@@ -1113,7 +1368,7 @@ def build():
             rec['conflicts'] = []
         out.append(rec)
     out.sort(key=lambda r: (r['brand'], r['id']))
-    return out, [hchart, achart], covers, sdsd
+    return out, [hchart, amchart, achart], covers, sdsd
 
 
 # ---------------------------------------------------------------- self-check
@@ -1137,7 +1392,8 @@ def self_check(data):
                        rk['printedAs'] in it['evidence'] for it in fe.get('burnRateRanks', [])):
                 errors.append(f'{r["id"]}: burn rank {rk} not in evidence')
         if r['nitroglycerinPct'] is not None:
-            if not any(f"({r['nitroglycerinPct']}% nitroglycerin)" in it['evidence'] for it in fe['nitroglycerinPct']):
+            if not any(f"({r['nitroglycerinPct']}% nitroglycerin)" in it['evidence'] or
+                       f"nitroglycerin ({r['nitroglycerinPct']}%)" in it['evidence'] for it in fe['nitroglycerinPct']):
                 errors.append(f'{r["id"]}: NG% not in evidence')
         if r['nitroglycerinPctRange']:
             ng = r['nitroglycerinPctRange']
@@ -1150,10 +1406,10 @@ def self_check(data):
                 errors.append(f'{r["id"]}: NG bounds {ng["min"]}-{ng["max"]} not matching raw {ng["raw"]}')
         kw = {'spherical': r'spherical|ball', 'extruded': r'extruded|perforated grain', 'flake': r'flake'}
         if r['form']:
-            if not any(re.search(kw[r['form']], it['evidence'], re.I) for it in fe['form']):
+            if not any(re.search(kw[r['form']], dehyphen(it['evidence']), re.I) for it in fe['form']):
                 errors.append(f'{r["id"]}: form keyword not in evidence')
         if r['base']:
-            if not any(re.search(r['base'] + r'[- ]base|nitroglycerin', it['evidence'], re.I) for it in fe['base']):
+            if not any(re.search(r['base'] + r'[- ]based?|nitroglycerin', dehyphen(it['evidence']), re.I) for it in fe['base']):
                 errors.append(f'{r["id"]}: base keyword not in evidence')
         for fld in ('bulkDensityGcc', 'heatOfExplosionJg', 'grainDimensions'):
             if r[fld] is not None:
@@ -1183,27 +1439,41 @@ def main():
         download()
     powders, charts, covers, sdsd = build()
     notes = (
-        'Hodgdon-family product pages are on shop.hodgdon.com, which is blocked from this sandbox; Hodgdon/IMR/'
-        'Winchester records therefore come from: the 2026 relative burn-rate chart (names, order, status=current), '
-        'brand-page featured-product one-liners (applications; "ball powder" -> form spherical), the Winchester '
-        '"Staball family" statement, the IMR "Enduron" statement, the 2012 Hodgdon Extreme-series web printout '
-        '(form extruded, temperature claims), and the OCR\'d COVER PAGE of each scanned Hodgdon SDS (title such as '
-        '"Spherical Powders"/"Extruded Rifle Powders"/"Double Base Powders"/"Single Base Powders" and the product '
-        'names listed). Evidence strings from OCR are prefixed "[OCR]". Numeric composition in the scanned SDS was '
-        'NOT extracted (OCR digits unreliable; tables keyed by internal codes). Alliant records come from '
-        'www.alliantpowder.com product pages, Alliant SDS PDFs (Section 3 nitroglycerin bands, Section 9 '
-        'appearance) and the 2023 Reloader\'s Guide. nitroglycerinPct is set only where a single figure is stated '
-        '(Alliant guide p.10: Bullseye 40 %, American Select 2 %). nitroglycerinPctRange holds SDS family bands '
-        '(not product-specific). baseBasis="sds-composition" means base was inferred from the SDS listing '
-        'nitroglycerin with lowest band >= 4 % together with Alliant\'s own definition of double-base; "stated" '
-        'means a page says it. temperatureStableClaim is verbatim maker text (not a boolean). applications are '
-        'categories (rifle/handgun/shotshell/muzzleloader) derived by keyword from maker text; principalUse/'
-        'secondaryUse/guideUse hold the raw text. bulkDensityGcc, heatOfExplosionJg and grainDimensions are null '
-        'everywhere: none of these documents publish them. burnRateRanks positions are chart positions, not '
-        'quantitative burn rates. fieldEvidence maps each populated field to the verbatim lines it came from.'
+        'Hodgdon-family product pages are on shop.hodgdon.com, which is blocked from this sandbox. Hodgdon/IMR/'
+        'Winchester records come from: (1) the 2026 relative burn-rate chart (names, order; status=current); '
+        '(2) the latest Hodgdon Annual Manual PDF published free on hodgdonpowderco.com/reloading-manuals-library '
+        '(AM25 = 2025 Annual Manual): its earlier-edition burn-rate chart, its "Powder Usage" matrix (applications = '
+        'the SHOTGUN/PISTOL/RIFLE sections a powder is listed in -> shotshell/handgun/rifle; usage = the column '
+        'headings ticked for PISTOL/RIFLE), and its per-powder descriptions (form from the words spherical/Ball powder/'
+        'flake/extruded, base from "double-base"/"single-base", temperature claims); (3) brand-page featured-product '
+        'one-liners, the Winchester "Staball family" and IMR "Enduron" statements; (4) the OCR\'d COVER PAGE of each '
+        'scanned Hodgdon SDS (title such as "Spherical Powders"/"Extruded Rifle Powders"/"Double Base Powders"/'
+        '"Single Base Powders"/"BALL Powder Propellant", the product names listed, [DISCONTINUED] marks); evidence '
+        'from OCR is prefixed "[OCR]"; numeric composition in the scanned SDS was NOT extracted (OCR digits '
+        'unreliable; tables keyed by internal codes); (5) the 2012 Hodgdon Extreme-series web printout. When sources '
+        'disagree the first value is kept (order: Annual Manual > brand pages > SDS covers > 2012 printout for the '
+        'Hodgdon family; product page > SDS for Alliant) and all values are listed in conflicts. Alliant records '
+        'come from www.alliantpowder.com product pages, Alliant SDS PDFs (Section 3 nitroglycerin bands, Section 9 '
+        'appearance; byte-identical duplicates de-duplicated) and the 2023 Reloader\'s Guide (burn order and uses). '
+        'nitroglycerinPct is set only where a single figure is stated (Alliant guide: Bullseye 40 %, American Select '
+        '2 %). nitroglycerinPctRange holds SDS family bands (not product-specific). baseBasis="sds-composition" '
+        'means base was inferred from an Alliant SDS listing nitroglycerin with lowest band >= 4 % together with '
+        'Alliant\'s own definition of double-base; "stated" means a page says it; Hodgdon-family base values are '
+        'stated by an SDS cover title or the Annual Manual text. temperatureStableClaim is maker text (sentences '
+        'containing temperature wording; end-of-line hyphenation removed), not a boolean, and claims differ in '
+        'strength. Alliant applications are keyword categories from the product page category/principal/secondary '
+        'use and guide uses (raw text in principalUse/secondaryUse/guideUse). bulkDensityGcc, heatOfExplosionJg and '
+        'grainDimensions are null everywhere: none of these documents publish them. burnRateRanks are chart '
+        'positions (ordinal), not quantitative burn rates; the Hodgdon and Alliant charts order some powders '
+        'differently. usage holds, per application, the Annual Manual matrix column headings ticked (PISTOL: TARGET/'
+        'LIGHT DUTY/MEDIUM DUTY/MAGNUM; RIFLE: TARGET/SILHOUETTE/LIGHT/MEDIUM/MAGNUM/50 CAL); usage.shotshell is null '
+        'because the SHOTGUN sub-columns (gauge/load class) were not parsed. temperatureClaims lists every claim with '
+        'its source. Page numbers are PDF page indices (1-based), not printed folios. fieldEvidence maps each '
+        'populated field to the verbatim, whitespace-collapsed lines it came from; "evidence" joins them with " || ".'
     )
     data = {
         'meta': {'documents': DOCS, 'notes': notes, 'retrieved': RETRIEVED,
+                 'unmatchedManualParagraphs': AM_UNMATCHED,
                  'blockedHosts': ['shop.hodgdon.com']},
         'powders': powders,
         'charts': charts,

@@ -1,0 +1,8 @@
+{
+  "_doc": "Post-verification corrections applied by scripts/build-data.ts. Each entry cites the verifier finding it resolves.",
+  "excludeSources": [],
+  "excludeRecords": {
+    "9mm": "C.I.P. list row '9 mm' links to the 416 Weatherby Magnum sheet (tabiiical-en-page33.pdf); its data are not for a '9 mm' cartridge (cartridges-standards verifier)."
+  },
+  "fixes": []
+}

@@ -9,7 +9,24 @@ interface Compact {
   cs: string | null; pm: string | null; u: string | null; pg: number | string | null; cp: boolean | null;
 }
 
-const loaders = import.meta.glob('../data/published-loads.json', { import: 'default' }) as Record<string, () => Promise<Compact[]>>;
+interface Packed {
+  v: 1;
+  s: string[];
+  r: (number | null)[][];
+}
+
+const loaders = import.meta.glob('../data/published-loads.json', { import: 'default' }) as Record<string, () => Promise<Packed | Compact[]>>;
+
+function unpack(p: Packed | Compact[]): Compact[] {
+  if (Array.isArray(p)) return p;
+  if (!p || !Array.isArray(p.r)) return [];
+  const S = (i: number | null) => (i === null || i < 0 ? null : p.s[i] ?? null);
+  return p.r.map((x) => ({
+    c: S(x[0]) as string, p: S(x[1]) as string, w: x[2] as number, bm: S(x[3]) ?? '', bt: S(x[4]) ?? '', t: S(x[5]) ?? 'other',
+    ch: x[6] as number, v: x[7] as number, pr: x[8], pu: S(x[9]) as Compact['pu'], b: x[10], oal: x[11], cs: S(x[12]), pm: S(x[13]),
+    u: S(x[14]), pg: x[15], cp: x[16] === -1 ? null : x[16] === 1,
+  }));
+}
 let cache: ValidationLoad[] | null = null;
 let pending: Promise<ValidationLoad[]> | null = null;
 
@@ -27,7 +44,7 @@ export function loadPublished(): Promise<ValidationLoad[]> {
   if (pending) return pending;
   const fn = Object.values(loaders)[0];
   pending = (fn ? fn() : Promise.resolve([] as Compact[]))
-    .then((rows) => (cache = (rows ?? []).map(expand)))
+    .then((data) => (cache = unpack(data).map(expand)))
     .catch(() => (cache = []));
   return pending;
 }

@@ -24,7 +24,11 @@ const CART_TOKENS: Record<string, string> = {
   blackout: 'blackout',
   aac: '',
   auto: 'auto',
+  automatic: 'auto',
   acp: 'auto',
+  weath: 'weatherby',
+  suisse: 'swiss',
+  swiss: 'swiss',
   luger: 'luger',
   parabellum: 'luger',
   sw: 'sw',
@@ -61,20 +65,30 @@ const CART_TOKENS: Record<string, string> = {
 /** Canonical key for a cartridge name, e.g. ".308 Win" and "308 Winchester" -> "308-winchester". */
 export function cartridgeKey(name: string): string {
   let s = name.toLowerCase().trim();
-  s = s.replace(/s&w/g, ' sw ').replace(/×/g, 'x');
+  s = s.replace(/smith\s*&\s*wesson/g, ' sw ').replace(/s\s*&\s*w/g, ' sw ').replace(/holland\s*&\s*holland/g, ' hh ').replace(/h\s*&\s*h/g, ' hh ').replace(/h\s*&\s*r/g, ' hr ').replace(/×/g, 'x');
+  s = s.replace(/(\d),(\d)/g, '$1.$2'); // European decimal comma: 6,5 x 55 -> 6.5 x 55
+  s = s.replace(/(\d)\s*x\s*(\d)/g, '$1x$2'); // 6.5 x 55 -> 6.5x55
+  s = s.replace(/(x\d+)\s+r\b/g, '$1r'); // rimmed: 7 x 65 R -> 7x65r
+  // "6.5mm Grendel" = "6.5 Grendel"; "7.62x39mm" = "7.62x39"; keep whole-number "9mm"/"7mm" forms as they are written.
+  s = s.replace(/(\d\.\d+)\s*mm\b/g, '$1').replace(/(x\d+)\s*mm\b/g, '$1');
   s = s.replace(/(\d)\s*mm\b/g, '$1mm');
   s = s.replace(/^\./, '').replace(/\s\./g, ' ');
   s = s.replace(/[“”"']/g, '');
   const toks = s.split(/[\s,()/]+/).filter(Boolean);
   const out: string[] = [];
   for (let t of toks) {
-    t = t.replace(/^\./, '');
+    t = t.replace(/^\./, '').replace(/\.$/, '');
     if (t in CART_TOKENS) {
       const v = CART_TOKENS[t];
       if (v) out.push(v);
     } else out.push(t.replace(/[^a-z0-9.+x-]/g, ''));
   }
   return out.filter(Boolean).join('-').replace(/-+/g, '-');
+}
+
+/** Key without parenthetical qualifiers, e.g. "45-70 Government (Lever Actions)" -> key of "45-70 Government". */
+export function cartridgeKeyLoose(name: string): string {
+  return cartridgeKey(name.replace(/\([^)]*\)/g, ' '));
 }
 
 /** Canonical key for a powder within its manufacturer, e.g. "IMR 4064" / "IMR4064" -> "imr4064"; "Reloder 16" -> "reloder16". */
