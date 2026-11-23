@@ -89,3 +89,95 @@ def download():
 if __name__ == '__main__' and '--download' in sys.argv:
     download()
     sys.exit(0)
+
+
+# ----------------------------------------------------------------------------- parsing
+
+def ws(s):
+    return ' '.join(str(s).split())
+
+
+BOOT_RE = re.compile(r'window\.stencilBootstrap\("product", "((?:[^"\\]|\\.)*)"')
+
+
+def load_product(path):
+    """Return (bootstrap_dict, bootstrap_text, page_html) for a cached product page."""
+    page = open(path, encoding='utf-8').read()
+    m = BOOT_RE.search(page)
+    if not m:
+        return None, None, page
+    boot_text = json.loads('"' + m.group(1) + '"')   # undo the JS string escaping
+    return json.loads(boot_text), boot_text, page
+
+
+def description_text(page):
+    """Visible text of the 'Product Details' tab (manufacturer's description)."""
+    i = page.find('id="tab-description-content"')
+    if i < 0:
+        return ''
+    j = page.find('<div class="tab-content"', i)
+    frag = page[page.find('>', i) + 1: j if j > 0 else i + 20000]
+    frag = re.sub(r'<(script|style)\b.*?</\1>', ' ', frag, flags=re.S)
+    frag = re.sub(r'<br\s*/?>|</p>|</li>|</h\d>', '\n', frag)
+    txt = htmlmod.unescape(re.sub(r'<[^>]+>', ' ', frag))
+    return '\n'.join(ws(l) for l in txt.split('\n') if ws(l))
+
+
+def sentences(txt):
+    out = []
+    for line in txt.split('\n'):
+        out += [ws(s) for s in re.split(r'(?<=[.!?])\s+(?=[A-Z#(])', line) if ws(s)]
+    return out
+
+
+def spec_block_text(specs_text, sku):
+    """Verbatim (whitespace-collapsed) text of one SKU's block in the specsJson string."""
+    m = re.search(r'"' + re.escape(sku) + r'"\s*:\s*\{[^{}]*\}', specs_text)
+    return ws(m.group(0)) if m else None
+
+
+NUM = r'(\d*\.\d+|\d+)'
+
+
+def num(s):
+    if s is None:
+        return None
+    m = re.fullmatch(r'\s*' + NUM + r'\s*"?\s*', str(s))
+    return float(m.group(1)) if m else None
+
+
+def parse_bc(raw):
+    """Return (value, bandNotes). Plain number -> (float, None); banded text -> (first, text)."""
+    if raw is None or ws(raw) == '':
+        return None, None
+    v = num(raw)
+    if v is not None:
+        return v, None
+    nums = re.findall(NUM, str(raw))
+    # velocity-banded / multi-value text: keep the full text, take nothing we cannot be sure of
+    return None, ws(raw)
+
+
+TWIST_PATTERNS = [
+    # e.g. "1:7 twist", "1:7" twist", "1-in-7" twist", "1 in 8 inch twist", "7" twist", "twist of 1:8"
+    re.compile(r'\b1\s*(?:[:/-]|-?in-?|\s+in\s+)\s*(\d{1,2}(?:\.\d+)?)\s*(?:"|”|″|\'\'|-?\s*inch(?:es)?|in\.)?\s*(?:or (?:faster|quicker))?\s*(?:barrel\s+)?twist', re.I),
+    re.compile(r'twist[^.]{0,40}?\b1\s*(?:[:/-]|-?in-?|\s+in\s+)\s*(\d{1,2}(?:\.\d+)?)', re.I),
+    re.compile(r'\b(\d{1,2}(?:\.\d+)?)\s*(?:"|”|″|-?\s*inch)\s*(?:or (?:faster|quicker)\s*)?(?:barrel\s+)?twist', re.I),
+]
+
+
+def find_twists(desc):
+    """Return list of (twistInches, sentence) for sentences that state a twist rate."""
+    out = []
+    for s in sentences(desc):
+        if 'twist' not in s.lower():
+            continue
+        found = []
+        for p in TWIST_PATTERNS:
+            for m in p.finditer(s):
+                found.append(float(m.group(1)))
+        if found:
+            out.append((sorted(set(found)), s))
+        else:
+            out.append(([], s))
+    return out
