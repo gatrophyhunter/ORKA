@@ -5,6 +5,7 @@ import { defaultShotStartPsi } from '../engine/defaults';
 import type { Bullet, Cartridge, Powder } from '../data/schema';
 import { NumberField, PlainNumber, SearchPicker, StatusChip, EstimateWarning, type PickerItem } from './components';
 import { fmtInput, fmtP } from './format';
+import { bulletFeatures, fitLengthModel } from '../engine/bulletLength';
 import { useApp, type PressureStandard } from './state';
 import { capacityOptions, modelStatus, useLoad } from './useLoad';
 
@@ -54,6 +55,16 @@ export function LoadBuilder() {
     return dia ? db.bullets.filter((b) => Math.abs(b.diameterIn - dia) <= 0.0015) : db.bullets;
   }, [db.bullets, d.cartridge]);
   const bItems = useMemo(() => bulletItems(bulletPool), [bulletPool]);
+  // Labelled starting estimate for bullets whose maker publishes no length (never stored as data).
+  const lengthModel = useMemo(() => fitLengthModel(db.bullets), [db.bullets]);
+  const lengthEstimate = useMemo(() => {
+    const b = d.bullet;
+    if (!b || b.lengthIn !== null || !lengthModel) return null;
+    const f = bulletFeatures(b);
+    const v = lengthModel.predict(f);
+    const relErr = f.blunt ? lengthModel.looRelRmsBlunt : lengthModel.looRelRmsPointed;
+    return v && relErr ? { value: v, relErr, n: lengthModel.n } : null;
+  }, [d.bullet, lengthModel]);
   const capOpts = useMemo(() => capacityOptions(db, d.cartridge), [db, d.cartridge]);
   const selectedCap = capOpts.find((o) => o.key === builder.brassKey) ?? null;
 
@@ -243,6 +254,14 @@ export function LoadBuilder() {
             error={d.bullet && d.bullet.lengthIn === null && !Number.isFinite(inp.bulletLengthIn) ? 'Not published — measure it' : null}
           />
         </div>
+        {d.bullet && d.bullet.lengthIn === null && lengthEstimate && (
+          <div className="alert info small" style={{ marginTop: 6 }} data-testid="length-estimate">
+            {d.bullet.manufacturer} does not publish this bullet's length. A model fitted on {lengthEstimate.n} bullets whose makers do publish
+            lengths estimates about <strong>{fmtInput('len', sys, lengthEstimate.value, sys === 'imperial' ? 3 : 2)}</strong> (typical error ±
+            {fmtInput('len', sys, lengthEstimate.value * lengthEstimate.relErr, sys === 'imperial' ? 3 : 2)}). That is only a starting point:
+            measure 5 bullets from your box and enter the average. A {Math.round(lengthEstimate.relErr * 100)} % length error moves predicted pressure by several percent.
+          </div>
+        )}
         <details className="collapsible" style={{ marginTop: 6 }}>
           <summary className="small">Boat tail (optional)</summary>
           <div className="grid-2" style={{ marginTop: 6 }}>
