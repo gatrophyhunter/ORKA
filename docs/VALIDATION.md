@@ -50,7 +50,7 @@ Breakdowns by bullet-length source and bullet construction, including the signed
 ## Known contributors to the error
 
 1. **Test-case capacity.** Most publisher test cases (Winchester, Hornady, Remington brass) have no published capacity. For 8,685 of 23,336 loads, an "effective capacity" was inferred from the data itself.
-2. **Bullet length.** Hornady and Sierra publish no bullet lengths, so 17,394 of 23,336 loads use an estimated length. The leave-one-out error of the estimator is 6.1 % for pointed bullets and 5.9 % for blunt (flat-nose) bullets. Published lengths that fail a physical plausibility screen (13 bullets) are withheld.
+2. **Bullet length.** Hornady and Sierra publish no bullet lengths (Hornady's 2026 and 2027 catalogs and its product pages were checked: none prints one), so 17,394 of 23,336 loads use an estimated length. The leave-one-out error of the estimator is 6.1 % for pointed bullets and 5.9 % for blunt (flat-nose) bullets. Published lengths that fail a physical plausibility screen (13 bullets) are withheld.
 3. **Model structure.** There is one shot-start pressure per construction class (fitted: monolithic 49.8 MPa vs the 25 MPa jacketed reference), no bearing-surface or jump effects, a single form function per powder, and Lagrange gradients.
 4. **Burn-rate charts.** Chart-interpolated "estimated" powders have an RMS burn-rate error of 42 % when re-estimated for calibrated powders. They are labelled "not for load development".
 
@@ -67,5 +67,4 @@ Breakdowns by bullet-length source and bullet construction, including the signed
   - Western Powders (Accurate/Ramshot product pages): connection reset. Those powders come from Hodgdon's chart and manual instead.
   - ADI: unreachable.
   - Alpha Munitions: bot checkpoint, not circumvented.
-  - Hornady's catalog CDN.
   - shop.hodgdon.com.

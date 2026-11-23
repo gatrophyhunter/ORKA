@@ -8,7 +8,13 @@
 4. **Nothing from memory.** If a document does not state a value, the field is empty. ORKA then asks the user to enter a measured value: case capacity and bullet length are the usual ones.
 5. **Units as published.** Inches, grains, psi, bar. **CUP is never converted to psi.**
 6. **Conflicts are kept, not resolved silently.** For example, when SAAMI and C.I.P. disagree on a dimension, both values are stored under `conflicts`.
-7. **Round-1 research** (`research/raw/`) was gathered from search-result snippets without page access. It is kept as background notes and is **never shipped**.
+7. **One maker, two documents.** When a maker's catalog and its product pages differ (`research/raw2/bullets-hornady-catalog.json`, the Hornady 2027 catalog against hornady.com), the build:
+   - fills a BC that the web record leaves empty from the catalog, but only for an exact item-number match;
+   - keeps the web value where both publish one and they differ, and records both in the bullet's notes and `bcNotes`, because neither document says which is newer;
+   - never adopts a printed pair that fails a consistency check. Hornady 254104 prints a G7/G1 ratio of 0.90, while every other bullet in the catalog falls in 0.50–0.51.
+
+   Hornady 2027 result: 258 rifle bullets parsed, 3 new, 36 BCs filled, 9 disagreements (none in diameter or weight), all checked by an independent re-parse. The catalog prints no bullet lengths.
+8. **Round-1 research** (`research/raw/`) was gathered from search-result snippets without page access. It is kept as background notes and is **never shipped**.
 
 ## Pipeline
 

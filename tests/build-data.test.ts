@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { buildBullets, buildCartridges, buildPowders, buildLoads } from '../scripts/build-data';
+import { applyCatalogCrossChecks, buildBullets, buildCartridges, buildPowders, buildLoads } from '../scripts/build-data';
 
 const src = [{ url: 'https://example.invalid/catalog.pdf', type: 'manufacturer', page: 3 }];
 
@@ -58,5 +58,37 @@ describe('data build policy', () => {
     const loads = buildLoads(files, [], []);
     expect(loads[0].pressureUnit).toBe('CUP');
     expect(loads[0].pressure).toBe(40000);
+  });
+  it('applies a maker catalog cross-check: fills exact-match gaps, keeps both values on disagreement, skips flagged and suffix matches', () => {
+    const web = { key: 'web', data: { bullets: [
+      { id: 'mk-1', manufacturer: 'MakerCo', line: 'CX', diameterIn: 0.277, weightGr: 120, bcG1: 0.4, bcG7: null, construction: 'monolithic-copper', tip: 'polymer tip', sources: src, evidence: 'a | b' },
+      { id: 'mk-2', manufacturer: 'MakerCo', line: 'CX', diameterIn: 0.257, weightGr: 90, bcG1: 0.273, bcG7: null, construction: 'monolithic-copper', sources: src, evidence: 'c' },
+      { id: 'mk-3-75', manufacturer: 'MakerCo', line: 'SP', diameterIn: 0.308, weightGr: 150, bcG1: null, sources: src, evidence: 'd' },
+    ] } };
+    const cat = { key: 'cat', data: {
+      meta: { documents: [{ url: 'https://example.invalid/2027.pdf', title: 'MakerCo 2027 Catalog' }] },
+      bullets: [{ id: 'mk-9', manufacturer: 'MakerCo', line: 'CX®', diameterIn: 0.277, weightGr: 100, bcG1: 0.262, sources: src, evidence: 'CX | .277 | 100' }],
+      crossCheck: [
+        { id: 'mk-1', field: 'bcG7', web: null, catalog: 0.2, page: 7, evidence: 'row | 1', kind: 'web-missing', match: 'exact (web sku 1)' },
+        { id: 'mk-1', field: 'bcG1', web: 0.4, catalog: 0.41, page: 7, evidence: 'row | 1', kind: 'value-mismatch', match: 'exact (web sku 1)' },
+        { id: 'mk-2', field: 'bcG7', web: null, catalog: 0.246, page: 8, evidence: 'row | 2', kind: 'web-missing', match: 'exact (web sku 2)', catalogCheck: 'ratio implausible' },
+        { id: 'mk-3-75', field: 'bcG1', web: null, catalog: 0.338, page: 9, evidence: 'row | 3', kind: 'web-missing', match: 'suffix (web sku 3-75)' },
+      ],
+    } };
+    const bullets = buildBullets([web, cat]);
+    const counts = applyCatalogCrossChecks(bullets, [web, cat]);
+    expect(counts).toEqual({ filled: 1, disagreements: 1, skippedFlagged: 1, skippedSuffix: 1, constructionFromLine: 1 });
+    const by = (id: string) => bullets.find((b) => b.id === id)!;
+    expect(by('mk-1').bcG7).toBe(0.2);
+    expect(by('mk-1').sources.some((s) => s.url === 'https://example.invalid/2027.pdf' && s.page === 7)).toBe(true);
+    expect(by('mk-1').bcG1).toBe(0.4); // web value kept on disagreement
+    expect(by('mk-1').bcNotes).toContain('.410');
+    expect(by('mk-2').bcG7).toBeNull(); // flagged printed values are never adopted
+    expect(by('mk-2').bcNotes).toMatch(/misprint/);
+    expect(by('mk-3-75').bcG1).toBeNull(); // suffix matches are not filled
+    expect(by('mk-9').construction).toBe('monolithic-copper');
+    expect(by('mk-9').tip).toBe('polymer tip');
+    // Evidence keeps its inner separators out of the note-part separator.
+    expect(by('mk-1').notes).toContain('Evidence: a · b');
   });
 });

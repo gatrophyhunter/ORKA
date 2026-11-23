@@ -45,6 +45,10 @@ function rawFiles(): { key: string; data: any }[] {
     .filter((x) => x.data && !excluded.has(x.key));
 }
 
+/** One "Evidence: …" note part. Extractors join table cells / JSON fields with " | ", which is also the note-part
+ * separator that later splits notes from evidence, so inner separators become " · ". */
+const evidencePart = (e: unknown) => `Evidence: ${String(e ?? '').replace(/\s\|\s/g, ' · ')}`;
+
 const num = (v: unknown): number | null => {
   if (v === null || v === undefined || v === '') return null;
   const n = typeof v === 'number' ? v : Number(String(v).replace(/[,"”]/g, ''));
@@ -151,7 +155,7 @@ export function buildCartridges(files: { key: string; data: any }[]): Cartridge[
           str(r.notes),
           crusher && r.cipPmaxBar ? `C.I.P. Pmax ${r.cipPmaxBar} bar was measured by the crusher method and is not used as a piezo limit.` : null,
           r.transducerLocation ? `Transducer: ${typeof r.transducerLocation === 'string' ? r.transducerLocation : JSON.stringify(r.transducerLocation)}` : null,
-          `Evidence: ${r.evidence}`,
+          evidencePart(r.evidence),
         ].filter(Boolean).join(' | '),
       };
       const prev = byKey.get(key);
@@ -209,7 +213,7 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
         burnRateCharts: [],
         status: r.status === 'discontinued' ? 'discontinued' : r.status === 'current' ? 'current' : 'unknown',
         sources: sourcesOf(r),
-        notes: [str(r.notes), r.grainDimensions ? `Grain: ${typeof r.grainDimensions === 'string' ? r.grainDimensions : JSON.stringify(r.grainDimensions)}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [str(r.notes), r.grainDimensions ? `Grain: ${typeof r.grainDimensions === 'string' ? r.grainDimensions : JSON.stringify(r.grainDimensions)}` : null, evidencePart(r.evidence)].filter(Boolean).join(' | '),
       };
       if (p.bulkDensityGcc != null && (p.bulkDensityGcc < 0.3 || p.bulkDensityGcc > 1.3)) {
         p.notes += ` | bulk density ${p.bulkDensityGcc} outside 0.3–1.3 g/cm³ rejected`;
@@ -263,7 +267,7 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
           burnRateCharts: [],
           status: 'unknown',
           sources: [{ url: c.url, type: 'manufacturer', fields: ['name', 'burnRateCharts'] }],
-          notes: `Name and burn-rate position from the ${c.publisher} ${c.edition ?? ''} chart; ${maker}'s own product pages could not be reached, so form, base and density are not stated. | Evidence: ${raw}`,
+          notes: `Name and burn-rate position from the ${c.publisher} ${c.edition ?? ''} chart; ${maker}'s own product pages could not be reached, so form, base and density are not stated. | ${evidencePart(raw)}`,
         });
       }
     }
@@ -351,7 +355,7 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
         recommendedTwist: str(r.recommendedTwist),
         status: r.status === 'discontinued' ? 'discontinued' : r.status === 'current' ? 'current' : 'unknown',
         sources: sourcesOf(r),
-        notes: [str(r.notes), arr(r.conflicts).length ? `Sources disagree: ${JSON.stringify(r.conflicts)}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [str(r.notes), arr(r.conflicts).length ? `Sources disagree: ${JSON.stringify(r.conflicts)}` : null, evidencePart(r.evidence)].filter(Boolean).join(' | '),
         boatTailLengthIn: num(r.boatTailLengthIn),
         baseToOgiveIn: num(r.baseToOgiveIn),
         use: str(r.kind ?? r.firearm ?? null),
@@ -360,6 +364,82 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
     }
   }
   return applyFixes([...byId.values()]).sort((a, b) => a.diameterIn - b.diameterIn || a.weightGr - b.weightGr || a.manufacturer.localeCompare(b.manufacturer));
+}
+
+/**
+ * A maker's catalog cross-checked against the same maker's web records (file with a `crossCheck` array, e.g.
+ * bullets-hornady-catalog.json). Rules:
+ *  - 'web-missing' (the web record leaves a BC empty, the catalog prints one): filled from the catalog, exact item
+ *    number matches only, never when the extractor flagged the printed values as inconsistent (catalogCheck);
+ *  - 'value-mismatch' (both publish a value and they differ): the web value is kept and both values are recorded,
+ *    because nothing in either document says which is newer;
+ *  - new catalog-only records with no construction take the construction and tip that the maker's own web records give
+ *    for the same product line (labelled as such).
+ * Returns counts for the build log.
+ */
+export function applyCatalogCrossChecks(bullets: Bullet[], files: { key: string; data: any }[]) {
+  const byId = new Map(bullets.map((b) => [b.id, b]));
+  const counts = { filled: 0, disagreements: 0, skippedFlagged: 0, skippedSuffix: 0, constructionFromLine: 0 };
+  const fmtBc = (v: number) => v.toFixed(3).replace(/^0/, '');
+  const fieldLabel: Record<string, string> = { bcG1: 'G1', bcG7: 'G7' };
+  const addNote = (b: Bullet, note: string) => {
+    if ((b.notes ?? '').split(' | ').includes(note)) return;
+    b.notes = [b.notes, note].filter(Boolean).join(' | ');
+  };
+  for (const f of files) {
+    const doc = f.data?.meta?.documents?.[0];
+    const checks = arr<any>(f.data?.crossCheck);
+    if (!checks.length || !doc?.url) continue;
+    const title = String(doc.title ?? 'maker catalog');
+    for (const c of checks) {
+      const b = byId.get(slug(String(c.id)));
+      const field = String(c.field);
+      if (!b || !(field in fieldLabel)) continue;
+      const label = fieldLabel[field];
+      const cat = num(c.catalog);
+      if (cat === null) continue;
+      const where = `${title}, PDF page ${c.page}`;
+      if (c.catalogCheck) {
+        counts.skippedFlagged++;
+        addNote(b, `${where} prints ${label} ${fmtBc(cat)}, not adopted: ${c.catalogCheck}`);
+        addNote(b, evidencePart(`${where}: ${c.evidence}`));
+        b.bcNotes = [b.bcNotes, `The 2027 catalog's G1/G7 pair for this bullet is inconsistent (probable misprint); treat the BC with caution.`].filter(Boolean).join('; ');
+        continue;
+      }
+      if (!/^exact/.test(String(c.match ?? ''))) {
+        counts.skippedSuffix++;
+        continue;
+      }
+      if (c.kind === 'web-missing' && (b as any)[field] === null) {
+        (b as any)[field] = cat;
+        b.sources = [...b.sources, { url: doc.url, type: 'manufacturer', fields: [field], page: c.page, retrieved: '2026-11-23' }];
+        addNote(b, `${label} ${fmtBc(cat)} from the ${where} (the hornady.com product page gives no ${label}).`);
+        addNote(b, evidencePart(`${where}: ${c.evidence}`));
+        counts.filled++;
+      } else if (c.kind === 'value-mismatch') {
+        const web = num(c.web);
+        addNote(b, `The maker's two publications disagree on ${label}: hornady.com ${web !== null ? fmtBc(web) : '—'}, ${where} ${fmtBc(cat)}. ORKA shows the web value; neither document says which is newer.`);
+        addNote(b, evidencePart(`${where}: ${c.evidence}`));
+        b.bcNotes = [b.bcNotes, `${label}: hornady.com ${web !== null ? fmtBc(web) : '—'} vs 2027 catalog ${fmtBc(cat)}`].filter(Boolean).join('; ');
+        counts.disagreements++;
+      }
+    }
+    // Construction for new catalog-only records, from the same maker's web records of the same line.
+    for (const r of arr<any>(f.data?.bullets)) {
+      const b = byId.get(slug(String(r.id)));
+      if (!b || b.construction) continue;
+      const lineKey = (l: string) => l.replace(/[®™]/g, '').replace(/\b(rifle|handgun)\b/gi, '').replace(/[‐‑–]/g, '-').trim().toLowerCase();
+      const peers = bullets.filter((x) => x !== b && x.manufacturer === b.manufacturer && x.construction && lineKey(x.line) === lineKey(b.line));
+      const kinds = [...new Set(peers.map((x) => x.construction))];
+      if (kinds.length !== 1) continue;
+      b.construction = kinds[0] ?? null;
+      const tips = [...new Set(peers.map((x) => x.tip).filter(Boolean))];
+      if (!b.tip && tips.length === 1) b.tip = tips[0] ?? null;
+      addNote(b, `Construction${!r.tip && tips.length === 1 ? ' and tip' : ''} not printed in the catalog; taken from the maker's web records for the same line (${peers.length} bullets, all "${kinds[0]}").`);
+      counts.constructionFromLine++;
+    }
+  }
+  return counts;
 }
 
 // ---------------------------------------------------------------- brass
@@ -403,7 +483,7 @@ export function buildBrass(files: { key: string; data: any }[], cartridges: Cart
         primerPocketType: str(r.primerPocketType),
         basis: r.basis ?? 'unknown',
         sources: sourcesOf(r),
-        notes: [str(r.notes), r.capacityTo ? `Capacity measured to: ${r.capacityTo}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [str(r.notes), r.capacityTo ? `Capacity measured to: ${r.capacityTo}` : null, evidencePart(r.evidence)].filter(Boolean).join(' | '),
       };
       cases.push(bc);
       if (cart && bc.waterCapacityGrH2O != null && (r.capacityTo ?? 'case mouth') !== 'base of neck') {
@@ -523,6 +603,7 @@ function main() {
   let cartridges = buildCartridges(files);
   let { powders, charts } = buildPowders(files);
   let bullets = buildBullets(files);
+  console.log('catalog cross-checks:', applyCatalogCrossChecks(bullets, files));
   let { brands, cases } = buildBrass(files, cartridges);
   let validationLoads = buildLoads(files, cartridges, powders);
 
