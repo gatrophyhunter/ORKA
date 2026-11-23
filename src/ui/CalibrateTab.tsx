@@ -118,8 +118,18 @@ export function CalibrateTab() {
 
   const params: FitParam[] = ['beta', ...(fitLambda && valid.length >= 3 ? (['lambda'] as FitParam[]) : []), ...(fitForce && nPressure >= 1 ? (['force'] as FitParam[]) : []), ...(fitHeat && valid.length >= 4 ? (['heat'] as FitParam[]) : [])];
 
+  // Snapshot of exactly what the fit used; save() records this, never the (possibly edited) current state.
+  const fitContext = useRef<{ inputs: typeof builder.inputs; cartridgeId: string | null; rows: Row[]; params: FitParam[]; powderId: string } | null>(null);
+  // Any change to the builder, the rows or the chosen parameters invalidates an unsaved fit (review finding).
+  const fitKey = JSON.stringify([builder.inputs, builder.cartridgeId, rows, params, powderId]);
+  useEffect(() => {
+    setResult(null);
+    setSaved(null);
+  }, [fitKey]);
+
   const run = () => {
     if (!powder || errors.length) return;
+    fitContext.current = { inputs: { ...builder.inputs }, cartridgeId: builder.cartridgeId, rows: valid.map((r) => ({ ...r })), params: [...params], powderId: powder.id };
     const start = propellantFromParams(startParams, powder.bulkDensityGcc ?? null);
     const heat = startParams.heatScale ?? 1;
     const observations = valid.map((r) => ({
@@ -153,10 +163,13 @@ export function CalibrateTab() {
   };
 
   const save = () => {
-    if (!powder || !result) return;
+    const ctx = fitContext.current;
+    if (!powder || !result || !ctx || ctx.powderId !== powder.id) return;
     const today = new Date().toISOString().slice(0, 10);
-    const inp = builder.inputs;
-    const cart = builder.cartridgeId ? db.cartridges.find((c) => c.id === builder.cartridgeId)?.name : 'custom chamber';
+    const inp = ctx.inputs;
+    const valid = ctx.rows;
+    const params = ctx.params;
+    const cart = ctx.cartridgeId ? db.cartridges.find((c) => c.id === ctx.cartridgeId)?.name : 'custom chamber';
     const entry: PowderModelEntry = {
       status: 'user-calibrated',
       params: paramsFromPropellant(result.model, result.heatScale),
@@ -165,7 +178,7 @@ export function CalibrateTab() {
         points: valid.length,
         rmsVelocityFps: result.rmsVelocityMs === null ? null : U.msToFps(result.rmsVelocityMs),
         rmsPressurePct: result.rmsPressureRel === null ? null : result.rmsPressureRel * 100,
-        cartridges: [builder.cartridgeId ?? 'custom'],
+        cartridges: [ctx.cartridgeId ?? 'custom'],
         sources: ['user measurements'],
         chargeRangeGr: [Math.min(...valid.map((r) => r.chargeGr)), Math.max(...valid.map((r) => r.chargeGr))],
       },

@@ -86,8 +86,33 @@ export function parseUserImport(text: string): UserData {
     }
   }
   if (obj.powderModels !== undefined) {
-    if (typeof obj.powderModels !== 'object') throw new Error('"powderModels" must be an object.');
-    out.powderModels = obj.powderModels;
+    if (typeof obj.powderModels !== 'object' || obj.powderModels === null || Array.isArray(obj.powderModels)) throw new Error('"powderModels" must be an object.');
+    const models: Record<string, PowderModelEntry> = {};
+    for (const [id, m] of Object.entries(obj.powderModels as Record<string, any>)) {
+      if (!m || typeof m !== 'object' || !m.params || typeof m.params !== 'object') continue;
+      const nums = ['forceJg', 'flameTempK', 'gamma', 'covolumeCm3g', 'solidDensityGcc', 'beta', 'n', 'lambda', 'mu', 'tempCoeffPerK', 'refTempC'];
+      if (!nums.every((k) => Number.isFinite(m.params[k]))) continue;
+      // An imported model is always "your calibration": a file cannot claim shipped status or fit statistics (review finding).
+      const cal = m.calibration && typeof m.calibration === 'object' ? { ...m.calibration } : undefined;
+      if (cal) {
+        delete cal.grade;
+        delete cal.heldOutPressurePct;
+      }
+      models[id] = {
+        status: 'user-calibrated',
+        params: m.params,
+        derivation: `Imported from a file. ${typeof m.derivation === 'string' ? m.derivation : ''}`.trim(),
+        ...(cal ? { calibration: cal } : {}),
+      };
+    }
+    out.powderModels = models;
+  }
+  // Imported records must not silently replace shipped ones: re-identify any that reuse a shipped id.
+  const shipped = { cartridges: new Set(BASE_DB.cartridges.map((x) => x.id)), powders: new Set(BASE_DB.powders.map((x) => x.id)), bullets: new Set(BASE_DB.bullets.map((x) => x.id)) };
+  for (const k of ['cartridges', 'powders', 'bullets'] as const) {
+    (out as any)[k] = (out[k] as { id: string; name: string }[]).map((r) =>
+      r && typeof r === 'object' && shipped[k].has(r.id) ? { ...r, id: `${r.id}-imported`, name: `${r.name} (imported)` } : r,
+    );
   }
   return out;
 }

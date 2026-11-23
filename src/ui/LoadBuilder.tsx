@@ -70,6 +70,8 @@ export function LoadBuilder() {
         brassBrandId: null,
         capacityBasis: '',
         standard,
+        // A custom limit typed for another cartridge must not carry over (review finding).
+        customLimitPsi: standard === 'custom' ? NaN : b.customLimitPsi,
         bulletId: b.bulletId && c.bulletDiameterIn && Math.abs((db.bullets.find((x) => x.id === b.bulletId)?.diameterIn ?? 0) - c.bulletDiameterIn) > 0.0015 ? null : b.bulletId,
         inputs: {
           ...b.inputs,

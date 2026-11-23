@@ -20,7 +20,12 @@
     "heldOutPressureP90Pct": 31.2,
     "heldOutPressureBiasPct": -4.8,
     "heldOutWithin10Pct": 37,
-    "scope": "centerfire rifle cartridges whose test-case capacity is published",
+    "scope": "held-out pressure comparisons exist only for: 308 Winchester, 223 Remington",
+    "heldOutCartridgeIds": [
+      "308-winchester",
+      "223-remington"
+    ],
+    "heldOutPowders": 40,
     "generated": "2026-11-23T17:04:42.269Z"
   }
 }

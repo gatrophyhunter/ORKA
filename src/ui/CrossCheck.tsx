@@ -5,7 +5,7 @@
 import type { Database, ValidationLoad } from '../data/schema';
 import type { DerivedLoad } from './useLoad';
 import { fmtNum } from './format';
-import { usePublishedLoads } from './published';
+import { publishedLoadFailed, usePublishedLoads } from './published';
 
 export function publishedMatches(db: Database, cartridgeId: string | null, powderId: string | null, bulletWeightGr: number, published?: ValidationLoad[] | null): ValidationLoad[] {
   if (!cartridgeId || !powderId) return [];
@@ -20,6 +20,13 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
   const rows = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, bulletWeightGr, published);
   if (!d.cartridge || !d.powder) return null;
   if (published === null) return <div className="small muted">Loading published maker data…</div>;
+  if (publishedLoadFailed()) {
+    return (
+      <div className="alert warn small" data-testid="published-failed">
+        Published maker data could not be loaded, so ORKA cannot cross-check this load. Reload the page, and check the powder maker's current load data before loading.
+      </div>
+    );
+  }
   if (!rows.length) {
     return (
       <div className="alert info small" data-testid="published-none">
@@ -28,15 +35,20 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
       </div>
     );
   }
-  const maxRows = rows.filter((r) => r.loadType === 'max');
-  const maxCharge = maxRows.length ? Math.min(...maxRows.map((r) => r.chargeGr)) : null;
+  const ref = publishedReference(rows);
+  const maxCharge = ref?.charge ?? null;
   const over = maxCharge !== null && chargeGr > maxCharge + 1e-9;
   return (
     <div className="card" data-testid="published-crosscheck">
       <h3>Published maker data for these components</h3>
       {over && (
         <div className="alert danger" role="alert" data-testid="published-over">
-          <strong>Your charge ({fmtNum(chargeGr, 1)} gr) is above the maker's published maximum ({fmtNum(maxCharge, 1)} gr)</strong> for this cartridge, powder and bullet weight. Published pressure-tested data takes precedence over any prediction.
+          {ref?.kind === 'single' ? (
+            <strong>Your charge ({fmtNum(chargeGr, 1)} gr) is above every load the maker publishes ({fmtNum(maxCharge, 1)} gr is the highest)</strong>
+          ) : (
+            <strong>Your charge ({fmtNum(chargeGr, 1)} gr) is above the maker's published maximum ({fmtNum(maxCharge, 1)} gr)</strong>
+          )}{' '}
+          for this cartridge, powder and bullet weight. Published pressure-tested data takes precedence over any prediction.
         </div>
       )}
       <p className="small muted">
@@ -64,7 +76,7 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
                   {r.bulletMfr} {fmtNum(r.bulletWeightGr, 0)} gr {r.bulletModel}
                   {/\(/.test(r.cartridge) && <div className="small muted">{r.cartridge}</div>}
                 </td>
-                <td>{r.loadType}</td>
+                <td>{TYPE_LABEL[r.loadType ?? ''] ?? r.loadType}</td>
                 <td className="num">{fmtNum(r.chargeGr, 1)}</td>
                 <td className="num">{fmtNum(r.velocityFps, 0)}</td>
                 <td className="num">{r.pressure !== null ? `${r.pressure.toLocaleString('en-US')} ${r.pressureUnit ?? ''}` : '—'}</td>
@@ -88,6 +100,24 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
     </div>
   );
 }
+
+/** The maker's reference maximum for these components: the lowest published 'max' charge; if the maker publishes only
+ * single loads (no start/max pair), the highest published single load (exceeding every published load is flagged). */
+export function publishedReference(rows: ValidationLoad[]): { charge: number; kind: 'max' | 'single' } | null {
+  const max = rows.filter((r) => r.loadType === 'max');
+  if (max.length) return { charge: Math.min(...max.map((r) => r.chargeGr)), kind: 'max' };
+  const single = rows.filter((r) => r.loadType === 'other');
+  if (single.length) return { charge: Math.max(...single.map((r) => r.chargeGr)), kind: 'single' };
+  return null;
+}
+
+const TYPE_LABEL: Record<string, string> = {
+  max: 'max',
+  start: 'start',
+  other: 'single load',
+  reduced: 'reduced (not a max)',
+  'section-max': 'max for a firearm-class section (not the cartridge standard)',
+};
 
 /** Warnings about how far the current prediction is from the powder model's calibration data. */
 export function scopeWarnings(d: DerivedLoad, chargeGr: number): string[] {

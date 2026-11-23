@@ -1,6 +1,6 @@
 // Charge ladder and charge solvers.
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { ladder, solveChargeForPressure, solveChargeForVelocity, type ChargeSolution, type LadderRow } from '../engine/search';
 import { DEFAULT_MAX_FILL } from '../engine/defaults';
 import * as U from '../engine/units';
@@ -8,7 +8,7 @@ import { ErrorList, EstimateWarning, NumberField, PlainNumber, StatusChip } from
 import { fmtChargeKg, fmtP, fmtPct, fmtV, fmtMs } from './format';
 import { useApp } from './state';
 import { useLoad } from './useLoad';
-import { publishedMatches, ScopeWarnings } from './CrossCheck';
+import { publishedMatches, publishedReference, ScopeWarnings } from './CrossCheck';
 import { usePublishedLoads } from './published';
 
 export function LadderTab() {
@@ -26,10 +26,23 @@ export function LadderTab() {
   const [velSol, setVelSol] = useState<ChargeSolution | null | 'unreachable'>(null);
   const [busy, setBusy] = useState(false);
   const limit = d.limit.limitPa;
+  // Results belong to the setup they were computed for: clear them when the load or its geometry changes (review finding).
+  useEffect(() => {
+    setRows(null);
+    setMaxSol(null);
+    setVelSol(null);
+  }, [base]);
+  // A solved maximum belongs to the limit it was solved for.
+  useEffect(() => {
+    setMaxSol(null);
+    setVelSol(null);
+  }, [limit]);
+  // Over-limit state is evaluated against the CURRENT limit at render time; non-finite peaks count as over.
+  const overNow = (peakPa: number) => limit !== null && !(peakPa <= limit);
   const published = usePublishedLoads();
   const pubMax = (() => {
-    const rowsPub = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr, published).filter((r) => r.loadType === 'max');
-    return rowsPub.length ? Math.min(...rowsPub.map((r) => r.chargeGr)) : null;
+    const ref = publishedReference(publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr, published));
+    return ref ? ref.charge : null;
   })();
 
   if (!base) {
@@ -102,7 +115,7 @@ export function LadderTab() {
               <tbody>
                 {rows.map((r) => {
                   const overPub = pubMax !== null && U.kgToGr(r.chargeKg) > pubMax + 1e-9;
-                  const over = (limit !== null && r.overLimit) || overPub;
+                  const over = overNow(r.result.peakBreechPa) || overPub;
                   return (
                     <tr key={r.chargeKg} className={over ? 'over' : ''}>
                       <td className="nowrap">
@@ -115,7 +128,7 @@ export function LadderTab() {
                         {overPub && <span className="small" style={{ marginLeft: 6, color: 'var(--danger)' }}>pub max</span>}
                       </td>
                       <td className="num">{fmtP(r.result.peakBreechPa, sys)}</td>
-                      <td className="num">{limit !== null ? fmtPct(r.pressureRatio, 0) : '—'}</td>
+                      <td className="num">{limit !== null ? fmtPct(r.result.peakBreechPa / limit, 0) : '—'}</td>
                       <td className="num">{r.result.status === 'muzzle' ? fmtV(r.result.muzzleVelocityMs, sys) : r.result.status}</td>
                       <td className="num">{r.result.fillRatio === null ? '—' : fmtPct(r.result.fillRatio, 0)}</td>
                       <td className="num">{fmtPct(r.result.burntAtMuzzle, 0)}</td>
@@ -132,7 +145,7 @@ export function LadderTab() {
             </table>
           </div>
         )}
-        {rows && limit !== null && rows.some((r) => r.overLimit) && (
+        {rows && limit !== null && rows.some((r) => overNow(r.result.peakBreechPa)) && (
           <p className="small" style={{ marginTop: 6, color: 'var(--danger)' }}>
             Red rows exceed the working limit. Do not load them.
           </p>

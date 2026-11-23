@@ -628,7 +628,7 @@ async function main() {
       notes:
         `Held-out = leave-one-cartridge-out: each powder is refitted without one cartridge (only rows whose case capacity is published are used for this test), then predicts that cartridge's loads. ` +
         `${heldOutV.length} held-out velocity and ${heldOutP.length} held-out pressure comparisons over ${s3.length} powders. ` +
-        `Held-out |pressure error|: median-ish MAPE ${heldOutP.length ? ((mae(heldOutP) as number) * 100).toFixed(1) : '—'} %, 67th percentile ${pctTxt(q(heldOutP, 0.67))}, 95th ${pctTxt(q(heldOutP, 0.95))}. ` +
+        `Held-out |pressure error|: median ${pctTxt(q(heldOutP, 0.5))}, mean ${heldOutP.length ? ((mae(heldOutP) as number) * 100).toFixed(1) : '—'} %, 67th percentile ${pctTxt(q(heldOutP, 0.67))}, 95th ${pctTxt(q(heldOutP, 0.95))}. ` +
         `In-sample (fitted rows, including inferred capacities): velocity MAE ${mae(inSampleV)?.toFixed(0) ?? '—'} fps, pressure MAPE ${inSampleP.length ? ((mae(inSampleP) as number) * 100).toFixed(1) : '—'} %. ` +
         `Chart interpolation (calibrated powders re-estimated from chart neighbours): ${rmsLog === null ? 'too few to measure' : `RMS burn-rate error ${(rmsLog * 100).toFixed(0)} % over ${interpErr.length} powders`}. ` +
         `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. ` +

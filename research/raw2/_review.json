@@ -130,6 +130,18 @@
       "field": "bcG7",
       "value": null,
       "reason": "see bcG1 (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "416-rigby",
+      "field": "saamiMapPsi",
+      "value": 52000,
+      "reason": "SAAMI Z299.4 prints 65,000 psi in its velocity-and-pressure table but 52,000 psi in both its transducer-calibration and proof-pressure tables; the lower value is shipped until resolved (C.I.P. Pmax 3,250 bar) (code-review finding)"
+    },
+    {
+      "id": "370-sako-magnum",
+      "field": "notes",
+      "value": "SAAMI Z299.4 disagrees with itself: 47,500 psi in the velocity-and-pressure table vs 60,000 psi in the transducer-calibration and proof-pressure tables; the lower value is shipped (code-review finding).",
+      "reason": "code-review finding"
     }
   ]
 }

@@ -65,7 +65,8 @@ export function perturb(s: LoadSetup, d: { cap: number; beta: number; force: num
     propellant: {
       ...s.propellant,
       thermo: { ...s.propellant.thermo, forceJkg: s.propellant.thermo.forceJkg * (1 + d.force) },
-      burn: { ...s.propellant.burn, beta: s.propellant.burn.beta * Math.max(0.05, 1 + d.beta) },
+      burn: { ...s.propellant.burn, // burn-rate spread is log-normal: model errors are multiplicative (review finding)
+      beta: s.propellant.burn.beta * Math.exp(d.beta) },
     },
     options: {
       ...s.options,
@@ -171,29 +172,36 @@ export function temperatureSweep(s: LoadSetup, tempsC: number[]) {
   });
 }
 
-/** Peak-pressure sensitivity to the burn-rate coefficient in this model (Δp/p ≈ 2.2·Δβ/β near max loads; see sensitivities()). */
-const PRESSURE_PER_BETA = 2.2;
+/** Typical elasticity of peak pressure to the burn-rate coefficient (median over shipped models at ~95 % of MAP, measured
+ * in code review: 1.68, IQR 1.34–1.88). Used only when the caller cannot supply the load's own elasticity. */
+export const DEFAULT_PRESSURE_PER_BETA = 1.7;
+/** Pressure spread (1σ, relative) assumed when a model's pressure was never validated against measurements. */
+export const UNVALIDATED_PRESSURE_SIGMA = 0.25;
 
 /**
- * Default spreads for a powder model, sized from its measured error rather than a fixed guess:
- *  - calibrated / user-calibrated with a pressure fit: the in-sample RMS pressure error, inflated by 1.45 (the ratio of
- *    held-out to in-sample median error measured over all calibrated powders) or the powder's own held-out error when
- *    larger, expressed as an equivalent burn-rate spread;
- *  - estimated: the measured chart-interpolation error (betaRelSigma);
- *  - otherwise the generic defaults.
+ * Default spreads for a powder model, sized from its measured error:
+ *  - calibrated with pressure data: σP = max(in-sample RMS × 1.45, held-out median × 1.48);
+ *  - calibrated or user-calibrated WITHOUT pressure data (velocity-only): σP = UNVALIDATED_PRESSURE_SIGMA;
+ *  - estimated: the measured chart-interpolation error (already a burn-rate spread).
+ * σP is converted to a burn-rate spread with the load's own elasticity d ln p / d ln β (from sensitivities()),
+ * so the Monte Carlo band reproduces the intended pressure spread.
  */
-export function specForPowderModel(m?: {
-  status: string;
-  betaRelSigma?: number;
-  calibration?: { rmsPressurePct?: number | null; heldOutPressurePct?: number | null };
-} | null): UncertaintySpec {
+export function specForPowderModel(
+  m?: {
+    status: string;
+    betaRelSigma?: number;
+    calibration?: { rmsPressurePct?: number | null; heldOutPressurePct?: number | null };
+  } | null,
+  pressurePerBeta: number = DEFAULT_PRESSURE_PER_BETA,
+): UncertaintySpec {
+  const k = Number.isFinite(pressurePerBeta) && pressurePerBeta > 0.2 ? pressurePerBeta : DEFAULT_PRESSURE_PER_BETA;
   if (!m) return DEFAULT_SPEC_ESTIMATED;
   if (m.status === 'estimated') return { ...DEFAULT_SPEC_ESTIMATED, betaRel: m.betaRelSigma && m.betaRelSigma > 0 ? m.betaRelSigma : DEFAULT_SPEC_ESTIMATED.betaRel };
   const rms = m.calibration?.rmsPressurePct;
   const held = m.calibration?.heldOutPressurePct;
+  let sigmaP = UNVALIDATED_PRESSURE_SIGMA;
   if (typeof rms === 'number' && rms > 0) {
-    const sigmaP = Math.max((rms * 1.45) / 100, typeof held === 'number' && held > 0 ? (held * 1.48) / 100 : 0);
-    return { ...DEFAULT_SPEC_CALIBRATED, betaRel: Math.min(0.3, Math.max(0.03, sigmaP / PRESSURE_PER_BETA)) };
+    sigmaP = Math.max((rms * 1.45) / 100, typeof held === 'number' && held > 0 ? (held * 1.48) / 100 : 0);
   }
-  return { ...DEFAULT_SPEC_CALIBRATED, betaRel: 0.05 };
+  return { ...DEFAULT_SPEC_CALIBRATED, betaRel: Math.min(0.6, Math.max(0.03, sigmaP / k)) };
 }

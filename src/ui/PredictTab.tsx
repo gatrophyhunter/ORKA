@@ -33,7 +33,10 @@ export function PredictTab() {
   const sens = useMemo(() => (setup && res?.status === 'muzzle' ? sensitivities(setup) : null), [setup, res]);
   const sweep = useMemo(() => (setup && res?.status === 'muzzle' ? temperatureSweep(setup, [-20, -10, 0, 10, 20, 30, 40, 50]) : null), [setup, res]);
 
-  const defaultSpec = specForPowderModel(d.powder?.model);
+  // Elasticity of peak pressure to burn rate for THIS load (sensitivities() perturbs beta by a factor e^0.03).
+  const betaSens = sens?.find((x) => x.key === 'beta');
+  const elasticity = betaSens ? betaSens.peakPct / (100 * (Math.exp(0.03) - 1)) : undefined;
+  const defaultSpec = specForPowderModel(d.powder?.model, elasticity);
   const [spec, setSpec] = useState<UncertaintySpec | null>(null);
   const activeSpec = spec ?? defaultSpec;
   const [mc, setMc] = useState<{ r: MonteCarloResult; key: unknown } | null>(null);
@@ -111,7 +114,7 @@ export function PredictTab() {
           </div>
         )}
         <div className="print-only small" data-testid="print-summary">
-          <strong>Inputs:</strong> {d.cartridge?.name ?? 'custom chamber'} · case capacity {builder.inputs.caseCapacityGrH2O} gr H₂O ({builder.capacityBasis || 'entered'}) · case length {builder.inputs.caseLengthIn} in · bore/groove {builder.inputs.boreDiameterIn}/{builder.inputs.grooveDiameterIn} in · barrel {builder.inputs.barrelLengthIn} in · bullet {d.bullet ? `${d.bullet.manufacturer} ${d.bullet.name}` : 'custom'} {builder.inputs.bulletWeightGr} gr, {builder.inputs.bulletLengthIn} in long · COAL {builder.inputs.coalIn} in · {d.powder?.manufacturer} {d.powder?.name} ({d.status}) {builder.inputs.chargeGr} gr at {builder.inputs.powderTempF} °F · shot-start {builder.inputs.shotStartPsi} psi · limit {d.limit.label} − {builder.marginPct} %.
+          <strong>Inputs:</strong> {d.cartridge?.name ?? 'custom chamber'} · case capacity {builder.inputs.caseCapacityGrH2O} gr H₂O ({builder.capacityBasis || 'entered'}) · case length {builder.inputs.caseLengthIn} in · bore/groove {builder.inputs.boreDiameterIn}/{builder.inputs.grooveDiameterIn} in · barrel {builder.inputs.barrelLengthIn} in · bullet {d.bullet ? `${d.bullet.manufacturer} ${d.bullet.name}` : 'custom'} {builder.inputs.bulletWeightGr} gr, {builder.inputs.bulletLengthIn} in long · COAL {builder.inputs.coalIn} in · {d.powder?.manufacturer} {d.powder?.name} ({d.status}) {builder.inputs.chargeGr} gr at {builder.inputs.powderTempF} °F · shot-start {builder.inputs.shotStartPsi} psi · limit {d.limit.label}.
           <br />
           ORKA database {db.version}. Printed {new Date().toLocaleString()}. A prediction, not load data.
         </div>
@@ -137,7 +140,9 @@ export function PredictTab() {
               )}
               {mv && (d.status === 'calibrated' || d.status === 'estimated') && !d.powder?.user && !(d.powder && d.powder.model?.status === 'user-calibrated') && (
                 <div className={`small ${d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? 'warn-text' : 'muted'}`} data-testid="model-error">
-                  Model error on held-out published data: median ±{mv.heldOutPressureP50Pct} %, 1 in 10 worse than ±{mv.heldOutPressureP90Pct} %
+                  {d.powder?.model?.calibration?.grade === 'unvalidated' && <strong>This powder's model was fitted to velocities only — its pressure has never been checked against a measurement. </strong>}
+                  Model error on held-out published data ({mv.heldOutCartridgeIds?.length ? `measured on ${mv.scope.replace(/^held-out pressure comparisons exist only for: /, '')} only` : 'see Validation'}
+                  {mv.heldOutCartridgeIds?.length && d.cartridge && !mv.heldOutCartridgeIds.includes(d.cartridge.id) ? '; this cartridge is outside the validated set' : ''}): median ±{mv.heldOutPressureP50Pct} %, 1 in 10 worse than ±{mv.heldOutPressureP90Pct} %
                   {mv.heldOutPressureBiasPct < 0 ? ` (on average ${Math.abs(mv.heldOutPressureBiasPct)} % low)` : ''}
                   {typeof d.powder?.model?.calibration?.heldOutPressurePct === 'number' ? `; this powder: median ±${d.powder.model.calibration.heldOutPressurePct} %` : ''}.
                   {' '}Upper estimate {fmtP(res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100), sys)}

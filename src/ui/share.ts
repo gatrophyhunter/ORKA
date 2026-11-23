@@ -43,9 +43,10 @@ export function decodeBuilder(hash: string): DecodedShare | null {
     const builder: BuilderState = {
       ...EMPTY_BUILDER,
       cartridgeId: str(b.cartridgeId),
-      brassKey: str(b.brassKey),
-      brassBrandId: str(b.brassBrandId),
-      capacityBasis: typeof b.capacityBasis === 'string' ? b.capacityBasis : '',
+      // A shared link cannot vouch for where its capacity came from: treat it as an entered value (review finding).
+      brassKey: 'measured',
+      brassBrandId: null,
+      capacityBasis: 'from a shared link — verify against your own brass',
       bulletId: str(b.bulletId),
       powderId: str(b.powderId),
       inputs,

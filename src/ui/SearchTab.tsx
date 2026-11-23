@@ -30,13 +30,21 @@ export function SearchTab() {
   const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => () => workerRef.current?.terminate(), []);
+  // Results belong to the builder state and limit they were computed for: clear them on any change (review finding).
+  const runKey = JSON.stringify([builder.inputs, builder.cartridgeId, builder.standard, builder.customLimitPsi, builder.marginPct]);
+  useEffect(() => {
+    workerRef.current?.terminate();
+    workerRef.current = null;
+    setRows(null);
+    setProgress(null);
+  }, [runKey]);
 
   const manufacturers = useMemo(() => [...new Set(db.powders.map((p) => p.manufacturer))].sort(), [db.powders]);
   const filtered = useMemo(
     () => db.powders.filter((p) => (!mfr || p.manufacturer === mfr) && (!form || p.form === form)),
     [db.powders, mfr, form],
   );
-  const isPoor = (p: Powder) => p.model?.status === 'calibrated' && p.model.calibration?.grade === 'poor';
+  const isPoor = (p: Powder) => p.model?.status === 'calibrated' && (p.model.calibration?.grade === 'poor' || p.model.calibration?.grade === 'unvalidated');
   const usable = filtered.filter((p) => {
     const s = modelStatus(p);
     if (isPoor(p) && !includePoor) return false;
@@ -226,7 +234,7 @@ export function SearchTab() {
               <input type="checkbox" checked={includeEstimated} onChange={(e) => setIncludeEstimated(e.target.checked)} data-testid="include-estimated" /> include estimates
             </label>
             <label className="check" title="Calibrated powders whose fit to published pressure data is worse than ±20 % RMS">
-              <input type="checkbox" checked={includePoor} onChange={(e) => setIncludePoor(e.target.checked)} /> include poor fits
+              <input type="checkbox" checked={includePoor} onChange={(e) => setIncludePoor(e.target.checked)} /> include poor / pressure-unvalidated fits
             </label>
           </div>
         </div>
@@ -245,7 +253,7 @@ export function SearchTab() {
             </button>
           )}
           <span className="small muted">
-            {skippedNone.length} without a model{skippedEst.length ? `, ${skippedEst.length} estimates` : ''}{skippedPoor.length ? `, ${skippedPoor.length} poor fits` : ''} skipped
+            {skippedNone.length} without a model{skippedEst.length ? `, ${skippedEst.length} estimates` : ''}{skippedPoor.length ? `, ${skippedPoor.length} poor or pressure-unvalidated fits` : ''} skipped
           </span>
         </div>
         {progress && rows === null && !error && (

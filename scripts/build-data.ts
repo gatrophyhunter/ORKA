@@ -15,6 +15,7 @@ import type {
 } from '../src/data/schema';
 import { cartridgeKey, cartridgeKeyLoose, makerKey, powderKey, slug } from './names';
 import { estimateFromCharts } from './estimate';
+import { bulletFeatures, fitLengthModel } from './bullet-length';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const RAW = path.join(ROOT, 'research/raw2');
@@ -77,6 +78,22 @@ function applyFixes<T extends { id: string }>(items: T[]): T[] {
 
 const dropped: Record<string, number> = {};
 const SCOPE = process.env.ORKA_SCOPE ?? 'rifle';
+/** Fit grade from the worse of in-sample RMS and held-out median pressure error; no pressure data = 'unvalidated'. */
+function gradeModel(m: PowderModelEntry): PowderModelEntry {
+  const c = m.calibration;
+  if (!c) return m;
+  const rms = typeof c.rmsPressurePct === 'number' ? c.rmsPressurePct : null;
+  const held = typeof c.heldOutPressurePct === 'number' ? c.heldOutPressurePct : null;
+  const eff = rms === null && held === null ? null : Math.max(rms ?? 0, held ?? 0);
+  const grade = eff === null ? 'unvalidated' : eff <= 10 ? 'good' : eff <= 20 ? 'fair' : 'poor';
+  return { ...m, calibration: { ...c, grade } };
+}
+const LOAD_POWDER_ALIASES: Record<string, string> = {
+  'accurate|2015': '2015br',
+  'shooters-world|precisionrifle': 'precision',
+  'shooters-world|sbr-socom': 'socom',
+  'shooters-world|sbrsocom': 'socom',
+};
 /** Handgun and muzzleloader projectiles (by the maker's own category, or by product-line name where none is given). */
 function isNonRifleBullet(b: Bullet & { use?: string | null }): boolean {
   if (b.use && /handgun|pistol|muzzle/i.test(b.use)) return true;
@@ -192,7 +209,7 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
         burnRateCharts: [],
         status: r.status === 'discontinued' ? 'discontinued' : r.status === 'current' ? 'current' : 'unknown',
         sources: sourcesOf(r),
-        notes: [str(r.notes), r.grainDimensions ? `Grain: ${r.grainDimensions}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [str(r.notes), r.grainDimensions ? `Grain: ${typeof r.grainDimensions === 'string' ? r.grainDimensions : JSON.stringify(r.grainDimensions)}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
       };
       if (p.bulkDensityGcc != null && (p.bulkDensityGcc < 0.3 || p.bulkDensityGcc > 1.3)) {
         p.notes += ` | bulk density ${p.bulkDensityGcc} outside 0.3–1.3 g/cm³ rejected`;
@@ -210,13 +227,15 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
     }
   }
   // Merge duplicate spellings of one product (verifier finding): chart "7828SC" is the product "7828 SSC".
-  const POWDER_MERGE: Record<string, string> = { 'imr-7828sc': 'imr-7828-ssc' };
+  const POWDER_MERGE: Record<string, string> = { 'imr-7828sc': 'imr-7828-ssc', 'accurate-11-fs': 'accurate-no-11-fs' };
+  const mergedAliases: { name: string; maker: string; to: string }[] = [];
   for (const [from, to] of Object.entries(POWDER_MERGE)) {
     const a = byKey.get(from);
     const b = byKey.get(to);
     if (a && b) {
       b.sources = [...b.sources, ...a.sources];
       b.notes = `${b.notes ?? ''} | Also printed as "${a.name}" on burn-rate charts.`;
+      mergedAliases.push({ name: a.name, maker: a.manufacturer, to });
       byKey.delete(from);
     }
   }
@@ -249,10 +268,25 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
       }
     }
   }
+  // Apply merges again: chart-sourced records (created above) can also be duplicate spellings (e.g. "#11 FS" / "No. 11 FS").
+  for (const [from, to] of Object.entries(POWDER_MERGE)) {
+    const a = byKey.get(from);
+    const b = byKey.get(to);
+    if (a && b) {
+      b.sources = [...b.sources, ...a.sources];
+      b.notes = `${b.notes ?? ''} | Also printed as "${a.name}" on burn-rate charts.`;
+      mergedAliases.push({ name: a.name, maker: a.manufacturer, to });
+      byKey.delete(from);
+    }
+  }
   const powders = applyFixes([...byKey.values()]);
   // Index for chart-name matching: powderKey(name) and powderKey(maker + name).
   const index = new Map<string, string[]>();
   const addIdx = (k: string, id: string) => index.set(k, [...new Set([...(index.get(k) ?? []), id])]);
+  for (const m of mergedAliases) {
+    addIdx(powderKey(m.name), m.to);
+    addIdx(powderKey(`${m.maker} ${m.name}`), m.to);
+  }
   for (const p of powders) {
     addIdx(powderKey(p.name), p.id);
     addIdx(powderKey(`${p.manufacturer} ${p.name}`), p.id);
@@ -317,7 +351,7 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
         recommendedTwist: str(r.recommendedTwist),
         status: r.status === 'discontinued' ? 'discontinued' : r.status === 'current' ? 'current' : 'unknown',
         sources: sourcesOf(r),
-        notes: [str(r.notes), `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
+        notes: [str(r.notes), arr(r.conflicts).length ? `Sources disagree: ${JSON.stringify(r.conflicts)}` : null, `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
         boatTailLengthIn: num(r.boatTailLengthIn),
         baseToOgiveIn: num(r.baseToOgiveIn),
         use: str(r.kind ?? r.firearm ?? null),
@@ -438,8 +472,9 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
         continue;
       }
       const cart = findCartridge(cartridges, r.cartridge);
-      const pk = powderKey(r.powder);
       const mk = r.powderMfr ? makerKey(r.powderMfr) : null;
+      // Renamed / reprinted products (review finding): load-data name -> catalog name.
+      const pk = LOAD_POWDER_ALIASES[`${mk ?? ''}|${powderKey(r.powder)}`] ?? powderKey(r.powder);
       const pw = powders
         .filter((p) => powderKey(p.name) === pk || powderKey(`${p.manufacturer} ${p.name}`) === pk || powderKey(`${makerKey(p.manufacturer)} ${p.name}`) === pk)
         .filter((p) => !mk || makerKey(p.manufacturer) === mk);
@@ -466,8 +501,14 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
         pressure: num(r.pressure),
         pressureUnit: unit,
         pressureMethod: r.pressureMethod ?? 'unknown',
-        // Reduced loads for gas-operated service rifles (e.g. M1 Garand) are not cartridge maximums.
-        loadType: /garand/i.test(`${r.cartridge} ${r.notes ?? ''} ${r.dataSection ?? ''}`) && r.loadType === 'max' ? 'reduced' : r.loadType ?? 'other',
+        // Not cartridge maximums: reduced loads for gas-operated service rifles (e.g. M1 Garand), and firearm-class
+        // sections such as "45-70 Government (Modern Rifles)" whose pressure level differs from the standard (review finding).
+        loadType:
+          r.loadType === 'max' && /garand/i.test(`${r.cartridge} ${r.notes ?? ''} ${r.dataSection ?? ''}`)
+            ? 'reduced'
+            : r.loadType === 'max' && /\(.+\)/.test(String(r.cartridge)) && cart && cartridgeKey(r.cartridge) !== cart.id
+              ? 'section-max'
+              : r.loadType ?? 'other',
         compressed: r.compressed ?? null,
         sources: sourcesOf(r),
         notes: [str(r.notes), `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
@@ -484,6 +525,29 @@ function main() {
   let bullets = buildBullets(files);
   let { brands, cases } = buildBrass(files, cartridges);
   let validationLoads = buildLoads(files, cartridges, powders);
+
+  // Bullet-length plausibility screen (review finding): a published length is withheld when the bullet would be denser
+  // than physically possible as a plain cylinder (real bullets have less volume than their cylinder), or when it
+  // disagrees with the length model by more than 3x the model's leave-one-out error.
+  {
+    const lm = fitLengthModel(bullets);
+    for (const b of bullets) {
+      if (!b.lengthIn) continue;
+      const f = bulletFeatures(b);
+      const volCm3 = (Math.PI / 4) * (b.diameterIn * 2.54) ** 2 * (b.lengthIn * 2.54);
+      const rhoCyl = (b.weightGr * 0.06479891) / volCm3; // g/cm³, a lower bound on the true density
+      const maxRho = f.blunt ? 10.8 : 9.5; // lead is 11.34 g/cm³; pointed jacketed bullets fill far less than their cylinder
+      const pred = lm?.predict(f) ?? null;
+      const loo = f.blunt ? lm?.looRelRmsBlunt : lm?.looRelRmsPointed;
+      const resid = pred ? (b.lengthIn - pred) / pred : 0;
+      const tooFar = pred !== null && typeof loo === 'number' && Math.abs(resid) > Math.max(0.2, 3 * loo);
+      if (rhoCyl > maxRho || tooFar) {
+        b.notes = `${b.notes ?? ''} | Published length ${b.lengthIn} in withheld as implausible (cylinder density ${rhoCyl.toFixed(2)} g/cm³${pred ? `; length model ${pred.toFixed(3)} in` : ''}). Measure this bullet.`;
+        b.lengthIn = null;
+        drop('bullet length withheld as implausible');
+      }
+    }
+  }
 
   // Scope: ORKA is focused on centerfire rifle reloading (ORKA_SCOPE=all keeps handgun data).
   if (SCOPE === 'rifle') {
@@ -512,7 +576,7 @@ function main() {
 
   // Attach powder models: calibrated (scripts/calibrate-powders.ts) then chart-interpolated estimates.
   const models: Record<string, PowderModelEntry> = readJson(MODELS)?.models ?? {};
-  for (const p of powders) if (models[p.id]) p.model = models[p.id];
+  for (const p of powders) if (models[p.id]) p.model = gradeModel(models[p.id]);
   const report = readJson(path.join(ROOT, 'src/data/validation-report.json'));
   const sigma = report?.metrics?.interpolationBetaRelSigma;
   const estimates = estimateFromCharts(powders, charts, typeof sigma === 'number' && sigma > 0 ? Math.max(sigma, 0.1) : undefined);

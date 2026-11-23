@@ -29,6 +29,9 @@ function unpack(p: Packed | Compact[]): Compact[] {
   }));
 }
 let cache: ValidationLoad[] | null = null;
+let failed = false;
+/** True when the published-load chunk could not be loaded (network error, stale chunk after a redeploy). */
+export const publishedLoadFailed = () => failed;
 let pending: Promise<ValidationLoad[]> | null = null;
 
 function expand(r: Compact): ValidationLoad {
@@ -46,7 +49,11 @@ export function loadPublished(): Promise<ValidationLoad[]> {
   const fn = Object.values(loaders)[0];
   pending = (fn ? fn() : Promise.resolve([] as Compact[]))
     .then((data) => (cache = unpack(data).map(expand)))
-    .catch(() => (cache = []));
+    .catch(() => {
+      failed = true;
+      pending = null; // allow a retry on the next mount
+      return (cache = []);
+    });
   return pending;
 }
 

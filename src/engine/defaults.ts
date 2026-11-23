@@ -121,6 +121,8 @@ export interface ModelValidationSummary {
   heldOutPressureBiasPct: number;
   heldOutWithin10Pct: number;
   scope: string;
+  heldOutCartridgeIds?: string[];
+  heldOutPowders?: number;
 }
 /** Headline held-out validation of the calibrated models (scripts/validation-summary.ts), or null before calibration. */
 export function modelValidation(): ModelValidationSummary | null {

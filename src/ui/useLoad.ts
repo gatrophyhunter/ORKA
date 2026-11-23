@@ -85,7 +85,9 @@ export function pressureLimit(b: BuilderState, cartridge: Cartridge | null): Lim
   if (b.standard === 'SAAMI') {
     if (cartridge?.saamiMapPsi) {
       mapPa = U.psiToPa(cartridge.saamiMapPsi);
-      label = `SAAMI MAP ${cartridge.saamiMapPsi.toLocaleString('en-US')} psi (piezo)`;
+      label = cartridge.user
+        ? `Your entered MAP ${cartridge.saamiMapPsi.toLocaleString('en-US')} psi (not from the standard)`
+        : `SAAMI MAP ${cartridge.saamiMapPsi.toLocaleString('en-US')} psi (piezo)`;
     } else if (cartridge?.saamiMapCup) {
       note = `This cartridge's SAAMI MAP is published in CUP only (${cartridge.saamiMapCup.toLocaleString('en-US')} CUP). CUP and piezo psi are different measurement systems and are not converted. Choose CIP or enter a custom psi limit.`;
     } else {
@@ -94,7 +96,9 @@ export function pressureLimit(b: BuilderState, cartridge: Cartridge | null): Lim
   } else if (b.standard === 'CIP') {
     if (cartridge?.cipPmaxBar) {
       mapPa = U.barToPa(cartridge.cipPmaxBar);
-      label = `C.I.P. Pmax ${cartridge.cipPmaxBar.toLocaleString('en-US')} bar`;
+      label = cartridge.user
+        ? `Your entered Pmax ${cartridge.cipPmaxBar.toLocaleString('en-US')} bar (not from the standard)`
+        : `C.I.P. Pmax ${cartridge.cipPmaxBar.toLocaleString('en-US')} bar`;
     } else {
       note = cartridge ? 'No C.I.P. Pmax on record for this cartridge. Choose SAAMI or enter a custom limit.' : 'Select a cartridge or enter a custom limit.';
     }
@@ -104,7 +108,14 @@ export function pressureLimit(b: BuilderState, cartridge: Cartridge | null): Lim
       label = `Custom limit ${b.customLimitPsi.toLocaleString('en-US')} psi`;
     } else note = 'Enter a custom pressure limit.';
   }
-  const margin = Number.isFinite(b.marginPct) ? Math.min(Math.max(b.marginPct, 0), 50) : 0;
+  // The margin actually applied is stated in the label; values outside 0–50 % are clamped and flagged (review finding).
+  const raw = b.marginPct;
+  const margin = Number.isFinite(raw) ? Math.min(Math.max(raw, 0), 50) : 0;
+  if (mapPa !== null) {
+    label = `${label} − ${margin} % margin`;
+    if (!Number.isFinite(raw)) note = 'Safety margin is empty: 0 % applied.';
+    else if (raw !== margin) note = `Safety margin ${raw} % is outside 0–50 %: ${margin} % applied.`;
+  }
   const limitPa = mapPa !== null ? mapPa * (1 - margin / 100) : null;
   return { mapPa, limitPa, label, note };
 }
