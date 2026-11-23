@@ -26,12 +26,14 @@ import { defaultShotStartPsi, priorParams } from '../src/engine/defaults';
 import * as U from '../src/engine/units';
 import type { Bullet, Cartridge, Database, Powder, PowderModelEntry, PowderModelParams, ValidationLoad } from '../src/data/schema';
 import { estimateFromCharts } from './estimate';
+import { featuresFromText, fitLengthModel } from './bullet-length';
 
 const ROOT = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..');
 const db: Database = JSON.parse(fs.readFileSync(path.join(ROOT, 'src/data/db.json'), 'utf8'));
 db.validationLoads = JSON.parse(fs.readFileSync(path.join(ROOT, 'research/build/validation-loads.json'), 'utf8'));
 
 const SIGMA_V_MS = U.fpsToMs(25); // published velocities are rounded and lot-dependent
+const LENGTH_MODEL = fitLengthModel(db.bullets);
 const SIGMA_P_REL = 0.05;
 const CAP_PRIOR_SIGMA = 0.03;
 const MAX_LOCO = 6;
@@ -67,6 +69,7 @@ interface Prepared {
   cartridgeId: string;
   groupKey: string;
   tier: Tier;
+  lengthEstimated: boolean;
   capPrior: number | null;
   capBasis: string;
   inputs: LoadInputs;
@@ -96,6 +99,7 @@ function prepare(l: ValidationLoad): Prepared | null {
   if (!d) return skip('bullet diameter unknown'), null;
   const cap = capacityFor(l, c);
   let len = l.bulletLengthIn ?? null;
+  let lengthEstimated = false;
   let bt = 0;
   let construction: string | null = null;
   const notes: string[] = [`capacity: ${cap.basis}`];
@@ -105,6 +109,16 @@ function prepare(l: ValidationLoad): Prepared | null {
     bt = fb.bullet.boatTailLengthIn ?? 0;
     construction = fb.bullet.construction ?? null;
     notes.push(`bullet ${fb.bullet.manufacturer} ${fb.bullet.name} (${fb.note})`);
+  }
+  if (!len && LENGTH_MODEL && LENGTH_MODEL.looRelRms < 0.06) {
+    // Maker publishes no length: estimate it (calibration only; error measured by leave-one-out, see report).
+    const text = `${l.bulletModel ?? ''} ${fb.bullet ? `${fb.bullet.line} ${fb.bullet.name} ${fb.bullet.profile ?? ''}` : ''}`;
+    const est = LENGTH_MODEL.predict(featuresFromText(d, l.bulletWeightGr, text, fb.bullet?.construction ?? construction));
+    if (est > d && est < 3) {
+      len = Math.round(est * 1000) / 1000;
+      lengthEstimated = true;
+      notes.push(`bullet length ${len} in ESTIMATED (maker publishes none; estimator LOO error ${(LENGTH_MODEL.looRelRms * 100).toFixed(1)} %)`);
+    }
   }
   if (!len) return skip(`bullet length unknown (${fb.note})`), null;
   let peakPa: number | undefined;
@@ -116,6 +130,7 @@ function prepare(l: ValidationLoad): Prepared | null {
     cartridgeId: c.id,
     groupKey: `${c.id}|${(l.caseBrand ?? 'unstated').toLowerCase()}`,
     tier: cap.tier,
+    lengthEstimated,
     capPrior: cap.cap,
     capBasis: cap.basis,
     inputs: {
@@ -239,6 +254,7 @@ function rowReport(p: Powder, r: Prepared, res: ReturnType<typeof simulate>, hel
     pPredPsi: Number.isFinite(res.peakBreechPa) ? Math.round(U.paToPsi(res.peakBreechPa)) : null,
     heldOut,
     capacityTier: r.tier,
+    lengthEstimated: r.lengthEstimated,
     page: r.load.sources[0]?.page ?? null,
     notes: r.notes.join('; '),
   };
@@ -543,7 +559,10 @@ async function main() {
         `Held-out |pressure error|: median-ish MAPE ${heldOutP.length ? ((mae(heldOutP) as number) * 100).toFixed(1) : '—'} %, 67th percentile ${pctTxt(q(heldOutP, 0.67))}, 95th ${pctTxt(q(heldOutP, 0.95))}. ` +
         `In-sample (fitted rows, including inferred capacities): velocity MAE ${mae(inSampleV)?.toFixed(0) ?? '—'} fps, pressure MAPE ${inSampleP.length ? ((mae(inSampleP) as number) * 100).toFixed(1) : '—'} %. ` +
         `Chart interpolation (calibrated powders re-estimated from chart neighbours): ${rmsLog === null ? 'too few to measure' : `RMS burn-rate error ${(rmsLog * 100).toFixed(0)} % over ${interpErr.length} powders`}. ` +
-        `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. Loads skipped: ${JSON.stringify(skipped)}.`,
+        `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. ` +
+        `Bullet lengths: ${prepared.filter((r) => r.lengthEstimated).length} of ${prepared.length} prepared loads use an ESTIMATED length because the bullet maker publishes none ` +
+        `(estimator fitted on ${LENGTH_MODEL?.n ?? 0} bullets with published lengths, leave-one-out error ${LENGTH_MODEL ? (LENGTH_MODEL.looRelRms * 100).toFixed(1) : '—'} %). ` +
+        `Loads skipped: ${JSON.stringify(skipped)}.`,
       interpolationBetaRelSigma: rmsLog,
     },
     rows,

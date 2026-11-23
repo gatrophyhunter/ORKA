@@ -259,9 +259,19 @@ def hodgdon_parse(doc, log):
     legend_page = next(i for i, p in enumerate(pages_text) if re.search(r"^\s*LEGEND\s*$", p, re.M) and "BRANDS" in p)
     brands, bullet_abbr = parse_legend(pages_text[legend_page])
     intro_page = next(i for i, p in enumerate(pages_text) if "Pressures were gauged by one of two methods" in p)
-    m = re.search(r"Pressures were gauged by one of two methods.*?pounds per square inch \(PSI\)\.",
-                  " ".join(re.split(r"\s{3,}", pages_text[intro_page])), re.S)
+    # the introduction is set in two columns: rebuild left column then right column from the -layout text
+    ip = pages_text[intro_page].split("\n")
+    starts = {}
+    for l_ in ip:
+        mm_ = re.search(r"\S\s{3,}(\S)", l_)
+        if mm_:
+            starts[mm_.start(1)] = starts.get(mm_.start(1), 0) + 1
+    split_at = max(starts, key=starts.get)
+    col_text = ws(" ".join(l_[:split_at] for l_ in ip) + " " + " ".join(l_[split_at:] for l_ in ip))
+    m = re.search(r"Pressures were gauged by one of two methods.*?pounds per square inch \(PSI\)\.", col_text)
     method_evidence = ws(m.group(0)) if m else None
+    m2 = re.search(r"Primarily, the data for this edition.*?measured case heads\.", col_text)
+    test_evidence = ws(m2.group(0)) if m2 else None
 
     xml = open(bbox_path, encoding="utf-8").read()
     pages = PAGE_RE.findall(xml)
@@ -428,6 +438,7 @@ def hodgdon_parse(doc, log):
                 pending_name = t
     log["hodgdon_" + doc["key"]] = {
         "legendBrands": brands, "legendBulletTypes": bullet_abbr, "pressureMethodEvidence": method_evidence,
+        "testConditionsEvidence": test_evidence, "introductionPage": intro_page + 1,
         "unparsedRows": unparsed,
     }
     return records
@@ -929,6 +940,9 @@ def shooters_world_parse(doc, log, keep_all=False):
     for k, g in groups.items():
         if len({r["velocityFps"] for r in g}) > 1:
             for r in g:
+                r["conflicts"] = [{"field": "velocityFps", "values": [
+                    {"value": x["velocityFps"], "source": "%s#page=%d" % (doc["url"], x["sources"][0]["page"]),
+                     "caseBrand": x["caseBrand"], "coalIn": x["coalIn"]} for x in g]}]
                 r["notes"] += (" Same bullet/powder/charge%s appears %d times in the manual with different "
                                "velocities (%s); barrel/test setup of each block not stated."
                                % ("/pressure" if r["pressure"] else "", len(g),
@@ -957,7 +971,7 @@ VV_CANON = {
     ".223 Remington": "223 Remington", ".308 Winchester": "308 Winchester", "6,5 Creedmoor": "6.5 Creedmoor",
     ".30-06 Springfield": "30-06 Springfield", ".300 Winchester Magnum": "300 Winchester Magnum",
     ".243 Winchester": "243 Winchester", "6 mm Creedmoor": "6mm Creedmoor", ".270 Winchester": "270 Winchester",
-    "7mm Remington Magnum": "7mm Remington Magnum", "9 mm Luger / 9x19 mm": "9mm Luger",
+    "7 mm Remington Magnum": "7mm Remington Magnum", "9 mm Luger / 9x19 mm": "9mm Luger",
     ".45 Auto / .45 ACP": "45 ACP", ".357 Magnum": "357 Magnum", ".44 Remington Magnum": "44 Remington Magnum",
 }
 VV_FRAC = {"½": 0.5, "¼": 0.25, "¾": 0.75, "⅛": 0.125, "⅜": 0.375, "⅝": 0.625,
@@ -969,7 +983,7 @@ VV_LOAD_RE = re.compile(
     r"(?P<powder>" + VV_POWDER + r")\s+(?P<sg>" + VV_CH + r")\s+(?P<sgr>" + VV_CHGR + r")\s+(?P<sv>\d{3,4})\s+"
     r"(?P<svf>\d{3,4})\s+(?P<mg>" + VV_CH + r")\s*(?P<mgr>" + VV_CHGR + r")\s+(?P<mv>\d{3,4})\s+(?P<mvf>\d{3,4})\s*$")
 VV_BULLET_RE = re.compile(
-    r"^\s*(?P<bg>\d+,\d)\s+(?P<bgr>\d+(?:\.\d)?)\s+(?P<text>\S.*?)\s+(?P<colmm>\d{2,3},\d)\s+(?P<colin>\d\.\d{3})\s+"
+    r"^\s*(?P<bg>\d+,\d{1,2})\s+(?P<bgr>\d+(?:\.\d)?)\s+(?P<text>\S.*?)\s+(?P<colmm>\d{2,3},\d)\s+(?P<colin>\d\.\d{3})\s+"
     r"(?=" + VV_POWDER + r"\s)")
 VV_BARREL_RE = re.compile(r"Test barrel:\s+(?P<mm>\d+) mm \((?P<inch>[\d¼-¾⅓-⅞]+)”\), "
                           r"1 in (?P<tw>[\d¼-¾⅓-⅞.]+)” twist")
@@ -1016,6 +1030,11 @@ def vihtavuori_parse(doc, log, keep_all=False):
                          txt, re.M)
         printed = (foot.group(1) or foot.group(2)) if foot else None
         name_cont = None
+        if re.search(r"RELOADING DATA FOR\s+SHOTGUN", txt):
+            st.update({"cart": None, "bullet": None, "barrel": None})
+            continue  # shotshell data
+        if "COWBOY ACTION SHOOTING" in txt:
+            st.update({"cart": None, "bullet": None, "barrel": None, "cowboy": True})
         for li, line in enumerate(lines):
             s = line.strip()
             if not s:
@@ -1080,7 +1099,13 @@ def vihtavuori_parse(doc, log, keep_all=False):
                                 "colmm": mbl.group("colmm"), "colin": mbl.group("colin"), "line": ws(line),
                                 "frag_lines": [], "marker": bool(re.search(r"\d\)", line[:ml.start()]))}
             elif prefix.strip():
-                # wrapped bullet maker / type text on a continuation row
+                # wrapped bullet maker / type text on a continuation row.  Numbers in the prefix mean a bullet
+                # line that did not match the strict pattern: never treat it as wrapped text.
+                if re.search(r"\d+,\d|\d\.\d{3}|^\s*\d", prefix):
+                    unparsed.append({"page": p, "text": ws(line), "why": "bullet line does not match the strict "
+                                     "pattern; this bullet's rows are skipped"})
+                    st["bullet"] = None
+                    continue
                 if st["bullet"] is None:
                     unparsed.append({"page": p, "text": ws(line), "why": "text before powder but no bullet"})
                     continue
@@ -1139,6 +1164,11 @@ def vihtavuori_parse(doc, log, keep_all=False):
                                                                             p))
             if hdr_pos is None or (mfg_t and typ_t is None):
                 notes.append("Bullet maker/type split by column position; check bulletMfr/bulletModel.")
+            if st.get("cowboy"):
+                notes.append("Cowboy Action Shooting section: 'The maximum load is determined by the velocity limit "
+                             "about 300 m/s, or by the maximum pressure limit according to the CIP October 1, 1992 "
+                             "rules. The bold text in the tables indicate the maximum load according to CIP pressure "
+                             "level.' (bold type is not recoverable from the text layer).")
             for lt, gk, grk, vk, fk in (("start", "sg", "sgr", "sv", "svf"), ("max", "mg", "mgr", "mv", "mvf")):
                 flag = ml.group(grk)[-1] if ml.group(grk)[-1] in "ACF" else ""
                 n2 = list(notes)
@@ -1164,6 +1194,7 @@ def vihtavuori_parse(doc, log, keep_all=False):
                     "pressure": None, "pressureUnit": None,
                     "pressureMethod": "C.I.P. (stated for the guide as a whole; values not published)",
                     "loadType": lt, "compressed": flag == "C",
+                    "dataSection": "Cowboy Action Shooting loads" if st.get("cowboy") else "Reloading data",
                     "chargeG": float(ml.group(gk).rstrip("ACF").replace(",", ".")),
                     "velocityMps": int(ml.group(vk)),
                     "coalMm": float(b["colmm"].replace(",", ".")),
@@ -1279,6 +1310,60 @@ PRIORITY = ["223 Remington", "308 Winchester", "6.5 Creedmoor", "30-06 Springfie
             "357 Magnum", "44 Remington Magnum"]
 
 
+NOTES = (
+    "Published load data for calibrating/validating ORKA. One record per printed load (start and max are separate "
+    "records sharing the same evidence). Only the 13 priority cartridges are kept (run with --all for every "
+    "cartridge in the documents). Pressure: Hodgdon 2025 Annual Manual gives start+max pressure per load in psi "
+    "(transducer) or CUP (copper crusher) - CUP is never converted; Reload Swiss 2025 gives start+max pressure in "
+    "bar (method not stated; velocity is V5 at 5 m); Shooters World gives only the max-load pressure in psi "
+    "(method and test barrel not stated); Vihtavuori 2026 guide gives no pressure values (CIP-tested, max loads at "
+    "CIP/SAAMI limit) but states test barrel, twist, case and primer type per cartridge. Values are copied from "
+    "the printed columns (gr / fps / in / psi / CUP / bar). Derived values are flagged in notes: Reload Swiss "
+    "velocityFps = printed m/s / 0.3048 and coalIn / barrelLengthIn = printed mm / 25.4 (raw values kept in "
+    "velocityMps / coalMm / barrelLengthMm). Rows were skipped (never guessed) when a value had a typo (e.g. "
+    "'46.500 PSI'), when a footnote marker could change barrel/case/twist, when unit pairs printed in the same row "
+    "disagreed (g vs gr, m/s vs fps, mm vs in), when wrapped cells could not be attributed unambiguously, or when "
+    "a continuation page's header did not match the running section; every skipped row is listed in "
+    "meta.parseLog.*.unparsedRows. Rows whose COAL is shorter than the case trim length printed for that "
+    "cartridge are physically impossible as printed and are moved to meta.excludedRecords. Identical rows printed "
+    "twice on one Shooters World page are recorded once; the same component line printed with different "
+    "velocities is kept and cross-referenced in 'conflicts'.")
+DOCS_NOT_USED = [
+    {"url": "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/"
+            "Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf",
+     "part": "Customer reloading data (PDF pages 59-128)",
+     "why": "customer-submitted loads, no pressure, non-standard barrels; only Reload Swiss's own data is used"},
+    {"url": "https://shootersworldpowder.com/wp-content/uploads/2023/06/"
+            "ShootersWorldManualInterior_CHRIS_WITH-COVER__RUSS-REVISED.pdf",
+     "part": "PDF page 46 (SW-BMG .50 BMG) and page 49 (Clean Shot hard-cast competition table)",
+     "why": ".50 BMG is not a priority cartridge; page 49 uses a different column order (4 priority rows) and was "
+            "not parsed"},
+    {"url": "https://shootersworldpowder.com/wp-content/uploads/2025/05/Vectan-Reloading-catalogue_vUS_compressed.pdf",
+     "why": "shotshell data only"},
+    {"url": "https://hodgdonpowderco.com/reloading-manuals-library/",
+     "why": "older Hodgdon Annual Manuals (AM17-AM24) not parsed: same publisher as AM25, would mostly duplicate it"},
+    {"url": "https://hodgdonpowderco.com/wp-content/uploads/2023/04/Accurate_DP68-1.pdf",
+     "why": "Accurate 'Data Powder' surplus lots (DP68/73/74/79/85/86/2200/2230-C/2230-S) are discontinued one-off "
+            "surplus powders; Accurate No. 11FS and TCM data PDFs duplicate powders already in the 2025 Annual "
+            "Manual. Downloaded, not used."},
+    {"url": "https://www.alliantpowder.com/reloaders/RecipeList.aspx?gtypeid=2",
+     "why": "Alliant web recipes: one page per bullet (~270 pages for the priority cartridges), max load only, the "
+            "pressure column is hidden and shows 0, and recipe pages redirect to a disclaimer page; not crawled"},
+    {"url": "https://vihtavuori.com/reloading-data/reloading-data-tool/",
+     "why": "data served only through a JavaScript app/private API; the printed 2026 guide PDF was used instead"},
+    {"url": "https://www.reload-swiss.com/en/loading-data/rs-loading-data",
+     "why": "data served only through a JavaScript app/private API; the 2025 guide PDF was used instead"},
+    {"url": "https://www.nosler.com/load-data",
+     "why": "load data served through a JavaScript SDK/private API (omniguide); not used"},
+    {"url": "https://www.norma-ammunition.com/sitemap.xml",
+     "why": "no reloading data published on the site"},
+    {"url": "https://www.adi-powders.com.au/",
+     "why": "host unreachable from this environment (proxy 502)"},
+    {"url": "https://westernpowders.com/",
+     "why": "connection reset (site appears retired; Accurate/Ramshot data now in the Hodgdon Annual Manual)"},
+]
+
+
 def main():
     log = {}
     records = []
@@ -1296,15 +1381,54 @@ def main():
         records += recs
         docs_meta.append({"url": d["url"], "localPath": os.path.join(SRC_DIR, d["local"]), "title": d["title"],
                           "date": d["date"], "landingPage": d["landing"], "records": len(recs)})
+    # physically impossible rows: COAL shorter than the shortest case trim length any source prints for
+    # that cartridge (e.g. a mislabelled row).  Removed from 'loads' and listed in meta.excludedRecords.
+    trims = {}
+    for r in records:
+        if r.get("caseTrimLengthIn"):
+            trims.setdefault(r["cartridge"], []).append(r["caseTrimLengthIn"])
+    excluded, kept = [], []
+    for r in records:
+        t = min(trims.get(r["cartridge"], [0]) or [0])
+        if r["coalIn"] is not None and t and r["coalIn"] < t:
+            excluded.append({"reason": "coalIn %.3f is shorter than the shortest case trim length printed for %s "
+                                       "(%.3f in) in these sources: row is physically impossible as printed"
+                                       % (r["coalIn"], r["cartridge"], t),
+                             "record": {k: v for k, v in r.items() if not k.startswith("_")}})
+        else:
+            kept.append(r)
+    records = kept
+    print("excluded (COAL < case trim length):", len(excluded))
+    for e in excluded:
+        print("   EXCLUDED", e["record"]["cartridge"], e["record"]["coalIn"], e["record"]["evidence"][-100:])
     unknown_powders = sorted({r["powder"] for r in records if r["powderMfr"] is None})
+    for r in records:
+        r.setdefault("conflicts", [])
+    for dm in docs_meta:
+        dm["records"] = sum(1 for r in records if r["sources"][0]["url"] == dm["url"])
+    coverage = {}
+    for r in records:
+        c = coverage.setdefault(r["cartridge"], {"records": 0, "withPressure": 0, "powders": set(),
+                                                 "powdersWithPressure": set()})
+        c["records"] += 1
+        c["powders"].add("%s %s" % (r["powderMfr"], r["powder"]))
+        if r["pressure"] is not None:
+            c["withPressure"] += 1
+            c["powdersWithPressure"].add("%s %s" % (r["powderMfr"], r["powder"]))
+    coverage = {k: {"records": v["records"], "recordsWithPressure": v["withPressure"],
+                    "distinctPowders": len(v["powders"]), "distinctPowdersWithPressure": len(v["powdersWithPressure"])}
+                for k, v in sorted(coverage.items())}
     out = {
         "meta": {
             "documents": docs_meta,
             "generated": RETRIEVED,
             "script": "scripts/extract/validation-loads.py",
-            "notes": "",
+            "notes": NOTES,
+            "documentsNotUsed": DOCS_NOT_USED,
+            "coverage": coverage,
             "parseLog": log,
             "unknownPowderBrands": unknown_powders,
+            "excludedRecords": excluded,
         },
         "loads": records,
     }

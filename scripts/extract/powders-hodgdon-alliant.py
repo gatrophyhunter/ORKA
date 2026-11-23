@@ -25,6 +25,7 @@ Usage:
 
 Everything is parsed with code from HTML, `pdftotext -layout` output and OCR text; nothing is typed in.
 """
+import hashlib
 import html as htmlmod
 import json
 import os
@@ -483,6 +484,10 @@ def parse_alliant_sds():
         pages = pdfpages(local)
         full = '\f'.join(pages)
         d = {'url': u, 'local': local, 'file': u.split('/')[-1]}
+        with open(local, 'rb') as fh:
+            d['md5'] = hashlib.md5(fh.read()).hexdigest()
+        dup = next((x for x in out.values() if x['md5'] == d['md5']), None)
+        d['duplicateOf'] = dup['url'] if dup else None
         pm = re.search(r'Product Name:\s*(.+)', full) or re.search(r'Trade name:\s*(.+)', full)
         d['productName'] = ws(pm.group(1)) if pm else None
         d['productNameLine'] = ws(pm.group(0)) if pm else None
@@ -519,7 +524,8 @@ def parse_alliant_sds():
                 break
         d['appearance'] = ap
         out[d['file']] = d
-        add_doc(u, local, 'Alliant SDS: ' + (d['productName'] or d['file']), d['date'])
+        add_doc(u, local, 'Alliant SDS: ' + (d['productName'] or d['file']) +
+                (f' (byte-identical to {dup["url"]})' if dup else ''), d['date'])
     return out
 
 
@@ -975,6 +981,7 @@ def build():
         for x in sdsd.values():
             if normkey(nm_core) in sds_listed_keys(x['productName']) and x['file'] not in sds_files:
                 sds_files.append(x['file'])
+        seen_md5 = rec.setdefault('_seen_md5', set())
         for fn in sds_files:
             d = sdsd.get(fn)
             if not d:
@@ -990,8 +997,9 @@ def build():
                     continue
             if d.get('_used_by') is None:
                 d['_used_by'] = []
-            if rec['id'] in d['_used_by']:
+            if rec['id'] in d['_used_by'] or d['md5'] in seen_md5:
                 continue
+            seen_md5.add(d['md5'])
             d['_used_by'].append(rec['id'])
             add_source(rec, src(d['url'], 'manufacturer', d['ng']['page'] if d['ng'] else None))
             add_fe(rec, 'sds', d['productNameLine'], d['url'], 1)
@@ -1093,6 +1101,7 @@ def build():
     out = []
     for rec in records.values():
         rec.pop('_alliant_page', None)
+        rec.pop('_seen_md5', None)
         evs = []
         for fld, items in rec['fieldEvidence'].items():
             for it in items:
@@ -1135,9 +1144,10 @@ def self_check(data):
             ev = ' '.join(it['evidence'] for it in fe['nitroglycerinPctRange'])
             if ng['raw'] not in ev:
                 errors.append(f'{r["id"]}: NG range raw not in evidence')
-            for v in (ng['max'],) + ((ng['min'],) if ng['min'] else ()):
-                if not re.search(r'(?<![\d.])' + re.escape(str(v)) + r'(?![\d.])', ng['raw']):
-                    errors.append(f'{r["id"]}: NG bound {v} not in raw')
+            nums = [float(x) for x in re.findall(r'\d+(?:\.\d+)?', ng['raw'])]
+            if float(ng['max']) != max(nums) or not (float(ng['min']) == min(nums) or
+                                                      (ng['min'] == 0 and ng['raw'].startswith('<'))):
+                errors.append(f'{r["id"]}: NG bounds {ng["min"]}-{ng["max"]} not matching raw {ng["raw"]}')
         kw = {'spherical': r'spherical|ball', 'extruded': r'extruded|perforated grain', 'flake': r'flake'}
         if r['form']:
             if not any(re.search(kw[r['form']], it['evidence'], re.I) for it in fe['form']):

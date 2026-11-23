@@ -76,6 +76,8 @@ function applyFixes<T extends { id: string }>(items: T[]): T[] {
 }
 
 const dropped: Record<string, number> = {};
+const CANISTER_BRANDS = new Set(['hodgdon', 'imr', 'winchester', 'alliant', 'vihtavuori', 'norma', 'reload-swiss', 'shooters-world', 'accurate', 'ramshot', 'adi']);
+const cleanName = (s: string) => s.replace(/[®™]/g, '').replace(/\s+/g, ' ').trim();
 const drop = (k: string) => (dropped[k] = (dropped[k] ?? 0) + 1);
 
 // ---------------------------------------------------------------- cartridges
@@ -143,12 +145,16 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
         drop('powder (no source/evidence)');
         continue;
       }
-      const id = `${makerKey(r.manufacturer)}-${slug(r.name)}`;
+      // Show powders under their canister brand (IMR 4064, Winchester 760), keep the parent company in notes.
+      const brand = str(r.brand);
+      const shownMaker = brand && CANISTER_BRANDS.has(makerKey(brand)) ? brand : r.manufacturer;
+      const name = cleanName(r.name);
+      const id = `${makerKey(shownMaker)}-${slug(name)}`;
       const p: Powder = {
         id,
-        manufacturer: r.manufacturer,
-        brand: str(r.brand),
-        name: r.name,
+        manufacturer: shownMaker,
+        brand: brand && brand !== shownMaker ? brand : r.manufacturer !== shownMaker ? r.manufacturer : null,
+        name,
         form: (['spherical', 'extruded', 'flake', 'disc'].includes(r.form) ? r.form : null) as Powder['form'],
         base: (['single', 'double', 'triple'].includes(r.base) ? r.base : null) as Powder['base'],
         nitroglycerinPct: num(r.nitroglycerinPct),
@@ -183,6 +189,7 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
   for (const p of powders) {
     addIdx(powderKey(p.name), p.id);
     addIdx(powderKey(`${p.manufacturer} ${p.name}`), p.id);
+    addIdx(powderKey(`${makerKey(p.manufacturer)} ${p.name}`), p.id);
     if (makerKey(p.manufacturer) === 'imr' && !/^imr/i.test(p.name)) addIdx(powderKey(`IMR ${p.name}`), p.id);
     if (makerKey(p.manufacturer) === 'winchester' && !/^win/i.test(p.name)) addIdx(powderKey(`Winchester ${p.name}`), p.id);
   }
@@ -313,7 +320,9 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
       const cart = cartridges.find((c) => c.id === ck || c.aliases.some((a) => cartridgeKey(a) === ck));
       const pk = powderKey(r.powder);
       const mk = r.powderMfr ? makerKey(r.powderMfr) : null;
-      const pw = powders.filter((p) => powderKey(p.name) === pk || powderKey(`${p.manufacturer} ${p.name}`) === pk).filter((p) => !mk || makerKey(p.manufacturer) === mk);
+      const pw = powders
+        .filter((p) => powderKey(p.name) === pk || powderKey(`${p.manufacturer} ${p.name}`) === pk || powderKey(`${makerKey(p.manufacturer)} ${p.name}`) === pk)
+        .filter((p) => !mk || makerKey(p.manufacturer) === mk);
       const unit = r.pressureUnit === 'psi' || r.pressureUnit === 'CUP' || r.pressureUnit === 'bar' ? r.pressureUnit : null;
       out.push({
         cartridge: r.cartridge,

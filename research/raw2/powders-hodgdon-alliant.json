@@ -382,7 +382,7 @@
       {
         "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
         "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/powders-hodgdon-alliant/alliant/sds/30-40_Smokeless_Powder.pdf",
-        "title": "Alliant SDS: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
+        "title": "Alliant SDS: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders (byte-identical to https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf)",
         "date": "03/01/2017"
       },
       {
@@ -430,13 +430,13 @@
       {
         "url": "https://www.alliantpowder.com/downloads/sds/Power_Pro_Series_4_1_04-11-13.pdf",
         "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/powders-hodgdon-alliant/alliant/sds/Power_Pro_Series_4_1_04-11-13.pdf",
-        "title": "Alliant SDS: Power Pro® Series Smokeless Powders",
+        "title": "Alliant SDS: Power Pro® Series Smokeless Powders (byte-identical to https://www.alliantpowder.com/downloads/sds/PowerProSeries.pdf)",
         "date": "03/11/2015"
       },
       {
         "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
         "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/powders-hodgdon-alliant/alliant/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-        "title": "Alliant SDS: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
+        "title": "Alliant SDS: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders (byte-identical to https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf)",
         "date": "03/01/2017"
       },
       {
@@ -514,18 +514,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -590,16 +578,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -607,32 +585,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -1457,18 +1415,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -1531,16 +1477,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -1553,16 +1489,6 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
@@ -1574,16 +1500,6 @@
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -2032,18 +1948,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -2101,16 +2005,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -2118,32 +2012,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -2402,18 +2276,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -2476,16 +2338,6 @@
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 6
           }
         ],
         "temperatureStableClaim": [
@@ -2500,32 +2352,12 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
           {
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 2
           }
         ],
@@ -3168,18 +3000,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -3249,16 +3069,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -3266,32 +3076,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -4414,18 +4204,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -4495,16 +4273,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -4512,32 +4280,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -7364,18 +7112,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -7440,16 +7176,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -7457,32 +7183,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 6
           }
         ],
@@ -7578,18 +7284,6 @@
           "retrieved": "2026-11-23"
         },
         {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
           "url": "https://www.alliantpowder.com/resources/catalog/AP399_2023AlliantPowderReloadersGuide_SinglePgsNoCrops.pdf",
           "type": "manufacturer",
           "page": 9,
@@ -7654,16 +7348,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -7671,32 +7355,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
@@ -7788,18 +7452,6 @@
         },
         {
           "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-          "type": "manufacturer",
-          "page": 2,
-          "retrieved": "2026-11-23"
-        },
-        {
-          "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
           "type": "manufacturer",
           "page": 2,
           "retrieved": "2026-11-23"
@@ -7910,16 +7562,6 @@
             "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 1
-          },
-          {
-            "evidence": "Product Name: Bullseye®- Power Pistol® - BE-86 - E3 - Pro Reach - 20/28 – Steel - Unique - Sport Pistol - Smokeless Powders",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 1
           }
         ],
         "nitroglycerinPctRange": [
@@ -7927,32 +7569,12 @@
             "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
             "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 2
-          },
-          {
-            "evidence": "Nitroglycerin (CAS No) 55-63-0 4 - 10, 10 - 30, 30 - 40",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
-            "page": 2
           }
         ],
         "form": [
           {
             "evidence": "Appearance : Small black/gray flakes",
             "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powder.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA_FINAL.pdf",
-            "page": 6
-          },
-          {
-            "evidence": "Appearance : Small black/gray flakes",
-            "url": "https://www.alliantpowder.com/downloads/sds/30-40_Smokeless_Powders_SDS_NA.pdf",
             "page": 6
           }
         ],
