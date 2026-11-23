@@ -148,3 +148,13 @@ describe('builder derivation', () => {
     expect(r.chargeGr).toBe(44);
   });
 });
+
+import { shotStartClass, defaultShotStartPsi } from '../src/engine/defaults';
+describe('shot-start construction classes', () => {
+  it('classifies monolithic wording as monolithic and jacketed wording as jacketed', () => {
+    for (const s of ['monolithic-copper', 'lead-free', 'monometal', 'Barnes TSX', 'CuZn', 'homogeneous alloy', 'solid copper']) expect(shotStartClass(s)).toBe('monolithic');
+    for (const s of ['cup-and-core', 'copper-jacketed lead core', 'bonded', 'partition', 'FMJ', '', null]) expect(shotStartClass(s as any)).toBe('jacketed');
+    for (const s of ['lead round nose', 'cast', 'plated', 'hard cast']) expect(shotStartClass(s)).toBe('lead');
+    expect(defaultShotStartPsi('Barnes TSX')).toBeGreaterThan(defaultShotStartPsi('cup-and-core'));
+  });
+});

@@ -106,7 +106,8 @@ export interface Trace {
   psi: number[];
 }
 
-export type SimStatus = 'muzzle' | 'stuck' | 'max-steps' | 'invalid';
+/** 'diverged' = predicted pressure ran away (free gas volume → 0): far beyond any safe load and outside the model's range. */
+export type SimStatus = 'muzzle' | 'stuck' | 'max-steps' | 'invalid' | 'diverged';
 
 export interface SimResult {
   status: SimStatus;

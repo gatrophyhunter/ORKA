@@ -14,12 +14,19 @@ import type { PowderModelParams } from '../data/schema';
  * All three are calibratable; the uncertainty band varies shot-start by ±20 % (1σ).
  */
 const MPA_TO_PSI = 145.03773773020923;
+
+/** Classify bullet construction text for the shot-start default. Jacketed descriptions are never monolithic. */
+export function shotStartClass(construction?: string | null): 'monolithic' | 'lead' | 'jacketed' {
+  const c = (construction ?? '').toLowerCase();
+  if (!c.trim()) return 'jacketed';
+  const jacketed = /jacket|cup-and-core|cup and core|bonded|partition|fmj|tmj|lead[- ]?core|core/.test(c);
+  if (!jacketed && /\b(mono|monolithic|monometal|all[- ]copper|solid[- ]copper|solid[- ]brass|lead[- ]free|cuzn|homogeneous|tsx|ttsx|lrx|tac-x|e-tip|cx)\b|monolithic|copper alloy|brass/.test(c)) return 'monolithic';
+  if (!jacketed && /\b(lead|cast|swaged|plated|lrn|lswc|lwc|hard cast|coated)\b/.test(c)) return 'lead';
+  return 'jacketed';
+}
 export function defaultShotStartPsi(construction?: string | null, cartridgeType?: 'rifle' | 'handgun'): number {
   void cartridgeType;
-  const c = (construction ?? '').toLowerCase();
-  if (c.includes('monolithic') || c.includes('copper') || c.includes('brass') || c.includes('solid')) return Math.round(35.3 * MPA_TO_PSI);
-  if (c === 'lead' || c.includes('cast') || c.includes('plated') || c.includes('swaged')) return Math.round(30.0 * MPA_TO_PSI);
-  return Math.round(25.0 * MPA_TO_PSI);
+  return Math.round(shotStartClass(construction) === 'monolithic' ? 35.3 * MPA_TO_PSI : shotStartClass(construction) === 'lead' ? 30.0 * MPA_TO_PSI : 25.0 * MPA_TO_PSI);
 }
 
 export const DEFAULT_POWDER_TEMP_F = 70;

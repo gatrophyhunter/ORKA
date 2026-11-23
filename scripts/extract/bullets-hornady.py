@@ -160,23 +160,32 @@ def num(s):
 
 
 # Profile abbreviations as printed in Hornady product names (kept verbatim; no expansion).
-PROFILE_TOKENS = ['BTHP', 'SPBT', 'SPSP', 'SP-RP', 'HP/XTP', 'FMJ-BT', 'FMJ-RN', 'FMJ-FP', 'FMJ BT',
-                  'FMJ RN', 'FMJ FP', 'FMJ-FN', 'FMJ', 'BT', 'HP', 'SP', 'RN', 'FP', 'FN', 'SWC', 'HBWC',
-                  'LRN', 'DEWC', 'RNSP', 'TSX', 'JFP', 'JHP', 'ENC', 'FPJ']
+PROFILE_TOKENS = ['BTHP', 'HPBT', 'BTSP', 'SPBT', 'SP-RP', 'FMJ-BT', 'FMJ-RN', 'FMJ-FP', 'FMJ-FN', 'FMJ',
+                  'BT', 'HP', 'SP', 'RN', 'FP', 'FN', 'SWC', 'HBWC', 'LRN', 'DEWC', 'RNSP', 'JFP', 'JHP',
+                  'Boattail']
 
 
 def profile_from_name(name):
-    toks = re.findall(r'[A-Za-z][A-Za-z/-]*', name)
+    """Profile abbreviations printed in the product name (non-breaking hyphens -> '-')."""
+    toks = name.replace('\u2011', '-').split()
     hits = []
     for t in toks:
-        tu = t.strip('-/')
+        tu = t.strip('-/(),')
         if tu in PROFILE_TOKENS and tu not in hits:
             hits.append(tu)
     return ' '.join(hits) if hits else None
 
 
+def twist_inches(tw):
+    """Inches per turn from a printed twist such as 1-12\" or 1:8.5\u201d; None if not of that form."""
+    if not tw:
+        return None
+    m = re.fullmatch(r'1\s*[-:]\s*([0-9]+(?:\.[0-9]+)?)\s*(?:"|\u201d|in)?', tw.strip())
+    return float(m.group(1)) if m else None
+
+
 def visible_title_and_item_line(h):
-    """The H1/H2 product title and the 'Item #NNNN | NN/Box' line from the visible HTML."""
+    """The visible "Item #NNNN | NN/Box" line from the server-rendered HTML."""
     body = h[h.find('<body'):]
     body = re.sub(r'<script.*?</script>', ' ', body, flags=re.S)
     body = re.sub(r'<style.*?</style>', ' ', body, flags=re.S)
@@ -221,7 +230,7 @@ def bc_row_key(label):
     '30 Cal 225 gr. ELD Match 1 in 7" Twist', '6mm 90gr ELD-X' or '.25 cal 134 ELD-Match'."""
     w = re.search(r'(\d+)\s*gr', label) or re.search(r'cal\s+(\d+)\s+ELD', label, flags=re.I)
     weight = int(w.group(1)) if w else None
-    cal = label.split()[0].lower().lstrip('.')
+    cal = re.sub(r'(\d)\s+mm\b', r'\1mm', label).split()[0].lower().lstrip('.')
     tw = re.search(r'1 in ([\d.]+)"?\s*Twist', label)
     return cal, weight, (tw.group(0) if tw else None)
 
@@ -252,13 +261,22 @@ def find_construction(feature_text, name, line):
     wording; 'bonded' wording (not negated); lead bullets (line 'Lead Bullets' or a lead
     profile abbreviation in the name, plus 'lead' wording); InterLock ring or a jacket +
     (swaged/lead) core description -> cup-and-core."""
+    name = name.replace('\u2011', '-')
     low_name = (name + ' ' + (line or '')).lower()
-    if re.search(r'\bfmj\b', low_name):
+    if re.search(r'\bfmj\b', name.lower()):
         return 'FMJ', name
+    # Non-expanding solids with a lead core in a steel jacket (DGS) and jacketed bullets with
+    # a non-lead core (NTX) fit none of the categories: leave null, explain in notes.
+    if re.search(r'\bdgs\b|\bsolid\b', low_name):
+        return None, 'NO-CATEGORY: ' + (_sent(r'\bjacket\b', feature_text) or name)
+    nl = _sent(r'\bnon-lead core\b', feature_text)
+    if nl:
+        return None, 'NO-CATEGORY: ' + nl
     for pat, val in (
-        (r'\bmonolithic\b[^.!?<>]*\bbrass\b|\bbrass\b[^.!?<>]*\bmonolithic\b|\bsolid brass\b', 'monolithic-brass'),
-        (r'\bmonolithic\b[^.!?<>]*\bcopper\b|\bcopper\b[^.!?<>]*\bmonolithic\b|\bsolid copper\b|'
-         r'\b100% copper\b|\ball[- ]copper\b', 'monolithic-copper'),
+        (r'\bmonolithic\b[^.!?<>]*\bbrass\b|\bbrass\b[^.!?<>]*\bmonolithic\b', 'monolithic-brass'),
+        (r'\bmonolithic\b[^.!?<>]*\bcopper\b|\bcopper\b[^.!?<>]*\bmonolithic\b', 'monolithic-copper'),
+        (r'\bsolid brass\b', 'monolithic-brass'),
+        (r'\b100% copper\b|\ball[- ]copper\b', 'monolithic-copper'),
     ):
         ev = _sent(pat, feature_text)
         if ev:
@@ -274,7 +292,7 @@ def find_construction(feature_text, name, line):
     if ev:
         return 'cup-and-core', ev
     if re.search(r'\bjacket', feature_text, flags=re.I):
-        ev = _sent(r'\b(?:swaged|lead) cores?\b|\bcores?\b[^.!?<>]*\bswaged\b', feature_text)
+        ev = _sent(r'\bcores?\b', feature_text)
         if ev:
             ev2 = _sent(r'\bjacket', feature_text)
             return 'cup-and-core', ev + ' / ' + ev2
@@ -290,6 +308,9 @@ TIP_PATTERNS = [
 
 
 def find_tip(feature_text, name, line):
+    feature_text = feature_text.replace('\u2011', '-')
+    name = name.replace('\u2011', '-')
+    line = (line or '').replace('\u2011', '-')
     for pat, val in TIP_PATTERNS:
         for src in (name + ' ' + (line or ''), feature_text):
             m = re.search(r'[^.<>]*(?:' + pat + r')[^.<>]*', src, flags=re.I)
@@ -333,6 +354,13 @@ def parse_page(kind, slug, url):
     rec_twist = (d.get('rec_twist') or '').strip()
     twist_val = twist if twist and twist not in ('-', '0') else None
     rec_val = rec_twist if rec_twist and rec_twist not in ('-', '0') else None
+    bad_tw = []
+    if twist_val and twist_inches(twist_val) is None:
+        bad_tw.append(f'page twist field holds non-twist text {twist_val!r}; ignored')
+        twist_val = None
+    if rec_val and twist_inches(rec_val) is None:
+        bad_tw.append(f'page rec_twist field holds non-twist text {rec_val!r}; ignored')
+        rec_val = None
     keys = ['title', 'sku', 'caliber', 'caliberdiameter', 'weight', 'sectional_density_1',
             'ball_coef_1', 'ball_coef_type_1', 'ball_coef_2_f', 'ball_coef_type_2', 'twist',
             'rec_twist', 'discontinued', 'box_count']
@@ -345,21 +373,44 @@ def parse_page(kind, slug, url):
     notes = []
     if bc_issue:
         notes += bc_issue
-    # title cross-checks
-    if diam is not None and ('%.3f' % diam).lstrip('0') not in title.replace(' ', ''):
-        notes.append(f'diameter {diam} from caliberdiameter not found in title')
-    if weight is not None and not re.search(r'\b%d\s*gr' % int(weight), title):
-        notes.append(f'weight {weight} not found in title as "<n> gr"')
+    notes += bad_tw
+    if line is None:
+        notes.append('page gives no product line (linktitle empty)')
+    # title cross-checks.  The printed title carries the diameter as e.g. '.308' or '.2215'.
+    tm = re.search(r'(?<![0-9A-Za-z])(0?\.[0-9]{3,4})(?![0-9])', title)
+    title_diam = float(tm.group(1)) if tm else None
+    conflicts = []
+    if diam is None and title_diam is not None:
+        diam = title_diam
+        notes.append(f'diameterIn {title_diam} taken from the printed product title '
+                     f'(page caliberdiameter field empty; caliber field reads {d.get("caliber")!r})')
+    elif diam is not None and title_diam is not None and abs(diam - title_diam) > 1e-9:
+        conflicts.append({'field': 'diameterIn', 'values': [
+            {'value': diam, 'source': url + ' (caliberdiameter field)'},
+            {'value': title_diam, 'source': url + ' (printed title)'}]})
+    elif diam is not None and title_diam is None:
+        notes.append(f'title prints no decimal diameter; diameterIn from caliberdiameter field {d.get("caliberdiameter")!r}')
+    if weight is not None and not re.search(r'(?<![0-9.])%s\s*gr' % re.escape('%g' % weight), title):
+        notes.append(f'weight {weight:g} not found in title as "<n> gr"')
     if rec_val and twist_val and rec_val != twist_val:
         notes.append(f'page has two twist fields: twist={twist_val!r}, rec_twist={rec_val!r}')
     if twist_val or rec_val:
         notes.append('recommendedTwist is the product page specification field "twist"'
                      ' (rec_twist used if twist empty); Hornady prints it like 1-12" (1 turn in 12 in).')
-    if c_ev:
+    if c_ev and c_ev.startswith('NO-CATEGORY: '):
+        notes.append('construction left null: page wording fits none of the categories: "'
+                     + c_ev[len('NO-CATEGORY: '):] + '"')
+    elif c_ev:
         notes.append(f'construction from page wording: "{c_ev}"')
     if t_ev:
         notes.append(f'tip from page wording: "{t_ev}"')
     sd = num(d.get('sectional_density_1') or d.get('sectional_density'))
+    if sd is not None and weight and diam:
+        calc = weight / 7000.0 / diam ** 2
+        if abs(calc - sd) > 0.0025:
+            notes.append(f'CHECK: page sectional density {sd:g} does not match the printed weight/diameter '
+                         f'({weight:g} gr / {diam:g} in gives {calc:.3f}); the page data may be copied from '
+                         f'another item, so treat this page\'s BC with caution')
     rec = {
         'id': f'hornady-{sku}' if sku else f'hornady-{slug}',
         'manufacturer': 'Hornady',
@@ -379,6 +430,7 @@ def parse_page(kind, slug, url):
         'tip': tip,
         'construction': construction,
         'recommendedTwist': twist_val or rec_val,
+        'twistIn': twist_inches(twist_val or rec_val),
         'status': 'discontinued' if d.get('discontinued') else 'current',
         'kind': kind,
         'sectionalDensity': sd,
@@ -386,6 +438,7 @@ def parse_page(kind, slug, url):
         'sources': [{'url': url, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED}],
         'evidence': collapse(' | '.join(ev_parts)),
         'notes': '; '.join(notes) if notes else None,
+        'conflicts': conflicts,
     }
     return rec, None
 
@@ -406,8 +459,9 @@ def record_line_key(r):
 
 def attach_bc_table(records, bc_rows):
     """Attach Mach-banded BCs from /bc to matching records.  A /bc bullet can have more than
-    one row (BC differs by barrel twist); all rows go to the one record.  A conflict is logged
-    when the product-page BC equals none of the /bc Mach 2.25 values for that bullet."""
+    one row (BC differs by barrel twist); all rows go to the bullet's record(s) -- the same bullet
+    can be sold under several item numbers (box counts).  A conflict is logged when the
+    product-page BC equals none of the /bc Mach 2.25 values for that bullet."""
     groups = {}
     for row in bc_rows:
         cal, weight, twist = bc_row_key(row['label'])
@@ -418,46 +472,83 @@ def attach_bc_table(records, bc_rows):
     for key, rows in groups.items():
         lk, cal, weight = key
         cands = [r for r in records if record_line_key(r) == lk and r['weightGr'] == weight
-                 and r['name'].split()[0].lower().lstrip('.') == cal and r['kind'] == 'rifle']
-        if len(cands) > 1:
-            # prefer the current (non-discontinued) product if exactly one is current
-            cur = [c for c in cands if c['status'] == 'current']
-            if len(cur) == 1:
-                cands = cur
-        if len(cands) != 1:
-            unmatched.append({'bcRows': [r['label'] for r in rows], 'candidates': [c['id'] for c in cands]})
+                 and re.sub(r'(\d)\s+mm\b', r'\1mm', r['name']).split()[0].lower().lstrip('.') == cal
+                 and r['kind'] == 'rifle']
+        if not cands:
+            unmatched.append({'bcRows': [r['label'] for r in rows], 'candidates': []})
             continue
-        r = cands[0]
-        parts = []
-        r['bcMach'] = []
-        for row in rows:
-            v = row['values']
-            tw = f' [{row["twist"]}]' if row['twist'] else ''
-            parts.append(f'Mach 2.25 (2512 fps): G1 {v[0][0]}, G7 {v[1][0]}; Mach 2.0 (2232 fps): G1 {v[2][0]}, '
-                         f'G7 {v[3][0]}; Mach 1.75 (1953 fps): G1 {v[4][0]}, G7 {v[5][0]}{tw}')
-            for mach, fps, a, b in ((2.25, 2512, 0, 1), (2.0, 2232, 2, 3), (1.75, 1953, 4, 5)):
-                r['bcMach'].append({'mach': mach, 'fpsIcao': fps, 'g1': float(v[a][0]), 'g7': float(v[b][0]),
-                                    'twistCondition': row['twist']})
-            r['evidence'] += ' || ' + row['text']
-        r['bcNotes'] = ('Hornady /bc table (' + (rows[0]['heading'] or '') + '), ICAO standard atmosphere: ' +
-                        ' / '.join(parts) + '.')
-        r['sources'].append({'url': BC_URL, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED})
-        for fld, idx in (('bcG1', 0), ('bcG7', 1)):
-            vals = [float(row['values'][idx][0]) for row in rows]
-            if r[fld] is None:
-                note = f'{fld} absent on product page; /bc Mach 2.25 value(s): {vals}'
-                r['notes'] = (r['notes'] + '; ' if r['notes'] else '') + note
-            elif not any(abs(r[fld] - x) < 1e-9 for x in vals):
-                r.setdefault('conflicts', []).append({'field': fld, 'values': [
-                    {'value': r[fld], 'source': r['sources'][0]['url']}] + [
-                    {'value': x, 'source': BC_URL + ' (Mach 2.25 column' +
-                     (', ' + row['twist'] if row['twist'] else '') + ')'} for x, row in zip(vals, rows)]})
+        # the same bullet is sold under several item numbers (box counts): attach to each
+        for r in cands:
+            _attach_rows(r, rows)
     return unmatched
+
+
+def _attach_rows(r, rows):
+    """Add the /bc rows (one per twist condition) to record r; log Mach 2.25 conflicts."""
+    parts = []
+    r['bcMach'] = []
+    for row in rows:
+        v = row['values']
+        tw = f' [{row["twist"]}]' if row['twist'] else ''
+        parts.append(f'Mach 2.25 (2512 fps): G1 {v[0][0]}, G7 {v[1][0]}; Mach 2.0 (2232 fps): G1 {v[2][0]}, '
+                     f'G7 {v[3][0]}; Mach 1.75 (1953 fps): G1 {v[4][0]}, G7 {v[5][0]}{tw}')
+        for mach, fps, a, b in ((2.25, 2512, 0, 1), (2.0, 2232, 2, 3), (1.75, 1953, 4, 5)):
+            r['bcMach'].append({'mach': mach, 'fpsIcao': fps, 'g1': float(v[a][0]), 'g7': float(v[b][0]),
+                                'twistCondition': row['twist']})
+        r['evidence'] += ' || ' + row['text']
+    r['bcNotes'] = ('Hornady /bc table (' + (rows[0]['heading'] or '') + '), ICAO standard atmosphere: ' +
+                    ' / '.join(parts) + '.')
+    r['sources'].append({'url': BC_URL, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED})
+    for fld, idx in (('bcG1', 0), ('bcG7', 1)):
+        vals = [float(row['values'][idx][0]) for row in rows]
+        if r[fld] is None and len(vals) == 1:
+            r[fld] = vals[0]
+            note = (f'{fld} not given on this product page; taken from {BC_URL} Mach 2.25 column '
+                    f'(Hornady publishes the Mach 2.25 value as its headline BC for this line)')
+            r['notes'] = (r['notes'] + '; ' if r['notes'] else '') + note
+        elif r[fld] is None:
+            note = f'{fld} absent on product page; /bc gives twist-dependent Mach 2.25 values {vals}'
+            r['notes'] = (r['notes'] + '; ' if r['notes'] else '') + note
+        elif not any(abs(r[fld] - x) < 1e-9 for x in vals):
+            r.setdefault('conflicts', []).append({'field': fld, 'values': [
+                {'value': r[fld], 'source': r['sources'][0]['url']}] + [
+                {'value': x, 'source': BC_URL + ' (Mach 2.25 column' +
+                 (', ' + row['twist'] if row['twist'] else '') + ')'} for x, row in zip(vals, rows)]})
+
+
+def bullet_key(r):
+    """Same physical bullet sold in different box counts: same line, diameter, weight and the
+    printed name without pack-size wording."""
+    nm = r['name'].replace('\u2011', '-').replace('\u2122', '').replace('\u00ae', '')
+    nm = re.sub(r'\((?:500|100)\)|Box of \d+|Bulk|\b\d+ ?ct\b', '', nm, flags=re.I)
+    return (r['line'], r['diameterIn'], r['weightGr'], collapse(nm).lower())
+
+
+def cross_sku_conflicts(records):
+    groups = {}
+    for r in records:
+        groups.setdefault(bullet_key(r), []).append(r)
+    for k, rs in groups.items():
+        if len(rs) < 2:
+            continue
+        for r in rs:
+            others = [o['id'] for o in rs if o is not r]
+            r['notes'] = (r['notes'] + '; ' if r['notes'] else '') + \
+                f'same bullet also listed as {others} (different box count)'
+        for fld in ('bcG1', 'bcG7', 'twistIn', 'sectionalDensity'):
+            vals = {}
+            for r in rs:
+                vals.setdefault(r[fld], []).append(r)
+            non_null = [v for v in vals if v is not None]
+            if len(non_null) > 1:
+                for r in rs:
+                    r.setdefault('conflicts', []).append({'field': fld, 'values': [
+                        {'value': o[fld], 'source': o['sources'][0]['url'] + f' (item {o["sku"]})'} for o in rs]})
 
 
 def build():
     urls = product_urls()
-    records, errors = [], []
+    records, errors, page_docs = [], [], []
     for kind, slug, u in urls:
         p = local_page(kind, slug)
         if not os.path.exists(p):
@@ -468,6 +559,7 @@ def build():
             errors.append(err)
             continue
         records.append(rec)
+        page_docs.append((kind, slug, u, rec['name']))
     # duplicate SKUs (same product listed under two URLs): keep first, record the other URL
     by_id = {}
     final = []
@@ -482,6 +574,7 @@ def build():
             continue
         by_id[r['id']] = r
         final.append(r)
+    cross_sku_conflicts(final)
     bc_rows = parse_bc_page()
     unmatched = attach_bc_table(final, bc_rows)
     for r in final:
@@ -497,9 +590,9 @@ def build():
                 {'url': BC_URL, 'localPath': os.path.join(SRC, 'bc.html'),
                  'title': 'Hornady - A-Tip, ELD Match, ELD-X and ELD-VT Ballistic Coefficient Values',
                  'date': RETRIEVED},
-                {'url': BASE + '/bullets/{rifle|handgun}/<slug>', 'localPath': os.path.join(SRC, 'pages'),
-                 'title': f'{len(final)} Hornady bullet product pages (one per record; see record sources)',
-                 'date': RETRIEVED},
+            ] + [
+                {'url': u, 'localPath': local_page(kind, slug), 'title': 'Hornady product page: ' + n,
+                 'date': RETRIEVED} for kind, slug, u, n in page_docs
             ],
             'notes': (
                 'Values come from the inline "var item = {...}" object that each www.hornady.com product page '
@@ -510,9 +603,19 @@ def build():
                 'Mach 2.25/2.0/1.75 values from https://www.hornady.com/bc are in bcNotes/bcMach. Hornady does not '
                 'publish bullet length, boat-tail length or base-to-ogive on these pages, so those are null. '
                 'construction/tip are set only when the page wording supports them (quoted in notes); otherwise '
-                'null. profile = profile abbreviations printed in the product name, verbatim. The 2027 product '
-                'catalog PDF (static.hornady.media) was not reachable (proxy-blocked host). '
-                'sectionalDensity and boxCount are extra fields taken from the same page. '
+                'null. profile = profile abbreviations printed in the product name (non-breaking hyphens '
+                'normalised to "-"). recommendedTwist is the verbatim value of the page specification field '
+                '"twist" (Hornady also has an unused "rec_twist" field, always "-"); the visible label of that '
+                'field could not be confirmed because the spec table is rendered by a script under '
+                '/assets/components/, which robots.txt disallows. twistIn = inches per turn parsed from it. '
+                'Where a product page shows no BC ("\u2013") but /bc lists exactly one row for that bullet, '
+                'bcG1/bcG7 are taken from the /bc Mach 2.25 column (noted per record). The same bullet sold in '
+                'several box counts has one record per item number; differing values between them are listed '
+                'in conflicts. diameterIn comes from the page caliberdiameter field, or from the printed title '
+                'when that field is empty; title and field never disagree in this snapshot. The 2027 product '
+                'catalog PDF and the 2026 international catalog PDFs (static.hornady.media) were not reachable '
+                '(proxy-blocked host). sectionalDensity, boxCount, kind, twistIn and bcMach are extra fields '
+                'from the same pages. '
                 f'Unmatched /bc rows: {unmatched}. Parse errors: {errors}'),
         },
         'bullets': final,
@@ -527,28 +630,48 @@ def build():
 
 
 def check():
+    """Every numeric value must appear in the evidence in the exact field it was parsed from."""
     doc = json.load(open(OUT, encoding='utf-8'))
     recs = doc['bullets']
-    print('records:', len(recs))
+    print('records:', len(recs), '| rifle:', sum(r['kind'] == 'rifle' for r in recs),
+          '| handgun:', sum(r['kind'] == 'handgun' for r in recs))
+
+    def dec(v, nd):
+        t = ('%.' + str(nd) + 'f') % v
+        return {t, t.lstrip('0')}
+
     bad = 0
     for r in recs:
         ev = r['evidence']
-        for fld in ('weightGr', 'bcG1', 'bcG7', 'diameterIn'):
+        probs = []
+        if not re.search(r'"weight":%s(?![0-9.])' % re.escape('%g' % r['weightGr']), ev):
+            probs.append('weightGr')
+        dforms = dec(r['diameterIn'], 3) | dec(r['diameterIn'], 4)
+        if not any(('"caliberdiameter":"%s"' % f) in ev for f in dforms) and \
+                not any(re.search(r'"title":"[^"]*\s%s\s' % re.escape(f), ev) for f in dforms if f.startswith('.')):
+            probs.append('diameterIn')
+        for fld, key, g in (('bcG1', 'ball_coef_1', 'G1'), ('bcG7', 'ball_coef_2_f', 'G7')):
             v = r[fld]
             if v is None:
                 continue
-            forms = {repr(v), ('%g' % v), ('%.3f' % v).lstrip('0'), ('%.3f' % v), str(int(v)) if v == int(v) else None,
-                     ('%.2f' % v).lstrip('0')}
-            if not any(f and f in ev for f in forms):
-                bad += 1
-                print('NOT IN EVIDENCE', r['id'], fld, v)
-        if r['recommendedTwist'] and json.dumps(r['recommendedTwist'])[1:-1] not in ev:
+            fs = dec(v, 3)
+            if not any(('"%s":"%s"' % (key, f)) in ev for f in fs) and \
+                    not any(('%s %s' % (f, g)) in ev for f in fs if f.startswith('0')):
+                probs.append(fld)
+        if r['recommendedTwist'] and ('"twist":' + json.dumps(r['recommendedTwist'])) not in ev:
+            probs.append('recommendedTwist')
+        if ('"sku":"%s"' % r['sku']) not in ev:
+            probs.append('sku')
+        for m in r.get('bcMach') or []:
+            if not any(('%s G1' % f) in ev for f in dec(m['g1'], 3)) or \
+                    not any(('%s G7' % f) in ev for f in dec(m['g7'], 3)):
+                probs.append('bcMach')
+                break
+        if probs:
             bad += 1
-            print('TWIST NOT IN EVIDENCE', r['id'], r['recommendedTwist'])
-        if r['sku'] and r['sku'] not in ev:
-            bad += 1
-            print('SKU NOT IN EVIDENCE', r['id'])
-    print('evidence mismatches:', bad)
+            print('NOT IN EVIDENCE', r['id'], probs)
+    print('records with evidence mismatches:', bad)
+    print('records with conflicts:', sum(1 for r in recs if r['conflicts']))
     random.seed(7)
     for r in random.sample(recs, min(5, len(recs))):
         print(json.dumps({k: r[k] for k in ('id', 'name', 'diameterIn', 'weightGr', 'bcG1', 'bcG7',

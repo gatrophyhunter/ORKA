@@ -27,6 +27,8 @@ export const DEFAULT_OPTIONS: ModelOptions = {
 export const STANTON = 0.002;
 
 const MPA = 1e6;
+/** Pressure above which a run is declared diverged (3 GPa ≈ 435,000 psi: far beyond any cartridge). */
+const DIVERGE_PA = 3e9;
 
 /** Bore cross-section assuming equal land and groove widths: S = π/8·(d_bore² + d_groove²). */
 export function boreArea(boreDiameterM: number, grooveDiameterM: number): number {
@@ -173,6 +175,23 @@ export function simulate(setup: LoadSetup): SimResult {
     messages.push('Charge does not physically fit: the solid propellant volume alone exceeds the chamber volume.');
     return empty('invalid');
   }
+  // The burn shape must be a proper form function: finite positive normalisation, psi non-decreasing on [0, 1].
+  {
+    const chi = 1 / (1 + burn.lambda + burn.mu);
+    let okShape = Number.isFinite(chi) && chi > 0;
+    for (let i = 0; okShape && i <= 50; i++) {
+      const z = i / 50;
+      if (chi * (1 + 2 * burn.lambda * z + 3 * burn.mu * z * z) < -1e-12) okShape = false;
+    }
+    if (!okShape) {
+      messages.push('Invalid burn-shape parameters (λ, μ): the burnt fraction must rise monotonically from 0 to 1.');
+      return empty('invalid');
+    }
+  }
+  if (!(burn.beta > 0) || !(burn.n > 0) || !(f > 0) || !(gam > 1) || !(rhoP > 0) || !(eta >= 0)) {
+    messages.push('Invalid powder model parameters (β, n, impetus, γ, density and covolume must be physical).');
+    return empty('invalid');
+  }
 
   const Vf0 = V0 - solidVol;
   // Gauge station as a fraction of the powder-chamber volume (chamber approximated as a cylinder of the
@@ -316,6 +335,7 @@ export function simulate(setup: LoadSetup): SimResult {
   deriv(y, k[0]);
 
   let steps = 0;
+  let exited = false;
   const tLimit = 0.05; // 50 ms — far beyond any real barrel time
   while (steps++ < o.maxSteps) {
     if (h > hMax) h = hMax;
@@ -324,6 +344,10 @@ export function simulate(setup: LoadSetup): SimResult {
       const fac = Number.isFinite(err) ? Math.max(0.2, 0.9 * Math.pow(err, -0.2)) : 0.1;
       h *= fac;
       if (h < 1e-15) {
+        if (peak > 0.3 * DIVERGE_PA) {
+          messages.push('Predicted pressure ran away (the gas free volume collapsed). This charge is far beyond any safe load and outside the model’s valid range.');
+          return { ...empty('diverged'), peakBreechPa: Infinity, peakBasePa: Infinity, peakGaugePa: Infinity };
+        }
         messages.push('Integrator step size underflow.');
         return empty('invalid');
       }
@@ -376,6 +400,7 @@ export function simulate(setup: LoadSetup): SimResult {
       y = [yNew[0], yNew[1], yNew[2], yNew[3]];
       if (burnoutX === null && y[0] >= 1) burnoutX = y[1];
       record(t, y);
+      exited = true;
       break;
     }
 
@@ -391,6 +416,15 @@ export function simulate(setup: LoadSetup): SimResult {
     record(t, y);
     deriv(y, k[0]); // (DP is FSAL, but recomputing keeps event handling simple)
 
+    {
+      const psiNow = ff.psi(y[0]);
+      const vfNow = V0 - solidVol * (1 - psiNow) - eta * C * psiNow + S * y[1];
+      if (peak > DIVERGE_PA || vfNow <= 0.01 * V0) {
+        messages.push('Predicted pressure ran away (the gas free volume collapsed). This charge is far beyond any safe load and outside the model’s valid range.');
+        return { ...empty('diverged'), peakBreechPa: Infinity, peakBasePa: Infinity, peakGaugePa: Infinity };
+      }
+    }
+
     if (!moving && y[0] >= 1) {
       messages.push('All powder burned before the bullet started to move (pressure never reached shot-start). Bullet stuck in bore / squib.');
       return { ...empty('stuck'), peakBreechPa: peak, peakBasePa: peakBase, peakGaugePa: peakGauge, burntAtMuzzle: 1 };
@@ -403,7 +437,7 @@ export function simulate(setup: LoadSetup): SimResult {
     h *= fac;
   }
 
-  if (steps >= o.maxSteps) {
+  if (!exited) {
     messages.push('Integrator hit the step limit.');
     return empty('max-steps');
   }

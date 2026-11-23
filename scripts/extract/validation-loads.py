@@ -434,10 +434,777 @@ def hodgdon_parse(doc, log):
 
 
 # --------------------------------------------------------------------------
+# Reload Swiss (Nitrochemie Wimmis AG) "Ladedaten / Reloading Data, Issue 2025"
+# Official RS data pages only (columns include measured pressure in bar for
+# start and max loads).  The "Customer reloading data" section (no pressure,
+# customer-measured) is NOT used.
+# --------------------------------------------------------------------------
+RS_DOC = {
+    "key": "RS2025",
+    "url": "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/"
+           "Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf",
+    "local": "rs/guide2025-small.pdf",
+    "title": "Reload Swiss RS Ladedaten / Reloading Data, Issue 2025 (Nitrochemie Wimmis AG)",
+    "date": "Issue 2025 (PDF created 2025-01-11)",
+    "landing": "https://www.reload-swiss.com/en/loading-data/brochures-and-product-datasheets",
+}
+RS_DEC = r"\d+,\d+"
+RS_Q = "[‘’'\"“”]*"
+RS_TAIL_RE = re.compile(
+    r"(?P<sg>" + RS_DEC + r"|-)\s+(?P<sgr>" + RS_DEC + r"|-)\s+(?P<sv>\d+|-)\s+(?P<sp>\d+|-)\s+(?P<sf>\d+|-)\s+"
+    r"(?P<mg>" + RS_DEC + r")\s+(?P<mgr>" + RS_DEC + r")\s+(?P<mv>\d+)\s+(?P<mp>\d+|-)\s+(?P<mf>\d+|-)\s+"
+    r"(?P<e>\d+|-)\s+"
+    r"(?P<bbl>n\.a\.|(?P<bblmm>\d+)(?:\s*\((?P<twist>1:\s*[\d.,]+)\s*" + RS_Q + r"\))?)\s+"
+    r"(?P<col>" + RS_DEC + r"|n\.a\.|\d+)(?:\s+(?P<notes>\S.*?))?\s*$")
+RS_ROW_RE = re.compile(
+    r"^(?P<cal>\S.*?)\s{2,}(?P<mass>\d{1,3})\s{2,}(?P<mid>.*?)\s{2,}(?P<powder>RS\s?\d{2})\s{2,}(?P<tail>.*)$")
+RS_CANON = {
+    "223 Rem.": "223 Remington", "308 Win.": "308 Winchester", "6.5 Creedmoor": "6.5 Creedmoor",
+    "30-06 Spring.": "30-06 Springfield", "300 Win. Mag.": "300 Winchester Magnum", "243 Win.": "243 Winchester",
+    "6 mm Creedmoor": "6mm Creedmoor", "270 Win.": "270 Winchester", "7 Rem. Mag.": "7mm Remington Magnum",
+    "9 mm Luger": "9mm Luger", "45 ACP (Auto)": "45 ACP", "357 Magnum": "357 Magnum",
+    "44 Rem. Mag.": "44 Remington Magnum",
+}
+RS_FLAGS = {"C": "C = Compressed load", "IP": "IP = IPSC load", "HP": "HP = Attention: high pressure",
+            "OL": "OL = Over length!"}
+
+
+def rs_dec(s):
+    return None if s in (None, "-", "n.a.") else float(s.replace(",", "."))
+
+
+def rs_phrases(s, offset=0):
+    """Cells of a -layout line: runs of text separated by 2+ spaces, with character centres."""
+    return [{"t": m.group(0), "a": m.start() + offset, "b": m.end() + offset,
+             "c": (m.start() + m.end()) / 2.0 + offset} for m in re.finditer(r"\S+(?: \S+)*", s)]
+
+
+def reload_swiss_parse(doc, log, keep_all=False):
+    pdf = fetch(doc["url"], doc["local"], delay=2)
+    txt_path = pdf[:-4] + ".txt"
+    if not os.path.exists(txt_path):
+        subprocess.run(["pdftotext", "-layout", pdf, txt_path], check=True, stderr=subprocess.DEVNULL)
+    pages = open(txt_path, encoding="utf-8").read().split("\f")
+    records, unparsed = [], []
+    legend_line = None
+    for pi, ptxt in enumerate(pages):
+        pno = pi + 1
+        # official RS data pages carry 'Filling Ratio' in the header; customer-data pages do not
+        if "Filling Ratio" not in ptxt or "Calibre" not in ptxt or "durch Beschussamt" in ptxt:
+            continue
+        lines = ptxt.split("\n")
+        hdr = next((l for l in lines if l.strip().startswith("Calibre")), None)
+        units = next((l for l in lines if re.match(r"^\s*gr\s+g\s+gr\s+m/s\s+bar", l)), None)
+        section = "Handguns" if "HANDGUNS" in ptxt[:3000] else "Rifles"
+        ph = rs_phrases(hdr)
+        names = [p["t"] for p in ph]
+        if names[:7] != ["Calibre", "Mass", "Type", "Producer", "Producer", "Type", "Type"]:
+            unparsed.append({"page": pno, "text": ws(hdr), "why": "unexpected header; page skipped"})
+            continue
+        centres = [ph[i]["c"] for i in range(2, 6)]  # bullet type, bullet producer, case producer, primer
+        colnames = ["bulletModel", "bulletMfr", "caseBrand", "primer"]
+        lg = next((ws(l) for l in lines if "C = Compressed load" in l), None)
+        if lg:
+            legend_line = ws(lg[lg.find("C = Compressed load"):])
+        printed = re.findall(r"^\s*(\d{1,3})\s{20,}(\d{1,3})\s*$", ptxt.strip().split("\n")[-1])
+        printed = "%s-%s" % printed[0] if printed else None
+        # blocks of consecutive non-blank lines
+        blocks, cur = [], []
+        for idx, l in enumerate(lines):
+            if l.strip():
+                cur.append((idx, l))
+            elif cur:
+                blocks.append(cur)
+                cur = []
+        if cur:
+            blocks.append(cur)
+        for blk in blocks:
+            rows = [(i, l, RS_ROW_RE.match(l)) for i, l in blk]
+            data = [(i, l, m) for i, l, m in rows if m and RS_TAIL_RE.match(m.group("tail"))]
+            for i, l, m in rows:
+                if m and not RS_TAIL_RE.match(m.group("tail")):
+                    unparsed.append({"page": pno, "text": ws(l), "why": "numeric columns did not match; skipped"})
+            if not data:
+                continue
+            frags = [(i, l) for i, l in blk if all(i != d[0] for d in data)]
+            for di, (i, l, m) in enumerate(data):
+                cal = m.group("cal").strip()
+                canon = RS_CANON.get(cal)
+                if canon is None and not keep_all:
+                    continue
+                t = RS_TAIL_RE.match(m.group("tail"))
+                cells = {k: [] for k in colnames}
+                problem = None
+                mid_ph = rs_phrases(m.group("mid"), m.start("mid"))
+                for p in mid_ph:
+                    k = min(range(4), key=lambda j: abs(p["c"] - centres[j]))
+                    # a phrase that straddles the midpoint to a neighbouring column centre is ambiguous
+                    for j in range(3):
+                        mpt = (centres[j] + centres[j + 1]) / 2.0
+                        if p["a"] < mpt - 1 < mpt + 1 < p["b"] and len(mid_ph) < 4:
+                            problem = "cell text '%s' straddles a column boundary" % p["t"]
+                    if cells[colnames[k]] and len(mid_ph) < 4:
+                        problem = "two cells assigned to column %s" % colnames[k]
+                    cells[colnames[k]].append((i, p["t"]))
+                if len(mid_ph) == 4:  # all four present: assign strictly in printed order
+                    cells = {colnames[j]: [(i, mid_ph[j]["t"])] for j in range(4)}
+                # wrapped cell fragments: lines of the same block, nearest data row
+                used_frags = []
+                for fi, fl in frags:
+                    near = min(range(len(data)), key=lambda q: abs(data[q][0] - fi))
+                    if abs(data[near][0] - fi) == abs(data[di][0] - fi) and near != di:
+                        problem = "wrapped fragment equidistant from two data rows"
+                    if near != di:
+                        continue
+                    for p in rs_phrases(fl):
+                        if p["c"] > (centres[3] + ph[6]["c"]) / 2.0 or p["c"] < ph[1]["c"]:
+                            problem = "wrapped fragment '%s' outside the bullet/case/primer columns" % p["t"]
+                            continue
+                        k = min(range(4), key=lambda j: abs(p["c"] - centres[j]))
+                        cells[colnames[k]].append((fi, p["t"]))
+                    used_frags.append(fl)
+                evidence_lines = [ws(x) for _, x in sorted([(fi, fl) for fi, fl in frags if fl in used_frags] +
+                                                         [(i, l)])]
+                if problem:
+                    unparsed.append({"page": pno, "text": " | ".join(evidence_lines), "why": problem + "; skipped"})
+                    continue
+                val = {k: (ws(" ".join(x for _, x in sorted(v))) or None) for k, v in cells.items()}
+                notes_raw = (t.group("notes") or "").strip()
+                flags = [f.strip() for f in notes_raw.split(",")] if notes_raw else []
+                compressed = "C" in flags
+                bbl_mm = int(t.group("bblmm")) if t.group("bblmm") else None
+                col_mm = rs_dec(t.group("col")) if "," in t.group("col") else None
+                base_notes = []
+                if canon is None:
+                    base_notes.append("Cartridge as printed: '%s'." % cal)
+                base_notes.append("Velocity is V5 (measured 5 m from the muzzle) printed in m/s; velocityFps = m/s / "
+                                  "0.3048, rounded to 1 fps (velocityMps keeps the printed value).")
+                base_notes.append("Pressure printed in bar ('Druck / Pressure'); the guide does not state the "
+                                  "measurement method.")
+                if bbl_mm is not None:
+                    base_notes.append("Barrel ('Lauf / Barrel') printed as a bare number (%d), read as mm (the same "
+                                      "guide's customer-data tables print barrel lengths as e.g. '600mm'); "
+                                      "barrelLengthIn = mm / 25.4." % bbl_mm)
+                else:
+                    base_notes.append("Barrel length printed as '%s'." % t.group("bbl"))
+                if col_mm is not None:
+                    base_notes.append("C.O.L. printed in mm (%s); coalIn = mm / 25.4." % t.group("col"))
+                for f in flags:
+                    if f in RS_FLAGS:
+                        base_notes.append("Notes column '%s' (legend: %s)." % (f, RS_FLAGS[f]))
+                    else:
+                        base_notes.append("Notes column: '%s'." % f)
+                for k in ("caseBrand", "primer", "bulletMfr", "bulletModel"):
+                    if val[k] in ("n.a.",):
+                        base_notes.append("%s printed as 'n.a.'." % k)
+                        val[k] = None
+                if printed:
+                    base_notes.append("Printed page spread %s." % printed)
+                for lt, g, gr, v, p, fill in (("start", "sg", "sgr", "sv", "sp", "sf"),
+                                             ("max", "mg", "mgr", "mv", "mp", "mf")):
+                    if t.group(gr) in (None, "-") or t.group(v) in (None, "-"):
+                        continue
+                    vm = int(t.group(v))
+                    pr = None if t.group(p) == "-" else int(t.group(p))
+                    rec = {
+                        "cartridge": canon or cal,
+                        "bulletMfr": val["bulletMfr"],
+                        "bulletModel": val["bulletModel"],
+                        "bulletWeightGr": float(m.group("mass")),
+                        "bulletDiameterIn": None,
+                        "bulletLengthIn": None,
+                        "caseBrand": val["caseBrand"],
+                        "caseTrimLengthIn": None,
+                        "primer": val["primer"],
+                        "coalIn": round(col_mm / 25.4, 3) if col_mm is not None else None,
+                        "barrelLengthIn": round(bbl_mm / 25.4, 2) if bbl_mm is not None else None,
+                        "twist": (t.group("twist").replace(" ", "") + '"') if t.group("twist") else None,
+                        "powder": m.group("powder").replace(" ", ""),
+                        "powderMfr": "Reload Swiss",
+                        "chargeGr": rs_dec(t.group(gr)),
+                        "velocityFps": int(round(vm / 0.3048)),
+                        "pressure": pr,
+                        "pressureUnit": "bar" if pr is not None else None,
+                        "pressureMethod": None,
+                        "loadType": lt,
+                        "compressed": compressed if lt == "max" else (False if not compressed else None),
+                        "dataSection": section,
+                        "chargeG": rs_dec(t.group(g)),
+                        "velocityMps": vm,
+                        "velocityMeasuredAt": "5 m from muzzle (V5)",
+                        "loadDensityPct": None if t.group(fill) == "-" else int(t.group(fill)),
+                        "coalMm": col_mm,
+                        "barrelLengthMm": bbl_mm,
+                        "cartridgeAsPrinted": cal,
+                        "sources": [{"url": doc["url"], "type": "manufacturer", "page": pno, "retrieved": RETRIEVED}],
+                        "evidence": " | ".join(evidence_lines),
+                        "notes": None,
+                        "_raw": [("chargeGr", t.group(gr)), ("velocityMps", t.group(v))]
+                                + ([("pressure", t.group(p))] if pr is not None else [])
+                                + ([("coalMm", t.group("col"))] if col_mm is not None else [])
+                                + ([("barrelLengthMm", t.group("bblmm"))] if bbl_mm is not None else [])
+                                + [("bulletWeightGr", m.group("mass"))],
+                    }
+                    n2 = list(base_notes)
+                    if compressed:
+                        n2.append("The 'C' flag is printed once per row; compressed is set true for the max load "
+                                  "only and left null for the start load (not stated which charge is compressed)."
+                                  if lt == "start" else "Compressed ('C') per the row's Notes column.")
+                    if rec["loadDensityPct"] is not None:
+                        n2.append("Filling ratio (Fuellgrad) %d %% printed for this charge (loadDensityPct)."
+                                  % rec["loadDensityPct"])
+                    rec["notes"] = " ".join(n2)
+                    records.append(rec)
+    log["reloadswiss_" + doc["key"]] = {"unparsedRows": unparsed, "legend": legend_line,
+                                        "columnsEvidence": "Calibre Mass Type Producer Producer Type Type Charge "
+                                                           "Charge Pressure Filling Ratio Charge Charge Pressure "
+                                                           "Filling ratio Barrel Patrone C.O.L. Notes / units: gr g "
+                                                           "gr m/s bar % g gr m/s bar % J"}
+    return records
+
+
+# --------------------------------------------------------------------------
+# Shooters World powder manual (2023).  Tables: Caliber | Case | Projectile |
+# Load Length | Starting Charge | Starting Velocity | Max Charge | Max Velocity |
+# Max Pressure (PSI).  Cells wrap over several lines, so rows are rebuilt from
+# word coordinates (pdftotext -bbox): every data row is a visual line with
+# numbers in >= 5 of the 6 numeric columns; wrapped text is attached to the
+# vertically nearest data row (only when clearly nearer than any other row).
+# --------------------------------------------------------------------------
+SW_DOC = {
+    "key": "SW2023",
+    "url": "https://shootersworldpowder.com/wp-content/uploads/2023/06/"
+           "ShootersWorldManualInterior_CHRIS_WITH-COVER__RUSS-REVISED.pdf",
+    "local": "sw/manual.pdf",
+    "title": "Shooters World reloading manual (Shooters World / Lovex powders)",
+    "date": "PDF created 2023-05-25",
+    "landing": "https://shootersworldpowder.com/",
+}
+SW_NUMTOK = re.compile(r"^(N/A|\d[\d,]*(?:\.\d+)?C?|\.\d+|C|Safe|in|Garand|Load)$")
+SW_SIDE_LABELS = {"RIFLE", "HANDGUN", "SHOTGUN", "/"}
+SW_CAL = [
+    (r"^\.?223 rem(ington)?$", "223 Remington"), (r"^\.?308 win(chester)?$", "308 Winchester"),
+    (r"^6\.5 creedmoor$", "6.5 Creedmoor"), (r"^6 ?mm creedmoor$", "6mm Creedmoor"),
+    (r"^\.?30-06 springfield( garand)?$", "30-06 Springfield"),
+    (r"^\.?300 win(chester)? mag(num)?$", "300 Winchester Magnum"), (r"^\.?243 win(chester)?$", "243 Winchester"),
+    (r"^\.?270 win(chester)?$", "270 Winchester"), (r"^7 ?mm rem(ington)? mag(num)?$", "7mm Remington Magnum"),
+    (r"^9 ?mm luger$", "9mm Luger"), (r"^\.?45 (auto|acp)$", "45 ACP"), (r"^\.?357 mag(num)?$", "357 Magnum"),
+    (r"^\.?44 rem(ington)? mag(num)?( carbine)?$", "44 Remington Magnum"),
+]
+SW_BULLET_MAKERS = ["Sierra", "Hornady", "Nosler", "Speer", "Berger", "Lapua", "Barnes", "Berry's", "Berry",
+                    "Winchester", "Sinterfire", "Ervin", "Acme", "Zero", "Xtreme", "X-treme", "Swift",
+                    "Precision Delta", "Dead Nuts", "Federal", "Remington"]
+
+
+def sw_words(pxml):
+    out = []
+    for m in WORD_RE.finditer(pxml):
+        x0, y0, x1, y1 = (float(m.group(i)) for i in range(1, 5))
+        out.append({"x0": x0, "y0": y0, "x1": x1, "y1": y1, "t": html.unescape(m.group(5)),
+                    "xc": (x0 + x1) / 2, "yc": (y0 + y1) / 2})
+    return out
+
+
+def sw_lines(words, tol=2.0):
+    out = []
+    for w in sorted(words, key=lambda w: (w["yc"], w["x0"])):
+        if out and abs(w["yc"] - out[-1]["yc"]) <= tol:
+            out[-1]["w"].append(w)
+        else:
+            out.append({"yc": w["yc"], "w": [w]})
+    for ln in out:
+        ln["w"].sort(key=lambda w: w["x0"])
+    return out
+
+
+def sw_join(ws_):
+    """Join words of one cell in reading order; re-join words hyphenated at a line break."""
+    s = " ".join(w["t"] for w in sorted(ws_, key=lambda w: (round(w["yc"]), w["x0"])))
+    return re.sub(r"(\w)- (\w)", r"\1\2", s).strip()
+
+
+def sw_num(s):
+    """'1,146' -> 1146 ; '41,590.0' -> 41590 ; '43.3' -> 43.3"""
+    s = s.replace(",", "")
+    return float(s)
+
+
+def shooters_world_parse(doc, log, keep_all=False):
+    pdf = fetch(doc["url"], doc["local"], delay=10)
+    txt_path = pdf[:-4] + ".txt"
+    bbox_path = pdf[:-4] + ".bbox.html"
+    if not os.path.exists(txt_path):
+        subprocess.run(["pdftotext", "-layout", pdf, txt_path], check=True)
+    if not os.path.exists(bbox_path):
+        subprocess.run(["pdftotext", "-bbox", pdf, bbox_path], check=True)
+    pages_text = open(txt_path, encoding="utf-8").read().split("\f")
+    pages = PAGE_RE.findall(open(bbox_path, encoding="utf-8").read())
+    # powder names from the tables' own titles, e.g. 'TACTICAL RIFLE D073-08 RELOAD DATA'
+    title_re = re.compile(r"^\s*([A-Z][A-Z0-9 ]*?[A-Z0-9]),?\s+([DS]\d{3}-\d{2}|S\d{3})\s+(?:PISTOL\s+)?RELOAD DATA",
+                          re.M)
+    code_names = {}
+    for p in pages_text:
+        for m in title_re.finditer(p):
+            code_names[m.group(2)] = (m.group(1).strip(), ws(m.group(0)))
+    records, unparsed = [], []
+    for pi, (pw, ph, pxml) in enumerate(pages):
+        pno = pi + 1
+        ptxt = pages_text[pi]
+        if "Projectile" not in ptxt or "Caliber" not in ptxt or "SHOT SHELL" in ptxt:
+            continue
+        # powder of this page's table
+        powder, code, title_ev = None, None, None
+        m = title_re.search(ptxt)
+        if m:
+            powder, code, title_ev = m.group(1).strip(), m.group(2), ws(m.group(0))
+        else:
+            mm = re.search(r"([DS]\d{3}-\d{2})\s+RELOAD DATA", ptxt)
+            if mm and mm.group(1) in code_names:
+                code = mm.group(1)
+                powder = code_names[code][0]
+                title_ev = ws(mm.group(0)) + " [powder name from the same code's title elsewhere in the manual: '%s']" \
+                    % code_names[code][1]
+            ms = re.search(r"POWDER SBR - SOCOM 63-01", ptxt)
+            if ms:
+                powder, code, title_ev = "SBR - SOCOM", "63-01", ms.group(0)
+        if powder is None:
+            unparsed.append({"page": pno, "text": ws(ptxt[:200]), "why": "no powder title found; page skipped"})
+            continue
+        powder_name = " ".join(t.capitalize() if t.isalpha() and t not in ("AR", "SBR", "SOCOM", "SW4350") else t
+                               for t in powder.split())
+        words = sw_words(pxml)
+        H = lambda names: sorted([w for w in words if w["t"] in names and w["y0"] < 140], key=lambda w: w["x0"])
+        try:
+            cal, case, proj, ln = H(("Caliber",))[0], H(("Case",))[0], H(("Projectile", "Projectiles"))[0], \
+                H(("Length",))[0]
+            ch, vel = H(("Charge",)), H(("Velocity",))
+            pr = H(("Pressure", "Pressure,", "Presure"))[0]
+            numc = [ln["xc"], ch[0]["xc"], vel[0]["xc"], ch[1]["xc"], vel[1]["xc"], pr["xc"]]
+        except (IndexError, KeyError):
+            unparsed.append({"page": pno, "text": "", "why": "table header not found; page skipped"})
+            continue
+        txtc = [cal["xc"], case["xc"], proj["xc"]]
+        hdr_bottom = max(w["y1"] for w in words if w["t"] in ("Length", "Charge", "Velocity") and w["y0"] < 140)
+        # page numbers: 1-2 digit words alone on their line at the foot of the page
+        body = [w for w in words if w["yc"] > hdr_bottom and w["t"] not in SW_SIDE_LABELS
+                and not (re.fullmatch(r"\d{1,2}", w["t"]) and w["y0"] > float(ph) - 45
+                         and not any(o is not w and abs(o["yc"] - w["yc"]) < 3 for o in words))]
+        numreg = lambda w: w["xc"] >= ln["x0"] - 6 and SW_NUMTOK.match(w["t"])
+        lines_ = sw_lines(body)
+        rows = []
+        for l_ in lines_:
+            cols = [[] for _ in range(6)]
+            for w in l_["w"]:
+                if numreg(w):
+                    cols[min(range(6), key=lambda j: abs(w["xc"] - numc[j]))].append(w)
+            filled = sum(1 for c in cols if c)
+            if filled >= 5 or (filled >= 3 and cols[0]):
+                # rows with only 3-4 numeric cells are kept as 'broken' so their wrapped text is not
+                # attached to a neighbouring row; they never produce records
+                rows.append({"yc": l_["yc"], "num": cols, "line": l_, "txt": [[], [], []], "all": list(l_["w"]),
+                             "problem": None if filled >= 5 else "only %d of 6 numeric cells on the row" % filled})
+        if not rows:
+            continue
+        for l_ in lines_:
+            isrow = any(r["line"] is l_ for r in rows)
+            for w in l_["w"]:
+                if isrow:
+                    r = next(r for r in rows if r["line"] is l_)
+                    if numreg(w):
+                        continue
+                else:
+                    ds = sorted((abs(w["yc"] - r["yc"]), i) for i, r in enumerate(rows))
+                    if ds[0][0] > 14 or (len(ds) > 1 and ds[1][0] - ds[0][0] < 3.0):
+                        if ds[0][0] <= 14:
+                            for _, i in ds[:2]:
+                                rows[i]["problem"] = "text '%s' is about equally near two rows" % w["t"]
+                        continue
+                    r = rows[ds[0][1]]
+                    r["all"].append(w)
+                    if numreg(w):
+                        r["num"][min(range(6), key=lambda j: abs(w["xc"] - numc[j]))].append(w)
+                        continue
+                r["txt"][min(range(3), key=lambda j: abs(w["xc"] - txtc[j]))].append(w)
+        for r in rows:
+            evl = sw_lines(r["all"])
+            evidence = " | ".join(" ".join(w["t"] for w in l_["w"]) for l_ in evl)
+            # numbers that landed in the Case column belong to the projectile (left-shifted weight)
+            mv_ = [w for w in r["txt"][1] if re.fullmatch(r"\d+", w["t"])]
+            for w in mv_:
+                r["txt"][1].remove(w)
+                r["txt"][2].append(w)
+            cal_t = sw_join(r["txt"][0])
+            case_t = sw_join(r["txt"][1])
+            proj_ws = sorted(r["txt"][2], key=lambda w: (0 if w in mv_ else 1, round(w["yc"]), w["x0"]))
+            proj_t = re.sub(r"(\w)- (\w)", r"\1\2", " ".join(w["t"] for w in proj_ws)).strip()
+            canon = None
+            for pat, nm in SW_CAL:
+                if re.match(pat, ws(cal_t).lower()):
+                    canon = nm
+            if canon is None and not keep_all:
+                continue
+            num = [" ".join(w["t"] for w in sorted(c, key=lambda w: (round(w["yc"]), w["x0"]))) for c in r["num"]]
+            problem = r["problem"]
+            mcol = re.fullmatch(r"(\d*\.\d+|\d)", num[0])
+            mmc = re.fullmatch(r"(\d+(?:\.\d+)?)\s?(C?)", num[3])
+            mmv = re.fullmatch(r"(\d{1,2},\d{3}|\d{3,4})", num[4])
+            mmp = re.fullmatch(r"(\d{1,3},\d{3}(?:\.0)?|\d{4,5})|N/A", num[5])
+            msc = re.fullmatch(r"(\d+(?:\.\d+)?)\s?(C?)", num[1])
+            msv = re.fullmatch(r"(\d{1,2},\d{3}|\d{3,4})", num[2])
+            if not (mcol and mmc and mmv and mmp):
+                problem = problem or "numeric columns incomplete or not numeric: %s" % num
+            mw = re.match(r"^(\d+)\s*(?:gr|grain|grains|gt)?\b\s*(.*)$", proj_t)
+            if not mw:
+                problem = problem or "projectile '%s' does not start with a weight" % proj_t
+            if problem:
+                unparsed.append({"page": pno, "text": evidence, "why": problem + "; skipped"})
+                continue
+            rest = mw.group(2).strip()
+            bmfr = next((b for b in SW_BULLET_MAKERS if rest == b or rest.startswith(b + " ")), None)
+            notes = ["Projectile printed as '%s'." % proj_t]
+            if canon and ws(cal_t) != canon:
+                notes.append("Caliber printed as '%s'." % cal_t)
+            if "garand" in cal_t.lower() or "Garand" in num[1]:
+                notes.append("Garand load (caliber/start cells mention Garand).")
+            if "carbine" in cal_t.lower():
+                notes.append("Caliber cell says 'carbine': carbine-length barrel, length not stated.")
+            bmatch = re.search(r"(\d+)-inch", cal_t + " " + evidence)
+            barrel = float(bmatch.group(1)) if bmatch and "Barrel" in evidence else None
+            if barrel is None:
+                notes.append("The manual does not state the test barrel length or primer for this table.")
+            notes.append("Pressure column is 'Max Pressure (PSI)': it belongs to the max load; the start load has no "
+                         "published pressure. Measurement method not stated.")
+            notes.append("Powder '%s' = Shooters World code %s (table title: '%s')." % (powder_name, code, title_ev))
+            base = {
+                "cartridge": canon or ws(cal_t),
+                "bulletMfr": bmfr,
+                "bulletModel": (rest[len(bmfr):].strip() if bmfr else rest) or None,
+                "bulletWeightGr": float(mw.group(1)),
+                "bulletDiameterIn": None, "bulletLengthIn": None,
+                "caseBrand": case_t or None, "caseTrimLengthIn": None, "primer": None,
+                "coalIn": float(mcol.group(1)),
+                "barrelLengthIn": barrel, "twist": None,
+                "powder": powder_name, "powderMfr": "Shooters World", "powderCode": code,
+                "cartridgeAsPrinted": cal_t,
+                "sources": [{"url": doc["url"], "type": "manufacturer", "page": pno, "retrieved": RETRIEVED}],
+                "evidence": evidence,
+            }
+            loads = []
+            if msc and msv:
+                loads.append(("start", msc.group(1), msc.group(2), msv.group(1), None))
+            elif num[1] or num[2]:
+                notes.append("Start-load cells read '%s' / '%s' (no start load recorded)." % (num[1], num[2]))
+            loads.append(("max", mmc.group(1), mmc.group(2), mmv.group(1), None if num[5] == "N/A" else mmp.group(1)))
+            for lt, g, c, v, p in loads:
+                rec = dict(base)
+                rec.update({
+                    "chargeGr": float(g), "velocityFps": int(sw_num(v)),
+                    "pressure": int(sw_num(p)) if p else None, "pressureUnit": "psi" if p else None,
+                    "pressureMethod": None, "loadType": lt, "compressed": bool(c),
+                    "notes": " ".join(notes + (["Charge printed with 'C' (compressed)."] if c else [])),
+                    "_raw": [("chargeGr", g), ("velocityFps", v), ("coalIn", mcol.group(1)),
+                             ("bulletWeightGr", mw.group(1))] + ([("pressure", p)] if p else []),
+                })
+                records.append(rec)
+    # identical rows printed more than once on the same page: keep one record, note the repetition
+    seen, dedup = {}, []
+    for r in records:
+        k = (r["cartridge"], r["caseBrand"], r["bulletWeightGr"], r["bulletMfr"], r["bulletModel"], r["coalIn"],
+             r["powder"], r["loadType"], r["chargeGr"], r["velocityFps"], r["pressure"], r["sources"][0]["page"])
+        if k in seen:
+            seen[k][1] += 1
+            continue
+        seen[k] = [r, 1]
+        dedup.append(r)
+    for r, n in seen.values():
+        if n > 1:
+            r["notes"] += " This identical row is printed %d times on this page; recorded once." % n
+    records = dedup
+    # same component line printed twice with different velocities (e.g. a second block on the page)
+    groups = {}
+    for r in records:
+        k = (r["cartridge"], r["powder"], r["bulletWeightGr"], r["bulletModel"], r["loadType"], r["chargeGr"],
+             r["pressure"])
+        groups.setdefault(k, []).append(r)
+    for k, g in groups.items():
+        if len({r["velocityFps"] for r in g}) > 1:
+            for r in g:
+                r["notes"] += (" Same bullet/powder/charge%s appears %d times in the manual with different "
+                               "velocities (%s); barrel/test setup of each block not stated."
+                               % ("/pressure" if r["pressure"] else "", len(g),
+                                  ", ".join(str(x["velocityFps"]) + " fps p." + str(x["sources"][0]["page"])
+                                            for x in g)))
+    log["shootersworld_" + doc["key"]] = {"unparsedRows": unparsed,
+                                          "powderTitles": {k: v[1] for k, v in code_names.items()}}
+    return records
+
+
+# --------------------------------------------------------------------------
+# Vihtavuori Reloading Guide 2026 (ENG).  Two printed pages per PDF page: each
+# half is converted separately (pdftotext -layout with a crop box).  Loads are
+# CIP pressure-tested but the guide publishes no pressure values; each section
+# states test barrel length/twist, primer type and case brand/trim length.
+# --------------------------------------------------------------------------
+VV_DOC = {
+    "key": "VV2026",
+    "url": "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf",
+    "local": "vv/VV_Reloading_Guide_2026_ENG_web.pdf",
+    "title": "Vihtavuori Reloading Guide 2026 (English, web edition)",
+    "date": "2026 (PDF created 2026-03-24)",
+    "landing": "https://vihtavuori.com/resources/news-media/downloads/",
+}
+VV_CANON = {
+    ".223 Remington": "223 Remington", ".308 Winchester": "308 Winchester", "6,5 Creedmoor": "6.5 Creedmoor",
+    ".30-06 Springfield": "30-06 Springfield", ".300 Winchester Magnum": "300 Winchester Magnum",
+    ".243 Winchester": "243 Winchester", "6 mm Creedmoor": "6mm Creedmoor", ".270 Winchester": "270 Winchester",
+    "7mm Remington Magnum": "7mm Remington Magnum", "9 mm Luger / 9x19 mm": "9mm Luger",
+    ".45 Auto / .45 ACP": "45 ACP", ".357 Magnum": "357 Magnum", ".44 Remington Magnum": "44 Remington Magnum",
+}
+VV_FRAC = {"½": 0.5, "¼": 0.25, "¾": 0.75, "⅛": 0.125, "⅜": 0.375, "⅝": 0.625,
+           "⅞": 0.875, "⅓": 1 / 3.0, "⅔": 2 / 3.0}
+VV_POWDER = r"(?:N\d{3}|\d{1,2}N\d{2}|N32C)"
+VV_CH = r"\d+,\d{2}[ACF]?"
+VV_CHGR = r"\d+\.\d[ACF]?"
+VV_LOAD_RE = re.compile(
+    r"(?P<powder>" + VV_POWDER + r")\s+(?P<sg>" + VV_CH + r")\s+(?P<sgr>" + VV_CHGR + r")\s+(?P<sv>\d{3,4})\s+"
+    r"(?P<svf>\d{3,4})\s+(?P<mg>" + VV_CH + r")\s*(?P<mgr>" + VV_CHGR + r")\s+(?P<mv>\d{3,4})\s+(?P<mvf>\d{3,4})\s*$")
+VV_BULLET_RE = re.compile(
+    r"^\s*(?P<bg>\d+,\d)\s+(?P<bgr>\d+(?:\.\d)?)\s+(?P<text>\S.*?)\s+(?P<colmm>\d{2,3},\d)\s+(?P<colin>\d\.\d{3})\s+"
+    r"(?=" + VV_POWDER + r"\s)")
+VV_BARREL_RE = re.compile(r"Test barrel:\s+(?P<mm>\d+) mm \((?P<inch>[\d¼-¾⅓-⅞]+)”\), "
+                          r"1 in (?P<tw>[\d¼-¾⅓-⅞.]+)” twist")
+VV_CASES_RE = re.compile(r"Cases:\s+(?P<case>.+?), trim-to length (?P<mm>[\d,]+) mm \((?P<inch>\d?\.\d+)”\)")
+
+
+def vv_frac(s):
+    v = 0.0
+    num = re.match(r"\d+", s)
+    if num:
+        v = float(num.group(0))
+    for ch in s:
+        if ch in VV_FRAC:
+            v += VV_FRAC[ch]
+    return v
+
+
+def vihtavuori_parse(doc, log, keep_all=False):
+    pdf = fetch(doc["url"], doc["local"], delay=2)
+    info = subprocess.run(["pdfinfo", pdf], capture_output=True, text=True).stdout
+    npages = int(re.search(r"Pages:\s+(\d+)", info).group(1))
+    halves_dir = os.path.join(os.path.dirname(pdf), "halves")
+    os.makedirs(halves_dir, exist_ok=True)
+    texts = []
+    for p in range(1, npages + 1):
+        sz = subprocess.run(["pdfinfo", "-f", str(p), "-l", str(p), pdf], capture_output=True, text=True).stdout
+        m = re.search(r"Page\s+%d size:\s+([\d.]+) x ([\d.]+)" % p, sz)
+        w, h = float(m.group(1)), float(m.group(2))
+        sides = [("L", 0, w / 2), ("R", w / 2, w / 2)] if w > h else [("S", 0, w)]
+        for side, x, ww in sides:
+            path = os.path.join(halves_dir, "p%02d%s.txt" % (p, side))
+            if not os.path.exists(path):
+                subprocess.run(["pdftotext", "-layout", "-f", str(p), "-l", str(p), "-x", str(int(x)), "-y", "0",
+                                "-W", str(int(ww) + 1), "-H", str(int(h) + 1), pdf, path],
+                               check=True, stderr=subprocess.DEVNULL)
+            texts.append((p, side, open(path, encoding="utf-8").read()))
+    records, unparsed = [], []
+    st = {"cart": None, "barrel": None, "barrel_line": None, "primer": None, "primer_line": None, "case": None,
+          "case_line": None, "bullet": None, "pending_barrel": None, "pending_barrel_line": None}
+    hdr_pos = None
+    for p, side, txt in texts:
+        lines = txt.split("\n")
+        foot = re.search(r"^\s*(\d{1,3})\s+LIGHT GREY|LOADS LESS THAN MINIMUM CHARGES SHOWN ARE NOT RECOMMENDED\s+(\d{1,3})\s*$",
+                         txt, re.M)
+        printed = (foot.group(1) or foot.group(2)) if foot else None
+        name_cont = None
+        for li, line in enumerate(lines):
+            s = line.strip()
+            if not s:
+                continue
+            mb = VV_BARREL_RE.search(line)
+            if mb:
+                st["pending_barrel"] = mb
+                st["pending_barrel_line"] = ws(line)
+                continue
+            if "Primers:" in line:
+                name = line[:line.index("Primers:")].strip()
+                st["primer"] = line[line.index("Primers:") + 8:].strip()
+                st["primer_line"] = ws(line)
+                if name.endswith("/"):
+                    name_cont = name
+                    name = None
+                st.update({"cart": name, "bullet": None, "case": None, "case_line": None,
+                           "barrel": st["pending_barrel"], "barrel_line": st["pending_barrel_line"]})
+                st["pending_barrel"] = None
+                if st["barrel"] is None:
+                    unparsed.append({"page": p, "text": ws(line), "why": "section without a preceding Test barrel "
+                                     "line; its rows are skipped"})
+                continue
+            mc = VV_CASES_RE.search(line)
+            if mc:
+                if name_cont is not None:
+                    pre = line[:line.index("Cases:")].strip()
+                    st["cart"] = ws(name_cont + " " + pre)
+                    st["primer_line"] = st["primer_line"] + " " + ws(pre)
+                    name_cont = None
+                st["case"] = mc
+                st["case_line"] = ws(line)
+                continue
+            mcont = re.match(r"^\s*(\S.*?)\s+cont\.\s*$", line)
+            if mcont:
+                if ws(mcont.group(1)) != st["cart"]:
+                    unparsed.append({"page": p, "text": ws(line), "why": "continuation page does not match the "
+                                     "current section '%s'; state reset" % st["cart"]})
+                    st.update({"cart": None, "bullet": None})
+                continue
+            if re.match(r"^\s*Weight\s+Mfg\s+Type/Name", line):
+                hdr_pos = (line.index("Mfg") + 1.5, line.index("Type/Name") + 4.5)
+                continue
+            ml = VV_LOAD_RE.search(line)
+            if not ml:
+                if re.search(r"\s" + VV_POWDER + r"\s+\d", line):
+                    unparsed.append({"page": p, "text": ws(line), "why": "powder row does not match the strict "
+                                     "column pattern; skipped"})
+                continue
+            canon = VV_CANON.get(st["cart"]) if st["cart"] else None
+            prefix = line[:ml.start()]
+            mbl = VV_BULLET_RE.match(line)
+            if mbl:
+                parts = rs_phrases(mbl.group("text"), mbl.start("text"))
+                mfg, typ = [], []
+                for ph_ in parts:
+                    if hdr_pos and abs(ph_["c"] - hdr_pos[0]) > abs(ph_["c"] - hdr_pos[1]):
+                        typ.append(ph_["t"])
+                    else:
+                        mfg.append(ph_["t"])
+                st["bullet"] = {"bg": mbl.group("bg"), "bgr": mbl.group("bgr"), "mfg": mfg, "typ": typ,
+                                "colmm": mbl.group("colmm"), "colin": mbl.group("colin"), "line": ws(line),
+                                "frag_lines": [], "marker": bool(re.search(r"\d\)", line[:ml.start()]))}
+            elif prefix.strip():
+                # wrapped bullet maker / type text on a continuation row
+                if st["bullet"] is None:
+                    unparsed.append({"page": p, "text": ws(line), "why": "text before powder but no bullet"})
+                    continue
+                for ph_ in rs_phrases(prefix):
+                    if hdr_pos and abs(ph_["c"] - hdr_pos[0]) > abs(ph_["c"] - hdr_pos[1]):
+                        st["bullet"]["typ"].append(ph_["t"])
+                    else:
+                        st["bullet"]["mfg"].append(ph_["t"])
+                    if re.search(r"\d\)", ph_["t"]):
+                        st["bullet"]["marker"] = True
+                st["bullet"]["frag_lines"].append(ws(line))
+            b = st["bullet"]
+            if canon is None and not keep_all:
+                continue
+            if b is None or st["barrel"] is None or st["cart"] is None:
+                unparsed.append({"page": p, "text": ws(line), "why": "row without bullet/section context; skipped"})
+                continue
+            if b["marker"] or re.search(r"\d\)", line[ml.start():]):
+                unparsed.append({"page": p, "text": ws(line), "why": "footnote marker on this bullet/row (footnotes "
+                                 "may change barrel, twist or case); skipped"})
+                continue
+            # internal unit consistency (g vs gr, m/s vs fps, mm vs in)
+            problems = []
+            for gk, grk in (("sg", "sgr"), ("mg", "mgr")):
+                g = float(ml.group(gk).rstrip("ACF").replace(",", "."))
+                gr = float(ml.group(grk).rstrip("ACF"))
+                if abs(g * 15.4324 - gr) > 0.2:
+                    problems.append("%s g vs %s gr" % (ml.group(gk), ml.group(grk)))
+            for vk, fk in (("sv", "svf"), ("mv", "mvf")):
+                if abs(int(ml.group(vk)) / 0.3048 - int(ml.group(fk))) > 4:
+                    problems.append("%s m/s vs %s fps" % (ml.group(vk), ml.group(fk)))
+            if abs(float(b["colmm"].replace(",", ".")) - float(b["colin"]) * 25.4) > 0.15:
+                problems.append("COL %s mm vs %s in" % (b["colmm"], b["colin"]))
+            # bullet mass in g is printed to 0.1 g (about 1.5 gr), so allow up to 1.6 gr
+            if abs(float(b["bg"].replace(",", ".")) * 15.4324 - float(b["bgr"])) > 1.6:
+                problems.append("bullet %s g vs %s gr" % (b["bg"], b["bgr"]))
+            if problems:
+                unparsed.append({"page": p, "text": ws(line), "why": "unit cross-check failed (%s); skipped"
+                                 % "; ".join(problems)})
+                continue
+            bar = st["barrel"]
+            case = st["case"]
+            ev_lines = [x for x in [st["barrel_line"], st["primer_line"], st["case_line"], b["line"]]
+                        + b["frag_lines"] + [ws(line)] if x]
+            evidence = " | ".join(dict.fromkeys(ev_lines))
+            mfg_t = ws(" ".join(b["mfg"])) or None
+            typ_t = ws(" ".join(b["typ"])) or None
+            notes = ["Vihtavuori guide: 'All the loads in this guide are pressure tested according to the C.I.P. "
+                     "method'; no pressure values are published. velocityFps / chargeGr / coalIn are the printed "
+                     "[fps] / [grs] / [in.] columns."]
+            notes.append("Test barrel printed as '%s mm (%s”)'; barrelLengthIn uses the printed inch value."
+                         % (bar.group("mm"), bar.group("inch")))
+            notes.append("Primer printed only as type: '%s'." % st["primer"])
+            if printed:
+                notes.append("Printed page %s (%s half of PDF page %d)." % (printed, "left" if side == "L" else "right",
+                                                                            p))
+            if hdr_pos is None or (mfg_t and typ_t is None):
+                notes.append("Bullet maker/type split by column position; check bulletMfr/bulletModel.")
+            for lt, gk, grk, vk, fk in (("start", "sg", "sgr", "sv", "svf"), ("max", "mg", "mgr", "mv", "mvf")):
+                flag = ml.group(grk)[-1] if ml.group(grk)[-1] in "ACF" else ""
+                n2 = list(notes)
+                if flag == "F":
+                    n2.append("Charge flagged 'F' (legend: F = Case full).")
+                if flag == "A":
+                    n2.append("Charge flagged 'A' (legend: A = Accuracy load).")
+                if flag == "C":
+                    n2.append("Charge flagged 'C' (legend: C = Compressed load).")
+                rec = {
+                    "cartridge": canon or st["cart"],
+                    "bulletMfr": mfg_t, "bulletModel": typ_t,
+                    "bulletWeightGr": float(b["bgr"]), "bulletDiameterIn": None, "bulletLengthIn": None,
+                    "caseBrand": case.group("case") if case else None,
+                    "caseTrimLengthIn": float(case.group("inch")) if case else None,
+                    "primer": st["primer"],
+                    "coalIn": float(b["colin"]),
+                    "barrelLengthIn": vv_frac(bar.group("inch")),
+                    "twist": "1:%g\"" % vv_frac(bar.group("tw")),
+                    "powder": ml.group("powder"), "powderMfr": "Vihtavuori",
+                    "chargeGr": float(ml.group(grk).rstrip("ACF")),
+                    "velocityFps": int(ml.group(fk)),
+                    "pressure": None, "pressureUnit": None,
+                    "pressureMethod": "C.I.P. (stated for the guide as a whole; values not published)",
+                    "loadType": lt, "compressed": flag == "C",
+                    "chargeG": float(ml.group(gk).rstrip("ACF").replace(",", ".")),
+                    "velocityMps": int(ml.group(vk)),
+                    "coalMm": float(b["colmm"].replace(",", ".")),
+                    "barrelLengthMm": int(bar.group("mm")),
+                    "cartridgeAsPrinted": st["cart"],
+                    "sources": [{"url": doc["url"], "type": "manufacturer", "page": p, "retrieved": RETRIEVED}],
+                    "evidence": evidence,
+                    "notes": " ".join(n2),
+                    "_raw": [("chargeGr", ml.group(grk).rstrip("ACF")), ("velocityFps", ml.group(fk)),
+                             ("coalIn", b["colin"]), ("bulletWeightGr", b["bgr"]),
+                             ("barrelLengthMm", bar.group("mm"))],
+                }
+                records.append(rec)
+    log["vihtavuori_" + doc["key"]] = {"unparsedRows": unparsed}
+    return records
+
+
+# --------------------------------------------------------------------------
+def generic_raw_check(records):
+    """Each parsed numeric value must appear verbatim in the evidence and convert back to the stored value."""
+    bad = 0
+    for r in records:
+        for f, raw in r.get("_raw", []):
+            if not re.search(r"(?<![\d.,])" + re.escape(raw) + r"(?![\d])", r["evidence"]):
+                bad += 1
+                print("RAW CHECK FAIL (not in evidence)", f, raw, "|", r["evidence"])
+                continue
+            v = float(raw.replace(",", "") if re.fullmatch(r"\d{1,3}(,\d{3})+(\.\d+)?", raw)
+                      else raw.replace(",", "."))
+            if r.get(f) is None or abs(float(r[f]) - v) > 1e-9:
+                bad += 1
+                print("RAW CHECK FAIL (value)", f, raw, r.get(f))
+    return bad
+
+
 def self_check(records):
     print("records:", len(records))
     bad = 0
     for r in records:
+        if "_raw" in r:
+            continue  # sources other than the Hodgdon manual are checked by generic_raw_check()
         ev = r["evidence"]
         want = [("%g" % r["chargeGr"]) if r["chargeGr"] != int(r["chargeGr"]) else ("%.1f" % r["chargeGr"]),
                 str(r["velocityFps"]), "{:,}".format(r["pressure"])]
@@ -456,6 +1223,7 @@ def self_check(records):
             if not any(re.search(r"(?<![\d.])" + re.escape(x) + r"(?!\d)", ev) for x in forms):
                 bad += 1
                 print("CHECK FAIL", f, v, ev)
+    bad += generic_raw_check(records)
     print("evidence check failures:", bad)
     nl = [r for r in records if not r.pop("_layout_ok", True)]
     print("rows not found verbatim in the page's -layout text:", len(nl))
@@ -470,14 +1238,33 @@ def self_check(records):
         if "start" in d and "max" in d:
             s_, m_ = d["start"], d["max"]
             if not (s_["chargeGr"] <= m_["chargeGr"] and s_["velocityFps"] <= m_["velocityFps"]
-                    and (s_["pressureUnit"] != m_["pressureUnit"] or s_["pressure"] <= m_["pressure"])):
+                    and (s_["pressureUnit"] != m_["pressureUnit"] or s_["pressure"] is None
+                         or m_["pressure"] is None or s_["pressure"] <= m_["pressure"])):
                 anomalies += 1
                 print("   ORDER ANOMALY (kept, as printed):", k[2].split(" | ")[-1], "page", k[1])
     print("start>max anomalies:", anomalies)
     for r in records:
+        if r["pressure"] is None:
+            continue
         if (r["pressureUnit"] == "psi" and not 5000 <= r["pressure"] <= 70000) or \
-                (r["pressureUnit"] == "CUP" and not 5000 <= r["pressure"] <= 56000):
+                (r["pressureUnit"] == "CUP" and not 5000 <= r["pressure"] <= 56000) or \
+                (r["pressureUnit"] == "bar" and not 300 <= r["pressure"] <= 5000):
             print("   PRESSURE RANGE?", r["cartridge"], r["pressure"], r["pressureUnit"], r["evidence"].split(" | ")[-1])
+    # cross-source plausibility: COAL far from the median of all records of the same cartridge
+    by_c = {}
+    for r in records:
+        if r["coalIn"]:
+            by_c.setdefault(r["cartridge"], []).append(r["coalIn"])
+    outl = 0
+    for r in records:
+        v = sorted(by_c.get(r["cartridge"], []))
+        if r["coalIn"] and v:
+            med = v[len(v) // 2]
+            if abs(r["coalIn"] - med) / med > 0.10:
+                outl += 1
+                print("   COAL OUTLIER?", r["cartridge"], r["coalIn"], "median", med, r["powder"],
+                      r["sources"][0]["url"][-30:], r["sources"][0]["page"], r["evidence"][-90:])
+    print("COAL outliers (>10% from cartridge median):", outl)
     random.seed(7)
     for r in random.sample(records, min(5, len(records))):
         print(json.dumps({k: r[k] for k in ("cartridge", "bulletMfr", "bulletModel", "bulletWeightGr", "caseBrand",
@@ -504,6 +1291,11 @@ def main():
         records += recs
         docs_meta.append({"url": d["url"], "localPath": os.path.join(SRC_DIR, d["local"]), "title": d["title"],
                           "date": d["date"], "landingPage": d["landing"], "records": len(recs)})
+    for d, fn in ((RS_DOC, reload_swiss_parse), (SW_DOC, shooters_world_parse), (VV_DOC, vihtavuori_parse)):
+        recs = fn(d, log, keep_all)
+        records += recs
+        docs_meta.append({"url": d["url"], "localPath": os.path.join(SRC_DIR, d["local"]), "title": d["title"],
+                          "date": d["date"], "landingPage": d["landing"], "records": len(recs)})
     unknown_powders = sorted({r["powder"] for r in records if r["powderMfr"] is None})
     out = {
         "meta": {
@@ -519,6 +1311,7 @@ def main():
     bad = self_check(records)
     for r in records:
         r.pop("_layout_ok", None)
+        r.pop("_raw", None)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=2, ensure_ascii=False)

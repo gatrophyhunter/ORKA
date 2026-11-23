@@ -241,3 +241,29 @@ describe('uncertainty', () => {
     expect(sens.beta.peakPct).toBeGreaterThan(0);
   });
 });
+
+describe('review regressions', () => {
+  it('velocity solver works when the powder has no bulk density', () => {
+    const noBulk: PropellantModel = { ...powder, bulkDensityKgM3: undefined };
+    const sol = solveChargeForVelocity(base({ propellant: noBulk }), U.fpsToMs(2600));
+    expect(sol).not.toBeNull();
+    expect(Math.abs(U.msToFps(sol!.result.muzzleVelocityMs) - 2600)).toBeLessThan(1);
+  });
+  it('a runaway charge is reported as diverged with an infinite peak, never as stuck', () => {
+    const noBulk: PropellantModel = { ...powder, bulkDensityKgM3: undefined };
+    const r = simulate(base({ propellant: noBulk, chargeKg: U.grToKg(70) }));
+    expect(['diverged', 'invalid']).toContain(r.status);
+    if (r.status === 'diverged') expect(r.peakBreechPa).toBe(Infinity);
+  });
+  it('pressure solver reports no solution when the limit is below shot-start', () => {
+    const sol = solveChargeForPressure(base(), U.psiToPa(3000));
+    expect(sol.limitedBy).toBe('no-solution');
+    expect(sol.chargeKg).toBe(0);
+  });
+  it('rejects improper burn-shape parameters', () => {
+    for (const [lambda, mu] of [[0, -0.9], [0, -1], [-0.4, -0.5]]) {
+      const bad: PropellantModel = { ...powder, burn: { ...powder.burn, lambda, mu } };
+      expect(simulate(base({ propellant: bad })).status).toBe('invalid');
+    }
+  });
+});

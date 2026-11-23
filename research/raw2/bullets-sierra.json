@@ -1,0 +1,3268 @@
+{
+  "meta": {
+    "key": "bullets-sierra",
+    "retrieved": "2026-11-23",
+    "documents": [
+      {
+        "url": "https://sierrabullets.com/xmlsitemap.php?type=products&page=1",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/sitemap-products.xml",
+        "title": "Sierra Bullets XML product sitemap (list of product pages)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/32-cal-90-gr-jhc-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/32-cal-90-gr-jhc-sports-master.html",
+        "title": "Sierra Bullets product page: 32 CAL 90 GR JHC SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/9mm-95-gr-fmj-tournament-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/9mm-95-gr-fmj-tournament-master.html",
+        "title": "Sierra Bullets product page: 9MM 95 GR FMJ TOURNAMENT MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/9mm-125-gr-jhp-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/9mm-125-gr-jhp-sports-master.html",
+        "title": "Sierra Bullets product page: 9MM 125 GR JHP SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/9mm-125-gr-jhp-sig-v-crown/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/9mm-125-gr-jhp-sig-v-crown.html",
+        "title": "Sierra Bullets product page: 9MM 125 GR JHP - SIG V-CROWN",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/38-cal-140-gr-jhp-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/38-cal-140-gr-jhp-sports-master.html",
+        "title": "Sierra Bullets product page: 38 CAL 140 GR JHP SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/41-cal-170-gr-jhc-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/41-cal-170-gr-jhc-sports-master.html",
+        "title": "Sierra Bullets product page: 41 CAL 170 GR JHC SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/41-cal-210-gr-jhc-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/41-cal-210-gr-jhc-sports-master.html",
+        "title": "Sierra Bullets product page: 41 CAL 210 GR JHC SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/44-cal-250-gr-fpj-tournament-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/44-cal-250-gr-fpj-tournament-master.html",
+        "title": "Sierra Bullets product page: 44 CAL 250 GR FPJ TOURNAMENT MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/45-cal-200-gr-jhp-sig-v-crown/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/45-cal-200-gr-jhp-sig-v-crown.html",
+        "title": "Sierra Bullets product page: 45 CAL 200 GR JHP - Sig V-Crown",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/45-cal-230-gr-fmj-tournament-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/45-cal-230-gr-fmj-tournament-master.html",
+        "title": "Sierra Bullets product page: 45 CAL 230 GR FMJ TOURNAMENT MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/45-cal-300-gr-jsp-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/45-cal-300-gr-jsp-sports-master.html",
+        "title": "Sierra Bullets product page: 45 CAL 300 GR JSP SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/50-cal-350-gr-jhp-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/50-cal-350-gr-jhp-sports-master.html",
+        "title": "Sierra Bullets product page: 50 CAL 350 GR JHP SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/50-cal-400-gr-jsp-sports-master/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/50-cal-400-gr-jsp-sports-master.html",
+        "title": "Sierra Bullets product page: 50 CAL 400 GR JSP SPORTS MASTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/20-cal-36-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/20-cal-36-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 20 CAL 36 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/20-cal-39-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/20-cal-39-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 20 CAL 39 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/223-cal-40-gr-hornet-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/223-cal-40-gr-hornet-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 223 CAL 40 GR Hornet VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-40-gr-hp-varmintking-vk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-40-gr-hp-varmintking-vk.html",
+        "title": "Sierra Bullets product page: 22 CAL 40 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-45-gr-hornet-varmintking-vk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-45-gr-hornet-varmintking-vk.html",
+        "title": "Sierra Bullets product page: 22 CAL 45 GR Hornet VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-50-gr-spt-varmintking/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-50-gr-spt-varmintking.html",
+        "title": "Sierra Bullets product page: 22 CAL 50 GR SPT VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-55-gr-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-55-gr-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 22 CAL 55 GR VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-55-gr-fmjbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-55-gr-fmjbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 22 CAL 55 GR FMJBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-55-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-55-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 22 CAL 55 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-62-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-62-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 22 CAL 62 GR SBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-69-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-69-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 22 CAL 69 GR HPBT MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-69-gr-tipped-matchking-tmk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-69-gr-tipped-matchking-tmk.html",
+        "title": "Sierra Bullets product page: 22 CAL 69 GR Tipped MatchKing (TMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-x-mkx-ktzx/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-77-gr-hpbt-matchking-x-mkx-ktzx.html",
+        "title": "Sierra Bullets product page: 22 CAL 77 GR HPBT MatchKing X (MKX)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-88-gr-tipped-matchking-tmk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-88-gr-tipped-matchking-tmk.html",
+        "title": "Sierra Bullets product page: 22 CAL 88 GR Tipped MatchKing (TMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/22-cal-95-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/22-cal-95-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 22 CAL 95 GR HPBT/CN MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-55-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-55-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 6MM 55 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-70-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-70-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 6MM 70 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-75-gr-hp-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-75-gr-hp-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 6MM 75 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-85-gr-hpbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-85-gr-hpbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 6MM 85 GR HPBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-100-gr-sbt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-100-gr-sbt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 6MM 100 GR SBT Pro-Hunter",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-100-gr-tipped-gameking-tgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-100-gr-tipped-gameking-tgk.html",
+        "title": "Sierra Bullets product page: 6MM 100 GR Tipped GameKing (TGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6mm-107-gr-hpbt-matchking-x-mkx/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6mm-107-gr-hpbt-matchking-x-mkx.html",
+        "title": "Sierra Bullets product page: 6MM 107 GR HPBT MatchKing X (MKX)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/25-cal-70-gr-tipped-varmintking-tvk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/25-cal-70-gr-tipped-varmintking-tvk.html",
+        "title": "Sierra Bullets product page: 25 CAL 70 GR Tipped VarmintKing (TVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/25-cal-87-gr-spt-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/25-cal-87-gr-spt-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 25 CAL 87 GR SPT VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/25-cal-100-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/25-cal-100-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 25 CAL 100 GR SBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/25-cal-131-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/25-cal-131-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 25 CAL 131 GR HPBT-CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-120-gr-spt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-120-gr-spt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 6.5MM 120 GR SPT Pro-Hunter",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-120-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-120-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 6.5MM 120 GR HPBT MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-130-gr-tipped-matchking-tmk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-130-gr-tipped-matchking-tmk.html",
+        "title": "Sierra Bullets product page: 6.5MM 130 GR Tipped MatchKing (TMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-140-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-140-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 6.5MM 140 GR SBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-144-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-144-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 6.5MM 144 GR HPBT MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-145-gr-tipped-gameking-tgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-145-gr-tipped-gameking-tgk.html",
+        "title": "Sierra Bullets product page: 6.5MM 145 GR Tipped GameKing (TGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-150-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-150-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 6.5MM 150 GR HPBT/CN MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/6-5mm-153-gr-tipped-matchking-tmk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/6-5mm-153-gr-tipped-matchking-tmk.html",
+        "title": "Sierra Bullets product page: 6.5MM 153 GR Tipped MatchKing (TMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/270-cal-130-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/270-cal-130-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 270 CAL 130 GR SBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/270-cal-130-gr-spt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/270-cal-130-gr-spt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 270 CAL 130 GR SPT Pro-Hunter",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/270-cal-135-gr-hpbt-matchking-x-mkx/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/270-cal-135-gr-hpbt-matchking-x-mkx.html",
+        "title": "Sierra Bullets product page: 270 CAL 135 GR HPBT MatchKing X (MKX)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-100-gr-hp-varmintking-vk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-100-gr-hp-varmintking-vk.html",
+        "title": "Sierra Bullets product page: 7MM 100 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-150-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-150-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 7MM 150 GR SBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-160-gr-hpbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-160-gr-hpbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 7MM 160 GR HPBT GameKing (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-168-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-168-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 7MM 168 GR HPBT MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-175-gr-hpbt-matchking-x-mkx/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-175-gr-hpbt-matchking-x-mkx.html",
+        "title": "Sierra Bullets product page: 7MM 175 GR HPBT MatchKing X (MKX)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-180-gr-hpbt-cn-optimized-for-7prc-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-180-gr-hpbt-cn-optimized-for-7prc-matchking-smk.html",
+        "title": "Sierra Bullets product page: 7MM 180 GR HPBT/CN (Optimized for 7PRC) MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-180-gr-tipped-gameking-tgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-180-gr-tipped-gameking-tgk.html",
+        "title": "Sierra Bullets product page: 7MM 180 GR Tipped GameKing (TGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/7mm-197-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/7mm-197-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 7MM 197 GR HPBT/CN MatchKing (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-115-gr-hp-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-115-gr-hp-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 30 CAL 115 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-125-gr-spt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-125-gr-spt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 30 CAL 125 GR SPT PRO-HUNTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-135-gr-hp-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-135-gr-hp-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 30 CAL 135 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-150-gr-spt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-150-gr-spt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 30 CAL 150 GR SPT PRO-HUNTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-150-gr-hp-varmintking-svk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-150-gr-hp-varmintking-svk.html",
+        "title": "Sierra Bullets product page: 30 CAL 150 GR HP VarmintKing (SVK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-155-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-155-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 155 GR HPBT MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-165-gr-hpbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-165-gr-hpbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 30 CAL 165 GR HPBT GAMEKING (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-169-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-169-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 169 GR HPBT/CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-x-mkx/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-175-gr-hpbt-matchking-x-mkx.html",
+        "title": "Sierra Bullets product page: 30 CAL 175 GR HPBT MATCHKING X (MKX)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-177-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-177-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 177 GR HPBT/CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-180-gr-tipped-gameking-tgk-optimized-for-30-06/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-180-gr-tipped-gameking-tgk-optimized-for-30-06.html",
+        "title": "Sierra Bullets product page: 30 CAL 180 GR TIPPED GAMEKING (TGK) (Optimized for 30-06)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-180-gr-tipped-gameking-tgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-180-gr-tipped-gameking-tgk.html",
+        "title": "Sierra Bullets product page: 30 CAL 180 GR TIPPED GAMEKING (TGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-190-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-190-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 190 GR HPBT MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-200-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-200-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 200 GR HPBT/CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-215-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-215-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 30 CAL 215 GR HPBT/CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/30-cal-220-gr-rn-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/30-cal-220-gr-rn-pro-hunter.html",
+        "title": "Sierra Bullets product page: 30 CAL 220 GR RN PRO-HUNTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/303-cal-174-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/303-cal-174-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 303 CAL 174 GR HPBT MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/303-cal-180-gr-spt-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/303-cal-180-gr-spt-pro-hunter.html",
+        "title": "Sierra Bullets product page: 303 CAL 180 GR SPT PRO-HUNTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/8mm-220-gr-sbt-gameking-sgk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/8mm-220-gr-sbt-gameking-sgk.html",
+        "title": "Sierra Bullets product page: 8MM 220 GR SBT GAMEKING (SGK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/338-cal-250-gr-hpbt-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/338-cal-250-gr-hpbt-matchking-smk.html",
+        "title": "Sierra Bullets product page: 338 CAL 250 GR HPBT MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/375-cal-350-gr-hpbt-cn-matchking-smk/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/375-cal-350-gr-hpbt-cn-matchking-smk.html",
+        "title": "Sierra Bullets product page: 375 CAL 350 GR HPBT/CN MATCHKING (SMK)",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/45-cal-260-gr-fn-pro-hunter/",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/products/45-cal-260-gr-fn-pro-hunter.html",
+        "title": "Sierra Bullets product page: 45 CAL 260 GR FN PRO-HUNTER",
+        "date": "2026-11-23"
+      },
+      {
+        "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/bullets-sierra/loaddata/rifle__264-6.5mm__6.5-Creedmoor.pdf",
+        "title": "Sierra load data PDF (Sierra Reloading Manual 6th ed. pages): 6.5-Creedmoor.pdf",
+        "date": null
+      }
+    ],
+    "notes": "Source: every bullet product page listed in the sierrabullets.com product sitemap on 2026-11-23. Values come from the manufacturer spec table that each product page embeds as JSON (window.stencilBootstrap \"specsJson\" and \"customFields\": Item #, Bullet Type, Bullet Diameter, Bullet Weight (Grains), G1 BC, G7 BC, Bullet Material, Tipped/Non-Tipped); evidence quotes that JSON text verbatim (JS string escaping undone, whitespace collapsed). Sierra's current site publishes ONE G1 and (for some bullets) ONE G7 BC per bullet; it does not publish velocity-banded BCs, bullet length, base-to-ogive, boat-tail length or recommended twist in its spec tables, so those fields are null unless a product description states them (twist, when parsed, is quoted in evidence). The \"2026 catalog\" offered on https://sierrabullets.com/catalog/ is a single JPEG poster image, not a PDF, and was not used for numbers. construction is mapped from the maker's \"Bullet Material\" wording (\"Jacketed Lead\" -> cup-and-core; Bullet Type containing Full Metal Jacket -> FMJ); the raw wording is kept in notes. \"firearm\" (rifle/handgun) is from the site category the product is listed in. Conflicts list disagreements between the two copies of the spec table on a page, between packaging variants, or between the spec table and the product description text/name. Notes starting with \"CHECK:\" flag a diameter that differs from other products with the same caliber label (flag only; value kept as published).",
+    "problems": [
+      "not downloaded: https://sierrabullets.com/9mm-115-gr-fmj-tournament-master/",
+      "not downloaded: https://sierrabullets.com/10mm-150-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/22-cal-55-gr-hpbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/7mm-140-gr-tipped-gameking-tgk-bgb/",
+      "not downloaded: https://sierrabullets.com/30-cal-200-gr-hpbt-matchking-x-mkx/",
+      "not downloaded: https://sierrabullets.com/35-cal-225-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-130-gr-hpbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/270-cal-140-gr-hpbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-200-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-165-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-140-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-125-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/270-cal-140-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/22-cal-69-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/30-cal-180-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/45-cal-200-gr-fpj-tournament-master/",
+      "not downloaded: https://sierrabullets.com/30-cal-125-gr-hp-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/40-cal-200-gr-jhp-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/25-cal-100-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/8mm-200-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/7mm-160-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/38-cal-125-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/7mm-175-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-168-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/30-cal-210-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-150-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-85-gr-rn-sports-master/",
+      "not downloaded: https://sierrabullets.com/22-cal-50-gr-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/44-cal-240-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/22-cal-63-gr-smp-varmintking-vk/",
+      "not downloaded: https://sierrabullets.com/338-cal-250-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6mm-90-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/25-cal-135-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/9mm-147-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/7mm-183-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/45-70-cal-300-gr-hp-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/30-cal-230-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-60-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/20-cal-32-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/25-cal-131-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/35-cal-200-gr-rn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/375-cal-200-gr-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/30-cal-175-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/22-cal-50-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/6mm-95-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/338-cal-225-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/10mm-165-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/7mm-140-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-107-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/30-cal-168-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-40-gr-hornet-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/22-cal-55-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-195-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-220-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/44-cal-180-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/38-cal-125-gr-jsp-sports-master/",
+      "not downloaded: https://sierrabullets.com/6mm-110-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/8mm-150-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/7mm-175-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-90-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-140-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/7mm-120-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/30-cal-195-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/30-cal-155-gr-hpbt-cn-palma-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/38-cal-180-gr-fpj-tournament-master/",
+      "not downloaded: https://sierrabullets.com/9mm-124-gr-jhp-sig-v-crown/",
+      "not downloaded: https://sierrabullets.com/45-cal-185-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/270-cal-115-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-110-gr-rn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/45-cal-230-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/6-5mm-100-gr-hp-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/30-cal-110-gr-hp-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/25-cal-90-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/38-cal-158-gr-jsp-sports-master/",
+      "not downloaded: https://sierrabullets.com/303-cal-125-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-smk-cannelure/",
+      "not downloaded: https://sierrabullets.com/7mm-160-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/6mm-70-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-130-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/270-cal-150-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/22-cal-64-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/9mm-90-gr-jhp-sig-v-crown/",
+      "not downloaded: https://sierrabullets.com/30-cal-150-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-180-gr-rn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/30-cal-200-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/25-cal-110-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/270-cal-140-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/44-cal-210-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/30-cal-150-gr-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/30-cal-125-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/30-cal-210-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/375-cal-250-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/22-cal-52-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-40-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/6mm-80-gr-sbt-varmintking-vk/",
+      "not downloaded: https://sierrabullets.com/45-70-cal-400-gr-hp-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/7mm-150-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-100-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-123-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/35-cal-155-gr-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/10mm-180-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/6mm-105-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/9mm-124-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/10mm-165-gr-jhp-sig-v-crown/",
+      "not downloaded: https://sierrabullets.com/7mm-140-gr-hpbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6mm-95-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/338-cal-215-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-107-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/45-cal-240-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/6mm-107-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-205-gr-hpbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-165-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-142-gr-hpbt-matchking-x-mkx/",
+      "not downloaded: https://sierrabullets.com/7mm-140-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-125-gr-hp-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/375-cal-300-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/9mm-90-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/30-cal-170-gr-fn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/6mm-116-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/22-cal-55-gr-spt-varmintking-vk/",
+      "not downloaded: https://sierrabullets.com/8mm-175-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/6-5mm-142-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/30-cal-180-gr-tipped-gameking-tgk-optimized-for-300-win-mag/",
+      "not downloaded: https://sierrabullets.com/30-cal-155-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/22-cal-80-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/7mm-180-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/44-cal-300-gr-jsp-sports-master/",
+      "not downloaded: https://sierrabullets.com/6mm-100-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/22-cal-77-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/22-cal-45-gr-spt-varmintking-vk/",
+      "not downloaded: https://sierrabullets.com/223-cal-45-gr-hornet-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/22-cal-60-gr-hp-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/7mm-185-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/303-cal-150-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/7mm-165-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/6mm-60-gr-hp-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-130-gr-hpbt-cn-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/9mm-147-gr-jhp-sig-v-crown/",
+      "not downloaded: https://sierrabullets.com/30-cal-150-gr-rn-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/6mm-107-gr-tipped-matchking-tmk/",
+      "not downloaded: https://sierrabullets.com/22-cal-53-gr-hp-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/45-cal-225-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/22-cal-69-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-105-gr-tipped-varmintking-tvk/",
+      "not downloaded: https://sierrabullets.com/338-cal-300-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/22-cal-65-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/9mm-125-gr-fmj-tournament-master/",
+      "not downloaded: https://sierrabullets.com/30-cal-150-gr-fmjbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/25-cal-117-gr-sbt-gameking-sgk/",
+      "not downloaded: https://sierrabullets.com/6mm-85-gr-spt-varmintking-svk/",
+      "not downloaded: https://sierrabullets.com/7mm-150-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/38-cal-158-gr-jhc-sports-master/",
+      "not downloaded: https://sierrabullets.com/270-cal-135-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/6-5mm-120-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/30-cal-220-gr-hpbt-matchking-smk/",
+      "not downloaded: https://sierrabullets.com/270-cal-175-gr-tipped-gameking-tgk/",
+      "not downloaded: https://sierrabullets.com/9mm-115-gr-jhp-sports-master/",
+      "not downloaded: https://sierrabullets.com/7mm-140-gr-spt-pro-hunter/",
+      "not downloaded: https://sierrabullets.com/25-cal-90-gr-hpbt-gameking-sgk/"
+    ]
+  },
+  "bullets": [
+    {
+      "id": "sierra-8030",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "32 CAL 90 GR JHC SPORTS MASTER",
+      "sku": "8030",
+      "caliberLabel": "32 CAL",
+      "diameterIn": 0.312,
+      "weightGr": 90.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.125,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Cavity (JHC)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/32-cal-90-gr-jhc-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8030\":{\"Item #\":\"8030\",\"Bullet Type\":\"Jacketed Hollow Cavity (JHC)\",\"Bullet Diameter\":\"0.312\",\"Bullet Weight (Grains)\":\"90\",\"G1 BC\":\"0.125\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763080306\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8030: box quantity 100. Listed under several caliber categories: 9mm, 32 Caliber."
+    },
+    {
+      "id": "sierra-8105",
+      "manufacturer": "Sierra Bullets",
+      "line": "TournamentMaster",
+      "name": "9MM 95 GR FMJ TOURNAMENT MASTER",
+      "sku": "8105",
+      "caliberLabel": "9MM",
+      "diameterIn": 0.355,
+      "weightGr": 95.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.093,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Full Metal Jacket (FMJ)",
+      "tip": null,
+      "construction": "FMJ",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/9mm-95-gr-fmj-tournament-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8105\":{\"Item #\":\"8105\",\"Bullet Type\":\"Full Metal Jacket (FMJ)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"95\",\"G1 BC\":\"0.093\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081051\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"FMJ\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8105: box quantity 100."
+    },
+    {
+      "id": "sierra-8125",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "9MM 125 GR JHP SPORTS MASTER",
+      "sku": "8125",
+      "caliberLabel": "9MM",
+      "diameterIn": 0.355,
+      "weightGr": 125.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.124,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Point (JHP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/9mm-125-gr-jhp-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8125\":{\"Item #\":\"8125\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.124\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081259\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8125: box quantity 100."
+    },
+    {
+      "id": "sierra-9925",
+      "manufacturer": "Sierra Bullets",
+      "line": "Sig V-Crown",
+      "name": "9MM 125 GR JHP - SIG V-CROWN",
+      "sku": "9925",
+      "caliberLabel": "9MM",
+      "diameterIn": 0.355,
+      "weightGr": 125.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.122,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Point (JHP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/9mm-125-gr-jhp-sig-v-crown/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9925\":{\"Item #\":\"9925\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.122\",\"Purpose\":\"Personal Defense\",\"Pursuit\":\"Personal Defense, Hunting - Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763099254\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9925C (500 ct). Base item #9925: box quantity 100."
+    },
+    {
+      "id": "sierra-8325",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "38 CAL 140 GR JHP SPORTS MASTER",
+      "sku": "8325",
+      "caliberLabel": "38 CAL",
+      "diameterIn": 0.357,
+      "weightGr": 140.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.078,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Cavity (JHC)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/38-cal-140-gr-jhp-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8325\":{\"Item #\":\"8325\",\"Bullet Type\":\"Jacketed Hollow Cavity (JHC)\",\"Bullet Diameter\":\"0.357\",\"Bullet Weight (Grains)\":\"140\",\"G1 BC\":\"0.078\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763083253\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8325: box quantity 100."
+    },
+    {
+      "id": "sierra-8500",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "41 CAL 170 GR JHC SPORTS MASTER",
+      "sku": "8500",
+      "caliberLabel": "41 CAL",
+      "diameterIn": 0.41,
+      "weightGr": 170.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.123,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Cavity (JHC)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/41-cal-170-gr-jhc-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8500\":{\"Item #\":\"8500\",\"Bullet Type\":\"Jacketed Hollow Cavity (JHC)\",\"Bullet Diameter\":\"0.410\",\"Bullet Weight (Grains)\":\"170\",\"G1 BC\":\"0.123\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763085004\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8500: box quantity 100."
+    },
+    {
+      "id": "sierra-8520",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "41 CAL 210 GR JHC SPORTS MASTER",
+      "sku": "8520",
+      "caliberLabel": "41 CAL",
+      "diameterIn": 0.41,
+      "weightGr": 210.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.165,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Cavity (JHC)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/41-cal-210-gr-jhc-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8520\":{\"Item #\":\"8520\",\"Bullet Type\":\"Jacketed Hollow Cavity (JHC)\",\"Bullet Diameter\":\"0.410\",\"Bullet Weight (Grains)\":\"210\",\"G1 BC\":\"0.165\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763085202\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8520: box quantity 100."
+    },
+    {
+      "id": "sierra-8615",
+      "manufacturer": "Sierra Bullets",
+      "line": "TournamentMaster",
+      "name": "44 CAL 250 GR FPJ TOURNAMENT MASTER",
+      "sku": "8615",
+      "caliberLabel": "44 CAL",
+      "diameterIn": 0.4295,
+      "weightGr": 250.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.213,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Full Profile Jacket (FPJ)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/44-cal-250-gr-fpj-tournament-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8615\":{\"Item #\":\"8615\",\"Bullet Type\":\"Full Profile Jacket (FPJ)\",\"Bullet Diameter\":\"0.4295\",\"Bullet Weight (Grains)\":\"250\",\"G1 BC\":\"0.213\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763086155\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8615: box quantity 100."
+    },
+    {
+      "id": "sierra-9820",
+      "manufacturer": "Sierra Bullets",
+      "line": "Sig V-Crown",
+      "name": "45 CAL 200 GR JHP - Sig V-Crown",
+      "sku": "9820",
+      "caliberLabel": "45 CAL",
+      "diameterIn": 0.4515,
+      "weightGr": 200.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.118,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Point (JHP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/45-cal-200-gr-jhp-sig-v-crown/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9820\":{\"Item #\":\"9820\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.4515\",\"Bullet Weight (Grains)\":\"200\",\"G1 BC\":\"0.118\",\"Purpose\":\"Personal Defense\",\"Pursuit\":\"Personal Defense, Hunting - Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763098202\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9820C (500 ct). Base item #9820: box quantity 100."
+    },
+    {
+      "id": "sierra-8815",
+      "manufacturer": "Sierra Bullets",
+      "line": "TournamentMaster",
+      "name": "45 CAL 230 GR FMJ TOURNAMENT MASTER",
+      "sku": "8815",
+      "caliberLabel": "45 CAL",
+      "diameterIn": 0.4515,
+      "weightGr": 230.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.14,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Full Metal Jacket (FMJ)",
+      "tip": null,
+      "construction": "FMJ",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/45-cal-230-gr-fmj-tournament-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8815\":{\"Item #\":\"8815\",\"Bullet Type\":\"Full Metal Jacket (FMJ)\",\"Bullet Diameter\":\"0.4515\",\"Bullet Weight (Grains)\":\"230\",\"G1 BC\":\"0.140\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763088159\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"FMJ\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8815: box quantity 100."
+    },
+    {
+      "id": "sierra-8830",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "45 CAL 300 GR JSP SPORTS MASTER",
+      "sku": "8830",
+      "caliberLabel": "45 CAL",
+      "diameterIn": 0.4515,
+      "weightGr": 300.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.192,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Soft Point (JSP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/45-cal-300-gr-jsp-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8830\":{\"Item #\":\"8830\",\"Bullet Type\":\"Jacketed Soft Point (JSP)\",\"Bullet Diameter\":\"0.4515\",\"Bullet Weight (Grains)\":\"300\",\"G1 BC\":\"0.192\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763088302\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8830: box quantity 50."
+    },
+    {
+      "id": "sierra-5350",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "50 CAL 350 GR JHP SPORTS MASTER",
+      "sku": "5350",
+      "caliberLabel": "50 CAL",
+      "diameterIn": 0.5,
+      "weightGr": 350.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.155,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Hollow Point (JHP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/50-cal-350-gr-jhp-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"5350\":{\"Item #\":\"5350\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.500\",\"Bullet Weight (Grains)\":\"350\",\"G1 BC\":\"0.155\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763053508\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #5350: box quantity 50."
+    },
+    {
+      "id": "sierra-5400",
+      "manufacturer": "Sierra Bullets",
+      "line": "SportsMaster",
+      "name": "50 CAL 400 GR JSP SPORTS MASTER",
+      "sku": "5400",
+      "caliberLabel": "50 CAL",
+      "diameterIn": 0.5,
+      "weightGr": 400.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.185,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Jacketed Soft Point (JSP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "handgun",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/50-cal-400-gr-jsp-sports-master/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"5400\":{\"Item #\":\"5400\",\"Bullet Type\":\"Jacketed Soft Point (JSP)\",\"Bullet Diameter\":\"0.500\",\"Bullet Weight (Grains)\":\"400\",\"G1 BC\":\"0.185\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Personal Defense, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763054000\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #5400: box quantity 50."
+    },
+    {
+      "id": "sierra-1036",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "20 CAL 36 GR Tipped VarmintKing (TVK)",
+      "sku": "1036",
+      "caliberLabel": "20 CAL",
+      "diameterIn": 0.204,
+      "weightGr": 36.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.255,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/20-cal-36-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1036\":{\"Item #\":\"1036\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.204\",\"Bullet Weight (Grains)\":\"36\",\"G1 BC\":\"0.255\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763010365\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1036C (500 ct). Base item #1036: box quantity 100."
+    },
+    {
+      "id": "sierra-1039",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "20 CAL 39 GR Tipped VarmintKing (TVK)",
+      "sku": "1039",
+      "caliberLabel": "20 CAL",
+      "diameterIn": 0.204,
+      "weightGr": 39.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.287,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/20-cal-39-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1039\":{\"Item #\":\"1039\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.204\",\"Bullet Weight (Grains)\":\"39\",\"G1 BC\":\"0.287\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763010396\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1039C (500 ct). Base item #1039: box quantity 100."
+    },
+    {
+      "id": "sierra-1100",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "223 CAL 40 GR Hornet VarmintKing (SVK)",
+      "sku": "1100",
+      "caliberLabel": "223 CAL",
+      "diameterIn": 0.223,
+      "weightGr": 40.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.117,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hornet",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/223-cal-40-gr-hornet-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1100\":{\"Item #\":\"1100\",\"Bullet Type\":\"Hornet\",\"Bullet Diameter\":\"0.223\",\"Bullet Weight (Grains)\":\"40\",\"G1 BC\":\"0.117\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763011003\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1100: box quantity 100."
+    },
+    {
+      "id": "sierra-1385",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "22 CAL 40 GR HP VarmintKing (SVK)",
+      "sku": "1385",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 40.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.155,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-40-gr-hp-varmintking-vk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1385\":{\"Item #\":\"1385\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"40\",\"G1 BC\":\"0.155\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013854\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1385: box quantity 100."
+    },
+    {
+      "id": "sierra-1210",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "22 CAL 45 GR Hornet VarmintKing (SVK)",
+      "sku": "1210",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 45.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.131,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hornet",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-45-gr-hornet-varmintking-vk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1210\":{\"Item #\":\"1210\",\"Bullet Type\":\"Hornet\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"45\",\"G1 BC\":\"0.131\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763012109\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1210: box quantity 100."
+    },
+    {
+      "id": "sierra-1330",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "22 CAL 50 GR SPT VarmintKing (SVK)",
+      "sku": "1330",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 50.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.222,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-50-gr-spt-varmintking/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1330\":{\"Item #\":\"1330\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"50\",\"G1 BC\":\"0.222\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013304\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1330: box quantity 100."
+    },
+    {
+      "id": "sierra-1345",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "22 CAL 55 GR VarmintKing (SVK)",
+      "sku": "1345",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 55.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.237,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-55-gr-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1345\":{\"Item #\":\"1345\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"55\",\"G1 BC\":\"0.237\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013458\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1345: box quantity 100."
+    },
+    {
+      "id": "sierra-1355",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "22 CAL 55 GR FMJBT GameKing (SGK)",
+      "sku": "1355",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 55.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.272,
+      "bcG7": 0.122,
+      "bcNotes": null,
+      "profile": "Full Metal Jacket Boat Tail (FMJBT)",
+      "tip": null,
+      "construction": "FMJ",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-55-gr-fmjbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1355\":{\"Item #\":\"1355\",\"Bullet Type\":\"Full Metal Jacket Boat Tail (FMJBT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"55\",\"G1 BC\":\"0.272\",\"G7 BC\":\"0.122\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013557\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"FMJ\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1355: box quantity 100."
+    },
+    {
+      "id": "sierra-1455",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "22 CAL 55 GR Tipped VarmintKing (TVK)",
+      "sku": "1455",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 55.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.271,
+      "bcG7": 0.124,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-55-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1455\":{\"Item #\":\"1455\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"55\",\"G1 BC\":\"0.271\",\"G7 BC\":\"0.124\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763014554\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1455C (500 ct), 1455Z (2000 ct). Base item #1455: box quantity 100."
+    },
+    {
+      "id": "sierra-9362",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "22 CAL 62 GR SBT GameKing (SGK)",
+      "sku": "9362",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 62.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.298,
+      "bcG7": 0.149,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-62-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9362\":{\"Item #\":\"9362\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"62\",\"G1 BC\":\"0.298\",\"G7 BC\":\"0.149\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763093627\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9362C (500 ct). Base item #9362: box quantity 100."
+    },
+    {
+      "id": "sierra-1380",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "22 CAL 69 GR HPBT MatchKing (SMK)",
+      "sku": "1380",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 69.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.341,
+      "bcG7": 0.167,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:10",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-69-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1380\":{\"Item #\":\"1380\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"69\",\"G1 BC\":\"0.341\",\"G7 BC\":\"0.167\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013809\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×10” or faster.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1380C (500 ct). Base item #1380: box quantity 100."
+    },
+    {
+      "id": "sierra-7169",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped MatchKing",
+      "name": "22 CAL 69 GR Tipped MatchKing (TMK)",
+      "sku": "7169",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 69.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.375,
+      "bcG7": 0.178,
+      "bcNotes": null,
+      "profile": "Tipped MatchKing (TMK)",
+      "tip": "acetal resin tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:10",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-69-gr-tipped-matchking-tmk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"7169\":{\"Item #\":\"7169\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"69\",\"G1 BC\":\"0.375\",\"G7 BC\":\"0.178\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763071694\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×10” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7169C (500 ct). Base item #7169: box quantity 100."
+    },
+    {
+      "id": "sierra-9380",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing X",
+      "name": "22 CAL 77 GR HPBT MatchKing X (MKX)",
+      "sku": "9380",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 77.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.372,
+      "bcG7": 0.182,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-77-gr-hpbt-matchking-x-mkx-ktzx/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9380\": { \"Item #\": \"9380\", \"Bullet Type\": \"Hollow Point Boat Tail (HPBT)\", \"Bullet Diameter\": \"0.224\", \"Bullet Weight (Grains)\": \"77\", \"G1 BC\": \".372\", \"G7 BC\": \".182\", \"Purpose\": \"Hunting\", \"Pursuit\": \"Big Game, Target\", \"Box Quantity\": \"100\", \"Bullet Material\": \"Jacketed Lead\", \"Box UPC\": \"092763093801\", \"Tipped/Non-Tipped\": \"Non-Tipped\" }",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9380C (500 ct). Base item #9380: box quantity 100."
+    },
+    {
+      "id": "sierra-7188",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped MatchKing",
+      "name": "22 CAL 88 GR Tipped MatchKing (TMK)",
+      "sku": "7188",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 88.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.525,
+      "bcG7": 0.263,
+      "bcNotes": null,
+      "profile": "Tipped MatchKing (TMK)",
+      "tip": "acetal resin tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-88-gr-tipped-matchking-tmk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"7188\":{\"Item #\":\"7188\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"88\",\"G1 BC\":\"0.525\",\"G7 BC\":\"0.263\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763071885\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped MatchKing bullets are an evolution of the MatchKing bullet, featuring an acetal resin tip designed to reduce drag and improve ballistic efficiency.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7188C (500 ct). Base item #7188: box quantity 100."
+    },
+    {
+      "id": "sierra-1396",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "22 CAL 95 GR HPBT/CN MatchKing (SMK)",
+      "sku": "1396",
+      "caliberLabel": "22 CAL",
+      "diameterIn": 0.224,
+      "weightGr": 95.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.6,
+      "bcG7": 0.299,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:6.5",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/22-cal-95-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1396\":{\"Item #\":\"1396\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"95\",\"G1 BC\":\"0.600\",\"G7 BC\":\"0.299\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763013960\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×6.5” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1396C (500 ct). Base item #1396: box quantity 100."
+    },
+    {
+      "id": "sierra-1502",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "6MM 55 GR Tipped VarmintKing (TVK)",
+      "sku": "1502",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 55.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.225,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-55-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1502\":{\"Item #\":\"1502\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"55\",\"G1 BC\":\"0.225\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763015025\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1502C (500 ct). Base item #1502: box quantity 100."
+    },
+    {
+      "id": "sierra-1507",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "6MM 70 GR Tipped VarmintKing (TVK)",
+      "sku": "1507",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 70.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.299,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-70-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1507\":{\"Item #\":\"1507\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"70\",\"G1 BC\":\"0.299\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763015070\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1507C (500 ct). Base item #1507: box quantity 100."
+    },
+    {
+      "id": "sierra-1510",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "6MM 75 GR HP VarmintKing (SVK)",
+      "sku": "1510",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 75.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.217,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-75-gr-hp-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1510\":{\"Item #\":\"1510\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"75\",\"G1 BC\":\"0.217\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763015100\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1510: box quantity 100."
+    },
+    {
+      "id": "sierra-1530",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "6MM 85 GR HPBT GameKing (SGK)",
+      "sku": "1530",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 85.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.311,
+      "bcG7": 0.156,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-85-gr-hpbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1530\":{\"Item #\":\"1530\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"85\",\"G1 BC\":\"0.311\",\"G7 BC\":\"0.156\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763015308\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1530: box quantity 100."
+    },
+    {
+      "id": "sierra-1560",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "6MM 100 GR SBT Pro-Hunter",
+      "sku": "1560",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 100.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.43,
+      "bcG7": 0.208,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-100-gr-sbt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1560\":{\"Item #\":\"1560\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"100\",\"G1 BC\":\"0.430\",\"G7 BC\":\"0.208\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763015605\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet will perform to outstanding levels in long-range target or silhouette competition from barrels with standard twist rates.",
+      "notes": "Product description also references item number(s) #1540 (description text may be shared with/compare to another product). Product description mentions twist but no single recommended rate could be parsed unambiguously; see evidence. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1560: box quantity 100."
+    },
+    {
+      "id": "sierra-4110t",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped GameKing",
+      "name": "6MM 100 GR Tipped GameKing (TGK)",
+      "sku": "4110T",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 100.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.515,
+      "bcG7": 0.253,
+      "bcNotes": null,
+      "profile": "Tipped GameKing (TGK)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:8",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-100-gr-tipped-gameking-tgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"4110T\":{\"Item #\":\"4110T\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"100\",\"G1 BC\":\"0.515\",\"G7 BC\":\"0.253\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763341100\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | Open pocket under the polymer tip expands lead core instantly on impact",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4110 (100 ct), 4110C (500 ct). Base item #4110T: box quantity 50."
+    },
+    {
+      "id": "sierra-1571",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing X",
+      "name": "6MM 107 GR HPBT MatchKing X (MKX)",
+      "sku": "1571",
+      "caliberLabel": "6MM",
+      "diameterIn": 0.243,
+      "weightGr": 107.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.477,
+      "bcG7": 0.242,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6mm-107-gr-hpbt-matchking-x-mkx/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1571\": { \"Item #\": \"1571\", \"Bullet Type\": \"Hollow Point Boat Tail (HPBT)\", \"Bullet Diameter\": \"0.243\", \"Bullet Weight (Grains)\": \"107\", \"G1 BC\": \"0.477\", \"G7 BC\": \"0.242\", \"Purpose\": \"Hunting\", \"Pursuit\": \"Big Game, Target\", \"Box Quantity\": \"100\", \"Bullet Material\": \"Jacketed Lead\", \"Box UPC\": \"092763015711\", \"Tipped/Non-Tipped\": \"Non-Tipped\" }",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1571C (500 ct). Base item #1571: box quantity 100."
+    },
+    {
+      "id": "sierra-1605",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped VarmintKing (formerly BlitzKing)",
+      "name": "25 CAL 70 GR Tipped VarmintKing (TVK)",
+      "sku": "1605",
+      "caliberLabel": "25 CAL",
+      "diameterIn": 0.257,
+      "weightGr": 70.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.26,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/25-cal-70-gr-tipped-varmintking-tvk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1605\":{\"Item #\":\"1605\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.257\",\"Bullet Weight (Grains)\":\"70\",\"G1 BC\":\"0.260\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763016053\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1605C (500 ct). Base item #1605: box quantity 100."
+    },
+    {
+      "id": "sierra-1610",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "25 CAL 87 GR SPT VarmintKing (SVK)",
+      "sku": "1610",
+      "caliberLabel": "25 CAL",
+      "diameterIn": 0.257,
+      "weightGr": 87.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.293,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/25-cal-87-gr-spt-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1610\":{\"Item #\":\"1610\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.257\",\"Bullet Weight (Grains)\":\"87\",\"G1 BC\":\"0.293\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763016107\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1610: box quantity 100."
+    },
+    {
+      "id": "sierra-1625",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "25 CAL 100 GR SBT GameKing (SGK)",
+      "sku": "1625",
+      "caliberLabel": "25 CAL",
+      "diameterIn": 0.257,
+      "weightGr": 100.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.355,
+      "bcG7": 0.17,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/25-cal-100-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1625\":{\"Item #\":\"1625\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.257\",\"Bullet Weight (Grains)\":\"100\",\"G1 BC\":\"0.355\",\"G7 BC\":\"0.170\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763016251\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1625: box quantity 100."
+    },
+    {
+      "id": "sierra-9631",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "25 CAL 131 GR HPBT-CN MATCHKING (SMK)",
+      "sku": "9631",
+      "caliberLabel": "25 CAL",
+      "diameterIn": 0.257,
+      "weightGr": 131.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.571,
+      "bcG7": 0.291,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/25-cal-131-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9631\": { \"Item #\": \"9631\", \"Bullet Type\": \"Hollow Point Boat Tail (HPBT)\", \"Bullet Diameter\": \"0.257\", \"Bullet Weight (Grains)\": \"131\", \"G1 BC\": \"0.571\", \"G7 BC\": \"0.291\", \"Purpose\": \"Match/Target\", \"Pursuit\": \"Match/Target\", \"Box Quantity\": \"100\", \"Bullet Material\": \"Jacketed Lead\", \"Box UPC\": \"92763896310\", \"Tipped/Non-Tipped\": \"Non-Tipped\" }",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9631MP (250 ct), 9631C (500 ct). Base item #9631: box quantity 100. Listed under several caliber categories: 25 Caliber, 6.5mm."
+    },
+    {
+      "id": "sierra-1720",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "6.5MM 120 GR SPT Pro-Hunter",
+      "sku": "1720",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 120.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.356,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-120-gr-spt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 5,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1720\":{\"Item #\":\"1720\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"120\",\"G1 BC\":\"0.356\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017203\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.5] #1720 .264” 120gr. SPT 2.730”",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1720: box quantity 100. Diameter and weight confirmed by the bullet header line for #1720 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-1725",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "6.5MM 120 GR HPBT MatchKing (SMK)",
+      "sku": "1725",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 120.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.421,
+      "bcG7": 0.207,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-120-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 5,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1725\":{\"Item #\":\"1725\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"120\",\"G1 BC\":\"0.421\",\"G7 BC\":\"0.207\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017258\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.5] #1725 .264” 120gr. HPBT Match 2.750”",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1725C (500 ct). Base item #1725: box quantity 100. Diameter and weight confirmed by the bullet header line for #1725 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-7430",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped MatchKing",
+      "name": "6.5MM 130 GR Tipped MatchKing (TMK)",
+      "sku": "7430",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 130.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.518,
+      "bcG7": 0.262,
+      "bcNotes": null,
+      "profile": "Tipped MatchKing (TMK)",
+      "tip": "acetal resin tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:8",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-130-gr-tipped-matchking-tmk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 7,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"7430\":{\"Item #\":\"7430\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.518\",\"G7 BC\":\"0.262\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763074305\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.7] #7430 .264” 130gr. TMK Match 2.810”",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7430C (500 ct). Base item #7430: box quantity 100. Diameter and weight confirmed by the bullet header line for #7430 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-1730",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "6.5MM 140 GR SBT GameKing (SGK)",
+      "sku": "1730",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 140.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.495,
+      "bcG7": 0.246,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-140-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 8,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1730\":{\"Item #\":\"1730\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"140\",\"G1 BC\":\"0.495\",\"G7 BC\":\"0.246\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017302\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.8] #1730 .264” 140gr. SBT 2.750”",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1730: box quantity 100. Diameter and weight confirmed by the bullet header line for #1730 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-1744",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "6.5MM 144 GR HPBT MatchKing (SMK)",
+      "sku": "1744",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 144.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.55,
+      "bcG7": 0.271,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-144-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1744\":{\"Item #\":\"1744\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"144\",\"G1 BC\":\"0.550\",\"G7 BC\":\"0.271\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017449\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1744C (500 ct). Base item #1744: box quantity 100."
+    },
+    {
+      "id": "sierra-4345",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped GameKing",
+      "name": "6.5MM 145 GR Tipped GameKing (TGK)",
+      "sku": "4345",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 145.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.597,
+      "bcG7": 0.291,
+      "bcNotes": null,
+      "profile": "Tipped GameKing (TGK)",
+      "tip": "Tipped",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-145-gr-tipped-gameking-tgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 13,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"4345\":{\"Item #\":\"4345\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"145\",\"G1 BC\":\"0.597\",\"G7 BC\":\"0.291\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763043455\",\"Tipped/Non-Tipped\":\"Tipped\"} | [load data p.13] #4345 0.264 145gr TGK 2.780\"",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4345C (500 ct). Base item #4345: box quantity 100. Diameter and weight confirmed by the bullet header line for #4345 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-1755",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "6.5MM 150 GR HPBT/CN MatchKing (SMK)",
+      "sku": "1755",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 150.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.713,
+      "bcG7": 0.354,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:7.5",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-150-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 9,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1755\":{\"Item #\":\"1755\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.713\",\"G7 BC\":\"0.354\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017555\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×7.5” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention. | [load data p.9] #1755 .264” 150gr. HPBT Match 2.810”",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1755C (500 ct). Base item #1755: box quantity 100. Diameter and weight confirmed by the bullet header line for #1755 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-7450",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped MatchKing",
+      "name": "6.5MM 153 GR Tipped MatchKing (TMK)",
+      "sku": "7450",
+      "caliberLabel": "6.5MM",
+      "diameterIn": 0.264,
+      "weightGr": 153.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.642,
+      "bcG7": 0.32,
+      "bcNotes": null,
+      "profile": "Tipped MatchKing (TMK)",
+      "tip": "acetal resin tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/6-5mm-153-gr-tipped-matchking-tmk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        },
+        {
+          "url": "https://sierrabullets.com/content/load-data/rifle/264-6.5mm/6.5-Creedmoor.pdf",
+          "type": "manufacturer",
+          "page": 14,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"7450\":{\"Item #\":\"7450\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"153\",\"G1 BC\":\"0.642\",\"G7 BC\":\"0.320\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763074473\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped MatchKing bullets are an evolution of the MatchKing profile, featuring an acetal resin tip designed to reduce drag and improve ballistic efficiency. | [load data p.14] #7450 0.264 153gr TMK 2.780\"",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7450C (500 ct). Base item #7450: box quantity 100. Diameter and weight confirmed by the bullet header line for #7450 in 1 Sierra load-data PDF page(s) (sources[1:])."
+    },
+    {
+      "id": "sierra-1820",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "270 CAL 130 GR SBT GameKing (SGK)",
+      "sku": "1820",
+      "caliberLabel": "270 CAL",
+      "diameterIn": 0.277,
+      "weightGr": 130.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.436,
+      "bcG7": 0.209,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/270-cal-130-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1820\":{\"Item #\":\"1820\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.277\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.436\",\"G7 BC\":\"0.209\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763018200\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Product description also references item number(s) #1830 (description text may be shared with/compare to another product). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1820: box quantity 100."
+    },
+    {
+      "id": "sierra-1830",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "270 CAL 130 GR SPT Pro-Hunter",
+      "sku": "1830",
+      "caliberLabel": "270 CAL",
+      "diameterIn": 0.277,
+      "weightGr": 130.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.37,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/270-cal-130-gr-spt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1830\":{\"Item #\":\"1830\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.277\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.370\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763018309\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1830: box quantity 100."
+    },
+    {
+      "id": "sierra-1834",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing X",
+      "name": "270 CAL 135 GR HPBT MatchKing X (MKX)",
+      "sku": "1834",
+      "caliberLabel": "270 CAL",
+      "diameterIn": 0.277,
+      "weightGr": 135.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.505,
+      "bcG7": 0.245,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/270-cal-135-gr-hpbt-matchking-x-mkx/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1834\":{\"Item #\":\"1834\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.277\",\"Bullet Weight (Grains)\":\"135\",\"G1 BC\":\"0.505\",\"G7 BC\":\"0.245\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763018347\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Product description also references item number(s) #1834C (description text may be shared with/compare to another product). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1834: box quantity 100."
+    },
+    {
+      "id": "sierra-1895",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "7MM 100 GR HP VarmintKing (SVK)",
+      "sku": "1895",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 100.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.209,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-100-gr-hp-varmintking-vk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1895\":{\"Item #\":\"1895\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"100\",\"G1 BC\":\"0.209\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763018958\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1895: box quantity 100."
+    },
+    {
+      "id": "sierra-1913",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "7MM 150 GR SBT GameKing (SGK)",
+      "sku": "1913",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 150.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.436,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-150-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1913\":{\"Item #\":\"1913\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.436\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019139\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1913: box quantity 100."
+    },
+    {
+      "id": "sierra-1925",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "7MM 160 GR HPBT GameKing (SGK)",
+      "sku": "1925",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 160.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.384,
+      "bcG7": 0.2,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-160-gr-hpbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1925\":{\"Item #\":\"1925\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"160\",\"G1 BC\":\"0.384\",\"G7 BC\":\"0.200\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019252\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Product description also references item number(s) #1920 (description text may be shared with/compare to another product). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1925: box quantity 100."
+    },
+    {
+      "id": "sierra-1930",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "7MM 168 GR HPBT MatchKing (SMK)",
+      "sku": "1930",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 168.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.488,
+      "bcG7": 0.247,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-168-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1930\":{\"Item #\":\"1930\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"168\",\"G1 BC\":\"0.488\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019306\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | {\"id\":\"25729\",\"name\":\"G7 BC\",\"value\":\"0.247\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1930C (500 ct). Base item #1930: box quantity 100."
+    },
+    {
+      "id": "sierra-1976",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing X",
+      "name": "7MM 175 GR HPBT MatchKing X (MKX)",
+      "sku": "1976",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 175.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.597,
+      "bcG7": 0.295,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-175-gr-hpbt-matchking-x-mkx/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1976\": { \"Item #\": \"1976\", \"Bullet Type\": \"Hollow Point Boat Tail (HPBT)\", \"Bullet Diameter\": \"0.284\", \"Bullet Weight (Grains)\": \"175\", \"G1 BC\": \"0.597\", \"G7 BC\": \"0.295\", \"Purpose\": \"Hunting\", \"Pursuit\": \"Big Game, Target\", \"Box Quantity\": \"100\", \"Bullet Material\": \"Jacketed Lead\", \"Box UPC\": \"092763019764\", \"Tipped/Non-Tipped\": \"Non-Tipped\" }",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1976C (500 ct). Base item #1976: box quantity 100."
+    },
+    {
+      "id": "sierra-1981",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "7MM 180 GR HPBT/CN (Optimized for 7PRC) MatchKing (SMK)",
+      "sku": "1981",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 180.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.676,
+      "bcG7": 0.335,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-180-gr-hpbt-cn-optimized-for-7prc-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1981\":{\"Item #\":\"1981\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.676\",\"G7 BC\":\"0.335\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019818\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1981C (500 ct). Base item #1981: box quantity 100."
+    },
+    {
+      "id": "sierra-4580",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped GameKing",
+      "name": "7MM 180 GR Tipped GameKing (TGK)",
+      "sku": "4580",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 180.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.632,
+      "bcG7": 0.305,
+      "bcNotes": null,
+      "profile": "Tipped GameKing (TGK)",
+      "tip": "Tipped",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-180-gr-tipped-gameking-tgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"4580\":{\"Item #\":\"4580\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.632\",\"G7 BC\":\"0.305\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"9.28E+10\",\"Tipped/Non-Tipped\":\"Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4580C (500 ct). Base item #4580: box quantity 100."
+    },
+    {
+      "id": "sierra-1997",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "7MM 197 GR HPBT/CN MatchKing (SMK)",
+      "sku": "1997",
+      "caliberLabel": "7MM",
+      "diameterIn": 0.284,
+      "weightGr": 197.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.78,
+      "bcG7": 0.385,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:7.5",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/7mm-197-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"1997\":{\"Item #\":\"1997\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"197\",\"G1 BC\":\"0.780\",\"G7 BC\":\"0.385\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019979\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×7.5” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1997C (500 ct). Base item #1997: box quantity 100."
+    },
+    {
+      "id": "sierra-2116",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "30 CAL 115 GR HP VarmintKing (SVK)",
+      "sku": "2116",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 115.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.267,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-115-gr-hp-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2116\":{\"Item #\":\"2116\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"115\",\"G1 BC\":\"0.267\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021163\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2116C (500 ct). Base item #2116: box quantity 100."
+    },
+    {
+      "id": "sierra-2120",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "30 CAL 125 GR SPT PRO-HUNTER",
+      "sku": "2120",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 125.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.279,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-125-gr-spt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2120\":{\"Item #\":\"2120\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.279\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021200\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2120: box quantity 100."
+    },
+    {
+      "id": "sierra-2124",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "30 CAL 135 GR HP VarmintKing (SVK)",
+      "sku": "2124",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 135.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.308,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-135-gr-hp-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2124\":{\"Item #\":\"2124\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"135\",\"G1 BC\":\"0.308\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021248\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2124C (500 ct). Base item #2124: box quantity 100."
+    },
+    {
+      "id": "sierra-2130",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "30 CAL 150 GR SPT PRO-HUNTER",
+      "sku": "2130",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 150.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.336,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-150-gr-spt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2130\":{\"Item #\":\"2130\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.336\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021309\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2130: box quantity 100."
+    },
+    {
+      "id": "sierra-2136",
+      "manufacturer": "Sierra Bullets",
+      "line": "VarmintKing (formerly Varminter)",
+      "name": "30 CAL 150 GR HP VarmintKing (SVK)",
+      "sku": "2136",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 150.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.334,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Hollow Point (HP)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-150-gr-hp-varmintking-svk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2136\":{\"Item #\":\"2136\",\"Bullet Type\":\"Hollow Point (HP)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.334\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021361\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2136C (500 ct). Base item #2136: box quantity 100."
+    },
+    {
+      "id": "sierra-2155",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 155 GR HPBT MATCHKING (SMK)",
+      "sku": "2155",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 155.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.45,
+      "bcG7": 0.221,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-155-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2155\":{\"Item #\":\"2155\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"155\",\"G1 BC\":\"0.450\",\"G7 BC\":\"0.221\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021552\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2155C (500 ct). Base item #2155: box quantity 100."
+    },
+    {
+      "id": "sierra-2140",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "30 CAL 165 GR HPBT GAMEKING (SGK)",
+      "sku": "2140",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 165.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.363,
+      "bcG7": 0.183,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-165-gr-hpbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2140\":{\"Item #\":\"2140\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"165\",\"G1 BC\":\"0.363\",\"G7 BC\":\"0.183\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021408\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2140: box quantity 100."
+    },
+    {
+      "id": "sierra-2269",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 169 GR HPBT/CN MATCHKING (SMK)",
+      "sku": "2269",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 169.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.527,
+      "bcG7": 0.26,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-169-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2269\":{\"Item #\":\"2269\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"169\",\"G1 BC\":\"0.527\",\"G7 BC\":\"0.260\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763022696\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2269MP (250 ct), 2269C (500 ct). Base item #2269: box quantity 100."
+    },
+    {
+      "id": "sierra-2175",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing X",
+      "name": "30 CAL 175 GR HPBT MATCHKING X (MKX)",
+      "sku": "2175",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 175.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.505,
+      "bcG7": 0.25,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-175-gr-hpbt-matchking-x-mkx/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2175\":{\"Item #\":\"2175\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"175\",\"G1 BC\":\"0.505\",\"G7 BC\":\"0.250\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021750\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2175C (500 ct). Base item #2175: box quantity 100."
+    },
+    {
+      "id": "sierra-2277",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 177 GR HPBT/CN MATCHKING (SMK)",
+      "sku": "2277",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 177.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.545,
+      "bcG7": 0.271,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-177-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2277\":{\"Item #\":\"2277\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"177\",\"G1 BC\":\"0.545\",\"G7 BC\":\"0.271\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763022771\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2277MP (250 ct), 2277C (500 ct). Base item #2277: box quantity 100."
+    },
+    {
+      "id": "sierra-4681t",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped GameKing",
+      "name": "30 CAL 180 GR TIPPED GAMEKING (TGK) (Optimized for 30-06)",
+      "sku": "4681T",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 180.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.543,
+      "bcG7": 0.264,
+      "bcNotes": null,
+      "profile": "Tipped GameKing (TGK)",
+      "tip": "Tipped",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-180-gr-tipped-gameking-tgk-optimized-for-30-06/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"4681T\":{\"Item #\":\"4681T\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.543\",\"G7 BC\":\"0.264\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763346815\",\"Tipped/Non-Tipped\":\"Tipped\"}",
+      "notes": "Product description also references item number(s) #4680 (description text may be shared with/compare to another product). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4681 (100 ct), 4681C (500 ct). Base item #4681T: box quantity 50."
+    },
+    {
+      "id": "sierra-4682",
+      "manufacturer": "Sierra Bullets",
+      "line": "Tipped GameKing",
+      "name": "30 CAL 180 GR TIPPED GAMEKING (TGK)",
+      "sku": "4682",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 180.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.543,
+      "bcG7": 0.264,
+      "bcNotes": null,
+      "profile": "Tipped GameKing (TGK)",
+      "tip": "polymer tip",
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-180-gr-tipped-gameking-tgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"4682\":{\"Item #\":\"4682\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.543\",\"G7 BC\":\"0.264\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763046821\",\"Tipped/Non-Tipped\":\"Tipped\"} | Built from the proven MatchKing profile, the design is re-engineered into a hollow point for faster expansion and finished with a transparent green polymer tip to ensure consistent ballistics.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4682C (500 ct). Base item #4682: box quantity 100."
+    },
+    {
+      "id": "sierra-2210",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 190 GR HPBT MATCHKING (SMK)",
+      "sku": "2210",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 190.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.533,
+      "bcG7": 0.265,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-190-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2210\":{\"Item #\":\"2210\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"190\",\"G1 BC\":\"0.533\",\"G7 BC\":\"0.265\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763022108\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2210C (500 ct). Base item #2210: box quantity 100."
+    },
+    {
+      "id": "sierra-2231",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 200 GR HPBT/CN MATCHKING (SMK)",
+      "sku": "2231",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 200.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.715,
+      "bcG7": 0.354,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:9",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-200-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2231\":{\"Item #\":\"2231\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"200\",\"G1 BC\":\"0.715\",\"G7 BC\":\"0.354\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763022313\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×9” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2231C (500 ct). Base item #2231: box quantity 100."
+    },
+    {
+      "id": "sierra-2237",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "30 CAL 215 GR HPBT/CN MATCHKING (SMK)",
+      "sku": "2237",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 215.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.68,
+      "bcG7": 0.336,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail - Closed Nose (HPBT-CN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-215-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2237\":{\"Item #\":\"2237\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"215\",\"G1 BC\":\"0.680\",\"G7 BC\":\"0.336\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2237C (500 ct). Base item #2237: box quantity 50."
+    },
+    {
+      "id": "sierra-2180",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "30 CAL 220 GR RN PRO-HUNTER",
+      "sku": "2180",
+      "caliberLabel": "30 CAL",
+      "diameterIn": 0.308,
+      "weightGr": 220.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.31,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Roundnose (RN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/30-cal-220-gr-rn-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2180\":{\"Item #\":\"2180\",\"Bullet Type\":\"Roundnose (RN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"220\",\"G1 BC\":\"0.310\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021804\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | They may prove useful in situations where a heavy bullet is needed but twist rate is marginally slow, such as Handgun Silhouettes where momentum is more important than expansion.",
+      "notes": "Product description mentions twist but no single recommended rate could be parsed unambiguously; see evidence. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2180: box quantity 100."
+    },
+    {
+      "id": "sierra-2315",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "303 CAL 174 GR HPBT MATCHKING (SMK)",
+      "sku": "2315",
+      "caliberLabel": "303 CAL",
+      "diameterIn": 0.311,
+      "weightGr": 174.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.499,
+      "bcG7": 0.249,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/303-cal-174-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2315\":{\"Item #\":\"2315\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.311\",\"Bullet Weight (Grains)\":\"174\",\"G1 BC\":\"0.499\",\"G7 BC\":\"0.249\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763023150\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2315C (500 ct). Base item #2315: box quantity 100."
+    },
+    {
+      "id": "sierra-2310",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "303 CAL 180 GR SPT PRO-HUNTER",
+      "sku": "2310",
+      "caliberLabel": "303 CAL",
+      "diameterIn": 0.311,
+      "weightGr": 180.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.411,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Spitzer (SPT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/303-cal-180-gr-spt-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2310\":{\"Item #\":\"2310\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.311\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.411\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763023105\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2310: box quantity 100."
+    },
+    {
+      "id": "sierra-2420",
+      "manufacturer": "Sierra Bullets",
+      "line": "GameKing",
+      "name": "8MM 220 GR SBT GAMEKING (SGK)",
+      "sku": "2420",
+      "caliberLabel": "8MM",
+      "diameterIn": 0.323,
+      "weightGr": 220.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.521,
+      "bcG7": 0.261,
+      "bcNotes": null,
+      "profile": "Spitzer Boat Tail (SBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/8mm-220-gr-sbt-gameking-sgk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2420\":{\"Item #\":\"2420\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.323\",\"Bullet Weight (Grains)\":\"220\",\"G1 BC\":\"0.521\",\"G7 BC\":\"0.261\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763024201\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2420: box quantity 50."
+    },
+    {
+      "id": "sierra-2650",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "338 CAL 250 GR HPBT MATCHKING (SMK)",
+      "sku": "2650",
+      "caliberLabel": "338 CAL",
+      "diameterIn": 0.338,
+      "weightGr": 250.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.587,
+      "bcG7": 0.295,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/338-cal-250-gr-hpbt-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"2650\":{\"Item #\":\"2650\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.338\",\"Bullet Weight (Grains)\":\"250\",\"G1 BC\":\"0.587\",\"G7 BC\":\"0.295\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763026502\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet will shoot well in 338 Winchester Magnum barrels with 1×12″ twist rate.",
+      "notes": "Product description mentions twist but no single recommended rate could be parsed unambiguously; see evidence. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2650C (500 ct). Base item #2650: box quantity 50."
+    },
+    {
+      "id": "sierra-9350t",
+      "manufacturer": "Sierra Bullets",
+      "line": "MatchKing",
+      "name": "375 CAL 350 GR HPBT/CN MATCHKING (SMK)",
+      "sku": "9350T",
+      "caliberLabel": "375 CAL",
+      "diameterIn": 0.375,
+      "weightGr": 350.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.805,
+      "bcG7": 0.4,
+      "bcNotes": null,
+      "profile": "Hollow Point Boat Tail (HPBT)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": "1:12",
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/375-cal-350-gr-hpbt-cn-matchking-smk/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"9350T\":{\"Item #\":\"9350T\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.375\",\"Bullet Weight (Grains)\":\"350\",\"G1 BC\":\"0.805\",\"G7 BC\":\"0.400\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763393505\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×12” or faster. | We knew the 11 caliber ogive, 9 degree boat tail and Sierra’s famously forgiving ogive would make this bullet a big hit with our big bore long range customers.",
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 11 caliber ogive; 9 degree boat tail. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9350 (500 ct). Base item #9350T: box quantity 50."
+    },
+    {
+      "id": "sierra-8760",
+      "manufacturer": "Sierra Bullets",
+      "line": "Pro-Hunter",
+      "name": "45 CAL 260 GR FN PRO-HUNTER",
+      "sku": "8760",
+      "caliberLabel": "45 CAL",
+      "diameterIn": 0.4515,
+      "weightGr": 260.0,
+      "lengthIn": null,
+      "boatTailLengthIn": null,
+      "baseToOgiveIn": null,
+      "bcG1": 0.164,
+      "bcG7": null,
+      "bcNotes": null,
+      "profile": "Flatnose (FN)",
+      "tip": null,
+      "construction": "cup-and-core",
+      "recommendedTwist": null,
+      "status": "current (offered on sierrabullets.com product page, retrieved 2026-11-23)",
+      "firearm": "rifle",
+      "sources": [
+        {
+          "url": "https://sierrabullets.com/45-cal-260-gr-fn-pro-hunter/",
+          "type": "manufacturer",
+          "page": null,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "\"8760\":{\"Item #\":\"8760\",\"Bullet Type\":\"Flatnose (FN)\",\"Bullet Diameter\":\"0.4515\",\"Bullet Weight (Grains)\":\"260\",\"G1 BC\":\"0.164\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763087602\",\"Tipped/Non-Tipped\":\"Non-Tipped\"}",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8760: box quantity 100."
+    }
+  ]
+}

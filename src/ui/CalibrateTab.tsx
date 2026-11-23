@@ -416,7 +416,7 @@ function ManualParams({ powderId, powderName, start }: { powderId: string; powde
     setP({ ...start, heatScale: start.heatScale ?? 1 });
     setMsg(null);
   }, [powderId]); // eslint-disable-line react-hooks/exhaustive-deps
-  const ok = PARAM_FIELDS.every((f) => Number.isFinite(p[f.key] as number)) && p.forceJg > 0 && p.gamma > 1 && p.solidDensityGcc > 0 && p.beta > 0 && p.n > 0 && p.lambda > -0.5;
+  const ok = PARAM_FIELDS.every((f) => Number.isFinite(p[f.key] as number)) && p.forceJg > 0 && p.gamma > 1 && p.solidDensityGcc > 0 && p.beta > 0 && p.n > 0 && p.lambda > -0.5 && Number.isFinite(1 / (1 + p.lambda + p.mu)) && 1 + p.lambda + p.mu > 0 && 1 + 2 * p.lambda + 3 * p.mu >= 0 && p.covolumeCm3g >= 0;
   return (
     <details className="card collapsible" data-testid="manual-params">
       <summary>Advanced: enter model parameters manually for {powderName}</summary>

@@ -12,7 +12,7 @@ export interface ChargeSolveOptions {
 
 export const DEFAULT_SOLVE: ChargeSolveOptions = { maxFillRatio: 1.1, tolKg: 1e-6 };
 
-export type LimitReason = 'pressure' | 'fill' | 'fit' | 'velocity';
+export type LimitReason = 'pressure' | 'fill' | 'fit' | 'velocity' | 'no-solution';
 
 export interface ChargeSolution {
   chargeKg: number;
@@ -28,7 +28,9 @@ const withCharge = (s: LoadSetup, chargeKg: number): LoadSetup => ({ ...s, charg
 export function maxChargeByVolume(s: LoadSetup, maxFillRatio: number): { kg: number; reason: 'fill' | 'fit' } {
   const probe = simulate({ ...withCharge(s, 1e-6), options: { ...s.options, recordTrace: false } });
   const V0 = probe.chamberVolumeM3;
-  const solidLimit = 0.98 * V0 * s.propellant.thermo.solidDensityKgM3;
+  // Physical fit: solid grains must fit, and the burnt gas's covolume must leave free volume (Noble-Abel).
+  const eta = s.propellant.thermo.covolumeM3kg;
+  const solidLimit = Math.min(0.98 * V0 * s.propellant.thermo.solidDensityKgM3, eta > 0 ? (0.95 * V0) / eta : Infinity);
   const bulk = s.propellant.bulkDensityKgM3;
   if (bulk && bulk > 0) {
     const fillLimit = maxFillRatio * V0 * bulk;
@@ -37,7 +39,11 @@ export function maxChargeByVolume(s: LoadSetup, maxFillRatio: number): { kg: num
   return { kg: solidLimit, reason: 'fit' };
 }
 
-const peakOf = (r: SimResult) => (Number.isFinite(r.peakBreechPa) ? r.peakBreechPa : r.status === 'invalid' ? Infinity : 0);
+/** Peak used by the solvers. Anything that is not a finite, trustworthy peak counts as over the limit (conservative). */
+const peakOf = (r: SimResult) => {
+  if (r.status === 'muzzle' || r.status === 'stuck') return Number.isFinite(r.peakBreechPa) ? r.peakBreechPa : Infinity;
+  return Infinity;
+};
 
 /**
  * Find the charge whose predicted peak breech pressure equals `targetPa`.
@@ -56,6 +62,11 @@ export function solveChargeForPressure(
   }
   let lo = cap.kg * 0.02;
   let hi = cap.kg;
+  const loRes = simulate({ ...s, chargeKg: lo, options: quiet });
+  if (peakOf(loRes) > targetPa) {
+    // Even the smallest charge searched exceeds the target (e.g. a limit below the shot-start pressure).
+    return { chargeKg: 0, result: simulate(withCharge(s, lo)), limitedBy: 'no-solution', iterations: 0 };
+  }
   let it = 0;
   while (hi - lo > opt.tolKg && it < 60) {
     it++;
@@ -75,10 +86,23 @@ export function solveChargeForVelocity(
 ): ChargeSolution | null {
   const cap = maxChargeByVolume(s, opt.maxFillRatio);
   const quiet = { ...s.options, recordTrace: false };
-  const hiRes = simulate({ ...s, chargeKg: cap.kg, options: quiet });
-  if (!(hiRes.muzzleVelocityMs >= targetMs)) return null;
+  let top = cap.kg;
+  let topRes = simulate({ ...s, chargeKg: top, options: quiet });
+  if (topRes.status !== 'muzzle') {
+    // Find the largest charge that still gives a valid muzzle exit (velocity is only defined there).
+    let a = cap.kg * 0.02;
+    let b = cap.kg;
+    for (let i = 0; i < 40 && b - a > opt.tolKg; i++) {
+      const mid = 0.5 * (a + b);
+      if (simulate({ ...s, chargeKg: mid, options: quiet }).status === 'muzzle') a = mid;
+      else b = mid;
+    }
+    top = a;
+    topRes = simulate({ ...s, chargeKg: top, options: quiet });
+  }
+  if (!(topRes.muzzleVelocityMs >= targetMs)) return null;
   let lo = cap.kg * 0.02;
-  let hi = cap.kg;
+  let hi = top;
   let it = 0;
   while (hi - lo > opt.tolKg && it < 60) {
     it++;
@@ -166,6 +190,7 @@ export function parametricSearch(
     const sol = solveChargeForPressure(s, c.pressureLimitPa, { maxFillRatio: c.maxFillRatio, tolKg: 2e-6 });
     const r = sol.result;
     const reasons: string[] = [];
+    if (sol.limitedBy === 'no-solution') reasons.push('no charge satisfies the pressure limit');
     if (r.status !== 'muzzle') reasons.push(`simulation: ${r.status}`);
     if (r.burntAtMuzzle < c.minBurnt) reasons.push(`only ${(r.burntAtMuzzle * 100).toFixed(0)} % burnt at muzzle`);
     if (r.fillRatio !== null && r.fillRatio < c.minFillRatio) reasons.push(`fill ${(r.fillRatio * 100).toFixed(0)} % below minimum`);
