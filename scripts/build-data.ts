@@ -76,6 +76,12 @@ function applyFixes<T extends { id: string }>(items: T[]): T[] {
 }
 
 const dropped: Record<string, number> = {};
+const SCOPE = process.env.ORKA_SCOPE ?? 'rifle';
+/** Handgun and muzzleloader projectiles (by the maker's own category, or by product-line name where none is given). */
+function isNonRifleBullet(b: Bullet & { use?: string | null }): boolean {
+  if (b.use && /handgun|pistol|muzzle/i.test(b.use)) return true;
+  return /handgun|personal protection|\bxpb\b|tac-xp\b|\bcprn\b|\bcpfn\b|\bmz\b|spit-?fire|muzzle ?loader|sabot/i.test(`${b.line} ${b.name}`);
+}
 const CANISTER_BRANDS = new Set(['hodgdon', 'imr', 'winchester', 'alliant', 'vihtavuori', 'norma', 'reload-swiss', 'shooters-world', 'accurate', 'ramshot', 'adi']);
 const cleanName = (s: string) => s.replace(/[®™]/g, '').replace(/\s+/g, ' ').trim();
 const drop = (k: string) => (dropped[k] = (dropped[k] ?? 0) + 1);
@@ -292,7 +298,7 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
       const id = r.id ? slug(String(r.id)) : slug(`${r.manufacturer}-${r.sku ?? `${r.line}-${d}-${w}`}`);
       // Lengths marked low-confidence (e.g. inferred from an unlabeled data file) are not shipped (verifier finding).
       const len = r.lengthConfidence === 'low' ? null : num(r.lengthIn);
-      const b: Bullet & { boatTailLengthIn?: number | null; baseToOgiveIn?: number | null } = {
+      const b = {
         id,
         manufacturer: r.manufacturer,
         line: r.line ?? '',
@@ -314,7 +320,8 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
         notes: [str(r.notes), `Evidence: ${r.evidence}`].filter(Boolean).join(' | '),
         boatTailLengthIn: num(r.boatTailLengthIn),
         baseToOgiveIn: num(r.baseToOgiveIn),
-      };
+        use: str(r.kind ?? r.firearm ?? null),
+      } as Bullet & { boatTailLengthIn?: number | null; baseToOgiveIn?: number | null; use?: string | null };
       if (!byId.has(id)) byId.set(id, b);
     }
   }
@@ -472,11 +479,26 @@ export function buildLoads(files: { key: string; data: any }[], cartridges: Cart
 
 function main() {
   const files = rawFiles();
-  const cartridges = buildCartridges(files);
-  const { powders, charts } = buildPowders(files);
-  const bullets = buildBullets(files);
-  const { brands, cases } = buildBrass(files, cartridges);
-  const validationLoads = buildLoads(files, cartridges, powders);
+  let cartridges = buildCartridges(files);
+  let { powders, charts } = buildPowders(files);
+  let bullets = buildBullets(files);
+  let { brands, cases } = buildBrass(files, cartridges);
+  let validationLoads = buildLoads(files, cartridges, powders);
+
+  // Scope: ORKA is focused on centerfire rifle reloading (ORKA_SCOPE=all keeps handgun data).
+  if (SCOPE === 'rifle') {
+    cartridges = cartridges.filter((c) => c.type === 'rifle');
+    const rifleIds = new Set(cartridges.map((c) => c.id));
+    bullets = bullets.filter((b) => !isNonRifleBullet(b));
+    validationLoads = validationLoads.filter((l) => l.cartridgeId && rifleIds.has(l.cartridgeId));
+    const usedInRifleLoads = new Set(validationLoads.map((l) => l.powderId).filter(Boolean));
+    powders = powders.filter((p) => !p.applications.length || p.applications.some((a) => /rifle/i.test(a)) || usedInRifleLoads.has(p.id));
+    const keptPowders = new Set(powders.map((p) => p.id));
+    charts = charts.map((c) => ({ ...c, orderedPowderIds: c.orderedPowderIds.map((id, i) => (id.startsWith('name:') || keptPowders.has(id) ? id : `name:${c.orderedNames?.[i] ?? id}`)) }));
+    cases = cases.filter((c) => c.cartridgeId && rifleIds.has(c.cartridgeId));
+    const usedBrands = new Set(cases.map((c) => c.brandId));
+    brands = brands.filter((b) => usedBrands.has(b.id));
+  }
 
   // Model-inferred effective capacities of publishers' test cases (scripts/calibrate-powders.ts), labelled as such.
   const inferredCaps: any[] = readJson(path.join(ROOT, 'src/data/inferred-capacities.json')) ?? [];

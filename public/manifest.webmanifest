@@ -1,7 +1,7 @@
 {
   "name": "ORKA Load Lab",
   "short_name": "ORKA",
-  "description": "Interior-ballistics load prediction with pressure limits, parametric powder search and a sourced component database.",
+  "description": "Centerfire rifle load prediction with pressure limits, parametric powder search and a sourced component database.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

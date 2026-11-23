@@ -93,7 +93,7 @@ function Header() {
     <header className="app-header">
       <div className="brand">
         <strong>ORKA</strong>
-        <span>Load Lab · interior ballistics</span>
+        <span>Centerfire rifle load lab</span>
       </div>
       <div className="header-controls">
         <div className="seg" role="group" aria-label="Units">

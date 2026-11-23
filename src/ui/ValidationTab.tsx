@@ -16,8 +16,6 @@ function Breakdown({ rows }: { rows: ValidationRow[] }) {
   const held = rows.filter((r) => r.heldOut);
   const groups: { label: string; f: (r: ValidationRow) => boolean }[] = [
     { label: 'All held-out', f: () => true },
-    { label: 'Rifle cartridges', f: (r) => r.cartType === 'rifle' },
-    { label: 'Handgun cartridges', f: (r) => r.cartType === 'handgun' },
     { label: 'Bullet length published by maker', f: (r) => r.lengthEstimated === false },
     { label: 'Bullet length estimated (maker publishes none)', f: (r) => r.lengthEstimated === true },
     { label: 'Monolithic bullets', f: (r) => r.shotClass === 'monolithic' },

@@ -188,7 +188,7 @@ function UserActions(props: { isUser: boolean; onEdit: () => void; onDelete: () 
 function CartridgesTable() {
   const { db, updateUser } = useApp();
   const [q, setQ] = useState('');
-  const [type, setType] = useState('');
+  const type = ''; // all shipped cartridges are centerfire rifle
   const [sel, setSel] = useState<string | null>(null);
   const [editing, setEditing] = useState<Cartridge | 'new' | null>(null);
   const rows = useMemo(() => db.cartridges.filter((c) => (!type || c.type === type) && has([c.name, c.aliases, c.id], q)), [db.cartridges, q, type]);
@@ -205,11 +205,6 @@ function CartridgesTable() {
   return (
     <div className="card">
       <TableToolbar q={q} setQ={setQ} label="cartridges" onAdd={() => setEditing('new')} onCsv={() => downloadText('orka-cartridges.csv', toCsv(rows.map((r) => flat(r as never))), 'text/csv')}>
-        <select aria-label="Cartridge type" value={type} onChange={(e) => setType(e.target.value)} style={{ maxWidth: 140 }}>
-          <option value="">All types</option>
-          <option value="rifle">rifle</option>
-          <option value="handgun">handgun</option>
-        </select>
       </TableToolbar>
       {editing && (
         <CartridgeForm
@@ -237,7 +232,7 @@ function CartridgesTable() {
 function CartridgeForm(props: { initial: Cartridge | null; onSave: (c: Cartridge) => void; onCancel: () => void }) {
   const i = props.initial;
   const [name, setName] = useState(i?.name ?? '');
-  const [type, setType] = useState<'rifle' | 'handgun'>(i?.type ?? 'rifle');
+  const type: 'rifle' | 'handgun' = i?.type ?? 'rifle';
   const [dia, setDia] = useState(i?.bulletDiameterIn ?? NaN);
   const [bore, setBore] = useState(i?.boreDiameterIn ?? NaN);
   const [groove, setGroove] = useState(i?.grooveDiameterIn ?? NaN);
@@ -254,7 +249,7 @@ function CartridgeForm(props: { initial: Cartridge | null; onSave: (c: Cartridge
       <h3>{i ? 'Edit cartridge' : 'Add custom cartridge'}</h3>
       <div className="grid-3">
         <TextField label="Name *" value={name} onChange={setName} testId="fc-name" />
-        <SelectField label="Type" value={type} onChange={setType} options={[{ value: 'rifle', label: 'rifle' }, { value: 'handgun', label: 'handgun' }]} />
+
         <NumberField label="Bullet Ø" qty="len" value={dia} onChange={setDia} digits={4} testId="fc-dia" />
         <NumberField label="Bore Ø" qty="len" value={bore} onChange={setBore} digits={4} testId="fc-bore" />
         <NumberField label="Groove Ø" qty="len" value={groove} onChange={setGroove} digits={4} testId="fc-groove" />
