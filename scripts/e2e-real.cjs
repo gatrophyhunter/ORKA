@@ -1,0 +1,71 @@
+// Real-data browser check: .308 Win, Peterson brass, Berger 168 gr Hybrid Target, Varget 44 gr, 24" barrel.
+// Prints what the app reports so it can be compared with the maker's published data shown in the same view.
+const { chromium } = require('playwright');
+const OUT = process.env.ORKA_E2E_OUT || require('path').join(require('os').tmpdir(), 'orka-e2e');
+require('fs').mkdirSync(OUT, { recursive: true });
+const URL = process.env.ORKA_E2E_URL || 'http://localhost:4173/';
+
+(async () => {
+  const browser = await chromium.launch();
+  const page = await (await browser.newContext({ viewport: { width: 1280, height: 900 }, deviceScaleFactor: 1 })).newPage();
+  const errors = [];
+  page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });
+  page.on('pageerror', (e) => errors.push(e.message));
+  const pick = async (tid, text, optText) => {
+    const el = page.getByTestId(tid);
+    await el.click();
+    await el.fill(text);
+    await page.locator('.picker-list [role=option]').filter({ hasText: optText ?? text }).first().click();
+  };
+  const fill = async (tid, v) => page.getByTestId(tid).fill(String(v));
+  await page.goto(URL);
+  await page.getByTestId('ack').click();
+  await pick('pick-cartridge', '308 Winchester');
+  const opts = await page.getByTestId('pick-brass').locator('option').allTextContents();
+  console.log('brass options:', opts.length, opts.slice(1, 4));
+  const pet = opts.findIndex((o) => /Peterson/.test(o));
+  await page.getByTestId('pick-brass').selectOption({ index: pet });
+  await pick('pick-bullet', 'Hybrid Target', '168');
+  await fill('in-barrel', 24);
+  await fill('in-coal', 2.8);
+  await pick('pick-powder', 'Varget');
+  await fill('in-charge', 44);
+  await page.getByTestId('tab-predict').click();
+  await page.getByTestId('tile-peak').waitFor({ timeout: 10000 });
+  await page.waitForTimeout(800);
+  console.log('peak:', (await page.getByTestId('tile-peak').innerText()).replace(/\s+/g, ' '));
+  console.log('vel :', (await page.getByTestId('tile-velocity').innerText()).replace(/\s+/g, ' '));
+  const grade = page.getByTestId('fit-grade');
+  console.log('fit :', (await grade.count()) ? await grade.first().innerText() : 'none');
+  const sw = page.getByTestId('scope-warnings');
+  console.log('scope warnings:', (await sw.count()) ? (await sw.innerText()).replace(/\s+/g, ' ').slice(0, 300) : 'none');
+  await page.getByTestId('published-crosscheck').waitFor({ timeout: 10000 }).catch(() => {});
+  const pc = page.getByTestId('published-crosscheck');
+  if (await pc.count()) {
+    const rows = await pc.locator('tbody tr').allInnerTexts();
+    console.log('published rows:', rows.length);
+    rows.slice(0, 6).forEach((r) => console.log('   ', r.replace(/\s+/g, ' ')));
+  } else console.log('published:', (await page.getByTestId('published-none').innerText().catch(() => 'missing')));
+  await page.getByTestId('run-mc').click();
+  await page.getByTestId('mc-results').waitFor({ timeout: 60000 });
+  console.log('band:', (await page.getByTestId('mc-results').innerText()).replace(/\s+/g, ' '));
+  await page.screenshot({ path: `${OUT}/real-predict-1280.png`, fullPage: true });
+  await page.getByTestId('tab-search').click();
+  await page.getByTestId('run-search').click();
+  await page.getByTestId('search-results').waitFor({ timeout: 180000 });
+  const top = await page.getByTestId('search-table').locator('tbody tr').allInnerTexts();
+  console.log('search rows:', top.length);
+  top.slice(0, 5).forEach((r) => console.log('   ', r.replace(/\s+/g, ' ').slice(0, 200)));
+  await page.screenshot({ path: `${OUT}/real-search-1280.png`, fullPage: true });
+  await page.getByTestId('tab-validation').click();
+  await page.getByTestId('validation-breakdown').waitFor({ timeout: 20000 });
+  console.log('validation:', (await page.getByTestId('validation-breakdown').innerText()).replace(/\s+/g, ' ').slice(0, 700));
+  await page.screenshot({ path: `${OUT}/real-validation-1280.png` });
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.getByTestId('tab-predict').click();
+  await page.waitForTimeout(500);
+  console.log('scrollWidth@390:', await page.evaluate(() => document.documentElement.scrollWidth));
+  await page.screenshot({ path: `${OUT}/real-predict-390.png`, fullPage: false });
+  console.log('errors:', errors.length ? errors : 'none');
+  await browser.close();
+})();

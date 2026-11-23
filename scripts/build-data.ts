@@ -508,6 +508,22 @@ function main() {
     // copy is loaded lazily by the app for the published-data cross-check. db.json itself stays small.
     validationLoads: [],
   };
+  // Move verbatim evidence out of the records into a lazily loaded file (keeps the main bundle small).
+  const evidence: Record<string, Record<string, string>> = { cartridges: {}, powders: {}, bullets: {}, brassCases: {} };
+  // Notes and verbatim evidence are shown only in the record's detail panel, so both move to the lazy file.
+  const split = (col: string, key: string, rec: { notes?: string }) => {
+    if (!rec.notes) return;
+    const parts = rec.notes.split(' | ');
+    const ev = parts.filter((x) => x.startsWith('Evidence: ')).map((x) => x.slice(10));
+    const other = parts.filter((x) => !x.startsWith('Evidence: ') && x.trim());
+    evidence[col][key] = [...(other.length ? [`Notes: ${other.join(' | ')}`] : []), ...ev.map((e) => `Evidence: ${e}`)].join('\n');
+    delete rec.notes;
+  };
+  db.cartridges.forEach((c) => split('cartridges', c.id, c));
+  db.powders.forEach((p) => split('powders', p.id, p));
+  db.bullets.forEach((b) => split('bullets', b.id, b));
+  db.brassCases.forEach((c, i) => split('brassCases', String(i), c));
+  fs.writeFileSync(path.join(ROOT, 'src/data/db-evidence.json'), JSON.stringify(evidence));
   fs.writeFileSync(OUT, JSON.stringify(db));
   fs.mkdirSync(BUILD_DIR, { recursive: true });
   fs.writeFileSync(path.join(BUILD_DIR, 'validation-loads.json'), JSON.stringify(validationLoads));

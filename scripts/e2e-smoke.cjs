@@ -44,6 +44,7 @@ const URL = process.env.ORKA_E2E_URL || 'http://localhost:4173/';
     await fill('fc-coal', '2.800');
     await fill('fc-map', '62000');
     await page.getByTestId('fc-save').click();
+    await page.getByTestId('db-search-cartridges').fill('Test Cartridge A');
     await page.getByTestId('db-cartridges').getByText('Test Cartridge A').waitFor();
   });
 
@@ -54,6 +55,7 @@ const URL = process.env.ORKA_E2E_URL || 'http://localhost:4173/';
     await fill('fp-name', 'Test Powder A');
     await fill('fp-bulk', '0.9');
     await page.getByTestId('fp-save').click();
+    await page.getByTestId('db-search-powders').fill('Test Powder A');
     await page.getByTestId('db-powders').getByText('Test Powder A').waitFor();
     await page.screenshot({ path: `${OUT}/02-database-1280.png`, fullPage: true });
   });

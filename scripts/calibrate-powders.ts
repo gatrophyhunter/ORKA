@@ -641,7 +641,9 @@ async function main() {
     rows,
   };
   fs.writeFileSync(path.join(ROOT, 'src/data/powder-models.json'), JSON.stringify({ generated: report.generated, models }, null, 1));
-  fs.writeFileSync(path.join(ROOT, 'src/data/validation-report.json'), JSON.stringify(report));
+  // Keep the shipped report compact: in-sample rows drop their long notes (held-out rows keep them).
+  const slim = { ...report, rows: report.rows.map((r: any) => (r.heldOut ? r : { ...r, notes: undefined, label: r.label })) };
+  fs.writeFileSync(path.join(ROOT, 'src/data/validation-report.json'), JSON.stringify(slim));
   fs.writeFileSync(path.join(ROOT, 'src/data/inferred-capacities.json'), JSON.stringify(inferred, null, 1));
   if (!only) {
     const constPath = path.join(ROOT, 'src/data/model-constants.json');

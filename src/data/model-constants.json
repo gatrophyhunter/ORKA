@@ -1,12 +1,12 @@
 {
-  "generated": "2026-11-23T15:12:26.637Z",
+  "generated": "2026-11-23T15:24:33.396Z",
   "shotStartMPa": {
     "jacketed": {
       "value": 25,
       "basis": "Reference value: widely reported QuickLOAD default for jacketed lead-core bullets (research/raw/physics.md [50][150][151]); within the 24-44 MPa first engraving peak reported for 6.5-9.3 mm jacketed bullets [47]."
     },
     "monolithic": {
-      "value": 50.7,
+      "value": 47.3,
       "basis": "Fitted to 60 published pressure-tested loads with monolithic bullets (33 powders), relative to the 25 MPa jacketed reference, by scripts/calibrate-powders.ts."
     },
     "lead": {

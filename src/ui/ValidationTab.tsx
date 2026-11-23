@@ -1,5 +1,6 @@
 // Validation report: model predictions vs published pressure-tested loads.
 
+import { useEffect, useState } from 'react';
 import { DataTable, StatusChip, type Column } from './components';
 import { fmtNum } from './format';
 import { useApp } from './state';
@@ -140,12 +141,32 @@ export interface ValidationReport {
   rows: ValidationRow[];
 }
 
-// Optional file: absent until the calibration pipeline produces it. import.meta.glob keeps the build working either way.
-const found = import.meta.glob('../data/validation-report.json', { eager: true, import: 'default' }) as Record<string, ValidationReport>;
-export const VALIDATION_REPORT: ValidationReport | null = Object.values(found)[0] ?? null;
+// Optional, large file: loaded lazily when this tab opens. import.meta.glob keeps the build working when it is absent.
+const loaders = import.meta.glob('../data/validation-report.json', { import: 'default' }) as Record<string, () => Promise<ValidationReport>>;
+let reportCache: ValidationReport | null | undefined;
+
+function useReport(): ValidationReport | null | undefined {
+  const [rep, setRep] = useState<ValidationReport | null | undefined>(reportCache);
+  useEffect(() => {
+    if (reportCache !== undefined) return;
+    const fn = Object.values(loaders)[0];
+    let live = true;
+    (fn ? fn() : Promise.resolve(null))
+      .then((r) => {
+        reportCache = r ?? null;
+        if (live) setRep(reportCache);
+      })
+      .catch(() => live && setRep((reportCache = null)));
+    return () => {
+      live = false;
+    };
+  }, []);
+  return rep;
+}
 
 export function ValidationTab() {
-  const rep = VALIDATION_REPORT;
+  const rep = useReport();
+  if (rep === undefined) return <div className="card">Loading validation report…</div>;
   if (!rep || !rep.rows?.length) {
     return (
       <div className="card" data-testid="validation-pending">

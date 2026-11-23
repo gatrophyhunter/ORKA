@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react';
 import { parseUserImport, type UserData } from '../data/db';
 import type { BrassCase, Bullet, Cartridge, Powder } from '../data/schema';
+import { Evidence } from './evidence';
 import { DataTable, NumberField, PlainNumber, SelectField, SourceLinks, StatusChip, TextField, type Column } from './components';
 import { downloadText, slug, toCsv } from './format';
 import { useApp } from './state';
@@ -12,7 +13,7 @@ type Sub = 'cartridges' | 'powders' | 'bullets' | 'brass' | 'charts';
 
 const has = (hay: unknown, q: string) => !q || JSON.stringify(hay).toLowerCase().includes(q.toLowerCase());
 
-function Detail({ obj, extra }: { obj: Record<string, unknown>; extra?: ReactNode }) {
+function Detail({ obj, extra, evidenceKey }: { obj: Record<string, unknown>; extra?: ReactNode; evidenceKey?: string | null }) {
   const skip = new Set(['sources', 'conflicts', 'model', 'user']);
   const entries = Object.entries(obj).filter(([k]) => !skip.has(k));
   const fmt = (v: unknown): ReactNode => {
@@ -57,6 +58,7 @@ function Detail({ obj, extra }: { obj: Record<string, unknown>; extra?: ReactNod
       )}
       <h4 style={{ marginTop: 12 }}>Sources</h4>
       <SourceLinks sources={(obj.sources as { url: string; type: string; fields?: string[] }[]) ?? []} />
+      {evidenceKey && <Evidence k={evidenceKey} />}
     </div>
   );
 }
@@ -224,6 +226,7 @@ function CartridgesTable() {
       {selected && (
         <Detail
           obj={selected as never}
+          evidenceKey={selected.user ? null : `cartridges:${selected.id}`}
           extra={<UserActions isUser={!!selected.user} onEdit={() => setEditing(selected)} onDelete={() => { updateUser((u) => ({ ...u, cartridges: u.cartridges.filter((x) => x.id !== selected.id) })); setSel(null); }} />}
         />
       )}
@@ -358,6 +361,7 @@ function PowdersTable() {
       {selected && (
         <Detail
           obj={selected as never}
+          evidenceKey={selected.user ? null : `powders:${selected.id}`}
           extra={
             <>
               <h4 style={{ marginTop: 12 }}>Burn model</h4>
@@ -491,7 +495,7 @@ function BulletsTable() {
       )}
       <DataTable rows={rows} columns={cols} rowKey={(b) => b.id} onRowClick={(b) => setSel(b.id)} selectedKey={sel} testId="db-bullets" />
       {selected && (
-        <Detail obj={selected as never} extra={<UserActions isUser={!!selected.user} onEdit={() => setEditing(selected)} onDelete={() => { updateUser((u) => ({ ...u, bullets: u.bullets.filter((x) => x.id !== selected.id) })); setSel(null); }} />} />
+        <Detail obj={selected as never} evidenceKey={selected.user ? null : `bullets:${selected.id}`} extra={<UserActions isUser={!!selected.user} onEdit={() => setEditing(selected)} onDelete={() => { updateUser((u) => ({ ...u, bullets: u.bullets.filter((x) => x.id !== selected.id) })); setSel(null); }} />} />
       )}
     </div>
   );
@@ -640,6 +644,7 @@ function BrassTable() {
       {selected && (
         <Detail
           obj={selected as never}
+          evidenceKey={selected.user || sel === null ? null : `brassCases:${sel}`}
           extra={
             <UserActions
               isUser={!!selected.user && userIndex >= 0}

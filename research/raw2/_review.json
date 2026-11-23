@@ -4,5 +4,18 @@
   "excludeRecords": {
     "9mm": "C.I.P. list row '9 mm' links to the 416 Weatherby Magnum sheet (tabiiical-en-page33.pdf); its data are not for a '9 mm' cartridge (cartridges-standards verifier)."
   },
-  "fixes": []
+  "fixes": [
+    {
+      "id": "hornady-33389",
+      "field": "bcNotes",
+      "value": "Mach-banded (Hornady /bc, ICAO): Mach 2.25 G1 0.863 / G7 0.435; Mach 2.0 G1 0.860 / G7 0.432; Mach 1.75 G1 0.850 / G7 0.428",
+      "reason": "extractor read a hidden, superseded HTML-comment row for Mach 2.0/1.75; values taken from the visible row (bullets-hornady verifier)"
+    },
+    {
+      "id": "hornady-35527b",
+      "field": "bcG1",
+      "value": null,
+      "reason": "Hornady's page shows sectional density .141 for a 100 gr .355 bullet (should be .113): its spec block appears copied from another item, so its BC is withheld (bullets-hornady verifier)"
+    }
+  ]
 }
