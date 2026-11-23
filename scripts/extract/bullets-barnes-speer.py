@@ -366,6 +366,7 @@ def barnes_records(log):
             for k, a, b in dupkeys:
                 notes.append(f'specsJson prints key "{k}" twice on this page ("{a}" / "{b}")')
             wcands = []
+            origin = {}
             for fld, sk, ck in B_FIELDS:
                 if fld == 'weightGr':
                     a_raw = sj.get(sk) if sj else None
@@ -387,6 +388,7 @@ def barnes_records(log):
                     vals[fld] = None
                 else:
                     vals[fld] = a if a is not None else b
+                    origin[fld] = 'both' if (a is not None and b is not None) else 'specsJson' if a is not None else 'customFields' if b is not None else None
                     if a is None and b is not None:
                         notes.append(f'{fld} taken from customFields (absent in specsJson)')
             line = (sj or {}).get('Product Line') or cg.get('Product Line') or (fam[0] if fam else None)
@@ -408,6 +410,13 @@ def barnes_records(log):
                     vals['weightGr'] = ok[0]
                     notes.append(f'weight sources disagree ({", ".join(f"{w:g}" for w in distinct)}); {ok[0]:g} gr kept because '
                                  f'the printed sectional density {sd:.3f} matches {ok[0]:g}/(7000*{dia:.3f}^2) and no other candidate')
+                    # a copy whose weight was wrong is not trusted for values nobody else confirms
+                    bad_copies = {('specsJson' if 'specsJson' in s_ else 'customFields' if 'customFields' in s_ else 'name')
+                                  for w, s_ in wcands if not same(w, ok[0])}
+                    for fld in ('lengthIn', 'bcG1', 'bcG7', 'minTwistIn', 'diameterIn'):
+                        if vals.get(fld) is not None and origin.get(fld) in bad_copies:
+                            notes.append(f'{fld} {vals[fld]:g} printed only in the {origin[fld]} copy whose weight was wrong; left null')
+                            vals[fld] = None
                 else:
                     notes.append(f'weight sources disagree ({", ".join(f"{w:g}" for w in distinct)}); left null')
             ev_parts = [f'productName: {name}']
@@ -442,8 +451,10 @@ def barnes_records(log):
             cal = re.sub(r'\b\d+\s*GR\b', '', cal, flags=re.I).strip(' ()')
             cal = ws(cal) or None
             prof = None
-            if style:
-                prof = style + (f' ({BARNES_STYLE[style]})' if style in BARNES_STYLE else '')
+            if style and style.strip():
+                style = ws(style)
+                kinds = [BARNES_STYLE[t] for t in style.split() if t in BARNES_STYLE]
+                prof = style + (f' ({", ".join(kinds)})' if kinds else '')
             rec = {
                 'id': f'barnes-{kebab(item)}',
                 'manufacturer': 'Barnes',

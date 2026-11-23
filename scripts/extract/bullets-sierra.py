@@ -712,6 +712,87 @@ def poster_ocr():
     return lines
 
 
+POSTER_TAG_CACHE = os.path.join(SRC, 'catalog-poster', 'ocr-tags.json')
+TAG_TW_RE = re.compile(r'(?<![\d.])(\d{1,2}(?:\.\d)?)\s*(?:["”″\']{1,2})\s*T[WV]?[I1l]?[S5]?T', re.I)
+
+
+def poster_tag_ocr():
+    """OCR only the beige-coloured tag text ("8" TWIST", "MED. VEL.") of the poster, two scales (cached).
+    Returns {'s3': [words], 's4': [words]} with word boxes in original-image pixels."""
+    if os.path.exists(POSTER_TAG_CACHE):
+        return json.load(open(POSTER_TAG_CACHE, encoding='utf-8'))
+    from PIL import Image
+    img = Image.open(POSTER_LOCAL).convert('RGB')
+    r, g, b = img.split()
+    import itertools
+    # beige tag text: bright, red clearly above blue, red >= green (white text has R~G~B; headers are green)
+    mask = Image.merge('RGB', (r, g, b)).point(lambda v: v)
+    px = img.load()
+    out = Image.new('L', img.size, 255)
+    po = out.load()
+    for y in range(img.height):
+        for x in range(img.width):
+            R, G, B = px[x, y]
+            if max(R, G, B) > 130 and R - B > 35 and R >= G:
+                po[x, y] = 0
+    tmpdir = os.path.join(SRC, 'catalog-poster', 'ocr-tmp')
+    os.makedirs(tmpdir, exist_ok=True)
+    res = {}
+    for sc in (3, 4):
+        pth = os.path.join(tmpdir, f'tags_s{sc}.png')
+        out.resize((out.width * sc, out.height * sc), Image.LANCZOS).point(lambda v: 0 if v < 128 else 255).save(pth)
+        rows = _tess(pth, 11, tsv=True).split('\n')
+        hdr = rows[0].split('\t')
+        words = []
+        for row in rows[1:]:
+            f = row.split('\t')
+            if len(f) != len(hdr):
+                continue
+            d = dict(zip(hdr, f))
+            if d['level'] != '5' or not d['text'].strip():
+                continue
+            words.append({'text': d['text'], 'x0': int(d['left']) // sc, 'y0': int(d['top']) // sc,
+                          'x1': (int(d['left']) + int(d['width'])) // sc, 'y1': (int(d['top']) + int(d['height'])) // sc,
+                          'key': [int(d['block_num']), int(d['par_num']), int(d['line_num'])]})
+        res[f's{sc}'] = words
+    json.dump(res, open(POSTER_TAG_CACHE, 'w', encoding='utf-8'), indent=0)
+    return res
+
+
+def poster_tags():
+    """List of tag reads: {'pass','x0','y0','x1','y1','tw' or None,'mv',text}."""
+    if not os.path.exists(POSTER_LOCAL):
+        return []
+    res = poster_tag_ocr()
+    tags = []
+    for pas, words in res.items():
+        lines = {}
+        for w in words:
+            lines.setdefault(tuple(w['key']), []).append(w)
+        for k, ws_ in lines.items():
+            ws_.sort(key=lambda w: w['x0'])
+            # split at large gaps so separate tags on one OCR line stay separate
+            seg = [ws_[0]]
+            segs = []
+            for w in ws_[1:]:
+                if w['x0'] - seg[-1]['x1'] > 60:
+                    segs.append(seg); seg = [w]
+                else:
+                    seg.append(w)
+            segs.append(seg)
+            for sg in segs:
+                text = ' '.join(w['text'] for w in sg)
+                m = TAG_TW_RE.search(text)
+                mv = bool(re.search(r'MED\.?\s*VEL', text, re.I))
+                if not m and not mv:
+                    continue
+                tags.append({'pass': pas, 'text': ws(text), 'tw': float(m.group(1)) if m else None, 'mv': mv,
+                             'x0': min(w['x0'] for w in sg), 'y0': min(w['y0'] for w in sg),
+                             'x1': max(w['x1'] for w in sg), 'y1': max(w['y1'] for w in sg)})
+    return tags
+
+
+TAGS = []
 PASSES = ('A', 'B', 'C', 'D', 'E')
 
 
@@ -744,6 +825,8 @@ def poster_entries():
     if not os.path.exists(POSTER_LOCAL):
         return []
     out = []
+    global TAGS
+    TAGS = poster_tags()
     for ln in poster_ocr():
         parsed = {k: _parse_poster_all(ln.get(k)) for k in PASSES}
         items = set()
@@ -758,11 +841,20 @@ def poster_entries():
                  'w_reads': [x['w'] for x in got], 'bc_reads': [x['bc'] for x in got]}
             tws = [x['tw'] for x in got]
             tw = _strict(tws)
-            e['tw_reads'] = tws
+            # twist tag reads: the 5 full-line passes plus the 2 colour-mask tag passes on the same row
+            x0, y0, x1, y1 = ln['box']
+            cy = (y0 + y1) / 2
+            tag_reads = [t['tw'] for t in TAGS if t['tw'] is not None and t['y0'] <= cy <= t['y1']
+                         and x0 < t['x0'] < x1 + 260]
+            allr = [t for t in tws if t is not None] + tag_reads
+            e['tw_reads'] = allr
             e['tw_rejected'] = None
-            if tw is not None and tw > 20:
-                e['tw_rejected'] = tw       # e.g. "7.5"" read as "75"": a lost decimal point -> unusable
-                tw = None
+            # a read > 20 can only be a lost decimal point ("7.5" read as "75"): unusable, ignored
+            usable = [t for t in allr if t <= 20]
+            if any(t > 20 for t in allr):
+                e['tw_rejected'] = [t for t in allr if t > 20]
+            tw = usable[0] if len(usable) >= 2 and len(set(usable)) == 1 else None
+            e['tw_tag_reads'] = tag_reads
             e['tw'] = tw
             e['mv'] = sum(1 for x in got if x['mv']) >= 2
             e['texts'] = [x['raw'] for x in got]
@@ -791,7 +883,8 @@ def apply_poster(recs):
         e = hits[0]
         matched_items.add(e['item'])
         stats['matched'] += 1
-        best_txt = max(e['texts'], key=lambda t: (e['texts'].count(t), len(t)))
+        best_txt = max(e['texts'], key=lambda t: (e['tw'] is not None and bool(re.search(r'(?<![\d.])%g\s*["”″]' % e['tw'], t)),
+                                                  e['texts'].count(t), len(t)))
         r['sources'].append({'url': POSTER_URL, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED})
         r['evidence'] += ' | [2026 Bullet Guide poster, OCR] ' + ws(best_txt)
         add = []
@@ -813,7 +906,9 @@ def apply_poster(recs):
                 r['recommendedTwist'] = tw
                 stats['twistUsed'] += 1
                 add.append(f'recommendedTwist {tw} from the 2026 Bullet Guide poster twist tag ("{"%g" % e["tw"]}\\" TWIST", '
-                           'OCR, two passes agree); treat as minimum (fastest-needed) twist.')
+                           f'OCR reads {e["tw_reads"]}, all usable reads agree); treat as minimum (fastest-needed) twist.')
+                if not re.search(r'(?<![\d.])%g\s*["”″]' % e['tw'], r['evidence']):
+                    r['evidence'] += ' | [poster tag, OCR] %g" TWIST' % e['tw']
             elif r['recommendedTwist'] == tw:
                 stats['twistAgree'] += 1
                 add.append('Twist also printed on the 2026 Bullet Guide poster (agrees).')

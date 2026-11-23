@@ -56,8 +56,8 @@ Measure your own case capacity (fired, water to the mouth) and bullet length whe
 | Parameter | Default | Basis |
 |---|---|---|
 | Shot-start, jacketed lead-core | 25 MPa (3,626 psi) | Widely reported QuickLOAD default [50][150][151]. Inside the reported 24–44 MPa first engraving peak for 6.5–9.3 mm jacketed bullets [47]. |
-| Shot-start, monolithic copper/brass | 35.3 MPa | OpenReloading default [48] (third party). Solid copper peaks reported much higher [50]. |
-| Shot-start, cast / plated lead | 30 MPa | OpenReloading default [48] (third party) |
+| Shot-start, monolithic copper/brass | fitted (see `src/data/model-constants.json`) | Fitted to published loads relative to the jacketed reference; falls back to the OpenReloading default 35.3 MPa [48] when not fitted. |
+| Shot-start, cast / plated lead | fitted (see `src/data/model-constants.json`) | As above; fallback 30 MPa [48]. |
 | Primer (ignition) pressure | 5 MPa as initial energy `p·V` | Modelling choice for the starting state [36]; absorbed by calibration |
 | Secondary-work factor φ1 | 1.05 | Classical weapons 1.05–1.20 [10]. No small-arms value is published. Calibration absorbs the difference. |
 | Specific gas constant R | 0.37 J/(g·K) | M1: 919–924 J/g at 2447–2449 K [72][73]. M6: 947.5 J/g at 2570 K [70]. |
@@ -65,11 +65,24 @@ Measure your own case capacity (fired, water to the mouth) and bullet length whe
 | Impetus f, flame temperature | `Tv = 298 K + Q(γ−1)/R`, `f = R·Tv` | Uses the maker's published heat of explosion `Q` where available. Otherwise single-base 3,850 J/g (Reload Swiss RS line, 3,750–3,950 [78]–[82]) or double-base 3,906 J/g (Vihtavuori N5xx, 3,700–4,000 [85]). This is a prior. Calibration with pressure data refits `f`. |
 | Covolume η | 1.0 cm³/g | "About 1 cc/g for most propellants" [5]. M1 1.105 [72], M30A1 1.041 [77]. |
 | Solid density ρp | 1.6 g/cm³ | Conventional value. **Not yet sourced** (see docs/DATA.md open items). It only sets the volume of the unburnt grains. |
-| Burn-rate exponent n | 1 | Vivacity form, linear in pressure, as used for closed-vessel vivacity [26]. No sourced small-arms value. |
+| Burn-rate exponent n | fitted per powder (prior 0.8) | No sourced small-arms value. Published load data constrain it (§4). 1 is the default for user calibrations with too little data. |
 | Temperature coefficient κ | 0.0007 /K (generic) | Chosen so the model reproduces the published ~1 fps/°F rule of thumb [95][96][98] (script `scripts/tempcoeff.ts`). Not powder-specific. |
 | Heat-loss Stanton number | 0.002 × scale | Model assumption with no sourced constant [§6 of the dossier]. Its structure follows the Reynolds analogy [60][61]. With this value, heat loss for a .308 load is about 12–16 % of chemical energy. That is within the 7–16 % rifle-like range reported in [69]. The per-powder `heatScale` absorbs the uncertainty. |
 
-## 4. Powder models and their status
+## 4. Calibration against published data
+
+`scripts/calibrate-powders.ts` fits every powder that has published, pressure-tested loads. The main source is the Hodgdon 2025 Annual Manual, which covers Hodgdon, IMR, Winchester, Accurate and Ramshot. Reload Swiss's guide (pressures in bar), the Vihtavuori guide (velocities) and the Shooters World manual are also used.
+
+- **Fitted parameters:** burn rate β, pressure exponent n, progressivity λ, and, where the data constrain them, energy (force) and heat-loss scale. Weak priors keep weakly identified parameters physical: force ±10 % of the class prior, heat ±40 %, n ≈ 0.8 ± 25 %, λ ≈ 0 ± 0.6.
+  - *Why n is fitted:* with n fixed at 1, held-out pressure errors showed a strong bullet-weight trend. Light bullets were under-predicted by 20–40 % and heavy bullets over-predicted by 30–45 %. Fitting n removed the trend, and the fitted values cluster around 0.75–0.85.
+- **Stages:**
+  1. Fit powders on loads whose test-case capacity is published for that brand, using jacketed bullets only.
+  2. With those powders fixed, fit the shot-start pressure of monolithic and cast/lead bullets relative to the 25 MPa jacketed reference, then infer an "effective capacity" for each (cartridge, case brand) with no published capacity.
+  3. Refit every powder on all loads.
+- **Validation:** leave-one-cartridge-out on cartridges whose capacity is published, training only on loads with published capacities, so no inferred quantity leaks into the test. Results, with breakdowns, are on the Validation tab.
+- **Bullet lengths:** when the bullet maker publishes no length (Hornady and Sierra product pages publish none), calibration uses a log-linear estimate from bullets whose lengths are published. There are separate fits for pointed and blunt bullets, and each is used only if its leave-one-out error is at most 6.5 %. Estimated lengths are never shipped as data.
+
+## 5. Powder models and their status
 
 Every powder shows one of four statuses:
 - **calibrated:** fitted to the maker's published, pressure-tested loads. The validation report shows how well the fit predicts *held-out cartridges*.
@@ -77,7 +90,7 @@ Every powder shows one of four statuses:
 - **estimated:** burn rate interpolated from the two nearest calibrated neighbours on a maker's relative burn-rate chart. Charts are ordinal, so the uncertainty band uses the interpolation error measured by re-estimating calibrated powders. **Not for load development.**
 - **none:** no model. ORKA will not predict with it until you calibrate it or enter parameters.
 
-## 5. What the model ignores
+## 6. What the model ignores
 
 - Gas leakage, bullet jump and freebore effects on engraving, and a travel-dependent resistance profile. Shot start is a threshold.
 - Barrel harmonics.

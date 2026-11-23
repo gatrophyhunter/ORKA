@@ -2,6 +2,7 @@
 
 import { DEFAULT_OPTIONS, STANTON } from '../engine/model';
 import * as U from '../engine/units';
+import { shotStartBasis, shotStartMPa } from '../engine/defaults';
 
 export function MethodTab() {
   return (
@@ -28,12 +29,27 @@ Heat loss     dQ/dt = scale·St·ρg·cp·(v/2)·(T − Tw)·A_wall`}</div>
           <span className="eq">S</span> bore area = π/8·(bore² + groove²), i.e. equal land and groove widths assumed.
         </li>
         <li>
-          Travel = barrel length − (COAL − bullet length). Freebore jump and engraving profile are not modelled beyond a single shot-start pressure (default {Math.round(U.paToPsi(DEFAULT_OPTIONS.shotStartPressurePa)).toLocaleString('en-US')} psi).
+          Travel = barrel length − (COAL − bullet length). Freebore jump and engraving profile are not modelled beyond a single shot-start pressure, which depends on bullet construction:
+          <ul>
+            {(['jacketed', 'monolithic', 'lead'] as const).map((c) => (
+              <li key={c}>
+                {c}: {shotStartMPa(c).toFixed(1)} MPa ({Math.round(U.mpaToPsi(shotStartMPa(c))).toLocaleString('en-US')} psi). {shotStartBasis(c)}
+              </li>
+            ))}
+          </ul>
         </li>
         <li>
           Secondary-work coefficient φ1 = {DEFAULT_OPTIONS.secondaryWorkCoeff}; primer modelled as an initial pressure of {Math.round(U.paToPsi(DEFAULT_OPTIONS.ignitionPressurePa)).toLocaleString('en-US')} psi; Stanton number St = {STANTON} in the Reynolds-analogy heat-loss term.
         </li>
         <li>The pressure compared with the limit is the chamber (breech-end) pressure, the closest model quantity to a SAAMI/C.I.P. piezo transducer.</li>
+      </ul>
+
+      <h3>How powder models are calibrated</h3>
+      <ul className="small">
+        <li>Each “calibrated” powder is fitted to the maker's published, pressure-tested loads (charge, velocity and piezo pressure for a stated barrel, case, primer and COAL). Fitted: burn rate β, the burn-law pressure exponent n, progressivity λ, and — where the data constrain them — energy and heat loss. Weak physical priors keep weakly constrained parameters near physical values.</li>
+        <li>The case capacity of the publisher's test case is taken from a published value for that brand where one exists. Otherwise an “effective capacity” is inferred from many loads of many powders in that cartridge; such values are labelled <em>model-inferred</em> in the brass picker and are never preferred over a published or measured value.</li>
+        <li>Bullet lengths: when a bullet maker publishes no length, calibration uses an estimate from a regression on bullets whose lengths are published (its leave-one-out error is stated on the Validation tab). Estimated lengths are never shown as data — the app asks you to measure.</li>
+        <li>Accuracy is measured by leave-one-cartridge-out: each powder is refitted without one cartridge, then predicts that cartridge's published loads. Only cartridges whose test-case capacity is published are used for that test.</li>
       </ul>
 
       <h3>What each output means</h3>

@@ -10,6 +10,66 @@ const PSI_PER_BAR = 14.503773773020923;
 const obsPsi = (r: { pObs: number | null; pObsUnit: string | null }) =>
   r.pObs === null ? null : r.pObsUnit === 'psi' ? r.pObs : r.pObsUnit === 'bar' ? r.pObs * PSI_PER_BAR : null;
 
+/** Held-out error broken down by cartridge type and by whether the bullet length was published or estimated. */
+function Breakdown({ rows }: { rows: ValidationRow[] }) {
+  const held = rows.filter((r) => r.heldOut);
+  const groups: { label: string; f: (r: ValidationRow) => boolean }[] = [
+    { label: 'All held-out', f: () => true },
+    { label: 'Rifle cartridges', f: (r) => r.cartType === 'rifle' },
+    { label: 'Handgun cartridges', f: (r) => r.cartType === 'handgun' },
+    { label: 'Bullet length published by maker', f: (r) => r.lengthEstimated === false },
+    { label: 'Bullet length estimated (maker publishes none)', f: (r) => r.lengthEstimated === true },
+    { label: 'Monolithic bullets', f: (r) => r.shotClass === 'monolithic' },
+  ];
+  const stats = (rs: ValidationRow[]) => {
+    const pe = rs.map((r) => {
+      const o = obsPsi(r);
+      return o !== null && r.pPredPsi !== null ? Math.abs((r.pPredPsi - o) / o) : null;
+    }).filter((x): x is number => x !== null).sort((a, b) => a - b);
+    const ve = rs.filter((r) => r.velPredFps !== null && r.velObsFps > 0).map((r) => Math.abs((r.velPredFps as number) - r.velObsFps)).sort((a, b) => a - b);
+    const q = (a: number[], f: number) => (a.length ? a[Math.min(a.length - 1, Math.floor(f * a.length))] : null);
+    return { nP: pe.length, p50: q(pe, 0.5), p90: q(pe, 0.9), nV: ve.length, v50: q(ve, 0.5), v90: q(ve, 0.9) };
+  };
+  if (!held.length || held[0].cartType === undefined) return null;
+  return (
+    <div className="card" data-testid="validation-breakdown">
+      <h3>Held-out error by group</h3>
+      <p className="small muted">Absolute errors of held-out predictions. p50 = median, p90 = 90th percentile (one prediction in ten is worse than this).</p>
+      <div className="table-wrap">
+        <table className="data">
+          <thead>
+            <tr>
+              <th>Group</th>
+              <th className="num">Pressure n</th>
+              <th className="num">Pressure p50</th>
+              <th className="num">Pressure p90</th>
+              <th className="num">Velocity n</th>
+              <th className="num">Velocity p50</th>
+              <th className="num">Velocity p90</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groups.map((g) => {
+              const s = stats(held.filter(g.f));
+              return (
+                <tr key={g.label}>
+                  <td>{g.label}</td>
+                  <td className="num">{s.nP}</td>
+                  <td className="num">{s.p50 === null ? '—' : `${fmtNum(s.p50 * 100, 1)} %`}</td>
+                  <td className="num">{s.p90 === null ? '—' : `${fmtNum(s.p90 * 100, 1)} %`}</td>
+                  <td className="num">{s.nV}</td>
+                  <td className="num">{s.v50 === null ? '—' : `${fmtNum(s.v50, 0)} fps`}</td>
+                  <td className="num">{s.v90 === null ? '—' : `${fmtNum(s.v90, 0)} fps`}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 /** Which powders, per maker, have calibrated / estimated / no models in this build. */
 export function CoverageCard() {
   const { db } = useApp();
@@ -58,6 +118,10 @@ export function CoverageCard() {
 }
 
 export interface ValidationRow {
+  cartType?: 'rifle' | 'handgun' | null;
+  lengthEstimated?: boolean;
+  capacityTier?: string;
+  shotClass?: string;
   label: string;
   cartridge: string;
   powder: string;
@@ -104,6 +168,7 @@ export function ValidationTab() {
     { key: 'dv', label: 'Δ vel %', num: true, render: (r) => `${fmtNum(((r.velPredFps - r.velObsFps) / r.velObsFps) * 100, 1)}`, sortValue: (r) => (r.velPredFps - r.velObsFps) / r.velObsFps },
     { key: 'po', label: 'Pressure published', num: true, render: (r) => (r.pObs === null ? '—' : `${fmtNum(r.pObs, 0)} ${r.pObsUnit ?? ''}`), sortValue: (r) => r.pObs },
     { key: 'pp', label: 'Pressure model psi', num: true, render: (r) => fmtNum(r.pPredPsi, 0), sortValue: (r) => r.pPredPsi },
+    { key: 'len', label: 'Bullet length', render: (r) => (r.lengthEstimated === undefined ? '—' : r.lengthEstimated ? 'estimated' : 'published'), sortValue: (r) => (r.lengthEstimated ? 1 : 0) },
     {
       key: 'dp',
       label: 'Δ p %',
@@ -144,6 +209,7 @@ export function ValidationTab() {
         </div>
         {m.notes && <p className="small" style={{ marginTop: 8 }}>{m.notes}</p>}
       </div>
+      <Breakdown rows={rep.rows} />
       <div className="card">
         <DataTable rows={rep.rows} columns={cols} rowKey={(r) => `${r.label}-${r.chargeGr}-${r.powder}-${r.heldOut}`} rowClass={(r) => (r.heldOut ? 'heldout' : '')} testId="validation-table" />
       </div>
