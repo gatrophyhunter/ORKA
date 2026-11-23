@@ -1,6 +1,6 @@
 # ORKA Load Lab
 
-Open-source handload prediction: interior ballistics with pressure limits, a parametric powder search, calibration against your chronograph, and a component database where every value names its source.
+Open-source **centerfire rifle** handload prediction: interior ballistics with pressure limits, a parametric powder search, calibration against your chronograph, and a component database where every value names its source. Handgun, shotshell, muzzleloader and rimfire data are deliberately left out; the build flag `ORKA_SCOPE=all` restores handgun data.
 
 > **Safety.** ORKA is a simulation tool, not load data. Real pressure depends on your rifle, components and powder lot, none of which a model can see. Use published load data as your primary reference, start low, work up, and never exceed a published maximum because a prediction says it is safe.
 
@@ -26,7 +26,6 @@ Measured on published pressure-tested data the model never saw (leave-one-cartri
 - **Pressure error:** median **±12.7 %**, and 1 in 10 predictions is off by more than **±31 %**.
 - **Bias:** on average the model reads **5 % low**, which is the unsafe direction.
 - **Velocity error:** median 71 fps.
-- **Handguns:** accuracy could not be validated on held-out data.
 
 That is not accurate enough to develop loads from. ORKA shows this error on every prediction, sizes its uncertainty band from each powder's own fit, and puts the maker's published loads for your components beside every prediction.
 
