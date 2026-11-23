@@ -649,7 +649,7 @@ def _tess(img_path, psm, tsv=False):
 
 
 def poster_ocr():
-    """Return list of {'box': (x0,y0,x1,y1), 'A': text, 'B': text, 'C': text} in reading order (cached)."""
+    """Return list of {'box': [x0,y0,x1,y1], 'A','B','C','D': text} line segments (cached)."""
     if os.path.exists(POSTER_OCR_CACHE):
         return json.load(open(POSTER_OCR_CACHE, encoding='utf-8'))['lines']
     from PIL import Image, ImageChops
@@ -662,8 +662,7 @@ def poster_ocr():
     _poster_binarize(mx, 2, 110).save(pa)
     rows = _tess(pa, 3, tsv=True).split('\n')
     hdr = rows[0].split('\t')
-    groups = {}
-    order = []
+    groups, order = {}, []
     for row in rows[1:]:
         f = row.split('\t')
         if len(f) != len(hdr):
@@ -676,21 +675,35 @@ def poster_ocr():
             groups[key] = []
             order.append(key)
         groups[key].append(d)
-    lines = []
+    # tesseract sometimes merges text from neighbouring poster columns into one "line":
+    # split a line wherever the horizontal gap between words is large (column gutter)
+    segments = []
     for k in order:
-        ws_ = groups[k]
+        words = sorted(groups[k], key=lambda w: int(w['left']))
+        seg = [words[0]]
+        for w in words[1:]:
+            prev = seg[-1]
+            if int(w['left']) - (int(prev['left']) + int(prev['width'])) > 80:
+                segments.append(seg)
+                seg = [w]
+            else:
+                seg.append(w)
+        segments.append(seg)
+    lines = []
+    for ws_ in segments:
         x0 = min(int(w['left']) for w in ws_) // 2
         y0 = min(int(w['top']) for w in ws_) // 2
         x1 = max(int(w['left']) + int(w['width']) for w in ws_) // 2
         y1 = max(int(w['top']) + int(w['height']) for w in ws_) // 2
         text_a = ' '.join(w['text'] for w in ws_)
         rec = {'box': [x0, y0, x1, y1], 'A': text_a}
-        if '#' in text_a or 'iameter' in text_a or re.search(r'\d{4}', text_a):
+        if '#' in text_a or re.search(r'\d{4}', text_a):
             pad = 6
-            crop = mx.crop((max(0, x0 - pad), max(0, y0 - pad), min(mx.width, x1 + pad + 40), min(mx.height, y1 + pad)))
-            for tag, th in (('B', 100), ('C', 140)):
+            # extend to the right so a small twist / MED. VEL. tag missed by pass A is inside the crop
+            crop = mx.crop((max(0, x0 - pad), max(0, y0 - pad), min(mx.width, x1 + pad + 200), min(mx.height, y1 + pad)))
+            for tag, sc, th in (('B', 4, 100), ('C', 4, 140), ('D', 3, 120), ('E', 3, 90)):
                 pp = os.path.join(tmpdir, f'line_{tag}.png')
-                _poster_binarize(crop, 4, th).save(pp)
+                _poster_binarize(crop, sc, th).save(pp)
                 rec[tag] = ws(_tess(pp, 7))
         lines.append(rec)
     ver = subprocess.run(['tesseract', '--version'], capture_output=True, text=True).stdout.split('\n')[0]
@@ -699,58 +712,61 @@ def poster_ocr():
     return lines
 
 
-def _consensus(vals):
+PASSES = ('A', 'B', 'C', 'D', 'E')
+
+
+def _parse_poster_all(t):
+    """All poster entries in one OCR text, keyed by item number."""
+    out = {}
+    if not t:
+        return out
+    for m in P_LINE_RE.finditer(t.replace(',', '.')):
+        bc = m.group('bc')
+        if bc is not None and not bc.startswith('.'):
+            bc = '.' + bc    # the poster prints every B.C. as ".xxx"; OCR sometimes drops the leading point
+        out.setdefault(m.group('item'), {
+            'w': float(m.group('w')), 'bc': float(bc) if bc else None,
+            'tw': float(m.group('tw')) if m.group('tw') else None, 'mv': bool(m.group('mv')),
+            'raw': ws(m.group(0))})
+    return out
+
+
+def _strict(vals):
+    """Accept a value only if >= 2 reads exist and all reads agree."""
     vals = [v for v in vals if v is not None]
-    if not vals:
-        return None
-    best = max(set(vals), key=vals.count)
-    if vals.count(best) >= 2 and all(v == best for v in vals):
-        return best
-    if vals.count(best) >= 2 and len(vals) == 3 and vals.count(best) == 2:
-        return None   # one pass read something different: not accepted
+    if len(vals) >= 2 and len(set(vals)) == 1:
+        return vals[0]
     return None
 
 
-def _parse_poster_text(t):
-    if not t:
-        return None
-    m = P_LINE_RE.search(t.replace(',', '.'))
-    if not m:
-        return None
-    bc = m.group('bc')
-    if bc is not None and not bc.startswith('.'):
-        bc = '.' + bc    # poster prints every B.C. as ".xxx"; OCR sometimes drops the leading point
-    return {'w': float(m.group('w')), 'item': m.group('item'), 'bc': float(bc) if bc else None,
-            'tw': float(m.group('tw')) if m.group('tw') else None, 'mv': bool(m.group('mv')),
-            'raw': ws(m.group(0))}
-
-
 def poster_entries():
-    """Consensus-parsed poster lines: list of dicts with item, w, bc, tw, mv, header, texts."""
+    """Consensus-parsed poster entries: list of dicts with item, w, bc, tw, mv, texts."""
     if not os.path.exists(POSTER_LOCAL):
         return []
     out = []
-    header = None
     for ln in poster_ocr():
-        hm = P_HDR_RE.search(ln['A'].replace(',', '.'))
-        if hm and '#' not in ln['A']:
-            header = {'d': float(hm.group('d')), 'text': ws(ln['A'])}
-            continue
-        ps = [_parse_poster_text(ln.get(k)) for k in ('A', 'B', 'C')]
-        if sum(1 for p in ps if p) < 2:
-            continue
-        e = {}
-        for f in ('item', 'w', 'bc', 'tw'):
-            e[f] = _consensus([p[f] for p in ps if p] if f != 'tw' else [p[f] for p in ps if p])
-        # twist / MED. VEL. tags: absent in a pass means "not read"; require 2 agreeing reads, none different
-        tws = [p['tw'] for p in ps if p and p['tw'] is not None]
-        e['tw'] = tws[0] if len(tws) >= 2 and len(set(tws)) == 1 else None
-        e['tw_reads'] = [p['tw'] if p else None for p in ps]
-        e['mv'] = sum(1 for p in ps if p and p['mv']) >= 2
-        e['header'] = header
-        e['texts'] = {k: ln.get(k) for k in ('A', 'B', 'C')}
-        e['box'] = ln['box']
-        if e['item']:
+        parsed = {k: _parse_poster_all(ln.get(k)) for k in PASSES}
+        items = set()
+        for k in PASSES:
+            items |= set(parsed[k])
+        for item in sorted(items):
+            reads = [parsed[k].get(item) for k in PASSES]
+            got = [x for x in reads if x]
+            if len(got) < 2:
+                continue
+            e = {'item': item, 'w': _strict([x['w'] for x in got]), 'bc': _strict([x['bc'] for x in got]),
+                 'w_reads': [x['w'] for x in got], 'bc_reads': [x['bc'] for x in got]}
+            tws = [x['tw'] for x in got]
+            tw = _strict(tws)
+            e['tw_reads'] = tws
+            e['tw_rejected'] = None
+            if tw is not None and tw > 20:
+                e['tw_rejected'] = tw       # e.g. "7.5"" read as "75"": a lost decimal point -> unusable
+                tw = None
+            e['tw'] = tw
+            e['mv'] = sum(1 for x in got if x['mv']) >= 2
+            e['texts'] = [x['raw'] for x in got]
+            e['box'] = ln['box']
             out.append(e)
     return out
 
@@ -767,33 +783,30 @@ def apply_poster(recs):
         skus = [r['sku']] + re.findall(r'(\w+) \(\d+ ct\)', (r['notes'] or '').split('Other packagings on the same page (same spec table): ')[-1]) \
             if 'Other packagings' in (r['notes'] or '') else [r['sku']]
         hits = [e for k in skus for e in by_item.get(k.upper(), [])]
-        hits = [e for e in hits if e['w'] is not None and r['weightGr'] is not None and abs(e['w'] - r['weightGr']) < 1e-9]
+        # attach a poster entry only if its item # matches and >= 2 OCR passes read the product page's weight
+        hits = [e for e in hits if r['weightGr'] is not None
+                and sum(1 for w in e['w_reads'] if w is not None and abs(w - r['weightGr']) < 1e-9) >= 2]
         if not hits:
             continue
         e = hits[0]
         matched_items.add(e['item'])
         stats['matched'] += 1
-        best_txt = max((t for t in e['texts'].values() if t), key=lambda t: ('#' in t, len(t)))
+        best_txt = max(e['texts'], key=lambda t: (e['texts'].count(t), len(t)))
         r['sources'].append({'url': POSTER_URL, 'type': 'manufacturer', 'page': None, 'retrieved': RETRIEVED})
-        r['evidence'] += ' | [2026 Bullet Guide poster, OCR] ' + ws(best_txt) + \
-            (f' (section: {e["header"]["text"]})' if e['header'] else '')
+        r['evidence'] += ' | [2026 Bullet Guide poster, OCR] ' + ws(best_txt)
         add = []
-        if e['bc'] is not None:
-            if r['bcG1'] is not None and abs(e['bc'] - r['bcG1']) < 1e-9:
-                stats['bcAgree'] += 1
-                add.append('G1 BC confirmed by the 2026 Bullet Guide poster.')
-            else:
+        n_same = sum(1 for b in e['bc_reads'] if b is not None and r['bcG1'] is not None and abs(b - r['bcG1']) < 1e-9)
+        if n_same >= 2:
+            stats['bcAgree'] += 1
+            add.append('G1 BC confirmed by the 2026 Bullet Guide poster.')
+        elif e['bc'] is not None:
+            if True:
                 stats['bcConflict'] += 1
                 r.setdefault('conflicts', []).append({'field': 'bcG1', 'values': [
                     {'value': r['bcG1'], 'source': r['sources'][0]['url'] + ' (product page spec table)'},
                     {'value': e['bc'], 'source': POSTER_URL + ' (2026 Bullet Guide poster "B.C.", OCR consensus)'}]})
                 add.append(f'CHECK: 2026 Bullet Guide poster prints B.C. {e["bc"]:.3f} vs product page G1 BC '
                            f'{r["bcG1"]}; product-page value kept, see conflicts.')
-        if e['header'] and r['diameterIn'] is not None and abs(e['header']['d'] - r['diameterIn']) > 1e-9:
-            r.setdefault('conflicts', []).append({'field': 'diameterIn', 'values': [
-                {'value': r['diameterIn'], 'source': r['sources'][0]['url']},
-                {'value': e['header']['d'], 'source': POSTER_URL + ' (poster section header, OCR)'}]})
-            add.append('CHECK: poster section header diameter differs; see conflicts.')
         if e['tw'] is not None:
             tw = '1:' + ('%g' % e['tw'])
             if r['recommendedTwist'] is None:
@@ -812,15 +825,15 @@ def apply_poster(recs):
                 add.append('CHECK: poster twist tag differs from the product description; twist left null, see conflicts.')
                 r['recommendedTwist'] = None
         elif any(t is not None for t in e['tw_reads']):
-            add.append('Poster line may carry a twist tag that OCR could not read consistently '
-                       f'(reads: {e["tw_reads"]}); not used.')
+            add.append('Poster line carries a twist tag that OCR could not read reliably '
+                       f'(reads: {e["tw_reads"]}' + (f', {e["tw_rejected"]:g} rejected as a lost decimal point' if e['tw_rejected'] else '')
+                       + '); not used.')
         if e['mv']:
             add.append('Poster tags this bullet "MED. VEL." (medium velocity).')
         r['notes'] = ((r['notes'] or '') + ' ' + ' '.join(add)).strip()
     for e in entries:
         if e['item'] not in matched_items:
             stats['unmatched'].append({'item': e['item'], 'weightGr': e['w'], 'bc': e['bc'], 'twist': e['tw'],
-                                       'section': e['header']['text'] if e['header'] else None,
                                        'ocr': e['texts']})
     return stats
 

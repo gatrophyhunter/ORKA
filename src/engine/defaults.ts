@@ -3,6 +3,7 @@
 // These are PRIORS: a powder's own calibration (published pressure data or chronograph data) overrides them.
 
 import type { PowderModelParams } from '../data/schema';
+import modelConstants from '../data/model-constants.json';
 
 /**
  * Shot-start (engraving) pressure defaults, psi.
@@ -15,6 +16,17 @@ import type { PowderModelParams } from '../data/schema';
  */
 const MPA_TO_PSI = 145.03773773020923;
 
+type ShotClass = 'monolithic' | 'lead' | 'jacketed';
+/** Shot-start pressure (MPa) per construction class: reference value for jacketed bullets; monolithic and lead values are
+ * fitted to published pressure-tested loads by scripts/calibrate-powders.ts (see src/data/model-constants.json for basis). */
+export function shotStartMPa(cls: ShotClass): number {
+  const v = (modelConstants as any)?.shotStartMPa?.[cls]?.value;
+  return typeof v === 'number' && v > 0 ? v : cls === 'monolithic' ? 35.3 : cls === 'lead' ? 30.0 : 25.0;
+}
+export function shotStartBasis(cls: ShotClass): string {
+  return String((modelConstants as any)?.shotStartMPa?.[cls]?.basis ?? '');
+}
+
 /** Classify bullet construction text for the shot-start default. Jacketed descriptions are never monolithic. */
 export function shotStartClass(construction?: string | null): 'monolithic' | 'lead' | 'jacketed' {
   const c = (construction ?? '').toLowerCase();
@@ -26,7 +38,7 @@ export function shotStartClass(construction?: string | null): 'monolithic' | 'le
 }
 export function defaultShotStartPsi(construction?: string | null, cartridgeType?: 'rifle' | 'handgun'): number {
   void cartridgeType;
-  return Math.round(shotStartClass(construction) === 'monolithic' ? 35.3 * MPA_TO_PSI : shotStartClass(construction) === 'lead' ? 30.0 * MPA_TO_PSI : 25.0 * MPA_TO_PSI);
+  return Math.round(shotStartMPa(shotStartClass(construction)) * MPA_TO_PSI);
 }
 
 export const DEFAULT_POWDER_TEMP_F = 70;

@@ -160,19 +160,21 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
   const byKey = new Map<string, Powder>();
   for (const f of files) {
     for (const r of arr<any>(f.data.powders)) {
-      if (!shippable(r) || !r.name || !r.manufacturer) {
+      // Some sources name only the brand, not the maker (e.g. Norma, Vectan): fall back to the brand.
+      const maker = str(r.manufacturer) ?? str(r.brand);
+      if (!shippable(r) || !r.name || !maker) {
         drop('powder (no source/evidence)');
         continue;
       }
       // Show powders under their canister brand (IMR 4064, Winchester 760), keep the parent company in notes.
       const brand = str(r.brand);
-      const shownMaker = brand && CANISTER_BRANDS.has(makerKey(brand)) ? brand : r.manufacturer;
+      const shownMaker = brand && CANISTER_BRANDS.has(makerKey(brand)) ? brand : maker;
       const name = cleanName(r.name);
       const id = `${makerKey(shownMaker)}-${slug(name)}`;
       const p: Powder = {
         id,
         manufacturer: shownMaker,
-        brand: brand && brand !== shownMaker ? brand : r.manufacturer !== shownMaker ? r.manufacturer : null,
+        brand: brand && brand !== shownMaker ? brand : maker !== shownMaker ? maker : null,
         name,
         form: (['spherical', 'extruded', 'flake', 'disc'].includes(r.form) ? r.form : null) as Powder['form'],
         base: (['single', 'double', 'triple'].includes(r.base) ? r.base : null) as Powder['base'],
@@ -198,6 +200,46 @@ export function buildPowders(files: { key: string; data: any }[]): { powders: Po
         }
         prev.sources = [...prev.sources, ...p.sources];
         prev.applications = [...new Set([...prev.applications, ...p.applications])];
+      }
+    }
+  }
+  // Merge duplicate spellings of one product (verifier finding): chart "7828SC" is the product "7828 SSC".
+  const POWDER_MERGE: Record<string, string> = { 'imr-7828sc': 'imr-7828-ssc' };
+  for (const [from, to] of Object.entries(POWDER_MERGE)) {
+    const a = byKey.get(from);
+    const b = byKey.get(to);
+    if (a && b) {
+      b.sources = [...b.sources, ...a.sources];
+      b.notes = `${b.notes ?? ''} | Also printed as "${a.name}" on burn-rate charts.`;
+      byKey.delete(from);
+    }
+  }
+  // Powders printed on the Hodgdon burn-rate chart whose own maker pages could not be reached (Accurate and Ramshot
+  // are Hodgdon brands; Western Powders' site reset every connection): minimal records sourced from the chart line.
+  const CHART_BRANDS: Record<string, string> = { ACCURATE: 'Accurate', RAMSHOT: 'Ramshot' };
+  for (const f of files) {
+    for (const c of arr<any>(f.data.charts)) {
+      if (!/hodgdon/i.test(String(c.publisher ?? '')) || !c.url) continue;
+      for (const raw of arr<string>(c.orderedNames)) {
+        const m = /^(ACCURATE|RAMSHOT)\s+(.+)$/i.exec(String(raw).trim());
+        if (!m) continue;
+        const maker = CHART_BRANDS[m[1].toUpperCase()];
+        const name = cleanName(m[2]).replace(/\b([A-Z])([A-Z]+)\b/g, (_s, a: string, b: string) => a + b.toLowerCase());
+        const id = `${makerKey(maker)}-${slug(name)}`;
+        if (byKey.has(id)) continue;
+        byKey.set(id, {
+          id,
+          manufacturer: maker,
+          brand: 'Hodgdon Powder Company',
+          name,
+          form: null,
+          base: null,
+          applications: [],
+          burnRateCharts: [],
+          status: 'unknown',
+          sources: [{ url: c.url, type: 'manufacturer', fields: ['name', 'burnRateCharts'] }],
+          notes: `Name and burn-rate position from the ${c.publisher} ${c.edition ?? ''} chart; ${maker}'s own product pages could not be reached, so form, base and density are not stated. | Evidence: ${raw}`,
+        });
       }
     }
   }
@@ -248,7 +290,8 @@ export function buildBullets(files: { key: string; data: any }[]): Bullet[] {
         continue;
       }
       const id = r.id ? slug(String(r.id)) : slug(`${r.manufacturer}-${r.sku ?? `${r.line}-${d}-${w}`}`);
-      const len = num(r.lengthIn);
+      // Lengths marked low-confidence (e.g. inferred from an unlabeled data file) are not shipped (verifier finding).
+      const len = r.lengthConfidence === 'low' ? null : num(r.lengthIn);
       const b: Bullet & { boatTailLengthIn?: number | null; baseToOgiveIn?: number | null } = {
         id,
         manufacturer: r.manufacturer,
@@ -291,12 +334,18 @@ export function buildBrass(files: { key: string; data: any }[], cartridges: Cart
     for (const r of arr<any>(f.data.brands)) {
       if (!r.name || sourcesOf(r).length === 0) continue;
       if (!brands.find((b) => b.id === (r.id ?? slug(r.name)))) {
-        brands.push({ id: r.id ?? slug(r.name), name: r.name, country: str(r.country), parent: str(r.parent), productLines: arr(r.productLines), notes: str(r.notes) ?? undefined, sources: sourcesOf(r) });
+        // Keep the source's wording: the expansion "(Winchester military headstamp)" is not in the source (verifier finding).
+        const shownName = String(r.name).replace(/\s*\(Winchester military headstamp\)/i, '');
+        brands.push({ id: r.id ?? slug(r.name), name: shownName, country: str(r.country), parent: str(r.parent), productLines: arr(r.productLines), notes: str(r.notes) ?? undefined, sources: sourcesOf(r) });
       }
     }
     for (const r of arr<any>(f.data.cases)) {
       if (!shippable(r) || !r.cartridge) {
         drop('case (no source/evidence)');
+        continue;
+      }
+      if (/\\|u0026/.test(String(r.cartridge))) {
+        drop('case (escape-corrupted cartridge name; verifier finding)');
         continue;
       }
       const cart = cartByKey.get(cartridgeKey(r.cartridge));

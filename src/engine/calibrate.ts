@@ -4,7 +4,7 @@
 import { simulate } from './model';
 import type { LoadSetup, PropellantModel } from './types';
 
-export type FitParam = 'beta' | 'lambda' | 'force' | 'heat';
+export type FitParam = 'beta' | 'lambda' | 'force' | 'heat' | 'n';
 
 export interface Observation {
   /** Full setup of the measured load (its `propellant` is replaced by the trial model during fitting). */
@@ -26,6 +26,11 @@ export interface CalibrationInput {
   /** Pressure residual scale as a fraction (e.g. 0.04 = 4 %). */
   sigmaPressureRel: number;
   maxIterations?: number;
+  /**
+   * Weak priors (in the fitted, transformed space) that keep weakly identified parameters physical:
+   * force/heat/n are log-scale relative to the start model, lambda is additive. Each adds a residual (x − center)/sigma.
+   */
+  priors?: Partial<Record<FitParam, { center: number; sigma: number }>>;
 }
 
 export interface ObservationFit {
@@ -52,6 +57,10 @@ export interface CalibrationResult {
 
 const LAMBDA_MIN = -0.45;
 const LAMBDA_MAX = 3;
+const N_MIN = 0.3;
+const N_MAX = 1.5;
+/** Reference pressure (MPa) used to decorrelate beta and n while fitting: the burn rate at 100 MPa is held by beta. */
+const P_REF_MPA = 100;
 
 interface Decoded {
   model: PropellantModel;
@@ -65,10 +74,21 @@ function decode(start: PropellantModel, startHeat: number, params: FitParam[], x
     burn: { ...start.burn },
   };
   let heatScale = startHeat;
+  const iN = params.indexOf('n');
+  const iB = params.indexOf('beta');
+  if (iN >= 0) {
+    // Fit n with the burn rate at P_REF held by beta: beta·P_REF^n is the decorrelated rate parameter.
+    const n = Math.min(N_MAX, Math.max(N_MIN, start.burn.n * Math.exp(x[iN])));
+    const rateRef = start.burn.beta * Math.pow(P_REF_MPA, start.burn.n) * (iB >= 0 ? Math.exp(x[iB]) : 1);
+    model.burn.n = n;
+    model.burn.beta = rateRef / Math.pow(P_REF_MPA, n);
+  }
   params.forEach((p, i) => {
     switch (p) {
+      case 'n':
+        break;
       case 'beta':
-        model.burn.beta = start.burn.beta * Math.exp(x[i]);
+        if (iN < 0) model.burn.beta = start.burn.beta * Math.exp(x[i]);
         break;
       case 'lambda':
         model.burn.lambda = Math.min(LAMBDA_MAX, Math.max(LAMBDA_MIN, start.burn.lambda + x[i]));
@@ -106,6 +126,16 @@ function residuals(inp: CalibrationInput, d: Decoded): number[] {
 }
 
 const sumSq = (r: number[]) => r.reduce((a, b) => a + b * b, 0);
+
+function withPriors(inp: CalibrationInput, params: FitParam[], x: number[], r: number[]): number[] {
+  if (!inp.priors) return r;
+  const out = r.slice();
+  params.forEach((p, i) => {
+    const pr = inp.priors![p];
+    if (pr && pr.sigma > 0) out.push((x[i] - pr.center) / pr.sigma);
+  });
+  return out;
+}
 
 function solveLinear(Ain: number[][], bin: number[]): number[] | null {
   const n = bin.length;
@@ -174,7 +204,7 @@ export function calibrate(inp: CalibrationInput): CalibrationResult {
   const P = params.length;
   let x = new Array(P).fill(0);
   let d = decode(start, startHeat, params, x);
-  let r = residuals(inp, d);
+  let r = withPriors(inp, params, x, residuals(inp, d));
   let cost = sumSq(r);
   let mu = 1e-3;
   let it = 0;
@@ -188,7 +218,7 @@ export function calibrate(inp: CalibrationInput): CalibrationResult {
       const hstep = 1e-4;
       const xp = x.slice();
       xp[j] += hstep;
-      const rp = residuals(inp, decode(start, startHeat, params, xp));
+      const rp = withPriors(inp, params, xp, residuals(inp, decode(start, startHeat, params, xp)));
       for (let i = 0; i < r.length; i++) J[i][j] = (rp[i] - r[i]) / hstep;
     }
     JtJ = Array.from({ length: P }, (_, a) => Array.from({ length: P }, (_, b) => J.reduce((s, row) => s + row[a] * row[b], 0)));
@@ -206,7 +236,7 @@ export function calibrate(inp: CalibrationInput): CalibrationResult {
       const scale = maxStep > 0.7 ? 0.7 / maxStep : 1;
       const xn = x.map((v, i) => v + delta[i] * scale);
       const dn = decode(start, startHeat, params, xn);
-      const rn = residuals(inp, dn);
+      const rn = withPriors(inp, params, xn, residuals(inp, dn));
       const cn = sumSq(rn);
       if (cn < cost) {
         const rel = (cost - cn) / Math.max(cost, 1e-30);

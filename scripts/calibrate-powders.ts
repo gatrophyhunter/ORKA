@@ -22,7 +22,7 @@ import { spawn } from 'node:child_process';
 import { calibrate, type FitParam, type Observation } from '../src/engine/calibrate';
 import { simulate, bulletVolumeBelow } from '../src/engine/model';
 import { propellantFromParams, paramsFromPropellant, toSetup, type LoadInputs } from '../src/engine/adapter';
-import { defaultShotStartPsi, priorParams } from '../src/engine/defaults';
+import { priorParams, shotStartClass, shotStartMPa } from '../src/engine/defaults';
 import * as U from '../src/engine/units';
 import type { Bullet, Cartridge, Database, Powder, PowderModelEntry, PowderModelParams, ValidationLoad } from '../src/data/schema';
 import { estimateFromCharts } from './estimate';
@@ -64,12 +64,21 @@ function findBullet(l: ValidationLoad, diameterIn: number): { bullet: Bullet | n
 
 type Tier = 'A' | 'B' | 'C';
 
+function shotClassOf(construction: string | null, catalogConstruction: string | null, model: string): 'jacketed' | 'monolithic' | 'lead' {
+  const c = catalogConstruction ?? construction;
+  if (c) return shotStartClass(c);
+  if (/\b(tsx|ttsx|lrx|cx|gmx|e-tip|etip|tac-x|xpb|mono|monolithic|solid copper|all copper|lead free)\b/i.test(model)) return 'monolithic';
+  if (/\b(lead|cast|lswc|lrn|swc|lwc|wc|lfp|lrnfp|hard cast)\b/i.test(model)) return 'lead';
+  return 'jacketed';
+}
+
 interface Prepared {
   load: ValidationLoad;
   cartridgeId: string;
   groupKey: string;
   tier: Tier;
   lengthEstimated: boolean;
+  shotClass: 'jacketed' | 'monolithic' | 'lead';
   capPrior: number | null;
   capBasis: string;
   inputs: LoadInputs;
@@ -78,10 +87,13 @@ interface Prepared {
   notes: string[];
 }
 
+const normBrand = (s: string | null | undefined) =>
+  (s ?? '').toLowerCase().replace(/\(.*?\)/g, ' ').replace(/[^a-z0-9 ]/g, ' ').replace(/\b(brass|cases?|commercial|new|unprimed|match)\b/g, ' ').replace(/\s+/g, ' ').trim();
 function capacityFor(l: ValidationLoad, c: Cartridge): { tier: Tier; cap: number | null; basis: string } {
-  const brand = (l.caseBrand ?? '').toLowerCase().trim();
+  const brand = normBrand(l.caseBrand);
   const published = c.caseCapacityGrH2O.filter((e) => !/inferred/i.test(e.basis));
-  const byBrand = published.filter((e) => brand && e.brand && (brand.includes(e.brand.toLowerCase()) || e.brand.toLowerCase().includes(brand)));
+  // Exact brand match only: "Winchester" commercial brass must not match "WCC (Winchester military headstamp)".
+  const byBrand = published.filter((e) => brand && e.brand && normBrand(e.brand) === brand);
   if (byBrand.length) return { tier: 'A', cap: median(byBrand.map((e) => e.value)), basis: `${byBrand[0].brand} (${byBrand[0].basis}, ${byBrand.length} value(s))` };
   if (published.length) return { tier: 'B', cap: median(published.map((e) => e.value)), basis: `median of ${published.length} published capacities of other brands (test case: ${l.caseBrand ?? 'unstated'})` };
   return { tier: 'C', cap: null, basis: 'no published capacity' };
@@ -110,14 +122,14 @@ function prepare(l: ValidationLoad): Prepared | null {
     construction = fb.bullet.construction ?? null;
     notes.push(`bullet ${fb.bullet.manufacturer} ${fb.bullet.name} (${fb.note})`);
   }
-  if (!len && LENGTH_MODEL && LENGTH_MODEL.looRelRms < 0.06) {
+  if (!len && LENGTH_MODEL) {
     // Maker publishes no length: estimate it (calibration only; error measured by leave-one-out, see report).
     const text = `${l.bulletModel ?? ''} ${fb.bullet ? `${fb.bullet.line} ${fb.bullet.name} ${fb.bullet.profile ?? ''}` : ''}`;
-    const est = LENGTH_MODEL.predict(featuresFromText(d, l.bulletWeightGr, text, fb.bullet?.construction ?? construction));
-    if (est > d && est < 3) {
+    const est = LENGTH_MODEL.predict(featuresFromText(d, l.bulletWeightGr, text, fb.bullet?.construction ?? construction, c.type === 'handgun'));
+    if (est !== null && est > d && est < 3) {
       len = Math.round(est * 1000) / 1000;
       lengthEstimated = true;
-      notes.push(`bullet length ${len} in ESTIMATED (maker publishes none; estimator LOO error ${(LENGTH_MODEL.looRelRms * 100).toFixed(1)} %)`);
+      notes.push(`bullet length ${len} in ESTIMATED (maker publishes none; estimator leave-one-out error ${(LENGTH_MODEL.looRelRms * 100).toFixed(1)} %)`);
     }
   }
   if (!len) return skip(`bullet length unknown (${fb.note})`), null;
@@ -131,6 +143,7 @@ function prepare(l: ValidationLoad): Prepared | null {
     groupKey: `${c.id}|${(l.caseBrand ?? 'unstated').toLowerCase()}`,
     tier: cap.tier,
     lengthEstimated,
+    shotClass: shotClassOf(construction, fb.bullet?.construction ?? null, l.bulletModel ?? ''),
     capPrior: cap.cap,
     capBasis: cap.basis,
     inputs: {
@@ -147,7 +160,7 @@ function prepare(l: ValidationLoad): Prepared | null {
       coalIn: l.coalIn,
       chargeGr: l.chargeGr,
       powderTempF: 70,
-      shotStartPsi: defaultShotStartPsi(construction, c.type),
+      shotStartPsi: U.mpaToPsi(shotStartMPa(shotClassOf(construction, fb.bullet?.construction ?? null, l.bulletModel ?? ''))),
     },
     peakPa,
     label: `${c.name} · ${l.bulletMfr ?? ''} ${l.bulletWeightGr} gr ${l.bulletModel ?? ''} · ${l.chargeGr} gr (${l.loadType})`,
@@ -174,7 +187,18 @@ function fitPowder(p: Powder, rows: Prepared[]) {
   if (rows.length >= 3) params.push('lambda');
   if (rows.length >= 4 && nP >= 2) params.push('force');
   if (rows.length >= 12 && barrels >= 3) params.push('heat');
-  const fit = calibrate({ start, observations: obs, params, sigmaVelocityMs: SIGMA_V_MS, sigmaPressureRel: SIGMA_P_REL });
+  // Pressure exponent of the burn law: identifiable when a powder spans several bullet weights with measured pressures.
+  if (rows.length >= 10 && nP >= 6 && new Set(rows.map((r) => Math.round(r.load.bulletWeightGr / 10))).size >= 3) params.push('n');
+  const fit = calibrate({
+    start,
+    observations: obs,
+    params,
+    sigmaVelocityMs: SIGMA_V_MS,
+    sigmaPressureRel: SIGMA_P_REL,
+    // Weak physical priors (transformed space): energy ±10 % of the class prior, heat-loss scale ±40 %,
+    // pressure exponent near 0.8 (±25 %), burn shape near neutral (±0.6). Data dominate where they are informative.
+    priors: { force: { center: 0, sigma: 0.1 }, heat: { center: 0, sigma: 0.4 }, n: { center: Math.log(0.8), sigma: 0.25 }, lambda: { center: 0, sigma: 0.6 } },
+  });
   return { fit, params };
 }
 
@@ -429,14 +453,57 @@ async function main() {
   // Stage 1: powders on rows with published capacity.
   const stage1Jobs: Job[] = [];
   for (const [pid, rows] of rowsOf) {
-    const a = rows.filter((r) => r.tier === 'A');
-    const ab = rows.filter((r) => r.tier !== 'C');
+    const a = rows.filter((r) => r.tier === 'A' && r.shotClass === 'jacketed');
+    const ab = rows.filter((r) => r.tier !== 'C' && r.shotClass === 'jacketed');
     const use = a.length >= 6 ? a : ab;
     if (use.length >= 3) stage1Jobs.push({ kind: 'powder', stage: 1, powderId: pid, rows: use });
   }
   console.log(`Stage 1: ${stage1Jobs.length} powders with ≥3 rows of published capacity.`);
   const s1 = await runJobs<PowderOut>(stage1Jobs, nProc, 's1');
   const models1: Record<string, FittedModel> = Object.fromEntries(s1.map((o) => [o.powderId, { params: o.params }]));
+
+  // Stage 2a: shot-start pressure of monolithic and lead bullets relative to the jacketed reference, fitted with the
+  // stage-1 powders fixed, on rows whose case capacity is published (tier A, or tier B at the prior).
+  const shotFits: Record<string, { value: number; n: number; powders: number; rmsPressurePct: number | null } | null> = {};
+  for (const cls of ['monolithic', 'lead'] as const) {
+    const pool: Prepared[] = [];
+    for (const rows of rowsOf.values()) for (const r of rows) if (r.shotClass === cls && r.tier !== 'C' && models1[r.load.powderId!]) pool.push(r);
+    const sample = subsample(pool, 4, 60);
+    if (sample.length < 8) {
+      shotFits[cls] = null;
+      continue;
+    }
+    const cost = (logMPa: number) => {
+      let s = 0;
+      for (const r of sample) {
+        const p = db.powders.find((x) => x.id === r.load.powderId)!;
+        const rr = { ...r, inputs: { ...r.inputs, shotStartPsi: U.mpaToPsi(Math.exp(logMPa)), caseCapacityGrH2O: r.inputs.caseCapacityGrH2O > 0 ? r.inputs.caseCapacityGrH2O : r.capPrior! } };
+        const res = simulateRow(models1[r.load.powderId!], rr, p.bulkDensityGcc);
+        const v = res.status === 'muzzle' ? res.muzzleVelocityMs : 0;
+        s += ((v - U.fpsToMs(r.load.velocityFps)) / SIGMA_V_MS) ** 2;
+        if (r.peakPa) s += ((Number.isFinite(res.peakBreechPa) ? res.peakBreechPa : 1e10) - r.peakPa) ** 2 / (r.peakPa * SIGMA_P_REL) ** 2;
+      }
+      return s;
+    };
+    let a = Math.log(10);
+    let b = Math.log(250);
+    const g = (Math.sqrt(5) - 1) / 2;
+    let c = b - g * (b - a);
+    let d = a + g * (b - a);
+    let fc = cost(c);
+    let fd = cost(d);
+    for (let i = 0; i < 24; i++) {
+      if (fc < fd) {
+        b = d; d = c; fd = fc; c = b - g * (b - a); fc = cost(c);
+      } else {
+        a = c; c = d; fc = fd; d = a + g * (b - a); fd = cost(d);
+      }
+    }
+    const value = Math.exp((a + b) / 2);
+    shotFits[cls] = { value: Math.round(value * 10) / 10, n: sample.length, powders: new Set(sample.map((r) => r.load.powderId)).size, rmsPressurePct: null };
+    for (const rows of rowsOf.values()) for (const r of rows) if (r.shotClass === cls) r.inputs = { ...r.inputs, shotStartPsi: U.mpaToPsi(value) };
+    console.log(`Stage 2a: ${cls} shot-start fitted at ${value.toFixed(1)} MPa from ${sample.length} loads.`);
+  }
 
   // Stage 2: effective capacity per (cartridge, case brand) for groups without a brand-matched capacity.
   const groups = new Map<string, Prepared[]>();
@@ -532,7 +599,7 @@ async function main() {
   for (const pid of Object.keys(models)) {
     const without = withModels.map((p) => (p.id === pid ? { ...p, model: undefined } : p));
     const est = estimateFromCharts(without, db.burnRateCharts as any)[pid];
-    if (est) interpErr.push(Math.log(est.params.beta / models[pid].params.beta));
+    if (est) interpErr.push(Math.log(est.params.beta * Math.pow(100, est.params.n)) - Math.log(models[pid].params.beta * Math.pow(100, models[pid].params.n)));
   }
   const rmsLog = interpErr.length >= 3 ? Math.sqrt(interpErr.reduce((s, v) => s + v * v, 0) / interpErr.length) : null;
 
@@ -560,8 +627,9 @@ async function main() {
         `In-sample (fitted rows, including inferred capacities): velocity MAE ${mae(inSampleV)?.toFixed(0) ?? '—'} fps, pressure MAPE ${inSampleP.length ? ((mae(inSampleP) as number) * 100).toFixed(1) : '—'} %. ` +
         `Chart interpolation (calibrated powders re-estimated from chart neighbours): ${rmsLog === null ? 'too few to measure' : `RMS burn-rate error ${(rmsLog * 100).toFixed(0)} % over ${interpErr.length} powders`}. ` +
         `Capacity tiers of prepared loads: ${JSON.stringify(tierCount)}. ` +
+        `Shot-start fitted per bullet construction: ${Object.entries(shotFits).map(([k, v]) => `${k} ${v ? `${v.value} MPa (${v.n} loads)` : 'not enough data'}`).join(', ')}; jacketed reference 25 MPa. ` +
         `Bullet lengths: ${prepared.filter((r) => r.lengthEstimated).length} of ${prepared.length} prepared loads use an ESTIMATED length because the bullet maker publishes none ` +
-        `(estimator fitted on ${LENGTH_MODEL?.n ?? 0} bullets with published lengths, leave-one-out error ${LENGTH_MODEL ? (LENGTH_MODEL.looRelRms * 100).toFixed(1) : '—'} %). ` +
+        `(estimator fitted on ${LENGTH_MODEL?.n ?? 0} bullets with published lengths, leave-one-out error: pointed ${LENGTH_MODEL?.looRelRmsPointed != null ? (LENGTH_MODEL.looRelRmsPointed * 100).toFixed(1) : '—'} %, blunt ${LENGTH_MODEL?.looRelRmsBlunt != null ? (LENGTH_MODEL.looRelRmsBlunt * 100).toFixed(1) : '—'} %; a class is used only when its error is at most 5 %). ` +
         `Loads skipped: ${JSON.stringify(skipped)}.`,
       interpolationBetaRelSigma: rmsLog,
     },
@@ -570,6 +638,16 @@ async function main() {
   fs.writeFileSync(path.join(ROOT, 'src/data/powder-models.json'), JSON.stringify({ generated: report.generated, models }, null, 1));
   fs.writeFileSync(path.join(ROOT, 'src/data/validation-report.json'), JSON.stringify(report));
   fs.writeFileSync(path.join(ROOT, 'src/data/inferred-capacities.json'), JSON.stringify(inferred, null, 1));
+  if (!only) {
+    const constPath = path.join(ROOT, 'src/data/model-constants.json');
+    const consts = JSON.parse(fs.readFileSync(constPath, 'utf8'));
+    consts.generated = report.generated;
+    for (const cls of ['monolithic', 'lead'] as const) {
+      const f = shotFits[cls];
+      if (f) consts.shotStartMPa[cls] = { value: f.value, basis: `Fitted to ${f.n} published pressure-tested loads with ${cls} bullets (${f.powders} powders), relative to the 25 MPa jacketed reference, by scripts/calibrate-powders.ts.` };
+    }
+    fs.writeFileSync(constPath, JSON.stringify(consts, null, 2));
+  }
   console.log(JSON.stringify({ powdersCalibrated: Object.keys(models).length, inferredCapacities: inferred.length, skipped, metrics: { ...report.metrics, notes: undefined } }, null, 2));
 }
 

@@ -1,8 +1,8 @@
 // Bullet-length estimator used ONLY inside powder calibration, for published loads whose bullet maker does not
 // publish lengths (e.g. Hornady, Sierra product pages). Never shipped as data: the app asks the user to measure.
 //
-// Model (log-linear in sectional density, with construction / profile offsets), fitted on bullets whose maker
-// publishes the length:   ln(L/d) = a0 + a1·ln(SD) + a2·mono + a3·flatBase + a4·tipped + a5·roundNose
+// Model (log-linear, separate fits for pointed rifle bullets and blunt handgun-style bullets), fitted on bullets whose
+// maker publishes the length:   ln L = a0 + a1·ln(weight) + a2·ln(diameter) + a3·mono + a4·flatBase + a5·tipped + a6·roundNose
 // Its leave-one-out error is reported in the validation report.
 
 import type { Bullet } from '../src/data/schema';
@@ -14,18 +14,23 @@ export interface LengthFeatures {
   flatBase: boolean;
   tipped: boolean;
   roundNose: boolean;
+  /** Handgun-style blunt bullet (JHP/JSP/XTP/FMJ RN/wadcutter/straight-wall flat nose): modelled separately. */
+  blunt: boolean;
 }
 
-const sd = (f: LengthFeatures) => f.weightGr / 7000 / (f.diameterIn * f.diameterIn);
-const row = (f: LengthFeatures) => [1, Math.log(sd(f)), f.mono ? 1 : 0, f.flatBase ? 1 : 0, f.tipped ? 1 : 0, f.roundNose ? 1 : 0];
+// ln L = a0 + a1·ln(weight) + a2·ln(diameter) + offsets (a cylinder would have a1 = 1, a2 = −2; shape bends both).
+const row = (f: LengthFeatures) => [1, Math.log(f.weightGr), Math.log(f.diameterIn), f.mono ? 1 : 0, f.flatBase ? 1 : 0, f.tipped ? 1 : 0, f.roundNose ? 1 : 0];
 
-export function featuresFromText(diameterIn: number, weightGr: number, text: string, construction?: string | null): LengthFeatures {
+export function featuresFromText(diameterIn: number, weightGr: number, text: string, construction?: string | null, handgunCartridge = false): LengthFeatures {
   const t = `${text} ${construction ?? ''}`.toLowerCase();
+  const blunt =
+    handgunCartridge ||
+    /handgun|\basp\b|jhp|jsp|wadcutter|\bwc\b|swc|straight[- ]wall|xtp|\bhap\b|\brn\b|round nose|flat nose|\bfn\b|\bfp\b|lrn|pistol|revolver|hollow cavity|jhc|sub-?x|ftx|flex ?tip|dgx|dgs|gold dot/.test(t);
   const mono = /monolithic|tsx|ttsx|lrx|\bcx\b|gmx|e-tip|etip|all[- ]copper|solid copper|lead[- ]free|tac-x|xpb|varmint grenade|hht|cutting edge|mono/.test(t);
   const tipped = /tip|eld|a-tip|sst|v-max|vmax|ballistic|tmk|tipped|accubond|ftx|ntx|scirocco|gamechanger|hybrid hunter|\btt/.test(t);
   const flatBase = /\bfb\b|flat[- ]?base|\bfn\b|flat nose|\brn\b|round nose|\bsp\b(?!.*bt)|interlock sp|jsp|jhp|xtp|fmj(?!.*bt)|lswc|swc|wc|lrn|cast|hp(?!bt)|jfp|rnfp|plinker/.test(t) && !/\bbt\b|boat[- ]?tail|hpbt|bthp|sbt|btsp|vld|eld|hybrid|scenar/.test(t);
   const roundNose = /\brn\b|round nose|rnfp|lrn|fmj rn/.test(t);
-  return { diameterIn, weightGr, mono, flatBase, tipped, roundNose };
+  return { diameterIn, weightGr, mono, flatBase, tipped, roundNose, blunt };
 }
 
 export function bulletFeatures(b: Bullet): LengthFeatures {
@@ -58,29 +63,60 @@ function solve(A: number[][], y: number[], ridge = 1e-6): number[] | null {
 }
 
 export interface LengthModel {
+  n: number;
+  /** Leave-one-out RMS relative error per class (pointed rifle bullets / blunt handgun-style bullets). */
+  looRelRms: number;
+  looRelRmsPointed: number | null;
+  looRelRmsBlunt: number | null;
+  /** Predicted length, or null when the bullet's class has no adequately accurate model. */
+  predict: (f: LengthFeatures) => number | null;
+}
+
+interface ClassModel {
   coef: number[];
   n: number;
-  /** Leave-one-out RMS relative error of length. */
-  looRelRms: number;
-  predict: (f: LengthFeatures) => number;
+  loo: number;
 }
+
+function fitClass(bullets: Bullet[], feats: LengthFeatures[]): ClassModel | null {
+  if (bullets.length < 15) return null;
+  const A = feats.map(row);
+  const y = bullets.map((b) => Math.log(b.lengthIn as number));
+  const coef = solve(A, y, 1e-4);
+  if (!coef) return null;
+  let se = 0;
+  for (let i = 0; i < bullets.length; i++) {
+    const c = solve(A.filter((_, j) => j !== i), y.filter((_, j) => j !== i), 1e-4);
+    if (!c) continue;
+    const pred = Math.exp(A[i].reduce((s, v, k) => s + v * c[k], 0));
+    se += ((pred - (bullets[i].lengthIn as number)) / (bullets[i].lengthIn as number)) ** 2;
+  }
+  return { coef, n: bullets.length, loo: Math.sqrt(se / bullets.length) };
+}
+
+/** Maximum leave-one-out error for a class model to be used at all. */
+export const MAX_LENGTH_LOO = 0.065;
 
 export function fitLengthModel(bullets: Bullet[]): LengthModel | null {
   const train = bullets.filter((b) => b.lengthIn && b.lengthIn > b.diameterIn && b.weightGr > 0);
   if (train.length < 20) return null;
   const feats = train.map(bulletFeatures);
-  const A = feats.map(row);
-  const y = train.map((b) => Math.log((b.lengthIn as number) / b.diameterIn));
-  const coef = solve(A, y);
-  if (!coef) return null;
-  // Leave-one-out via refits (n is small enough).
-  let se = 0;
-  for (let i = 0; i < train.length; i++) {
-    const c = solve(A.filter((_, j) => j !== i), y.filter((_, j) => j !== i));
-    if (!c) continue;
-    const pred = Math.exp(A[i].reduce((s, v, k) => s + v * c[k], 0)) * train[i].diameterIn;
-    se += ((pred - (train[i].lengthIn as number)) / (train[i].lengthIn as number)) ** 2;
-  }
-  const predict = (f: LengthFeatures) => Math.exp(row(f).reduce((s, v, k) => s + v * coef[k], 0)) * f.diameterIn;
-  return { coef, n: train.length, looRelRms: Math.sqrt(se / train.length), predict };
+  const pIdx = feats.map((f, i) => (f.blunt ? -1 : i)).filter((i) => i >= 0);
+  const bIdx = feats.map((f, i) => (f.blunt ? i : -1)).filter((i) => i >= 0);
+  const pointed = fitClass(pIdx.map((i) => train[i]), pIdx.map((i) => feats[i]));
+  const blunt = fitClass(bIdx.map((i) => train[i]), bIdx.map((i) => feats[i]));
+  const usable = (m: ClassModel | null) => (m && m.loo <= MAX_LENGTH_LOO ? m : null);
+  const pick = (f: LengthFeatures) => usable(f.blunt ? blunt : pointed);
+  const nTot = (pointed?.n ?? 0) + (blunt?.n ?? 0);
+  const loo = Math.sqrt((((pointed?.loo ?? 0) ** 2) * (pointed?.n ?? 0) + ((blunt?.loo ?? 0) ** 2) * (blunt?.n ?? 0)) / Math.max(1, nTot));
+  return {
+    n: nTot,
+    looRelRms: loo,
+    looRelRmsPointed: pointed?.loo ?? null,
+    looRelRmsBlunt: blunt?.loo ?? null,
+    predict: (f) => {
+      const m = pick(f);
+      return m ? Math.exp(row(f).reduce((s, v, k) => s + v * m.coef[k], 0)) : null;
+    },
+  };
 }

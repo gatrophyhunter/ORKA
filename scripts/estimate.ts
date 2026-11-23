@@ -19,7 +19,7 @@ export function estimateFromCharts(
     const m = byId.get(id)?.model;
     return m && m.status === 'calibrated' ? m : null;
   };
-  const acc: Record<string, { logBeta: number[]; lambda: number[]; notes: string[] }> = {};
+  const acc: Record<string, { logBeta: number[]; lambda: number[]; n: number[]; notes: string[] }> = {};
   for (const c of charts) {
     const ids = c.orderedPowderIds;
     ids.forEach((id, i) => {
@@ -33,21 +33,27 @@ export function estimateFromCharts(
       const ma = calibrated(ids[a])!;
       const mb = calibrated(ids[b])!;
       const t = (i - a) / (b - a);
-      const lb = Math.log(ma.params.beta) * (1 - t) + Math.log(mb.params.beta) * t;
+      // Interpolate the burn rate at 100 MPa (beta·100^n), which is comparable across powders with different n.
+      const r100 = (m: typeof ma) => Math.log(m.params.beta) + m.params.n * Math.log(100);
+      const lb = r100(ma) * (1 - t) + r100(mb) * t;
+      const nn = ma.params.n * (1 - t) + mb.params.n * t;
       const lam = ma.params.lambda * (1 - t) + mb.params.lambda * t;
-      (acc[id] ??= { logBeta: [], lambda: [], notes: [] }).logBeta.push(lb);
+      (acc[id] ??= { logBeta: [], lambda: [], n: [], notes: [] }).logBeta.push(lb);
       acc[id].lambda.push(lam);
+      acc[id].n.push(nn);
       acc[id].notes.push(`between ${byId.get(ids[a])!.name} (#${a + 1}) and ${byId.get(ids[b])!.name} (#${b + 1}) on ${c.publisher} ${c.edition}`.trim());
     });
   }
   const out: Record<string, PowderModelEntry> = {};
   for (const [id, e] of Object.entries(acc)) {
     const p = byId.get(id)!;
-    const logBeta = e.logBeta.reduce((s, v) => s + v, 0) / e.logBeta.length;
+    const logRate100 = e.logBeta.reduce((s, v) => s + v, 0) / e.logBeta.length;
     const lambda = e.lambda.reduce((s, v) => s + v, 0) / e.lambda.length;
+    const n = e.n.reduce((s, v) => s + v, 0) / e.n.length;
+    const logBeta = logRate100 - n * Math.log(100);
     out[id] = {
       status: 'estimated',
-      params: priorParams({ heatOfExplosionJg: p.heatOfExplosionJg ?? null, base: p.base, beta: Math.exp(logBeta), lambda }),
+      params: { ...priorParams({ heatOfExplosionJg: p.heatOfExplosionJg ?? null, base: p.base, beta: Math.exp(logBeta), lambda }), n },
       betaRelSigma,
       derivation:
         `Burn rate interpolated by chart position ${e.notes.join('; ')}. Thermochemistry from class priors` +
