@@ -241,41 +241,43 @@ def bc_line_key(heading, label):
 
 # ---------------------------------------------------------------- construction / tip wording
 
-# Each rule: (regex searched in the product page's own feature text, construction value).
-# The matching sentence is stored as constructionEvidence; nothing is assigned without it.
-CONSTRUCTION_RULES = [
-    (r'[^.<>]*\bmonolithic\b[^.<>]*\bbrass\b[^.<>]*', 'monolithic-brass'),
-    (r'[^.<>]*\bbrass\b[^.<>]*\bmonolithic\b[^.<>]*', 'monolithic-brass'),
-    (r'[^.<>]*\bmonolithic\b[^.<>]*\bcopper\b[^.<>]*', 'monolithic-copper'),
-    (r'[^.<>]*\bcopper\b[^.<>]*\bmonolithic\b[^.<>]*', 'monolithic-copper'),
-    (r'[^.<>]*\b(?:copper alloy|solid copper|100% copper)\b[^.<>]*', 'monolithic-copper'),
-    (r'[^.<>]*\bbonded\b[^.<>]*', 'bonded'),
-]
-
-
-def sentences(text):
-    return [collapse(s) for s in re.split(r'(?<=[.!?])\s+', text) if s.strip()]
+def _sent(pat, text):
+    m = re.search(r'[^.!?<>]*(?:' + pat + r')[^.!?<>]*[.!?]?', text, flags=re.I)
+    return collapse(m.group(0)) if m else None
 
 
 def find_construction(feature_text, name, line):
-    """Return (construction, evidence_sentence) only when the page's own wording says so."""
+    """Return (construction, evidence) only when the page's own wording says so.
+    Rules, in order: 'FMJ' printed in the product name or line; monolithic copper/brass
+    wording; 'bonded' wording (not negated); lead bullets (line 'Lead Bullets' or a lead
+    profile abbreviation in the name, plus 'lead' wording); InterLock ring or a jacket +
+    (swaged/lead) core description -> cup-and-core."""
     low_name = (name + ' ' + (line or '')).lower()
     if re.search(r'\bfmj\b', low_name):
         return 'FMJ', name
-    for pat, val in CONSTRUCTION_RULES:
-        m = re.search(pat, feature_text, flags=re.I)
-        if m:
-            s = collapse(m.group(0))
-            if val == 'bonded' and re.search(r'\bnot bonded\b|\bnon-?bonded\b|\bunbonded\b', s, flags=re.I):
-                continue
-            return val, s
-    if re.search(r'\b(lrn|swc|hbwc|dewc)\b', low_name) or re.search(r'\blead\b', (line or '').lower()):
-        m = re.search(r'[^.<>]*\b(?:swaged|lead)\b[^.<>]*', feature_text, flags=re.I)
-        if m:
-            return 'lead', collapse(m.group(0))
-    m = re.search(r'[^.<>]*\bInterLock\b[^.<>]*', feature_text)
-    if m:
-        return 'cup-and-core', collapse(m.group(0))
+    for pat, val in (
+        (r'\bmonolithic\b[^.!?<>]*\bbrass\b|\bbrass\b[^.!?<>]*\bmonolithic\b|\bsolid brass\b', 'monolithic-brass'),
+        (r'\bmonolithic\b[^.!?<>]*\bcopper\b|\bcopper\b[^.!?<>]*\bmonolithic\b|\bsolid copper\b|'
+         r'\b100% copper\b|\ball[- ]copper\b', 'monolithic-copper'),
+    ):
+        ev = _sent(pat, feature_text)
+        if ev:
+            return val, ev
+    ev = _sent(r'\bbonded\b|\bbonding\b', feature_text)
+    if ev and not re.search(r'\bnot bonded\b|\bnon-?bonded\b|\bunbonded\b', ev, flags=re.I):
+        return 'bonded', ev
+    if re.search(r'\b(lrn|swc|hbwc|dewc|lead)\b', low_name):
+        ev = _sent(r'\blead (?:pistol |rifle )?bullets?\b|\bcold-swaged\b', feature_text)
+        if ev:
+            return 'lead', ev
+    ev = _sent(r'\bInterLock\b', feature_text)
+    if ev:
+        return 'cup-and-core', ev
+    if re.search(r'\bjacket', feature_text, flags=re.I):
+        ev = _sent(r'\b(?:swaged|lead) cores?\b|\bcores?\b[^.!?<>]*\bswaged\b', feature_text)
+        if ev:
+            ev2 = _sent(r'\bjacket', feature_text)
+            return 'cup-and-core', ev + ' / ' + ev2
     return None, None
 
 

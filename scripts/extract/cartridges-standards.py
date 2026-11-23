@@ -299,7 +299,7 @@ def saami_toc(pages):
 # ----------------------------------------------------------------------------------------------
 DASH = '-–‒─—'
 NUM = r'(?:\d*\.\d+|\d+)'
-TOLRE = r'(?:\s*([+' + DASH + r'±])\s*(\d*\.\d+))?'
+TOLRE = r'(?:\s{0,2}([+\-' + DASH[1:] + r'±])\s{0,2}(\d*\.\d+))?'
 TOKRE = re.compile(r'\(\s*(' + NUM + r')' + TOLRE + r'\s*\)|(?<![\d./:°])(' + NUM + r')(?![\d°\'"/])' + TOLRE)
 
 
@@ -508,17 +508,225 @@ def drawing_dims(page):
     return res
 
 
+
+
+TRANSDUCER_LABEL = re.compile(r'TRANSDUCER(?:\s+LOCATION)?\s+C(?:\s*L)?\s*$|TRANSDUCER(?:\s+LOCATION)?\s+C\s*L?\s{2,}|TRANSDUCER(?:\s+LOCATION)?\s+CL\b')
+PISTON_LABEL = re.compile(r'PISTON HOLE\s+C')
+
+
 def barrel_transducer(page):
-    """Transducer location from a SAAMI V&P test-barrel drawing (dimension from breech face)."""
+    """Transducer location from a SAAMI V&P test-barrel drawing: the minus-toleranced dimension
+    (breech face to transducer centre line) printed right below/next to the 'TRANSDUCER (LOCATION) CL'
+    label.  Candidates nearer to the 'PISTON HOLE CL' label than to the transducer label are rejected."""
     lines = page.split('\n')
     pairs = page_pairs(lines)
-    labs = [i for i, l in enumerate(lines) if 'TRANSDUCER LOCATION' in l]
+    labs = [(i, m.start()) for i, l in enumerate(lines) for m in [TRANSDUCER_LABEL.search(l)] if m]
     if not labs:
         return None
-    i = labs[0]
-    cands = [p for p in pairs if i - 1 <= p['li'] <= i + 4 and p['sign'] == '-' and 0.3 <= p['in'] <= 3.0]
+    i, col = labs[0]
+    pist = [j for j, l in enumerate(lines) if PISTON_LABEL.search(l)]
+    cands = []
+    for p in pairs:
+        if p['sign'] != '-' or not (0.3 <= p['in'] <= 3.0):
+            continue
+        if not (i - 1 <= p['li'] <= i + 7):
+            continue
+        if abs(p['s'] - col) > 30:
+            continue
+        d_t = abs(p['li'] - i)
+        if pist and min(abs(p['li'] - j) for j in pist) < d_t:
+            continue
+        # skip intervening dimension lines: only lines between label and value may be blank / 'L' / 'C'
+        between = [lines[j] for j in range(min(i, p['li']) + 1, max(i, p['li']))]
+        if any(re.sub(r'[\sCL]', '', b) for b in between):
+            continue
+        cands.append((d_t, p))
     if not cands:
-        return {'warning': 'TRANSDUCER LOCATION label without a minus-toleranced dimension nearby'}
-    p = min(cands, key=lambda p: (0 if p['li'] >= i else 1, abs(p['li'] - i)))
+        return {'warning': 'TRANSDUCER label without an unambiguous minus-toleranced inch/mm dimension next to it'}
+    cands.sort(key=lambda c: c[0])
+    p = cands[0][1]
+    if len(cands) > 1 and cands[1][0] == cands[0][0] and abs(cands[1][1]['in'] - p['in']) > 1e-9:
+        return {'warning': 'two candidate transducer dimensions at the same distance'}
     ev = ' | '.join(ws(lines[j]) for j in sorted({i, p['li'], p['li2']}))
     return {'in': p['in'], 'mm': p['mm'], 'tolIn': p['tolIn'], 'ev': ev}
+
+
+def page_title(page):
+    """Cartridge title on a SAAMI drawing / barrel page (line before 'ISSUED:' or text on the ISSUED line)."""
+    lines = [l for l in page.split('\n')]
+    for k, l in enumerate(lines):
+        if 'ISSUED:' in l:
+            m = re.search(r'ISSUED:\s*\S+\s+(.*?)\s+REVISED', l)
+            t = ws(m.group(1)) if m else ''
+            if not t or 'TEST BARREL' in t.upper():
+                prev = [x for x in lines[:k] if x.strip()]
+                t = ws(prev[-1]) if prev else t
+            return t
+    return ''
+
+
+def saami_names(pages):
+    """Full and abbreviated names list (Section I)."""
+    res = []
+    on = False
+    for pi, page in enumerate(pages):
+        if 'FULL AND ABBREVIATED NAMES' in page:
+            on = True
+        elif on and ('VELOCITY DATA INTERPRETATION' in page or 'VELOCITY & PRESSURE DATA' in page
+                     or 'FACTORS AFFECTING' in page):
+            break
+        if not on or 'TABLE OF CONTENTS' in page:
+            continue
+        for l in page.split('\n'):
+            m = re.match(r'^\s*(\S.*?)\s*\.{3,}\s*(\S.*?)\s*$', l)
+            if m:
+                res.append((ws(m.group(1)), ws(m.group(2)), pi + 1, ws(l)))
+    return res
+
+
+# ----------------------------------------------------------------------------------------------
+# C.I.P.
+# ----------------------------------------------------------------------------------------------
+
+def cip_table_rows():
+    """Rows of the public TDCC listing (Tabs I-IV)."""
+    import html as _html
+    rows = []
+    for t, tabname in CIP_TABS.items():
+        h = open(cip_tab_local(t), encoding='utf-8').read()
+        for rid, r in re.findall(r'<tr id="cartridge-(\d+)"[^>]*>(.*?)</tr>', h, re.S):
+            tds = re.findall(r'<td([^>]*)>(.*?)</td>', r, re.S)
+            cells = []
+            for attrs, v in tds:
+                title = re.search(r'title="([^"]*)"', attrs)
+                txt = ws(_html.unescape(re.sub(r'<[^>]+>', ' ', v)).replace('\xa0', ' '))
+                cells.append((title.group(1) if title else None, txt, v))
+            links = dict((lang, u) for u, lang in re.findall(r'href="(/uploads/tdcc/[^"]+)"[^>]*>(\w\w)</a>', cells[4][2]))
+            num = {}
+            for title, txt, _ in cells[6:]:
+                if not title:
+                    continue
+                key = {'location of the pressure take (mm)': 'M',
+                       'maximum average pressure (bar)': 'Pmax'}.get(title)
+                if title.startswith('1,15 Pmax'):
+                    key = 'PK'
+                elif title.startswith('1,25 Pmax'):
+                    key = 'PE'
+                elif title.startswith('minimal proof energy'):
+                    key = 'EE'
+                if key:
+                    num[key] = txt
+            rows.append({'rowId': rid, 'tab': t, 'tabName': tabname, 'name': cells[0][1], 'date': cells[1][1],
+                         'rev': cells[2][1], 'country': cells[3][1], 'enPdf': links.get('EN'),
+                         'cells': num,
+                         'evidence': 'C.I.P. TDCC list ' + tabname + ': ' + ' | '.join(
+                             [cells[0][1], 'Date ' + cells[1][1], 'Rev ' + (cells[2][1] or '-'), cells[3][1]]
+                             + [f'{k}={v}' for k, v in num.items()])})
+    return rows
+
+
+def cip_num(s):
+    if s is None:
+        return None
+    s = s.strip().replace(',', '.')
+    if not re.match(r'^\d+(\.\d+)?$', s):
+        return None
+    return float(s)
+
+
+CIP_VAL = r'(\d+(?:[.,]\d+)?)'
+CIP_FN = r'(?:\s*\d\))*'
+
+
+def cip_label_re(lab):
+    return re.compile(r'(?<![A-Za-z0-9+])' + lab + CIP_FN + r'\s*\*?' + CIP_FN + r'\s*=\s*' + CIP_VAL + r'(?![\d°\'"])')
+
+
+CIP_LABELS = {k: cip_label_re(v) for k, v in {
+    'L3': 'L3', 'L6': 'L6', 'G1': 'G1', 'F': 'F', 'Z': 'Z', 'u': 'u'}.items()}
+CIP_LABEL_ANY = {k: re.compile(r'(?<![A-Za-z0-9+])' + v + CIP_FN + r'\s*\*?' + CIP_FN + r'\s*=') for k, v in {
+    'L3': 'L3', 'L6': 'L6', 'G1': 'G1', 'F': 'F', 'Z': 'Z', 'u': 'u'}.items()}
+
+
+def cip_sheet(pdf):
+    """Parse one C.I.P. TDCC data sheet (pdftotext -layout).  Left column = CARTRIDGE MAXI,
+    right column = CHAMBER MINI / Barrel.  Returns dict of values (mm / bar) with evidence lines."""
+    pages = pdftotext_pages(pdf)
+    text = '\n'.join(pages)
+    lines = text.split('\n')
+    res = {'warnings': [], 'ev': {}}
+    if not re.search(r'\d', text) or 'Pmax' not in text:
+        res['warnings'].append('no machine-readable text / no Pmax label in sheet')
+        return res
+    res['mmUnits'] = bool(re.search(r'Dimensions in\s*<<\s*mm\s*>>', text))
+    # header name (line(s) above 'Country of Origin')
+    hdr = ''
+    for k, l in enumerate(lines[:12]):
+        if 'Country of Origin' in l:
+            seg = [ws(re.sub(r'C\.I\.P\.|TAB\.?:?\s+\S+|Date:?\s+\S*|Revision:?\s*\S*', ' ', x)) for x in lines[max(0, k - 3):k]]
+            hdr = ' '.join(x for x in seg if x)
+            break
+    res['header'] = hdr
+    # column split: x position of the chamber-side labels
+    rights = []
+    for l in lines:
+        found = [m.start() for m in re.finditer(r'(?<![A-Za-z0-9])L[123]\b', l)]
+        if len(found) >= 2:
+            rights.append(found[-1])
+        for m in re.finditer(r'\b(Barrel|Grooves|Commencement of Rifling|CHAMBER MINI)\b', l):
+            rights.append(m.start())
+    if not rights:
+        res['warnings'].append('could not determine the chamber column position')
+        return res
+    split = min(rights) - 3
+    res['split'] = split
+    # Barrel section start (F / Z of the barrel follow it in the right column)
+    barrel_li = next((i for i, l in enumerate(lines) if re.search(r'\bBarrel\b', l)), None)
+
+    def grab(key, side, after=None):
+        hits = []
+        for i, l in enumerate(lines):
+            if after is not None and i <= after:
+                continue
+            for m in CIP_LABEL_ANY[key].finditer(l):
+                if (m.start() < split) != (side == 'L'):
+                    continue
+                mv = CIP_LABELS[key].match(l, m.start())
+                if mv and ((mv.start(1) < split) == (side == 'L') or side == 'R'):
+                    hits.append((i, cip_num(mv.group(1)), mv.group(1), l))
+                else:
+                    hits.append((i, None, None, l))
+        return hits
+
+    for key, side, after in (('L3', 'L', None), ('L6', 'L', None), ('G1', 'L', None),
+                             ('F', 'R', barrel_li), ('Z', 'R', barrel_li), ('u', 'R', barrel_li)):
+        if side == 'R' and after is None:
+            res['warnings'].append(f'{key}: no Barrel section found')
+            continue
+        hits = grab(key, side, after)
+        vals = [h for h in hits if h[1] is not None]
+        if not hits:
+            res['warnings'].append(f'{key}: label not found')
+        elif not vals:
+            res['warnings'].append(f'{key}: label present but no value on the same line ({ws(hits[0][3])})')
+        else:
+            if len({v[1] for v in vals}) > 1 and key in ('L3', 'L6', 'G1'):
+                res['warnings'].append(f'{key}: several different values {[v[2] for v in vals]}')
+                continue
+            if key in ('F', 'Z', 'u'):
+                vals = vals[:1]
+            res[key] = vals[0][1]
+            res['ev'][key] = ws(vals[0][3])
+    m = re.search(r'Pmax\s*=\s*(\d+)\s*bar', text)
+    if m:
+        res['Pmax'] = int(m.group(1))
+        res['ev']['Pmax'] = ws(next(l for l in lines if m.group(0) in l))
+    m = re.search(r'Method\s+(Transducer|Crusher|[A-Za-z]+)', text)
+    if m:
+        res['method'] = m.group(1)
+        res['ev']['method'] = ws(m.group(0))
+    m = re.search(r'(?<![A-Za-z])M\s*=\s*(\d+[.,]\d+)', text)
+    if m:
+        res['M'] = cip_num(m.group(1))
+        res['ev']['M'] = ws(m.group(0))
+    return res

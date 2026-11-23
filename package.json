@@ -2,14 +2,16 @@
   "name": "orka",
   "private": true,
   "version": "0.1.0",
-  "description": "ORKA — open handload prediction: interior ballistics, pressure limits, parametric powder search, sourced component database",
+  "description": "ORKA \u2014 open handload prediction: interior ballistics, pressure limits, parametric powder search, sourced component database",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
     "test": "vitest run",
-    "typecheck": "tsc -b --noEmit"
+    "typecheck": "tsc -b --noEmit",
+    "e2e": "node scripts/e2e-smoke.cjs",
+    "data": "tsx scripts/build-data.ts && tsx scripts/calibrate-powders.ts && tsx scripts/build-data.ts"
   },
   "license": "MIT",
   "dependencies": {
