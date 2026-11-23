@@ -57,8 +57,12 @@ export interface CalibrationResult {
 
 const LAMBDA_MIN = -0.45;
 const LAMBDA_MAX = 3;
-const N_MIN = 0.3;
-const N_MAX = 1.5;
+const N_MIN = 0.5;
+const N_MAX = 1.2;
+/** Hard physical bounds on multiplicative fit factors (relative to the start model). */
+const FORCE_FACTOR: [number, number] = [0.75, 1.3];
+const HEAT_FACTOR: [number, number] = [0.25, 4];
+const clampf = (v: number, [lo, hi]: [number, number]) => Math.min(hi, Math.max(lo, v));
 /** Reference pressure (MPa) used to decorrelate beta and n while fitting: the burn rate at 100 MPa is held by beta. */
 const P_REF_MPA = 100;
 
@@ -94,10 +98,10 @@ function decode(start: PropellantModel, startHeat: number, params: FitParam[], x
         model.burn.lambda = Math.min(LAMBDA_MAX, Math.max(LAMBDA_MIN, start.burn.lambda + x[i]));
         break;
       case 'force':
-        model.thermo.forceJkg = start.thermo.forceJkg * Math.exp(x[i]);
+        model.thermo.forceJkg = start.thermo.forceJkg * clampf(Math.exp(x[i]), FORCE_FACTOR);
         break;
       case 'heat':
-        heatScale = startHeat * Math.exp(x[i]);
+        heatScale = startHeat * clampf(Math.exp(x[i]), HEAT_FACTOR);
         break;
     }
   });

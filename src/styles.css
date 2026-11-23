@@ -309,3 +309,7 @@ table.data tr.fail td { color: var(--text-muted); }
   body { background: #fff !important; color: #000 !important; }
   .card { break-inside: avoid; border-color: #999 !important; box-shadow: none !important; }
 }
+
+.chip.fit-good { background: var(--ok-soft); border-color: var(--ok); }
+.chip.fit-fair { background: var(--warn-soft); border-color: var(--warn); }
+.chip.fit-poor { background: var(--danger-soft); border-color: var(--danger); }

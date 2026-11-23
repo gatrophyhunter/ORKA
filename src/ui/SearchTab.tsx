@@ -6,7 +6,7 @@ import { DEFAULT_MAX_FILL, DEFAULT_MIN_BURNT, DEFAULT_MIN_FILL } from '../engine
 import * as U from '../engine/units';
 import type { Powder } from '../data/schema';
 import type { SearchMessage, SearchRequest } from '../workers/search.worker';
-import { DataTable, ErrorList, NumberField, PlainNumber, StatusChip, type Column } from './components';
+import { DataTable, ErrorList, FitGrade, NumberField, PlainNumber, StatusChip, type Column } from './components';
 import { fmtChargeKg, fmtMs, fmtP, fmtPct, fmtV } from './format';
 import { useApp } from './state';
 import { geometryErrors, modelStatus, powderPropellant, setupForPowder, useLoad } from './useLoad';
@@ -20,6 +20,7 @@ export function SearchTab() {
   const [minBurnt, setMinBurnt] = useState(Math.round(DEFAULT_MIN_BURNT * 1000) / 10);
   const [targetFps, setTargetFps] = useState<number>(NaN);
   const [includeEstimated, setIncludeEstimated] = useState(false);
+  const [includePoor, setIncludePoor] = useState(false);
   const [mfr, setMfr] = useState('');
   const [form, setForm] = useState('');
   const [similarTo, setSimilarTo] = useState('');
@@ -35,10 +36,13 @@ export function SearchTab() {
     () => db.powders.filter((p) => (!mfr || p.manufacturer === mfr) && (!form || p.form === form)),
     [db.powders, mfr, form],
   );
+  const isPoor = (p: Powder) => p.model?.status === 'calibrated' && p.model.calibration?.grade === 'poor';
   const usable = filtered.filter((p) => {
     const s = modelStatus(p);
+    if (isPoor(p) && !includePoor) return false;
     return s === 'calibrated' || s === 'user-calibrated' || (includeEstimated && s === 'estimated');
   });
+  const skippedPoor = includePoor ? [] : filtered.filter(isPoor);
   const skippedNone = filtered.filter((p) => modelStatus(p) === 'none');
   const skippedEst = includeEstimated ? [] : filtered.filter((p) => modelStatus(p) === 'estimated');
   const geoErr = geometryErrors(builder);
@@ -130,7 +134,7 @@ export function SearchTab() {
 
   const columns: Column<ParametricRow>[] = [
     { key: 'powder', label: 'Powder', render: (r) => r.candidate.label, sortValue: (r) => r.candidate.label },
-    { key: 'status', label: 'Model', render: (r) => <StatusChip status={r.candidate.status} />, sortValue: (r) => r.candidate.status },
+    { key: 'status', label: 'Model', render: (r) => <><StatusChip status={r.candidate.status} /> <FitGrade model={powderById.get(r.candidate.id)?.model} /></>, sortValue: (r) => r.candidate.status },
     { key: 'charge', label: 'Charge', num: true, render: (r) => fmtChargeKg(r.chargeKg, sys), sortValue: (r) => r.chargeKg },
     { key: 'vel', label: 'Velocity', num: true, render: (r) => (r.result.status === 'muzzle' ? fmtV(r.result.muzzleVelocityMs, sys) : r.result.status), sortValue: (r) => r.result.muzzleVelocityMs || 0 },
     { key: 'p', label: 'Peak pressure', num: true, render: (r) => fmtP(r.result.peakBreechPa, sys), sortValue: (r) => r.result.peakBreechPa },
@@ -221,6 +225,9 @@ export function SearchTab() {
             <label className="check">
               <input type="checkbox" checked={includeEstimated} onChange={(e) => setIncludeEstimated(e.target.checked)} data-testid="include-estimated" /> include estimates
             </label>
+            <label className="check" title="Calibrated powders whose fit to published pressure data is worse than ±20 % RMS">
+              <input type="checkbox" checked={includePoor} onChange={(e) => setIncludePoor(e.target.checked)} /> include poor fits
+            </label>
           </div>
         </div>
         {includeEstimated && (
@@ -238,7 +245,7 @@ export function SearchTab() {
             </button>
           )}
           <span className="small muted">
-            {skippedNone.length} without a model{skippedEst.length ? `, ${skippedEst.length} estimates` : ''} skipped
+            {skippedNone.length} without a model{skippedEst.length ? `, ${skippedEst.length} estimates` : ''}{skippedPoor.length ? `, ${skippedPoor.length} poor fits` : ''} skipped
           </span>
         </div>
         {progress && rows === null && !error && (

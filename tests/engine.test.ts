@@ -270,7 +270,7 @@ describe('review regressions', () => {
 
 describe('calibration of the pressure exponent', () => {
   it('recovers n together with beta from loads spanning bullet weights', () => {
-    const truth: PropellantModel = { ...powder, burn: { ...powder.burn, beta: 0.9, n: 1.3 } };
+    const truth: PropellantModel = { ...powder, burn: { ...powder.burn, beta: 20, n: 0.75 } };
     const obs = [125, 150, 168, 190, 210].flatMap((w) =>
       [40, 44].map((gr) => {
         const s = base({ chargeKg: U.grToKg(gr), bullet: { ...base().bullet, massKg: U.grToKg(w), lengthM: U.inToM(0.8 + w / 200) }, propellant: truth });
@@ -279,7 +279,7 @@ describe('calibration of the pressure exponent', () => {
       }),
     ).filter((o) => Number.isFinite(o.peakPa));
     const res = calibrate({ start: { ...powder, burn: { ...powder.burn, beta: 5, n: 1 } }, observations: obs, params: ['beta', 'n'], sigmaVelocityMs: 5, sigmaPressureRel: 0.02 });
-    expect(res.model.burn.n).toBeCloseTo(1.3, 1);
+    expect(res.model.burn.n).toBeCloseTo(0.75, 1);
     expect(res.rmsPressureRel!).toBeLessThan(0.01);
   });
 });

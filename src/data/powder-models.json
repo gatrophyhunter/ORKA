@@ -1,27 +1,228 @@
 {
- "generated": "2026-11-23T14:59:59.372Z",
+ "generated": "2026-11-23T15:12:26.637Z",
  "models": {
+  "vihtavuori-n540": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1110.3155000000002,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.046569503667675,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.1349969186975915
+   },
+   "derivation": "Fitted to 48 of 1056 usable published pressure-tested loads (cartridge-stratified sample) across 35 cartridge(s); 774 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 119.82187979196617,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "224-valkyrie",
+     "223-remington",
+     "22-nosler",
+     "223-winchester-super-short-magnum",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-br-norma",
+     "6mm-creedmoor",
+     "243-winchester-super-short-magnum",
+     "243-winchester",
+     "6-xc",
+     "6mm-remington",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "260-remington",
+     "6.5x55-swedish",
+     "7mm-08-remington",
+     "284-winchester",
+     "7x57r",
+     "7x64-brenneke",
+     "7x65r",
+     "308-winchester",
+     "300-savage",
+     "7.62x53r",
+     "7.5x55-swiss",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "303-british",
+     "8mm-mauser-8x57",
+     "8x57-irs",
+     "9.3x62",
+     "370-sako-magnum",
+     "9.3x74r",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     21.3,
+     79.9
+    ]
+   }
+  },
+  "vihtavuori-n140": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1035.3155,
+    "flameTempK": 2798.15,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.3312113814719,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.9124721595857654
+   },
+   "derivation": "Fitted to 48 of 914 usable published pressure-tested loads (cartridge-stratified sample) across 38 cartridge(s); 584 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3700 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 134.3806878992306,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "204-ruger",
+     "224-valkyrie",
+     "223-remington",
+     "22-nosler",
+     "223-winchester-super-short-magnum",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-br-norma",
+     "6mm-creedmoor",
+     "243-winchester-super-short-magnum",
+     "243-winchester",
+     "6-xc",
+     "6mm-remington",
+     "25-06-remington",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "260-remington",
+     "6.5x55-swedish",
+     "7mm-08-remington",
+     "284-winchester",
+     "7mm-mauser-7x57",
+     "7x57r",
+     "308-winchester",
+     "30-30-winchester",
+     "300-savage",
+     "7.62x53r",
+     "7.5x55-swiss",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "303-british",
+     "8mm-mauser-8x57",
+     "8x57-irs",
+     "8x68-s",
+     "9.3x62",
+     "370-sako-magnum",
+     "9.3x74r",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     20.2,
+     75.8
+    ]
+   }
+  },
+  "vihtavuori-n135": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 997.8155,
+    "flameTempK": 2696.798648648649,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.8108965494070848,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.693314473164635
+   },
+   "derivation": "Fitted to 48 of 608 usable published pressure-tested loads (cartridge-stratified sample) across 32 cartridge(s); 292 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3550 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 123.74507417325799,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "204-ruger",
+     "224-valkyrie",
+     "222-remington",
+     "223-remington",
+     "22-nosler",
+     "223-winchester-super-short-magnum",
+     "22-ppc-usa",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-br-norma",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6-xc",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "6.5x55-swedish",
+     "7mm-08-remington",
+     "7mm-mauser-7x57",
+     "7x57r",
+     "308-winchester",
+     "30-30-winchester",
+     "300-savage",
+     "7.62x53r",
+     "30-06-springfield",
+     "303-british",
+     "8mm-mauser-8x57",
+     "8x57-irs",
+     "8x68-s",
+     "9.3x62",
+     "9.3x74r",
+     "375-hh-magnum",
+     "458-winchester-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     17.7,
+     75.6
+    ]
+   }
+  },
   "hodgdon-h4350": {
    "status": "calibrated",
    "params": {
-    "forceJg": 979.4613046976618,
+    "forceJg": 989.5585509414825,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 18.098031541142944,
-    "n": 0.7608026682125857,
-    "lambda": 0.36093864031996536,
+    "beta": 20.511823468207876,
+    "n": 0.7367662741776521,
+    "lambda": 0.38463528368137534,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
-    "heatScale": 1.278783586516727
+    "heatScale": 1.359309709395208
    },
    "derivation": "Fitted to 48 of 488 usable published pressure-tested loads (cartridge-stratified sample) across 37 cartridge(s); 486 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 58.828323238298864,
-    "rmsPressurePct": 8.254123506459727,
+    "rmsVelocityFps": 70.86226563939621,
+    "rmsPressurePct": 9.901617602726139,
     "cartridges": [
      "270-winchester",
      "7mm-08-remington",
@@ -70,33 +271,218 @@
     ]
    }
   },
-  "imr-4064": {
+  "vihtavuori-n133": {
    "status": "calibrated",
    "params": {
-    "forceJg": 887.2555865905309,
+    "forceJg": 1010.3155,
+    "flameTempK": 2730.5824324324326,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 4.043434650218186,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.9493628992570865
+   },
+   "derivation": "Fitted to 48 of 432 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 210 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3600 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 92.41823236361867,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "204-ruger",
+     "221-remington-fireball",
+     "224-valkyrie",
+     "222-remington",
+     "223-remington",
+     "22-nosler",
+     "22-ppc-usa",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-ppc-usa",
+     "6mm-br-norma",
+     "6.5-grendel",
+     "308-winchester",
+     "30-30-winchester",
+     "300-savage",
+     "7.62x53r",
+     "30-06-springfield",
+     "303-british",
+     "8mm-mauser-8x57",
+     "9.3x62",
+     "45-70-government",
+     "458-winchester-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     17.4,
+     75.6
+    ]
+   }
+  },
+  "hodgdon-h1000": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1244.7237255545892,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 17.640587325944242,
-    "n": 0.8076591479972044,
-    "lambda": 0.16570667382984014,
+    "beta": 16.28719482682883,
+    "n": 0.707634136789383,
+    "lambda": 0.4411619429883241,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
     "heatScale": 1
    },
-   "derivation": "Fitted to 48 of 376 usable published pressure-tested loads (cartridge-stratified sample) across 35 cartridge(s); 326 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "derivation": "Fitted to 48 of 395 usable published pressure-tested loads (cartridge-stratified sample) across 36 cartridge(s); 395 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 73.59117229130221,
-    "rmsPressurePct": 11.221828693402612,
+    "rmsVelocityFps": 97.80609644471764,
+    "rmsPressurePct": 10.661238324419855,
     "cartridges": [
-     "45-70-government",
+     "243-winchester",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-remington-magnum",
+     "30-06-springfield",
+     "300-winchester-magnum",
+     "22-250-remington",
+     "220-swift",
+     "6mm-creedmoor",
+     "6mm-remington",
+     "257-roberts",
+     "25-06-remington",
+     "257-weatherby-magnum",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "26-nosler",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "27-nosler",
+     "7mm-precision-rifle",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "300-winchester-short-magnum",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-norma-magnum",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "338-weatherby-rebated-precision-magnum",
+     "33-nosler",
+     "338-winchester-magnum",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     36,
+     124
+    ]
+   }
+  },
+  "winchester-staball-match": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 848.1302547708231,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 18.759929622855438,
+    "n": 0.808335009350013,
+    "lambda": 0.40811696070142484,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 376 usable published pressure-tested loads (cartridge-stratified sample) across 28 cartridge(s); 334 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 91.42342050866812,
+    "rmsPressurePct": 12.829994648722176,
+    "cartridges": [
      "204-ruger",
      "222-remington",
      "223-remington",
      "224-valkyrie",
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "25-06-remington",
+     "6.5-grendel",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "303-british",
+     "338-federal",
+     "338-weatherby-rebated-precision-magnum",
+     "35-remington",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     20.4,
+     66
+    ]
+   }
+  },
+  "winchester-staball-65": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 865.2230733959348,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 25.10438865437902,
+    "n": 0.7214722738225195,
+    "lambda": 0.5589604940477922,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 360 usable published pressure-tested loads (cartridge-stratified sample) across 29 cartridge(s); 350 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 83.60548089946451,
+    "rmsPressurePct": 10.361971084656664,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "223-remington",
+     "224-valkyrie",
+     "22-advanced-rifle",
      "22-250-remington",
      "220-swift",
      "6mm-advanced-rifle",
@@ -104,50 +490,1888 @@
      "6mm-creedmoor",
      "243-winchester",
      "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
      "25-06-remington",
      "6.5x55-swedish",
-     "6.5-creedmoor",
-     "270-winchester",
+     "260-remington",
      "270-winchester-short-magnum",
      "6.8-western",
-     "7mm-08-remington",
      "7mm-remington-magnum",
-     "30-30-winchester",
-     "308-winchester",
      "30-06-springfield",
      "300-winchester-short-magnum",
-     "300-winchester-magnum",
-     "300-weatherby-magnum",
      "303-british",
-     "338-federal",
      "338-weatherby-rebated-precision-magnum",
      "338-winchester-magnum",
-     "35-remington",
-     "35-whelen",
-     "9.3x62",
-     "375-hh-magnum",
-     "444-marlin"
+     "375-hh-magnum"
     ],
     "sources": [
      "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
     ],
     "chargeRangeGr": [
-     19.5,
-     76
+     23.6,
+     91.5
+    ]
+   }
+  },
+  "hodgdon-universal": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1011.7334749186971,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 131.1145899384792,
+    "n": 0.6919498553327046,
+    "lambda": 0.27366850751133065,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 13.27712194764564
+   },
+   "derivation": "Fitted to 48 of 339 usable published pressure-tested loads (cartridge-stratified sample) across 21 cartridge(s); 339 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 129.56179661908283,
+    "rmsPressurePct": 29.26702685415745,
+    "cartridges": [
+     "44-40-winchester",
+     "32-hr-magnum",
+     "32-20-winchester",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "9x18-makarov",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-sw-schofield",
+     "45-auto",
+     "45-colt",
+     "454-casull"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.5,
+     12
+    ]
+   }
+  },
+  "hodgdon-cfe-pistol": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1063.0332264117167,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 139.82997633171183,
+    "n": 0.6498715651188709,
+    "lambda": 0.2445983163929002,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 11.597026618346874
+   },
+   "derivation": "Fitted to 48 of 310 usable published pressure-tested loads (cartridge-stratified sample) across 17 cartridge(s); 310 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 94.92061355090938,
+    "rmsPressurePct": 26.934315247616226,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.8,
+     14
+    ]
+   }
+  },
+  "hodgdon-bl-c-2": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 822.8114879203738,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 26.775873645121585,
+    "n": 0.7567903937536602,
+    "lambda": 0.8055065757412515,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 288 usable published pressure-tested loads (cartridge-stratified sample) across 25 cartridge(s); 228 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 107.22727256349874,
+    "rmsPressurePct": 10.257781380067586,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "7.62x39",
+     "303-british",
+     "338-federal",
+     "35-remington",
+     "35-whelen",
+     "9.3x62"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     21,
+     66
+    ]
+   }
+  },
+  "hodgdon-hp-38": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 867.4809931246482,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 392.34526293787917,
+    "n": 0.492250624488083,
+    "lambda": 0.1517742124708204,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.547023161868329
+   },
+   "derivation": "Fitted to 48 of 279 usable published pressure-tested loads (cartridge-stratified sample) across 21 cartridge(s); 279 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 97.80413745839094,
+    "rmsPressurePct": 30.202664630131125,
+    "cartridges": [
+     "44-40-winchester",
+     "30-super-carry",
+     "32-hr-magnum",
+     "32-20-winchester",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "9x18-makarov",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-sw-schofield",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.4,
+     12
+    ]
+   }
+  },
+  "hodgdon-cfe-223": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 812.5213999631114,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 71.75017639036511,
+    "n": 0.578846245804232,
+    "lambda": 1.4362003962551169,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 260 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 208 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 76.5618881111847,
+    "rmsPressurePct": 10.780560278353216,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-dasher",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6.5-grendel",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "303-british",
+     "338-federal",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     21,
+     89
+    ]
+   }
+  },
+  "hodgdon-longshot": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1794.2703534766686,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 222.5999075580041,
+    "n": 0.522174856896975,
+    "lambda": 2.9999922605436278,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 44.10761703812034
+   },
+   "derivation": "Fitted to 48 of 258 usable published pressure-tested loads (cartridge-stratified sample) across 18 cartridge(s); 258 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 105.28905132828575,
+    "rmsPressurePct": 26.368366741279388,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt",
+     "454-casull",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3.2,
+     24.5
+    ]
+   }
+  },
+  "hodgdon-retumbo": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 869.8284044836727,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 18.555578927371656,
+    "n": 0.7362573199754952,
+    "lambda": 0.653380967077675,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 250 usable published pressure-tested loads (cartridge-stratified sample) across 24 cartridge(s); 250 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 99.80431932289041,
+    "rmsPressurePct": 11.251825138165616,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-remington-magnum",
+     "300-winchester-magnum",
+     "243-winchester",
+     "6mm-remington",
+     "25-06-remington",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "26-nosler",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "27-nosler",
+     "7mm-precision-rifle",
+     "28-nosler",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-norma-magnum",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "33-nosler",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     40.7,
+     125
+    ]
+   }
+  },
+  "ramshot-true-blue": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 917.0497482825805,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 120.13383904869596,
+    "n": 0.5970136022934461,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 5.200378180524624
+   },
+   "derivation": "Fitted to 48 of 240 usable published pressure-tested loads (cartridge-stratified sample) across 18 cartridge(s); 240 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 76.87189714610362,
+    "rmsPressurePct": 22.909922084061186,
+    "cartridges": [
+     "30-super-carry",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt",
+     "454-casull"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3.2,
+     22
+    ]
+   }
+  },
+  "imr-3031": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 901.0009392154785,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 15.527759171197088,
+    "n": 0.8398820252823116,
+    "lambda": 0.02262328441991063,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 221 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 171 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 84.9792855439953,
+    "rmsPressurePct": 11.496788236970877,
+    "cartridges": [
+     "350-legend",
+     "458-socom",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "22-250-remington",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "6.8-remington-spc",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "303-british",
+     "338-federal",
+     "35-whelen",
+     "9.3x62",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     18.5,
+     64
+    ]
+   }
+  },
+  "accurate-4350": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 908.7125360659682,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 16.363270687554465,
+    "n": 0.7717967523706217,
+    "lambda": 0.19513256863376063,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 214 usable published pressure-tested loads (cartridge-stratified sample) across 24 cartridge(s); 214 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 79.05754578940979,
+    "rmsPressurePct": 17.02293509287817,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "6mm-creedmoor",
+     "243-winchester",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "257-weatherby-magnum",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-284-norma",
+     "6.5-precision-rifle",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-remington-magnum",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "303-british",
+     "338-weatherby-rebated-precision-magnum",
+     "338-winchester-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     36.8,
+     84
+    ]
+   }
+  },
+  "ramshot-hunter": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 868.1935510873542,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 34.616411871462574,
+    "n": 0.6529140435489866,
+    "lambda": 0.4252943319233007,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 206 usable published pressure-tested loads (cartridge-stratified sample) across 21 cartridge(s); 204 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 80.4834876568368,
+    "rmsPressurePct": 13.475693378042314,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "260-remington",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-remington-magnum",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-precision-rifle",
+     "338-weatherby-rebated-precision-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     33,
+     77.7
+    ]
+   }
+  },
+  "accurate-2230": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1124.671947592414,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 10.781100475406298,
+    "n": 0.7746615055090903,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.2761889558191102
+   },
+   "derivation": "Fitted to 48 of 196 usable published pressure-tested loads (cartridge-stratified sample) across 14 cartridge(s); 152 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 77.50363481066404,
+    "rmsPressurePct": 14.411819872888284,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "30-30-winchester",
+     "308-winchester",
+     "7.62x39",
+     "303-british",
+     "35-remington",
+     "35-whelen",
+     "444-marlin",
+     "458-socom",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     19.6,
+     62
+    ]
+   }
+  },
+  "reload-swiss-rs52": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 831.0324381648717,
+    "flameTempK": 2933.285135135135,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 11.645739949357777,
+    "n": 0.888642516220373,
+    "lambda": 0.3049066751999816,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.4951469402791063
+   },
+   "derivation": "Fitted to 48 of 182 usable published pressure-tested loads (cartridge-stratified sample) across 23 cartridge(s); 170 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3900 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 93.22444922536403,
+    "rmsPressurePct": 11.425481329508951,
+    "cartridges": [
+     "222-remington",
+     "22-250-remington",
+     "223-remington",
+     "243-winchester",
+     "260-remington",
+     "30-r-blaser",
+     "30-06-springfield",
+     "303-british",
+     "308-winchester",
+     "375-hh-magnum",
+     "6-xc",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "7mm-mauser-7x57",
+     "7x64-brenneke",
+     "7.5x55-swiss",
+     "7.62x54r",
+     "8x57-irs",
+     "8mm-mauser-8x57",
+     "8x68-s",
+     "9.3x62",
+     "9.3x64-brenneke",
+     "9.3x74r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     19.9,
+     78.7
+    ]
+   }
+  },
+  "imr-7828-ssc": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 892.6444923516935,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 21.805131462700878,
+    "n": 0.7114681023744193,
+    "lambda": 0.31039799057871736,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 176 usable published pressure-tested loads (cartridge-stratified sample) across 24 cartridge(s); 176 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 86.6526491741161,
+    "rmsPressurePct": 11.773828979344575,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-06-springfield",
+     "300-winchester-magnum",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "264-winchester-magnum",
+     "6.8-western",
+     "27-nosler",
+     "7mm-precision-rifle",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "300-winchester-short-magnum",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "338-weatherby-rebated-precision-magnum",
+     "338-winchester-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     39.7,
+     86.5
+    ]
+   }
+  },
+  "reload-swiss-rs70": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 893.8286253094952,
+    "flameTempK": 2933.285135135135,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 13.00838827546585,
+    "n": 0.822935787691444,
+    "lambda": 0.5340295936271588,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.3886092452412888
+   },
+   "derivation": "Fitted to 48 of 172 usable published pressure-tested loads (cartridge-stratified sample) across 21 cartridge(s); 172 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3900 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 62.97780810904542,
+    "rmsPressurePct": 8.649363741334708,
+    "cartridges": [
+     "243-winchester",
+     "260-remington",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "30-r-blaser",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "30-06-springfield",
+     "338-lapua-magnum",
+     "338-winchester-magnum",
+     "6-xc",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "7mm-mauser-7x57",
+     "7x64-brenneke",
+     "7.5x55-swiss",
+     "7mm-remington-magnum",
+     "8x68-s",
+     "9.3x62",
+     "9.3x64-brenneke"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     36.3,
+     85.2
+    ]
+   }
+  },
+  "hodgdon-h4198": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 894.0761872562945,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 15.64248783746326,
+    "n": 0.8694996493880041,
+    "lambda": -0.01181431514284709,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.1325603210333437
+   },
+   "derivation": "Fitted to 48 of 167 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 153 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 95.90427803561761,
+    "rmsPressurePct": 20.93390133914584,
+    "cartridges": [
+     "300-blackout",
+     "360-buckhammer",
+     "450-bushmaster",
+     "17-hornet",
+     "204-ruger",
+     "22-hornet",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "30-30-winchester",
+     "308-winchester",
+     "7.62x39",
+     "338-federal",
+     "35-remington",
+     "444-marlin",
+     "458-socom",
+     "45-70-government",
+     "460-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     10,
+     63
+    ]
+   }
+  },
+  "winchester-wsf": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1317.0742026278683,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 202.33166214628412,
+    "n": 0.6052650954295,
+    "lambda": 1.8303586452659386,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 35.95703898081029
+   },
+   "derivation": "Fitted to 48 of 150 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 150 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 104.73142397356371,
+    "rmsPressurePct": 22.55872233950369,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "40-sw",
+     "10mm-auto",
+     "45-auto"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.5,
+     8.7
+    ]
+   }
+  },
+  "ramshot-x-terminator": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1117.8520984536804,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 15.450833507583102,
+    "n": 0.709640834251754,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.27988275579320476
+   },
+   "derivation": "Fitted to 48 of 144 usable published pressure-tested loads (cartridge-stratified sample) across 10 cartridge(s); 100 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 72.78201310041823,
+    "rmsPressurePct": 12.19681003483589,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "30-30-winchester",
+     "308-winchester",
+     "7.62x39",
+     "458-socom",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     19.6,
+     62
+    ]
+   }
+  },
+  "vihtavuori-n340": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 16.15505481688543,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 8.226015300902906
+   },
+   "derivation": "Fitted to 36 of 138 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 138 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 36,
+    "rmsVelocityFps": 73.3017583113247,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     3.6,
+     14.1
+    ]
+   }
+  },
+  "accurate-no-9": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1309.7939152675942,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 98.23459256369242,
+    "n": 0.557233606675492,
+    "lambda": 0.3543410660722512,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 7.0361508562650545
+   },
+   "derivation": "Fitted to 48 of 132 usable published pressure-tested loads (cartridge-stratified sample) across 13 cartridge(s); 132 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 99.35423837939747,
+    "rmsPressurePct": 24.919778962310126,
+    "cartridges": [
+     "350-legend",
+     "450-bushmaster",
+     "327-federal-magnum",
+     "357-sig",
+     "357-magnum",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     9.4,
+     45.4
+    ]
+   }
+  },
+  "reload-swiss-rs40": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 951.3169533974116,
+    "flameTempK": 2967.068918918919,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 11.616980594317987,
+    "n": 0.89925187855955,
+    "lambda": 0.2339765264056937,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.13010571368441
+   },
+   "derivation": "Fitted to 48 of 130 usable published pressure-tested loads (cartridge-stratified sample) across 13 cartridge(s); 112 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3950 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 81.07379085433737,
+    "rmsPressurePct": 13.069727196981034,
+    "cartridges": [
+     "222-remington",
+     "22-250-remington",
+     "223-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "375-hh-magnum",
+     "444-marlin",
+     "45-70-government",
+     "5.6x50r-magnum",
+     "7.62x54r",
+     "9.3x62",
+     "9.3x64-brenneke",
+     "10.3x60r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     19.6,
+     75
+    ]
+   }
+  },
+  "vihtavuori-n568": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1072.8155,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.8475082164127865,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.17875833825230658
+   },
+   "derivation": "Fitted to 48 of 126 usable published pressure-tested loads (cartridge-stratified sample) across 10 cartridge(s); 126 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3850 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 120.3047838750862,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6.5-precision-rifle",
+     "6.5-284-norma",
+     "6.8-western",
+     "280-remington",
+     "7mm-precision-rifle",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "338-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     47.7,
+     238.3
+    ]
+   }
+  },
+  "accurate-2200": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1126.2845401219438,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 12.948762620278943,
+    "n": 0.7540843441670101,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.17617556622917416
+   },
+   "derivation": "Fitted to 48 of 117 usable published pressure-tested loads (cartridge-stratified sample) across 9 cartridge(s); 93 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 53.46399999159197,
+    "rmsPressurePct": 13.75873746802016,
+    "cartridges": [
+     "458-socom",
+     "17-hornet",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "308-winchester",
+     "7.62x39",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     11.2,
+     65.3
+    ]
+   }
+  },
+  "accurate-lt-30": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 910.7316832822174,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 12.040075135549241,
+    "n": 0.8242507450455147,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.16572103505904348
+   },
+   "derivation": "Fitted to 48 of 104 usable published pressure-tested loads (cartridge-stratified sample) across 12 cartridge(s); 88 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 77.0585508542267,
+    "rmsPressurePct": 16.68949600392771,
+    "cartridges": [
+     "300-blackout",
+     "350-legend",
+     "360-buckhammer",
+     "458-socom",
+     "17-hornet",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "308-winchester",
+     "7.62x39",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     10.3,
+     59
+    ]
+   }
+  },
+  "vihtavuori-n110": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1097.8155,
+    "flameTempK": 2967.068918918919,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 6.250221583234174,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.2693706634669754
+   },
+   "derivation": "Fitted to 48 of 100 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 98 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3950 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 109.25960839654527,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "22-hornet",
+     "222-remington",
+     "300-blackout",
+     "308-winchester",
+     "7.62x39",
+     "8mm-mauser-8x57",
+     "9.3x62",
+     "444-marlin",
+     "357-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "50-action",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     6.4,
+     47.1
+    ]
+   }
+  },
+  "accurate-no-11-fs": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 772.6338928919987,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 238.9434827222367,
+    "n": 0.4626408269741668,
+    "lambda": 2.138640240452677,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.31683099195936376
+   },
+   "derivation": "Fitted to 48 of 92 usable published pressure-tested loads (cartridge-stratified sample) across 10 cartridge(s); 92 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 85.90586199110002,
+    "rmsPressurePct": 16.491678847475384,
+    "cartridges": [
+     "300-blackout",
+     "350-legend",
+     "360-buckhammer",
+     "400-legend",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     8.2,
+     49.6
+    ]
+   }
+  },
+  "accurate-lt-32": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 825.8414253313674,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 12.550984218879009,
+    "n": 0.832172029063892,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.12527409904583187
+   },
+   "derivation": "Fitted to 47 of 86 usable published pressure-tested loads (cartridge-stratified sample) across 9 cartridge(s); 74 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 47,
+    "rmsVelocityFps": 71.99676825452643,
+    "rmsPressurePct": 15.470174869430963,
+    "cartridges": [
+     "360-buckhammer",
+     "458-socom",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "30-30-winchester",
+     "7.62x39",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     17,
+     57.8
+    ]
+   }
+  },
+  "reload-swiss-rs76": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1406.7994879852347,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 21.392418296565054,
+    "n": 0.6342994269219628,
+    "lambda": 0.5784942803807744,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 38 of 80 usable published pressure-tested loads (cartridge-stratified sample) across 7 cartridge(s); 80 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors and the maker's heat of explosion (3850 J/g). ",
+   "calibration": {
+    "points": 38,
+    "rmsVelocityFps": 107.01773152334239,
+    "rmsPressurePct": 12.01921240380944,
+    "cartridges": [
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "338-lapua-magnum",
+     "338-norma-magnum",
+     "338-winchester-magnum",
+     "6.5-precision-rifle",
+     "7mm-remington-magnum"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     50,
+     96
+    ]
+   }
+  },
+  "hodgdon-h50bmg": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 926.9319633607344,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 37.39583621408839,
+    "n": 0.571644742168433,
+    "lambda": 0.5502417155684634,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 34 of 68 usable published pressure-tested loads (cartridge-stratified sample) across 7 cartridge(s); 68 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 34,
+    "rmsVelocityFps": 67.08531837240483,
+    "rmsPressurePct": 9.644025688546476,
+    "cartridges": [
+     "300-winchester-magnum",
+     "264-winchester-magnum",
+     "26-nosler",
+     "27-nosler",
+     "28-nosler",
+     "300-norma-magnum",
+     "300-remington-ultra-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     61.5,
+     108
+    ]
+   }
+  },
+  "reload-swiss-rs80": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 946.6126429735333,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 9.289189890514747,
+    "n": 0.8407189927092749,
+    "lambda": 1.1768828201567825,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.511757551731058
+   },
+   "derivation": "Fitted to 42 of 58 usable published pressure-tested loads (cartridge-stratified sample) across 8 cartridge(s); 58 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3850 J/g). ",
+   "calibration": {
+    "points": 42,
+    "rmsVelocityFps": 131.46520686019153,
+    "rmsPressurePct": 13.592868650420979,
+    "cartridges": [
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "30-06-springfield",
+     "338-lapua-magnum",
+     "50-browning",
+     "6.5-precision-rifle",
+     "7x64-brenneke",
+     "7mm-remington-magnum"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     49.8,
+     226.9
+    ]
+   }
+  },
+  "reload-swiss-rs36": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1061.2451028345656,
+    "flameTempK": 2967.068918918919,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 10.234221687806185,
+    "n": 0.936869665453791,
+    "lambda": 0.01417154842851882,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.6750220520468857
+   },
+   "derivation": "Fitted to 40 of 46 usable published pressure-tested loads (cartridge-stratified sample) across 9 cartridge(s); 46 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3950 J/g). ",
+   "calibration": {
+    "points": 40,
+    "rmsVelocityFps": 62.83038023161176,
+    "rmsPressurePct": 11.609952925409287,
+    "cartridges": [
+     "22-hornet",
+     "222-remington",
+     "22-250-remington",
+     "223-remington",
+     "300-blackout",
+     "444-marlin",
+     "45-70-government",
+     "7.62x39",
+     "10.3x60r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     7.1,
+     59
+    ]
+   }
+  },
+  "winchester-wst": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 770.04669749773,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 482.6304121931717,
+    "n": 0.47877754875256245,
+    "lambda": 1.7584440185158148,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.4946092488783304
+   },
+   "derivation": "Fitted to 22 of 34 usable published pressure-tested loads (cartridge-stratified sample) across 4 cartridge(s); 34 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 22,
+    "rmsVelocityFps": 69.43433278208704,
+    "rmsPressurePct": 32.889588841470264,
+    "cartridges": [
+     "30-super-carry",
+     "38-special",
+     "40-sw",
+     "45-auto"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.5,
+     5.9
+    ]
+   }
+  },
+  "vihtavuori-20n29": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1010.3155,
+    "flameTempK": 2730.5824324324326,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.7974712883610324,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 10 of 18 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 18 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda; other thermochemistry from class priors and the maker's heat of explosion (3600 J/g). ",
+   "calibration": {
+    "points": 10,
+    "rmsVelocityFps": 162.18980261580512,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6.5-precision-rifle",
+     "300-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     50.9,
+     260.8
+    ]
+   }
+  },
+  "reload-swiss-rs12": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 895.6063560992825,
+    "flameTempK": 3034.636486486487,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 7.192452819349665,
+    "n": 1.3097547789071613,
+    "lambda": 0.05076648974351966,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 16 of 16 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 16 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors and the maker's heat of explosion (4050 J/g). ",
+   "calibration": {
+    "points": 16,
+    "rmsVelocityFps": 31.840606894081667,
+    "rmsPressurePct": 16.273761804097656,
+    "cartridges": [
+     "357-magnum",
+     "44-remington-magnum",
+     "45-colt"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     5.2,
+     12.2
+    ]
+   }
+  },
+  "hodgdon-hybrid-100v": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1617.0381293021442,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.1035934349689955,
+    "n": 1,
+    "lambda": -0.3231421763288453,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 8 of 8 usable published pressure-tested loads (cartridge-stratified sample) across 4 cartridge(s); 6 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 8,
+    "rmsVelocityFps": 139.32870150349552,
+    "rmsPressurePct": 20.79477968737557,
+    "cartridges": [
+     "6.5-creedmoor",
+     "270-winchester",
+     "30-30-winchester",
+     "308-winchester"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     32.4,
+     44.7
+    ]
+   }
+  },
+  "shooters-world-sw4350": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1701.6651850181556,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.6594874341559924,
+    "n": 1,
+    "lambda": -0.376466794107255,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 6 of 6 usable published pressure-tested loads (cartridge-stratified sample) across 1 cartridge(s); 6 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 6,
+    "rmsVelocityFps": 96.82633405728888,
+    "rmsPressurePct": 18.484438670091926,
+    "cartridges": [
+     "6mm-dasher"
+    ],
+    "sources": [
+     "https://shootersworldpowder.com/wp-content/uploads/2023/06/ShootersWorldManualInterior_CHRIS_WITH-COVER__RUSS-REVISED.pdf"
+    ],
+    "chargeRangeGr": [
+     27,
+     35.9
+    ]
+   }
+  },
+  "vihtavuori-n150": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1047.8155,
+    "flameTempK": 2831.933783783784,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.20444171066252,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.726154589902623
+   },
+   "derivation": "Fitted to 48 of 1046 usable published pressure-tested loads (cartridge-stratified sample) across 42 cartridge(s); 840 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3750 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 124.05607902571377,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "224-valkyrie",
+     "223-remington",
+     "22-nosler",
+     "223-winchester-super-short-magnum",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-br-norma",
+     "6mm-creedmoor",
+     "243-winchester-super-short-magnum",
+     "243-winchester",
+     "6-xc",
+     "6mm-remington",
+     "240-weatherby-magnum",
+     "25-06-remington",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester",
+     "7mm-08-remington",
+     "284-winchester",
+     "7mm-mauser-7x57",
+     "7x57r",
+     "7x64-brenneke",
+     "280-remington",
+     "7x65r",
+     "7mm-winchester-short-magnum",
+     "308-winchester",
+     "7.62x53r",
+     "7.5x55-swiss",
+     "30-06-springfield",
+     "300-hh-magnum",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "8mm-mauser-8x57",
+     "8x57-irs",
+     "8x68-s",
+     "9.3x62",
+     "370-sako-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     20.1,
+     78.7
+    ]
+   }
+  },
+  "vihtavuori-n160": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1022.8155,
+    "flameTempK": 2764.3662162162163,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.6263137516952404,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.8815289179197126
+   },
+   "derivation": "Fitted to 48 of 888 usable published pressure-tested loads (cartridge-stratified sample) across 39 cartridge(s); 888 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3650 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 128.3208074851243,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6mm-creedmoor",
+     "243-winchester",
+     "6-xc",
+     "6mm-remington",
+     "240-weatherby-magnum",
+     "25-06-remington",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester-short-magnum",
+     "270-winchester",
+     "270-weatherby-magnum",
+     "7mm-08-remington",
+     "284-winchester",
+     "7mm-mauser-7x57",
+     "7x57r",
+     "7x64-brenneke",
+     "280-remington",
+     "7x65r",
+     "7mm-winchester-short-magnum",
+     "7mm-remington-magnum",
+     "7mm-weatherby-magnum",
+     "7mm-precision-rifle",
+     "30-06-springfield",
+     "300-hh-magnum",
+     "300-winchester-short-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "300-lapua-magnum",
+     "300-remington-ultra-magnum",
+     "8mm-mauser-8x57",
+     "8x68-s",
+     "338-winchester-magnum",
+     "338-lapua-magnum",
+     "416-rigby"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     24.2,
+     96
+    ]
+   }
+  },
+  "vihtavuori-n555": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1035.3155,
+    "flameTempK": 2798.15,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.508449962695805,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.36274494990515493
+   },
+   "derivation": "Fitted to 48 of 548 usable published pressure-tested loads (cartridge-stratified sample) across 20 cartridge(s); 548 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3700 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 137.20804196022186,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "224-valkyrie",
+     "22-nosler",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester",
+     "284-winchester",
+     "280-remington",
+     "7mm-precision-rifle",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     25.5,
+     82.6
     ]
    }
   },
   "hodgdon-varget": {
    "status": "calibrated",
    "params": {
-    "forceJg": 881.4479634875727,
+    "forceJg": 917.7457824244245,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 17.87688616151252,
-    "n": 0.8044384596151524,
-    "lambda": 0.0800311498272614,
+    "beta": 18.8818484163796,
+    "n": 0.7841945474358619,
+    "lambda": 0.05776127745105184,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
@@ -156,8 +2380,8 @@
    "derivation": "Fitted to 48 of 474 usable published pressure-tested loads (cartridge-stratified sample) across 38 cartridge(s); 414 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 84.39627064503539,
-    "rmsPressurePct": 8.821398897420647,
+    "rmsVelocityFps": 90.37249683804869,
+    "rmsPressurePct": 9.29784627680501,
     "cartridges": [
      "204-ruger",
      "222-remington",
@@ -207,17 +2431,150 @@
     ]
    }
   },
-  "imr-4350": {
+  "hodgdon-h4831": {
    "status": "calibrated",
    "params": {
-    "forceJg": 5179.336859789529,
+    "forceJg": 905.8951003674179,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 2.9101044884760388,
-    "n": 0.8368905741181538,
-    "lambda": 0.4691387760953093,
+    "beta": 26.31036710063004,
+    "n": 0.67779193360356,
+    "lambda": 0.35044807056584626,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 414 usable published pressure-tested loads (cartridge-stratified sample) across 36 cartridge(s); 414 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 65.55939796183279,
+    "rmsPressurePct": 9.120434380490037,
+    "cartridges": [
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "22-250-remington",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "257-weatherby-magnum",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "264-winchester-magnum",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-remington-magnum",
+     "7mm-precision-rifle",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "338-weatherby-rebated-precision-magnum",
+     "33-nosler",
+     "338-winchester-magnum",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "375-hh-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     35,
+     112
+    ]
+   }
+  },
+  "imr-4895": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 874.6662256285957,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 16.819249603797886,
+    "n": 0.8190042465598653,
+    "lambda": 0.11329024764057766,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 378 usable published pressure-tested loads (cartridge-stratified sample) across 33 cartridge(s); 318 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 83.07122906549425,
+    "rmsPressurePct": 10.800221286036377,
+    "cartridges": [
+     "45-70-government",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-dasher",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "303-british",
+     "338-federal",
+     "338-weatherby-rebated-precision-magnum",
+     "338-winchester-magnum",
+     "35-whelen",
+     "9.3x62",
+     "375-hh-magnum",
+     "444-marlin"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     20,
+     75.1
+    ]
+   }
+  },
+  "imr-4350": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 953.294936921312,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 19.41791642229442,
+    "n": 0.74107914114793,
+    "lambda": 0.3032077697557771,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
@@ -226,8 +2583,8 @@
    "derivation": "Fitted to 48 of 368 usable published pressure-tested loads (cartridge-stratified sample) across 34 cartridge(s); 366 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 68.6455607430606,
-    "rmsPressurePct": 11.733633177019373,
+    "rmsVelocityFps": 72.81928496012516,
+    "rmsPressurePct": 12.483988278375309,
     "cartridges": [
      "6.5-creedmoor",
      "270-winchester",
@@ -273,31 +2630,1943 @@
     ]
    }
   },
-  "hodgdon-h4895": {
+  "vihtavuori-n565": {
    "status": "calibrated",
    "params": {
-    "forceJg": 950.3785166399907,
+    "forceJg": 1110.3155000000002,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.9555081606911213,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.11089277928492641
+   },
+   "derivation": "Fitted to 48 of 360 usable published pressure-tested loads (cartridge-stratified sample) across 20 cartridge(s); 360 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 127.99320991145993,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6mm-creedmoor",
+     "243-winchester",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester",
+     "280-remington",
+     "7mm-remington-magnum",
+     "7mm-precision-rifle",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "8x68-s",
+     "338-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     37.8,
+     221.5
+    ]
+   }
+  },
+  "imr-8208-xbr": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 956.3778108115368,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 12.099712037195609,
-    "n": 0.8362355075767522,
-    "lambda": -0.15740273154792794,
+    "beta": 17.173618009371467,
+    "n": 0.7841861100449786,
+    "lambda": -0.07845565022102792,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
-    "heatScale": 8.315287191035708e-7
+    "heatScale": 0.14242566674263407
    },
-   "derivation": "Fitted to 48 of 451 usable published pressure-tested loads (cartridge-stratified sample) across 36 cartridge(s); 386 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "derivation": "Fitted to 48 of 327 usable published pressure-tested loads (cartridge-stratified sample) across 28 cartridge(s); 273 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 76.47015999315899,
-    "rmsPressurePct": 9.242728594010007,
+    "rmsVelocityFps": 85.23296157048998,
+    "rmsPressurePct": 12.38271736414864,
+    "cartridges": [
+     "458-socom",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-dasher",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "6.8-remington-spc",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "303-british",
+     "338-federal",
+     "338-winchester-magnum",
+     "35-remington",
+     "35-whelen",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     18,
+     65
+    ]
+   }
+  },
+  "winchester-autocomp": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 982.7205094316759,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 125.19113818409127,
+    "n": 0.6816839516481443,
+    "lambda": 0.25525443857856805,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 10.785234690043332
+   },
+   "derivation": "Fitted to 48 of 299 usable published pressure-tested loads (cartridge-stratified sample) across 17 cartridge(s); 299 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 101.86367999642344,
+    "rmsPressurePct": 30.948093175175433,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3,
+     13.8
+    ]
+   }
+  },
+  "accurate-5744": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1110.0493400326077,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 9.685463499712746,
+    "n": 0.8715323823686993,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.4822400012256014
+   },
+   "derivation": "Fitted to 48 of 286 usable published pressure-tested loads (cartridge-stratified sample) across 37 cartridge(s); 272 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 84.46009756992794,
+    "rmsPressurePct": 21.3831616346563,
+    "cartridges": [
+     "223-remington",
+     "300-blackout",
+     "308-winchester",
+     "30-06-springfield",
+     "7.62x39",
+     "350-legend",
+     "360-buckhammer",
+     "450-bushmaster",
+     "45-70-government",
+     "458-socom",
+     "243-winchester",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-30-winchester",
+     "300-winchester-magnum",
+     "17-hornet",
+     "204-ruger",
+     "222-remington",
+     "257-weatherby-magnum",
+     "6.5-284-norma",
+     "6.5-precision-rifle",
+     "6.8-remington-spc",
+     "270-winchester-short-magnum",
+     "300-winchester-short-magnum",
+     "300-precision-rifle",
+     "35-remington",
+     "35-whelen",
+     "400-legend",
+     "444-marlin",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     4.7,
+     52.5
+    ]
+   }
+  },
+  "winchester-572": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 936.9436544165023,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 149.1405440859447,
+    "n": 0.638459803119429,
+    "lambda": 0.08092311417629114,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 6.899840943888401
+   },
+   "derivation": "Fitted to 48 of 273 usable published pressure-tested loads (cartridge-stratified sample) across 16 cartridge(s); 273 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 108.58688272771481,
+    "rmsPressurePct": 32.95333227621287,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.6,
+     13.8
+    ]
+   }
+  },
+  "winchester-231": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 874.4292051407417,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 60.11444792266763,
+    "n": 0.8144124505219671,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 2.7182779523805918
+   },
+   "derivation": "Fitted to 48 of 260 usable published pressure-tested loads (cartridge-stratified sample) across 18 cartridge(s); 260 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 104.99665966711017,
+    "rmsPressurePct": 29.31904472006276,
+    "cartridges": [
+     "44-40-winchester",
+     "30-super-carry",
+     "32-hr-magnum",
+     "32-20-winchester",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-sw-schofield",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2,
+     12
+    ]
+   }
+  },
+  "hodgdon-benchmark": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 811.7138300066184,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 13.864894531236022,
+    "n": 0.8656911638187567,
+    "lambda": -0.04358261359641369,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.17580305959571463
+   },
+   "derivation": "Fitted to 48 of 254 usable published pressure-tested loads (cartridge-stratified sample) across 25 cartridge(s); 201 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 85.72501405016692,
+    "rmsPressurePct": 13.841281435284895,
     "cartridges": [
      "30-30-winchester",
      "308-winchester",
      "30-06-springfield",
+     "350-legend",
+     "360-buckhammer",
+     "458-socom",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-dasher",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "6.5-grendel",
+     "260-remington",
+     "6.8-remington-spc",
+     "7mm-08-remington",
+     "7.62x39",
+     "338-federal",
+     "35-remington",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     9.7,
+     63.5
+    ]
+   }
+  },
+  "ramshot-magnum": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1222.6870450507765,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 17.564142419329926,
+    "n": 0.6943044501977502,
+    "lambda": 0.48668308948910743,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 249 usable published pressure-tested loads (cartridge-stratified sample) across 21 cartridge(s); 249 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 79.00869325208446,
+    "rmsPressurePct": 17.21117133796125,
+    "cartridges": [
+     "243-winchester",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-remington-magnum",
+     "300-winchester-magnum",
+     "6mm-creedmoor",
+     "6mm-remington",
+     "257-roberts",
+     "25-06-remington",
+     "257-weatherby-magnum",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-precision-rifle",
+     "28-nosler",
+     "300-precision-rifle",
+     "30-nosler",
+     "338-lapua-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     40,
+     108
+    ]
+   }
+  },
+  "reload-swiss-rs60": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1441.4599629024299,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 10.460408856009561,
+    "n": 0.8017881684458128,
+    "lambda": 0.3209403650050303,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.273648364604937
+   },
+   "derivation": "Fitted to 48 of 228 usable published pressure-tested loads (cartridge-stratified sample) across 26 cartridge(s); 228 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 81.18445260736254,
+    "rmsPressurePct": 9.447134690395142,
+    "cartridges": [
+     "222-remington",
+     "22-250-remington",
+     "243-winchester",
+     "260-remington",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "30-r-blaser",
+     "300-winchester-magnum",
+     "300-winchester-short-magnum",
+     "30-06-springfield",
+     "303-british",
+     "308-winchester",
+     "338-winchester-magnum",
+     "375-hh-magnum",
+     "6-xc",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "7mm-mauser-7x57",
+     "7x64-brenneke",
+     "7.5x55-swiss",
+     "7.62x54r",
+     "7mm-remington-magnum",
+     "8x68-s",
+     "9.3x62",
+     "9.3x64-brenneke",
+     "9.3x74r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     20.5,
+     78.7
+    ]
+   }
+  },
+  "hodgdon-h110": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 851.0389983736231,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 67.04093623868376,
+    "n": 0.6683656650076083,
+    "lambda": 0.5807486983458459,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.36889927363445185
+   },
+   "derivation": "Fitted to 48 of 220 usable published pressure-tested loads (cartridge-stratified sample) across 16 cartridge(s); 220 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 84.90663698267957,
+    "rmsPressurePct": 22.223040932930058,
+    "cartridges": [
+     "300-blackout",
+     "450-bushmaster",
+     "17-hornet",
+     "22-hornet",
+     "30-carbine",
+     "350-legend",
+     "400-legend",
+     "44-remington-magnum",
+     "327-federal-magnum",
+     "357-magnum",
+     "41-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     8,
+     48.5
+    ]
+   }
+  },
+  "vihtavuori-n170": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1035.3155,
+    "flameTempK": 2798.15,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.005024032588005,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.19432500421866408
+   },
+   "derivation": "Fitted to 48 of 210 usable published pressure-tested loads (cartridge-stratified sample) across 16 cartridge(s); 210 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3700 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 153.51145186893768,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "25-06-remington",
+     "6.5-precision-rifle",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-weatherby-magnum",
+     "7mm-remington-magnum",
+     "7mm-precision-rifle",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "300-lapua-magnum",
+     "300-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     42.4,
+     227.8
+    ]
+   }
+  },
+  "accurate-no2": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 969.6222105192596,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 401.6778473692419,
+    "n": 0.4373897460196139,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 10.64309847888379
+   },
+   "derivation": "Fitted to 48 of 205 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 197 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 77.41195434111232,
+    "rmsPressurePct": 18.282637280153878,
+    "cartridges": [
+     "223-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "7.62x39",
+     "360-buckhammer",
+     "45-70-government",
+     "458-socom",
+     "30-luger-7.65",
+     "30-super-carry",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "44-sw-special",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.6,
+     14.4
+    ]
+   }
+  },
+  "accurate-2700": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 877.2989672897263,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 28.498631266424024,
+    "n": 0.6904803173553625,
+    "lambda": 0.22624879743864654,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 195 usable published pressure-tested loads (cartridge-stratified sample) across 24 cartridge(s); 193 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 94.3793689002499,
+    "rmsPressurePct": 14.493525616165861,
+    "cartridges": [
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "6.8-western",
+     "7mm-08-remington",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "303-british",
+     "338-winchester-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     24,
+     80
+    ]
+   }
+  },
+  "winchester-296": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 980.9094836730861,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 60.75262501377146,
+    "n": 0.6612739879101815,
+    "lambda": 0.47954757337818205,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.8625662882918363
+   },
+   "derivation": "Fitted to 48 of 181 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 181 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 71.42048425012979,
+    "rmsPressurePct": 22.00837427674993,
+    "cartridges": [
+     "300-blackout",
+     "17-hornet",
+     "22-hornet",
+     "30-carbine",
+     "350-legend",
+     "400-legend",
+     "44-remington-magnum",
+     "327-federal-magnum",
+     "357-magnum",
+     "41-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     8,
+     48.5
+    ]
+   }
+  },
+  "accurate-2520": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 832.6536248732185,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 21.687031424371554,
+    "n": 0.7818762041859986,
+    "lambda": 0.1836367490404217,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 174 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 126 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 81.85102505999396,
+    "rmsPressurePct": 15.508969297575465,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "6mm-advanced-rifle",
+     "257-roberts",
+     "6.5-grendel",
+     "6.5-creedmoor",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "303-british",
+     "35-remington",
+     "35-whelen"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     20.7,
+     60.5
+    ]
+   }
+  },
+  "hodgdon-h322": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1273.1848343242368,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 7.390506499462672,
+    "n": 0.8247786185416984,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.12670069491777997
+   },
+   "derivation": "Fitted to 48 of 170 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 135 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 93.72959474649333,
+    "rmsPressurePct": 27.364692331721347,
+    "cartridges": [
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "350-legend",
+     "360-buckhammer",
+     "458-socom",
+     "17-hornet",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "22-250-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "7.62x39",
+     "338-federal",
+     "35-remington",
+     "35-whelen",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     9.8,
+     63
+    ]
+   }
+  },
+  "vihtavuori-n120": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1035.3155,
+    "flameTempK": 2798.15,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 5.524142252019461,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 2.0304903603379807
+   },
+   "derivation": "Fitted to 48 of 162 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 128 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3700 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 93.52055136513621,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "22-hornet",
+     "221-remington-fireball",
+     "222-remington",
+     "223-remington",
+     "22-ppc-usa",
+     "6mm-advanced-rifle",
+     "6mm-ppc-usa",
+     "300-blackout",
+     "308-winchester",
+     "30-30-winchester",
+     "300-savage",
+     "7.62x53r",
+     "7.62x39",
+     "303-british",
+     "8mm-mauser-8x57",
+     "9.3x62",
+     "9.3x74r",
+     "444-marlin",
+     "45-70-government",
+     "458-winchester-magnum",
+     "50-action",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     9,
+     69.9
+    ]
+   }
+  },
+  "accurate-2460": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 816.600068570706,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 19.25615472277917,
+    "n": 0.8217216486864773,
+    "lambda": 0.15324096382303787,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 148 usable published pressure-tested loads (cartridge-stratified sample) across 13 cartridge(s); 94 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 82.92272051244366,
+    "rmsPressurePct": 15.910606748401717,
+    "cartridges": [
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "6mm-advanced-rifle",
+     "6.5-grendel",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "303-british",
+     "35-remington",
+     "35-whelen",
+     "444-marlin"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     19.7,
+     59
+    ]
+   }
+  },
+  "hodgdon-superformance": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 953.0750693023676,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 22.804024215097943,
+    "n": 0.719783753467998,
+    "lambda": 0.7681993439353808,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 143 usable published pressure-tested loads (cartridge-stratified sample) across 17 cartridge(s); 143 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 82.12846554063346,
+    "rmsPressurePct": 9.513055678120134,
+    "cartridges": [
+     "6.5-creedmoor",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "224-valkyrie",
+     "22-250-remington",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "260-remington",
+     "6.8-western",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-precision-rifle"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     26.1,
+     77
+    ]
+   }
+  },
+  "imr-4198": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 926.1049934778578,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 15.551217397121647,
+    "n": 0.8554220142739335,
+    "lambda": -0.14312299743359239,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.2020864929114297
+   },
+   "derivation": "Fitted to 48 of 135 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 123 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 83.78342734068279,
+    "rmsPressurePct": 16.087703826488315,
+    "cartridges": [
+     "300-blackout",
+     "45-70-government",
+     "458-socom",
+     "204-ruger",
+     "22-hornet",
+     "222-remington",
+     "223-remington",
+     "6.5-grendel",
+     "6.8-remington-spc",
+     "30-30-winchester",
+     "308-winchester",
+     "7.62x39",
+     "338-federal",
+     "444-marlin",
+     "460-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     10.5,
+     58.5
+    ]
+   }
+  },
+  "vihtavuori-n320": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 19.102013052334524,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 8.182316873251764
+   },
+   "derivation": "Fitted to 36 of 132 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 132 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 36,
+    "rmsVelocityFps": 67.39450118751506,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     3,
+     11.8
+    ]
+   }
+  },
+  "hodgdon-clays": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 945.2184399467536,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 23.023222570671166,
+    "n": 1.0797502274702167,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.411121231559808
+   },
+   "derivation": "Fitted to 48 of 127 usable published pressure-tested loads (cartridge-stratified sample) across 14 cartridge(s); 126 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 70.7170937353189,
+    "rmsPressurePct": 27.969977017176888,
+    "cartridges": [
+     "308-winchester",
+     "44-40-winchester",
+     "327-federal-magnum",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "357-magnum",
+     "40-sw",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-sw-schofield",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.5,
+     8
+    ]
+   }
+  },
+  "accurate-2495": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 825.7919382338539,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 12.981776947891971,
+    "n": 0.8780727884793478,
+    "lambda": 0.0945493751675553,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 122 usable published pressure-tested loads (cartridge-stratified sample) across 13 cartridge(s); 88 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 105.10824165496328,
+    "rmsPressurePct": 21.37330905643557,
+    "cartridges": [
+     "45-70-government",
+     "458-socom",
+     "204-ruger",
+     "223-remington",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "6mm-advanced-rifle",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "303-british",
+     "35-remington",
+     "35-whelen"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     18.6,
+     59.5
+    ]
+   }
+  },
+  "hodgdon-cfe-blk": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 744.063775076416,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 77.82252358770485,
+    "n": 0.6206544297524166,
+    "lambda": 2.999981132991881,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.13291712226707852
+   },
+   "derivation": "Fitted to 48 of 116 usable published pressure-tested loads (cartridge-stratified sample) across 12 cartridge(s); 116 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 102.81298087378568,
+    "rmsPressurePct": 20.917972118165785,
+    "cartridges": [
+     "300-blackout",
+     "450-bushmaster",
+     "17-hornet",
+     "22-hornet",
+     "222-remington",
+     "6.8-remington-spc",
+     "7.62x39",
+     "350-legend",
+     "360-buckhammer",
+     "458-socom",
+     "460-sw-magnum",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     9.8,
+     54
+    ]
+   }
+  },
+  "accurate-1680": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 722.7964005719031,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 422.06517851480925,
+    "n": 0.3000195245045443,
+    "lambda": 0.26474543942900963,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.40032348542589846
+   },
+   "derivation": "Fitted to 48 of 103 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 103 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 99.71644380393114,
+    "rmsPressurePct": 25.27555960661581,
+    "cartridges": [
+     "300-blackout",
+     "450-bushmaster",
+     "458-socom",
+     "17-hornet",
+     "6.8-remington-spc",
+     "7.62x39",
+     "350-legend",
+     "360-buckhammer",
+     "454-casull",
+     "460-sw-magnum",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     9,
+     55.7
+    ]
+   }
+  },
+  "vihtavuori-n350": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 13.836777017141992,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 7.449861102812961
+   },
+   "derivation": "Fitted to 36 of 98 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 98 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 36,
+    "rmsVelocityFps": 71.61148020121172,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     4.1,
+     15.3
+    ]
+   }
+  },
+  "vihtavuori-3n37": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 11.967772811976923,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.647224808581573
+   },
+   "derivation": "Fitted to 34 of 90 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 90 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 34,
+    "rmsVelocityFps": 73.31970706284316,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt",
+     "454-casull"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     5.1,
+     19.6
+    ]
+   }
+  },
+  "reload-swiss-rs14": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 724.0668473492216,
+    "flameTempK": 2460.312162162162,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 179.94830928140186,
+    "n": 0.5637928585965464,
+    "lambda": 0.09504521191010261,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.804828449898908
+   },
+   "derivation": "Fitted to 48 of 84 usable published pressure-tested loads (cartridge-stratified sample) across 14 cartridge(s); 72 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3200 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 74.62212976494803,
+    "rmsPressurePct": 23.37728473463916,
+    "cartridges": [
+     "223-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "338-lapua-magnum",
+     "444-marlin",
+     "45-70-government",
+     "50-browning",
+     "7.5x55-swiss",
+     "7.62x39",
+     "357-magnum",
+     "38-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     2,
+     72.5
+    ]
+   }
+  },
+  "accurate-nitro-100-nf": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 920.4639807673271,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 235.18396566943787,
+    "n": 0.70369484887363,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.0586012562425584
+   },
+   "derivation": "Fitted to 42 of 76 usable published pressure-tested loads (cartridge-stratified sample) across 8 cartridge(s); 76 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 42,
+    "rmsVelocityFps": 55.221141750491114,
+    "rmsPressurePct": 19.37891637870001,
+    "cartridges": [
+     "380-auto",
+     "9mm-luger",
+     "38-special",
+     "38-special-+p",
+     "40-sw",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     1.8,
+     6.5
+    ]
+   }
+  },
+  "vihtavuori-n330": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 16.378660869765973,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 6.3899770587529705
+   },
+   "derivation": "Fitted to 26 of 66 usable published pressure-tested loads (cartridge-stratified sample) across 5 cartridge(s); 66 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 26,
+    "rmsVelocityFps": 68.89347307800845,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "44-sw-special",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     3.3,
+     8.6
+    ]
+   }
+  },
+  "vihtavuori-n310": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1135.3155000000002,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 34.52534095652789,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 16.190933459562412
+   },
+   "derivation": "Fitted to 16 of 54 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 54 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 16,
+    "rmsVelocityFps": 91.60668884213331,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "45-auto"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     2.9,
+     7
+    ]
+   }
+  },
+  "vihtavuori-n105": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1072.8155,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 9.021436772929315,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.5541829417639428
+   },
+   "derivation": "Fitted to 34 of 46 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 46 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 34,
+    "rmsVelocityFps": 119.20173754962121,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "300-blackout",
+     "357-magnum",
+     "44-remington-magnum",
+     "454-casull",
+     "50-action",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     8.5,
+     36
+    ]
+   }
+  },
+  "reload-swiss-rs30": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1205.6024343425815,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 29.904286911282075,
+    "n": 0.7114233224841284,
+    "lambda": -0.20273904638314255,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 2.274784953791795
+   },
+   "derivation": "Fitted to 24 of 34 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 34 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 24,
+    "rmsVelocityFps": 74.81445363250128,
+    "rmsPressurePct": 24.603620508309117,
+    "cartridges": [
+     "22-hornet",
+     "223-remington",
+     "300-blackout",
+     "444-marlin",
+     "357-magnum",
+     "44-remington-magnum"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     6.3,
+     51
+    ]
+   }
+  },
+  "hodgdon-titewad": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 898.385265691272,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 205.45611275673068,
+    "n": 0.7368771228749418,
+    "lambda": 0.025843256926758203,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 16 of 16 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 16 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 16,
+    "rmsVelocityFps": 45.05854623682165,
+    "rmsPressurePct": 9.228088690282089,
+    "cartridges": [
+     "9mm-luger",
+     "38-super-auto-+p",
+     "45-auto"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.8,
+     4.6
+    ]
+   }
+  },
+  "reload-swiss-rs20": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 890.9282547695491,
+    "flameTempK": 3068.4202702702705,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 12.850444179472289,
+    "n": 1.1149170120480405,
+    "lambda": -0.1424799921448055,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 14 of 16 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 16 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors and the maker's heat of explosion (4100 J/g). ",
+   "calibration": {
+    "points": 14,
+    "rmsVelocityFps": 50.54543135892447,
+    "rmsPressurePct": 14.262007494034842,
+    "cartridges": [
+     "357-magnum",
+     "44-remington-magnum",
+     "45-colt"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     6.8,
+     14.2
+    ]
+   }
+  },
+  "imr-blue": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 749.3923841767552,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 22.86838982534116,
+    "n": 1,
+    "lambda": 3,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 8 of 8 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 8 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 8,
+    "rmsVelocityFps": 105.39712170301445,
+    "rmsPressurePct": 44.13505186764928,
+    "cartridges": [
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     7.4,
+     10.7
+    ]
+   }
+  },
+  "hodgdon-h4831sc": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1072.8155,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.5493968378233482,
+    "n": 1,
+    "lambda": 0,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 2 of 2 usable published pressure-tested loads (cartridge-stratified sample) across 1 cartridge(s); 2 of those loads use an inferred or other-brand case capacity. Fitted: beta; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 2,
+    "rmsVelocityFps": 74.5807913302326,
+    "rmsPressurePct": 16.96473242838733,
+    "cartridges": [
+     "30-06-springfield"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     56.5,
+     56.5
+    ]
+   }
+  },
+  "vihtavuori-n550": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1085.3155,
+    "flameTempK": 2933.285135135135,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 3.0156180513905126,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.9418560942061756
+   },
+   "derivation": "Fitted to 48 of 1040 usable published pressure-tested loads (cartridge-stratified sample) across 39 cartridge(s); 870 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3900 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 115.92392335115511,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "224-valkyrie",
+     "223-remington",
+     "22-nosler",
+     "223-winchester-super-short-magnum",
+     "6mm-advanced-rifle",
+     "6mm-creedmoor",
+     "243-winchester-super-short-magnum",
+     "243-winchester",
+     "6-xc",
+     "6mm-remington",
+     "240-weatherby-magnum",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester",
+     "270-weatherby-magnum",
+     "7mm-08-remington",
+     "284-winchester",
+     "7x57r",
+     "7x64-brenneke",
+     "280-remington",
+     "7x65r",
+     "7mm-winchester-short-magnum",
+     "308-winchester",
+     "7.62x53r",
+     "30-06-springfield",
+     "300-hh-magnum",
+     "300-winchester-short-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "8mm-mauser-8x57",
+     "8x68-s",
+     "338-winchester-magnum",
+     "9.3x62",
+     "370-sako-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     23.9,
+     81
+    ]
+   }
+  },
+  "vihtavuori-n560": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1110.3155000000002,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.1175112076777927,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.3742629498478911
+   },
+   "derivation": "Fitted to 48 of 792 usable published pressure-tested loads (cartridge-stratified sample) across 37 cartridge(s); 792 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 146.14775762422266,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6mm-creedmoor",
+     "243-winchester",
+     "240-weatherby-magnum",
+     "25-06-remington",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester-short-magnum",
+     "270-winchester",
+     "270-weatherby-magnum",
+     "7mm-08-remington",
+     "284-winchester",
+     "7x57r",
+     "7x64-brenneke",
+     "280-remington",
+     "7x65r",
+     "7mm-winchester-short-magnum",
+     "7mm-remington-magnum",
+     "7mm-weatherby-magnum",
+     "7mm-precision-rifle",
+     "7.62x53r",
+     "30-06-springfield",
+     "300-hh-magnum",
+     "300-winchester-short-magnum",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "300-lapua-magnum",
+     "300-remington-ultra-magnum",
+     "8x68-s",
+     "338-winchester-magnum",
+     "338-lapua-magnum",
+     "416-rigby"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     34.7,
+     96.9
+    ]
+   }
+  },
+  "vihtavuori-n165": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 985.3155,
+    "flameTempK": 2663.014864864865,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 2.2930088458599585,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.2830455522821152
+   },
+   "derivation": "Fitted to 48 of 536 usable published pressure-tested loads (cartridge-stratified sample) across 33 cartridge(s); 536 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3500 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 125.81004298510078,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "243-winchester",
+     "6mm-remington",
+     "240-weatherby-magnum",
+     "25-06-remington",
+     "6.5-creedmoor",
+     "6.5-precision-rifle",
+     "260-remington",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "270-winchester-short-magnum",
+     "270-winchester",
+     "270-weatherby-magnum",
+     "7mm-mauser-7x57",
+     "7x57r",
+     "7x64-brenneke",
+     "280-remington",
+     "7x65r",
+     "7mm-winchester-short-magnum",
+     "7mm-remington-magnum",
+     "7mm-weatherby-magnum",
+     "7mm-precision-rifle",
+     "30-06-springfield",
+     "300-hh-magnum",
+     "300-winchester-short-magnum",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "338-winchester-magnum",
+     "338-lapua-magnum",
+     "416-rigby"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     34,
+     102.8
+    ]
+   }
+  },
+  "hodgdon-h4895": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 966.4973831883325,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 17.73781027093851,
+    "n": 0.776451974624223,
+    "lambda": -0.06053182687984956,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.327951053653156
+   },
+   "derivation": "Fitted to 48 of 453 usable published pressure-tested loads (cartridge-stratified sample) across 37 cartridge(s); 388 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 89.76031614097754,
+    "rmsPressurePct": 20.466803973083458,
+    "cartridges": [
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "360-buckhammer",
      "204-ruger",
      "222-remington",
      "223-remington",
@@ -341,57 +4610,1892 @@
     ]
    }
   },
-  "hodgdon-cfe-223": {
+  "hodgdon-titegroup": {
    "status": "calibrated",
    "params": {
-    "forceJg": 805.6864951568629,
+    "forceJg": 1184.7738370740865,
     "flameTempK": 2899.5013513513513,
     "gamma": 1.25,
     "covolumeCm3g": 1,
     "solidDensityGcc": 1.6,
-    "beta": 75.63802166693569,
-    "n": 0.5709957703581884,
-    "lambda": 1.4629946667232832,
+    "beta": 184.98567569800971,
+    "n": 0.6059858095804558,
+    "lambda": -0.03797822692810025,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 12.993447336500562
+   },
+   "derivation": "Fitted to 48 of 408 usable published pressure-tested loads (cartridge-stratified sample) across 33 cartridge(s); 399 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 94.8017325973696,
+    "rmsPressurePct": 26.946891245292974,
+    "cartridges": [
+     "223-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "7.62x39",
+     "360-buckhammer",
+     "45-70-government",
+     "458-socom",
+     "44-40-winchester",
+     "30-super-carry",
+     "32-hr-magnum",
+     "32-20-winchester",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "9x18-makarov",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-sw-schofield",
+     "45-auto",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2,
+     20
+    ]
+   }
+  },
+  "imr-4064": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 901.5950578185383,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 17.719912140752243,
+    "n": 0.8027505477378516,
+    "lambda": 0.15086570338517,
     "mu": 0,
     "tempCoeffPerK": 0.0007,
     "refTempC": 21,
     "heatScale": 1
    },
-   "derivation": "Fitted to 48 of 260 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 208 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "derivation": "Fitted to 48 of 376 usable published pressure-tested loads (cartridge-stratified sample) across 35 cartridge(s); 326 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
    "calibration": {
     "points": 48,
-    "rmsVelocityFps": 73.53857210392069,
-    "rmsPressurePct": 11.022314848052755,
+    "rmsVelocityFps": 76.9453200427469,
+    "rmsPressurePct": 11.022980476894597,
     "cartridges": [
+     "45-70-government",
      "204-ruger",
      "222-remington",
      "223-remington",
      "224-valkyrie",
-     "22-advanced-rifle",
      "22-250-remington",
      "220-swift",
      "6mm-advanced-rifle",
      "6mm-dasher",
      "6mm-creedmoor",
      "243-winchester",
-     "6.5-grendel",
+     "6mm-remington",
+     "25-06-remington",
      "6.5x55-swedish",
+     "6.5-creedmoor",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "303-british",
+     "338-federal",
+     "338-weatherby-rebated-precision-magnum",
+     "338-winchester-magnum",
+     "35-remington",
+     "35-whelen",
+     "9.3x62",
+     "375-hh-magnum",
+     "444-marlin"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     19.5,
+     76
+    ]
+   }
+  },
+  "imr-4831": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 964.4863559156885,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 17.019412705936812,
+    "n": 0.7570627643431025,
+    "lambda": 0.31591441037723195,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 365 usable published pressure-tested loads (cartridge-stratified sample) across 33 cartridge(s); 363 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 73.44784172314384,
+    "rmsPressurePct": 12.298854789778362,
+    "cartridges": [
      "6.5-creedmoor",
      "270-winchester",
      "7mm-08-remington",
      "30-30-winchester",
      "308-winchester",
      "30-06-springfield",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "260-remington",
+     "264-winchester-magnum",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-remington-magnum",
+     "7mm-precision-rifle",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "30-nosler",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "338-weatherby-rebated-precision-magnum",
+     "33-nosler",
+     "338-winchester-magnum",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "375-hh-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     36.3,
+     108
+    ]
+   }
+  },
+  "winchester-760": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 847.9074738220959,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 45.313473981027805,
+    "n": 0.6262558332549852,
+    "lambda": 0.560599478103203,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 341 usable published pressure-tested loads (cartridge-stratified sample) across 28 cartridge(s); 328 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 77.23655780800998,
+    "rmsPressurePct": 9.470222785086865,
+    "cartridges": [
+     "308-winchester",
+     "223-remington",
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
      "303-british",
-     "338-federal",
+     "338-winchester-magnum",
+     "338-lapua-magnum",
+     "9.3x62",
      "375-hh-magnum"
     ],
     "sources": [
      "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
     ],
     "chargeRangeGr": [
-     21,
-     89
+     22.5,
+     93
+    ]
+   }
+  },
+  "vihtavuori-n130": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1047.8155,
+    "flameTempK": 2831.933783783784,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 4.542693218617563,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.39166454629007
+   },
+   "derivation": "Fitted to 48 of 318 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 160 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3750 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 91.87050109139909,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "204-ruger",
+     "221-remington-fireball",
+     "222-remington",
+     "223-remington",
+     "22-ppc-usa",
+     "22-250-remington",
+     "6mm-advanced-rifle",
+     "6mm-ppc-usa",
+     "6.5-grendel",
+     "308-winchester",
+     "30-30-winchester",
+     "300-savage",
+     "7.62x53r",
+     "30-06-springfield",
+     "7.62x39",
+     "303-british",
+     "8mm-mauser-8x57",
+     "9.3x62",
+     "9.3x74r",
+     "444-marlin",
+     "45-70-government",
+     "458-winchester-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     15.4,
+     74.1
+    ]
+   }
+  },
+  "winchester-244": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 977.8395340199194,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 238.85989646821326,
+    "n": 0.5516649586089701,
+    "lambda": -0.14339248959091483,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 5.260009104916206
+   },
+   "derivation": "Fitted to 48 of 298 usable published pressure-tested loads (cartridge-stratified sample) across 16 cartridge(s); 298 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 95.42588292322779,
+    "rmsPressurePct": 28.42576202063496,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.2,
+     12.6
+    ]
+   }
+  },
+  "hodgdon-hs-6": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1178.8094013678601,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 180.15530859200817,
+    "n": 0.37222091335861524,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.0462607807230055
+   },
+   "derivation": "Fitted to 48 of 281 usable published pressure-tested loads (cartridge-stratified sample) across 17 cartridge(s); 281 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 170.04453381410363,
+    "rmsPressurePct": 37.654191340278345,
+    "cartridges": [
+     "30-super-carry",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "44-remington-magnum",
+     "45-auto",
+     "45-colt",
+     "454-casull"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3,
+     17.5
+    ]
+   }
+  },
+  "hodgdon-h335": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 824.5746884473534,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 15.682475082767517,
+    "n": 0.8636101198401915,
+    "lambda": 0.2547976644275364,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 268 usable published pressure-tested loads (cartridge-stratified sample) across 27 cartridge(s); 218 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 91.24348715659569,
+    "rmsPressurePct": 16.955859486710303,
+    "cartridges": [
+     "17-hornet",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "224-valkyrie",
+     "22-250-remington",
+     "220-swift",
+     "6mm-advanced-rifle",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6.5-grendel",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.8-remington-spc",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "7.62x39",
+     "303-british",
+     "338-federal",
+     "35-remington",
+     "35-whelen",
+     "9.3x62",
+     "444-marlin",
+     "45-70-government"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     11.8,
+     68
+    ]
+   }
+  },
+  "winchester-staball-hd": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 888.8585750391645,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 18.040352592710526,
+    "n": 0.730295537013544,
+    "lambda": 0.42891458045961706,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 258 usable published pressure-tested loads (cartridge-stratified sample) across 23 cartridge(s); 258 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 75.52239300243009,
+    "rmsPressurePct": 9.732495101167553,
+    "cartridges": [
+     "243-winchester",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-remington-magnum",
+     "300-winchester-magnum",
+     "25-06-remington",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "26-nosler",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "27-nosler",
+     "7mm-precision-rifle",
+     "28-nosler",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-norma-magnum",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "33-nosler",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     40,
+     123.5
+    ]
+   }
+  },
+  "accurate-magpro": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1210.0721556572632,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 19.464258863766922,
+    "n": 0.676216184393478,
+    "lambda": 0.3502094769326472,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 254 usable published pressure-tested loads (cartridge-stratified sample) across 22 cartridge(s); 254 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 76.26689804972679,
+    "rmsPressurePct": 13.676835765210054,
+    "cartridges": [
+     "243-winchester",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "7mm-remington-magnum",
+     "30-06-springfield",
+     "6mm-creedmoor",
+     "25-06-remington",
+     "257-weatherby-magnum",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-precision-rifle",
+     "28-nosler",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-precision-rifle",
+     "30-nosler",
+     "338-lapua-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     38.8,
+     106.4
+    ]
+   }
+  },
+  "hodgdon-h380": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 843.4595763486308,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 51.51885288968616,
+    "n": 0.6055224674559945,
+    "lambda": 0.5025042581315462,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 246 usable published pressure-tested loads (cartridge-stratified sample) across 20 cartridge(s); 246 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 44.65947553870889,
+    "rmsPressurePct": 7.405755213343198,
+    "cartridges": [
+     "22-advanced-rifle",
+     "22-250-remington",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "25-06-remington",
+     "6.5x55-swedish",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "6.8-western",
+     "7mm-08-remington",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "300-weatherby-magnum",
+     "338-winchester-magnum",
+     "35-whelen"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     24,
+     72.5
+    ]
+   }
+  },
+  "accurate-no-5": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 843.5862976950896,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 116.56858350553337,
+    "n": 0.6899111409394619,
+    "lambda": -0.15378917143891854,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 8.469587314672069
+   },
+   "derivation": "Fitted to 48 of 226 usable published pressure-tested loads (cartridge-stratified sample) across 17 cartridge(s); 226 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 88.21573388437076,
+    "rmsPressurePct": 25.175116139828273,
+    "cartridges": [
+     "30-luger-7.65",
+     "30-super-carry",
+     "327-federal-magnum",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-sw-special",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3.6,
+     11.8
+    ]
+   }
+  },
+  "hodgdon-lil-gun": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1019.5045899692211,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 150.47238105908784,
+    "n": 0.4929095031052371,
+    "lambda": 1.2728249505243512,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.5659844729857397
+   },
+   "derivation": "Fitted to 48 of 218 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 218 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 119.7618505521459,
+    "rmsPressurePct": 25.111565442444494,
+    "cartridges": [
+     "300-blackout",
+     "450-bushmaster",
+     "17-hornet",
+     "22-hornet",
+     "30-carbine",
+     "350-legend",
+     "400-legend",
+     "44-remington-magnum",
+     "32-hr-magnum",
+     "32-20-winchester",
+     "327-federal-magnum",
+     "38-super-auto-+p",
+     "357-magnum",
+     "41-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     7,
+     46.5
+    ]
+   }
+  },
+  "vihtavuori-n570": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1110.3155000000002,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.8583241467365543,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.19212824247411875
+   },
+   "derivation": "Fitted to 48 of 210 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 210 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 136.41174834190753,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6.5-precision-rifle",
+     "6.5x55-swedish",
+     "6.5-284-norma",
+     "6.8-western",
+     "280-remington",
+     "7mm-precision-rifle",
+     "300-norma-magnum",
+     "300-precision-rifle",
+     "300-winchester-magnum",
+     "338-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     45.5,
+     239.2
+    ]
+   }
+  },
+  "imr-7828": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1047.4223748076333,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 20.99051689362094,
+    "n": 0.6905874483251486,
+    "lambda": 0.2234442532542829,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 197 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 197 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 72.60809326146624,
+    "rmsPressurePct": 7.093793562720177,
+    "cartridges": [
+     "243-winchester",
+     "257-weatherby-magnum",
+     "26-nosler",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "7mm-remington-magnum",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "300-winchester-magnum",
+     "30-nosler",
+     "300-weatherby-magnum",
+     "300-remington-ultra-magnum",
+     "33-nosler",
+     "338-winchester-magnum",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum",
+     "470-nitro"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     37.2,
+     117
+    ]
+   }
+  },
+  "reload-swiss-rs62": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1216.5683334476385,
+    "flameTempK": 2831.933783783784,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 8.586472524615825,
+    "n": 0.8446602965312499,
+    "lambda": 0.33510681426320904,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.513024976070585
+   },
+   "derivation": "Fitted to 48 of 186 usable published pressure-tested loads (cartridge-stratified sample) across 20 cartridge(s); 186 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3750 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 97.52739054047088,
+    "rmsPressurePct": 12.899337807955934,
+    "cartridges": [
+     "243-winchester",
+     "260-remington",
+     "270-winchester",
+     "270-winchester-short-magnum",
+     "30-r-blaser",
+     "300-winchester-magnum",
+     "30-06-springfield",
+     "308-winchester",
+     "338-winchester-magnum",
+     "6-xc",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "7mm-mauser-7x57",
+     "7x64-brenneke",
+     "7.5x55-swiss",
+     "7.62x54r",
+     "7mm-remington-magnum",
+     "8x68-s",
+     "9.3x62",
+     "9.3x74r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     33.3,
+     78.7
+    ]
+   }
+  },
+  "accurate-no-7": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1009.5818936719929,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 105.7272498803512,
+    "n": 0.5399582906100377,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 7.945604797910843
+   },
+   "derivation": "Fitted to 48 of 180 usable published pressure-tested loads (cartridge-stratified sample) across 16 cartridge(s); 180 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 91.32920898957916,
+    "rmsPressurePct": 15.908375370409875,
+    "cartridges": [
+     "30-luger-7.65",
+     "30-super-carry",
+     "327-federal-magnum",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "10mm-auto",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt",
+     "480-ruger"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     4.2,
+     19.1
+    ]
+   }
+  },
+  "ramshot-silhouette": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1122.5124672950649,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 219.38967343372207,
+    "n": 0.41698425695707503,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.2234157767977
+   },
+   "derivation": "Fitted to 48 of 172 usable published pressure-tested loads (cartridge-stratified sample) across 13 cartridge(s); 172 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 91.43033844961417,
+    "rmsPressurePct": 29.553088378862896,
+    "cartridges": [
+     "30-super-carry",
+     "380-auto",
+     "9mm-luger",
+     "38-super-auto-+p",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "40-sw",
+     "10mm-auto",
+     "44-sw-special",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3,
+     11
+    ]
+   }
+  },
+  "reload-swiss-rs50": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 797.5232671928434,
+    "flameTempK": 2831.933783783784,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 9.063448893115604,
+    "n": 0.9454516550556028,
+    "lambda": 0.2697928526921687,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.8682800533784449
+   },
+   "derivation": "Fitted to 48 of 168 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 158 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (3750 J/g). ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 87.06612597305617,
+    "rmsPressurePct": 14.09570596251862,
+    "cartridges": [
+     "222-remington",
+     "22-250-remington",
+     "223-remington",
+     "243-winchester",
+     "303-british",
+     "30-30-winchester",
+     "308-winchester",
+     "375-hh-magnum",
+     "6.5x55-swedish",
+     "6.5-creedmoor",
+     "7mm-mauser-7x57",
+     "7x64-brenneke",
+     "7.5x55-swiss",
+     "7.62x54r",
+     "8x57-irs",
+     "8mm-mauser-8x57",
+     "9.3x62",
+     "9.3x64-brenneke",
+     "10.3x60r"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     19.9,
+     81.8
+    ]
+   }
+  },
+  "ramshot-big-game": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 830.9801455417012,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 24.22790796046235,
+    "n": 0.7417472588911298,
+    "lambda": 0.3461054626908832,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 151 usable published pressure-tested loads (cartridge-stratified sample) across 20 cartridge(s); 141 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 62.82915951045656,
+    "rmsPressurePct": 13.002289567321204,
+    "cartridges": [
+     "30-30-winchester",
+     "308-winchester",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "220-swift",
+     "6mm-creedmoor",
+     "243-winchester",
+     "6mm-remington",
+     "257-roberts",
+     "257-roberts-+p",
+     "260-remington",
+     "6.5-creedmoor",
+     "270-winchester",
+     "6.8-western",
+     "7mm-08-remington",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "303-british",
+     "338-weatherby-rebated-precision-magnum",
+     "375-hh-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     24.5,
+     79.4
+    ]
+   }
+  },
+  "accurate-4064": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 998.0497442121697,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 17.209851064592605,
+    "n": 0.761154720001224,
+    "lambda": -0.10755523070679536,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 146 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 132 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 66.52244489312167,
+    "rmsPressurePct": 13.808197997162111,
+    "cartridges": [
+     "223-remington",
+     "224-valkyrie",
+     "22-250-remington",
+     "6mm-creedmoor",
+     "243-winchester",
+     "257-roberts",
+     "6.5-creedmoor",
+     "270-winchester",
+     "7mm-08-remington",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "300-winchester-short-magnum",
+     "303-british",
+     "338-weatherby-rebated-precision-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     20.5,
+     64.8
+    ]
+   }
+  },
+  "imr-4227": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 959.932195708931,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 22.755324508627524,
+    "n": 0.8049930386118116,
+    "lambda": 0.014542600072646654,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.13373855716564675
+   },
+   "derivation": "Fitted to 48 of 141 usable published pressure-tested loads (cartridge-stratified sample) across 19 cartridge(s); 141 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 102.49516990300312,
+    "rmsPressurePct": 26.273680288425165,
+    "cartridges": [
+     "300-blackout",
+     "450-bushmaster",
+     "17-hornet",
+     "22-hornet",
+     "222-remington",
+     "6.8-remington-spc",
+     "30-carbine",
+     "7.62x39",
+     "350-legend",
+     "360-buckhammer",
+     "400-legend",
+     "44-remington-magnum",
+     "458-socom",
+     "32-hr-magnum",
+     "327-federal-magnum",
+     "357-magnum",
+     "41-remington-magnum",
+     "45-colt",
+     "480-ruger"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     8.3,
+     41.7
+    ]
+   }
+  },
+  "ramshot-enforcer": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 744.934451178856,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 194.94429692606835,
+    "n": 0.5169952733595171,
+    "lambda": 2.9618229834186875,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.3673232370219288
+   },
+   "derivation": "Fitted to 48 of 135 usable published pressure-tested loads (cartridge-stratified sample) across 14 cartridge(s); 135 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 99.58880633227407,
+    "rmsPressurePct": 13.105167705532203,
+    "cartridges": [
+     "450-bushmaster",
+     "300-blackout",
+     "350-legend",
+     "400-legend",
+     "458-socom",
+     "327-federal-magnum",
+     "357-magnum",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     11.5,
+     48.7
+    ]
+   }
+  },
+  "hodgdon-h4227": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1125.7284938343373,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 44.66625545120972,
+    "n": 0.708892426109594,
+    "lambda": 0.7440532278082497,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 2.680655822926367
+   },
+   "derivation": "Fitted to 48 of 130 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 130 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": null,
+    "rmsPressurePct": 32.06951230046834,
+    "cartridges": [
+     "22-hornet",
+     "222-remington",
+     "30-carbine",
+     "44-remington-magnum",
+     "32-hr-magnum",
+     "38-special",
+     "38-special-+p",
+     "357-magnum",
+     "41-remington-magnum",
+     "44-sw-special",
+     "45-colt",
+     "454-casull",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     8,
+     45
+    ]
+   }
+  },
+  "hodgdon-us869": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 866.8337747082676,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 22.227593768456217,
+    "n": 0.6770142198312813,
+    "lambda": 0.9292468664061825,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 126 usable published pressure-tested loads (cartridge-stratified sample) across 15 cartridge(s); 126 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 77.95018974973621,
+    "rmsPressurePct": 9.714726633695633,
+    "cartridges": [
+     "243-winchester",
+     "300-winchester-magnum",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "26-nosler",
+     "27-nosler",
+     "7mm-remington-magnum",
+     "7mm-weatherby-magnum",
+     "28-nosler",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-norma-magnum",
+     "300-remington-ultra-magnum",
+     "338-remington-ultra-magnum",
+     "338-lapua-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     51.6,
+     108
+    ]
+   }
+  },
+  "accurate-4100": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1262.4141619201362,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 56.32762507822928,
+    "n": 0.6528300922681884,
+    "lambda": 0.3269377539902121,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 5.817407869666341
+   },
+   "derivation": "Fitted to 48 of 118 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 118 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 107.5242379117478,
+    "rmsPressurePct": 21.316809909862354,
+    "cartridges": [
+     "300-blackout",
+     "350-legend",
+     "450-bushmaster",
+     "458-socom",
+     "357-magnum",
+     "41-remington-magnum",
+     "44-remington-magnum",
+     "45-colt",
+     "460-sw-magnum",
+     "480-ruger",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     12.5,
+     48.6
+    ]
+   }
+  },
+  "ramshot-zip": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 915.7420466208905,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 68.59215333372381,
+    "n": 0.803638918137551,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 4.106141187958742
+   },
+   "derivation": "Fitted to 48 of 110 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 110 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 65.1774231401203,
+    "rmsPressurePct": 22.048907714162606,
+    "cartridges": [
+     "380-auto",
+     "9mm-luger",
+     "38-special",
+     "38-special-+p",
+     "357-sig",
+     "357-magnum",
+     "40-sw",
+     "44-sw-special",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     2.3,
+     8.9
+    ]
+   }
+  },
+  "ramshot-lrt": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 899.3303456766698,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 25.36213088064696,
+    "n": 0.6560394191235688,
+    "lambda": 0.8390979867343874,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 102 usable published pressure-tested loads (cartridge-stratified sample) across 14 cartridge(s); 102 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 64.53696886935909,
+    "rmsPressurePct": 11.263260142010644,
+    "cartridges": [
+     "243-winchester",
+     "300-winchester-magnum",
+     "257-weatherby-magnum",
+     "6.5-284-norma",
+     "6.5-precision-rifle",
+     "264-winchester-magnum",
+     "27-nosler",
+     "7mm-remington-magnum",
+     "7mm-precision-rifle",
+     "28-nosler",
+     "300-precision-rifle",
+     "30-nosler",
+     "300-norma-magnum",
+     "338-lapua-magnum"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     44.4,
+     104.8
+    ]
+   }
+  },
+  "ramshot-tac": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 817.6031003400665,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 45.30057309555967,
+    "n": 0.6601053517197126,
+    "lambda": 0.26265286125628234,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 39 of 93 usable published pressure-tested loads (cartridge-stratified sample) across 9 cartridge(s); 37 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 39,
+    "rmsVelocityFps": 80.77511591314871,
+    "rmsPressurePct": 13.065994542672033,
+    "cartridges": [
+     "350-legend",
+     "204-ruger",
+     "222-remington",
+     "223-remington",
+     "22-advanced-rifle",
+     "6mm-advanced-rifle",
+     "6.5-grendel",
+     "30-30-winchester",
+     "308-winchester"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     19.5,
+     52
+    ]
+   }
+  },
+  "winchester-748": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 860.7201433837186,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 36.99569167032948,
+    "n": 0.6808234403481448,
+    "lambda": 0.4597484066761101,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 48 of 87 usable published pressure-tested loads (cartridge-stratified sample) across 11 cartridge(s); 77 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 48,
+    "rmsVelocityFps": 87.98969147124673,
+    "rmsPressurePct": 12.030737717121433,
+    "cartridges": [
+     "223-remington",
+     "22-advanced-rifle",
+     "6mm-advanced-rifle",
+     "6mm-remington",
+     "6.5-creedmoor",
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield",
+     "338-federal",
+     "35-remington",
+     "9.3x62"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     22.3,
+     57
+    ]
+   }
+  },
+  "ramshot-competition": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 911.9856716687999,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 158.4190118307553,
+    "n": 0.7682602434225518,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1.2378844380175653
+   },
+   "derivation": "Fitted to 40 of 82 usable published pressure-tested loads (cartridge-stratified sample) across 7 cartridge(s); 82 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 40,
+    "rmsVelocityFps": 52.48642138136793,
+    "rmsPressurePct": 21.876005700028536,
+    "cartridges": [
+     "380-auto",
+     "9mm-luger",
+     "38-special",
+     "40-sw",
+     "45-auto",
+     "45-auto-+p",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     1.9,
+     6.5
+    ]
+   }
+  },
+  "hodgdon-leverevolution": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1015.6335140141625,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 29.818575597229817,
+    "n": 0.6801407200592708,
+    "lambda": 0.29644222833401745,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 46 of 75 usable published pressure-tested loads (cartridge-stratified sample) across 8 cartridge(s); 75 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 46,
+    "rmsVelocityFps": 72.68836780859674,
+    "rmsPressurePct": 11.865949413835738,
+    "cartridges": [
+     "30-30-winchester",
+     "224-valkyrie",
+     "22-advanced-rifle",
+     "6mm-advanced-rifle",
+     "6.5-grendel",
+     "303-british",
+     "338-federal",
+     "35-remington"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     22.2,
+     52
+    ]
+   }
+  },
+  "ramshot-grand": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 903.3774193184199,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 20.91824421389653,
+    "n": 0.7144733312189218,
+    "lambda": 0.7608757314285169,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 26 of 60 usable published pressure-tested loads (cartridge-stratified sample) across 5 cartridge(s); 60 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 26,
+    "rmsVelocityFps": 89.39255002952763,
+    "rmsPressurePct": 8.935710185711446,
+    "cartridges": [
+     "30-06-springfield",
+     "6.5x55-swedish",
+     "300-winchester-magnum",
+     "300-precision-rifle",
+     "30-nosler"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     48,
+     91
+    ]
+   }
+  },
+  "vihtavuori-24n41": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1035.3155,
+    "flameTempK": 2798.15,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 1.8324612584540043,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 0.19614400882267408
+   },
+   "derivation": "Fitted to 34 of 52 usable published pressure-tested loads (cartridge-stratified sample) across 7 cartridge(s); 52 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (3700 J/g). ",
+   "calibration": {
+    "points": 34,
+    "rmsVelocityFps": 123.21447045013305,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "6.5-precision-rifle",
+     "6.8-western",
+     "7mm-precision-rifle",
+     "300-norma-magnum",
+     "300-lapua-magnum",
+     "338-lapua-magnum",
+     "50-browning"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     44.8,
+     237.8
+    ]
+   }
+  },
+  "vihtavuori-3n38": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1110.3155000000002,
+    "flameTempK": 3000.852702702703,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 10.017927298534847,
+    "n": 1,
+    "lambda": -0.45,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 6.567998193705895
+   },
+   "derivation": "Fitted to 28 of 42 usable published pressure-tested loads (cartridge-stratified sample) across 6 cartridge(s); 42 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, heat; other thermochemistry from class priors and the maker's heat of explosion (4000 J/g). ",
+   "calibration": {
+    "points": 28,
+    "rmsVelocityFps": 82.74973740575116,
+    "rmsPressurePct": null,
+    "cartridges": [
+     "38-special",
+     "357-magnum",
+     "45-auto",
+     "45-colt",
+     "460-sw-magnum",
+     "500-sw-magnum"
+    ],
+    "sources": [
+     "https://vihtavuori.com/wp-content/uploads/2026/04/Vihtavuori_Reloading_Guide_2026_ENG_web.pdf"
+    ],
+    "chargeRangeGr": [
+     6,
+     33.9
+    ]
+   }
+  },
+  "shooters-world-long-rifle": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 785.6372576205176,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 6.672926322339092,
+    "n": 1,
+    "lambda": 0.3885256568941058,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 6 of 20 usable published pressure-tested loads (cartridge-stratified sample) across 1 cartridge(s); 20 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 6,
+    "rmsVelocityFps": 58.98090403024412,
+    "rmsPressurePct": 9.157605122353814,
+    "cartridges": [
+     "6mm-dasher"
+    ],
+    "sources": [
+     "https://shootersworldpowder.com/wp-content/uploads/2023/06/ShootersWorldManualInterior_CHRIS_WITH-COVER__RUSS-REVISED.pdf"
+    ],
+    "chargeRangeGr": [
+     27,
+     35
+    ]
+   }
+  },
+  "accurate-tcm": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1610.2724620538347,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 87.95867276016091,
+    "n": 0.5842541176442668,
+    "lambda": 0.7644824661969862,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 20.184477856085664
+   },
+   "derivation": "Fitted to 12 of 16 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 16 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 12,
+    "rmsVelocityFps": 115.51757707265331,
+    "rmsPressurePct": 12.50760661343212,
+    "cartridges": [
+     "357-magnum",
+     "41-remington-magnum",
+     "45-colt"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     11.5,
+     20.9
+    ]
+   }
+  },
+  "reload-swiss-rs24": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 852.1056526495238,
+    "flameTempK": 3237.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 19.66128258827099,
+    "n": 0.9552886195678086,
+    "lambda": -0.22596145940606946,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 3.3938930930330518
+   },
+   "derivation": "Fitted to 14 of 14 usable published pressure-tested loads (cartridge-stratified sample) across 4 cartridge(s); 14 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force, heat, n; other thermochemistry from class priors and the maker's heat of explosion (4350 J/g). ",
+   "calibration": {
+    "points": 14,
+    "rmsVelocityFps": 55.243915660495546,
+    "rmsPressurePct": 10.298341650925801,
+    "cartridges": [
+     "300-blackout",
+     "7.62x39",
+     "357-magnum",
+     "44-remington-magnum"
+    ],
+    "sources": [
+     "https://www.reload-swiss.com/Reload%20Swiss/Service/Brosch%C3%BCren%20und%20Produktdatenbl%C3%A4tter/Reload-Swiss-Ladedaten-Guide-2025-DE-EN-small.pdf"
+    ],
+    "chargeRangeGr": [
+     5.9,
+     15.7
+    ]
+   }
+  },
+  "hodgdon-trail-boss": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 538.3559325004614,
+    "flameTempK": 2899.5013513513513,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 50.53423384380977,
+    "n": 1,
+    "lambda": 0.017813311128310805,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 7 of 7 usable published pressure-tested loads (cartridge-stratified sample) across 3 cartridge(s); 4 of those loads use an inferred or other-brand case capacity. Fitted: beta, lambda, force; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 7,
+    "rmsVelocityFps": 75.90229766637376,
+    "rmsPressurePct": 28.909344516848286,
+    "cartridges": [
+     "30-30-winchester",
+     "308-winchester",
+     "30-06-springfield"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     10.5,
+     12.8
+    ]
+   }
+  },
+  "imr-red": {
+   "status": "calibrated",
+   "params": {
+    "forceJg": 1086.8155,
+    "flameTempK": 2937.3391891891893,
+    "gamma": 1.25,
+    "covolumeCm3g": 1,
+    "solidDensityGcc": 1.6,
+    "beta": 43.28631694577959,
+    "n": 1,
+    "lambda": 0,
+    "mu": 0,
+    "tempCoeffPerK": 0.0007,
+    "refTempC": 21,
+    "heatScale": 1
+   },
+   "derivation": "Fitted to 2 of 2 usable published pressure-tested loads (cartridge-stratified sample) across 1 cartridge(s); 2 of those loads use an inferred or other-brand case capacity. Fitted: beta; other thermochemistry from class priors. ",
+   "calibration": {
+    "points": 2,
+    "rmsVelocityFps": 18.630349793981214,
+    "rmsPressurePct": 2.0557359949147482,
+    "cartridges": [
+     "9mm-luger"
+    ],
+    "sources": [
+     "https://hodgdonpowderco.com/wp-content/uploads/2026/04/AM25.pdf"
+    ],
+    "chargeRangeGr": [
+     3.4,
+     3.9
     ]
    }
   }

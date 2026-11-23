@@ -570,6 +570,8 @@ async function main() {
         cartridges: carts,
         sources: [...new Set(all.flatMap((r) => r.load.sources.map((s) => s.url)))],
         chargeRangeGr: [Math.min(...all.map((r) => r.load.chargeGr)), Math.max(...all.map((r) => r.load.chargeGr))],
+        grade: o.rmsPressurePct === null ? 'fair' : o.rmsPressurePct <= 10 ? 'good' : o.rmsPressurePct <= 20 ? 'fair' : 'poor',
+        heldOutPressurePct: o.heldOutP.length >= 3 ? Math.round([...o.heldOutP].map(Math.abs).sort((a, b) => a - b)[Math.floor(o.heldOutP.length / 2)] * 1000) / 10 : null,
       },
     };
     rows.push(...o.rows);

@@ -2,9 +2,9 @@
 
 import { useMemo, useState } from 'react';
 import { simulate } from '../engine/model';
-import { monteCarlo, sensitivities, temperatureSweep, DEFAULT_SPEC_CALIBRATED, DEFAULT_SPEC_ESTIMATED, type MonteCarloResult, type UncertaintySpec } from '../engine/uncertainty';
+import { monteCarlo, sensitivities, temperatureSweep, specForPowderModel, type MonteCarloResult, type UncertaintySpec } from '../engine/uncertainty';
 import * as U from '../engine/units';
-import { ErrorList, EstimateWarning, PlainNumber, StatusChip, Tile, useDebounced } from './components';
+import { FitGrade, ErrorList, EstimateWarning, PlainNumber, StatusChip, Tile, useDebounced } from './components';
 import { fmtChargeKg, fmtE, fmtLen, fmtMs, fmtNum, fmtP, fmtPct, fmtTempC, fmtV, lenUnit, lenVal, pUnit, pVal, vUnit, vVal } from './format';
 import { LineChart } from './LineChart';
 import { useApp } from './state';
@@ -30,11 +30,7 @@ export function PredictTab() {
   const sens = useMemo(() => (setup && res?.status === 'muzzle' ? sensitivities(setup) : null), [setup, res]);
   const sweep = useMemo(() => (setup && res?.status === 'muzzle' ? temperatureSweep(setup, [-20, -10, 0, 10, 20, 30, 40, 50]) : null), [setup, res]);
 
-  const estSigma = d.powder?.model?.betaRelSigma;
-  const defaultSpec =
-    d.status === 'calibrated' || d.status === 'user-calibrated'
-      ? DEFAULT_SPEC_CALIBRATED
-      : { ...DEFAULT_SPEC_ESTIMATED, betaRel: estSigma && estSigma > 0 ? estSigma : DEFAULT_SPEC_ESTIMATED.betaRel };
+  const defaultSpec = specForPowderModel(d.powder?.model);
   const [spec, setSpec] = useState<UncertaintySpec | null>(null);
   const activeSpec = spec ?? defaultSpec;
   const [mc, setMc] = useState<{ r: MonteCarloResult; key: unknown } | null>(null);
@@ -94,7 +90,7 @@ export function PredictTab() {
           <span className="row small">
             {d.powder && (
               <>
-                {d.powder.name} <StatusChip status={d.status} />
+                {d.powder.name} <StatusChip status={d.status} /> <FitGrade model={d.powder.model} />
               </>
             )}
             <button className="btn small no-print" onClick={copyLink} data-testid="share-link">

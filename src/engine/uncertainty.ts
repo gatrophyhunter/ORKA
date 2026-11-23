@@ -170,3 +170,30 @@ export function temperatureSweep(s: LoadSetup, tempsC: number[]) {
     return { tempC: tc, peakPa: r.peakBreechPa, velocityMs: r.muzzleVelocityMs, status: r.status };
   });
 }
+
+/** Peak-pressure sensitivity to the burn-rate coefficient in this model (Δp/p ≈ 2.2·Δβ/β near max loads; see sensitivities()). */
+const PRESSURE_PER_BETA = 2.2;
+
+/**
+ * Default spreads for a powder model, sized from its measured error rather than a fixed guess:
+ *  - calibrated / user-calibrated with a pressure fit: the in-sample RMS pressure error, inflated by 1.45 (the ratio of
+ *    held-out to in-sample median error measured over all calibrated powders) or the powder's own held-out error when
+ *    larger, expressed as an equivalent burn-rate spread;
+ *  - estimated: the measured chart-interpolation error (betaRelSigma);
+ *  - otherwise the generic defaults.
+ */
+export function specForPowderModel(m?: {
+  status: string;
+  betaRelSigma?: number;
+  calibration?: { rmsPressurePct?: number | null; heldOutPressurePct?: number | null };
+} | null): UncertaintySpec {
+  if (!m) return DEFAULT_SPEC_ESTIMATED;
+  if (m.status === 'estimated') return { ...DEFAULT_SPEC_ESTIMATED, betaRel: m.betaRelSigma && m.betaRelSigma > 0 ? m.betaRelSigma : DEFAULT_SPEC_ESTIMATED.betaRel };
+  const rms = m.calibration?.rmsPressurePct;
+  const held = m.calibration?.heldOutPressurePct;
+  if (typeof rms === 'number' && rms > 0) {
+    const sigmaP = Math.max((rms * 1.45) / 100, typeof held === 'number' && held > 0 ? (held * 1.48) / 100 : 0);
+    return { ...DEFAULT_SPEC_CALIBRATED, betaRel: Math.min(0.3, Math.max(0.03, sigmaP / PRESSURE_PER_BETA)) };
+  }
+  return { ...DEFAULT_SPEC_CALIBRATED, betaRel: 0.05 };
+}

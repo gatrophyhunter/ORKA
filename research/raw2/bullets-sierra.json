@@ -2363,7 +2363,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"8120\":{\"Item #\":\"8120\",\"Bullet Type\":\"Full Metal Jacket (FMJ)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.115\",\"Purpose\":\"Personal Defense\",\"Pursuit\":\"Personal Defense\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081204\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.4] #8120 .355\" 125 gr FMJ 1.100\" | [2026 Bullet Guide poster, OCR] 25 or. FMI TM #8120 BL. 115",
+      "evidence": "\"8120\":{\"Item #\":\"8120\",\"Bullet Type\":\"Full Metal Jacket (FMJ)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.115\",\"Purpose\":\"Personal Defense\",\"Pursuit\":\"Personal Defense\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081204\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.4] #8120 .355\" 125 gr FMJ 1.100\" | [2026 Bullet Guide poster, OCR] 125 of. FMJTM #8120 BC. 115",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"FMJ\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8120: box quantity 100. Diameter and weight confirmed by the bullet header line for #8120 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -2407,7 +2407,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"8125\":{\"Item #\":\"8125\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.124\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081259\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.4] #8125 .355\" 125 gr JHP 1.100\" | [2026 Bullet Guide poster, OCR] 125 gr. JHP SM #8125 B.C. 124",
+      "evidence": "\"8125\":{\"Item #\":\"8125\",\"Bullet Type\":\"Jacketed Hollow Point (JHP)\",\"Bullet Diameter\":\"0.355\",\"Bullet Weight (Grains)\":\"125\",\"G1 BC\":\"0.124\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763081259\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.4] #8125 .355\" 125 gr JHP 1.100\" | [2026 Bullet Guide poster, OCR] 125 gr. JHP SM #8125 B.C. .124",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8125: box quantity 100. Diameter and weight confirmed by the bullet header line for #8125 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -4893,7 +4893,7 @@
         }
       ],
       "evidence": "\"1455\":{\"Item #\":\"1455\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"55\",\"G1 BC\":\"0.271\",\"G7 BC\":\"0.124\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Varmint, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763014554\",\"Tipped/Non-Tipped\":\"Tipped\"} | Tipped VarmintKing (TVK) bullets are an evolution of Sierra’s varmint bullet design, pairing a polymer tip with a streamlined profile for improved downrange efficiency and consistent feeding. | [load data p.5] #1455 .224” 55gr. BlitzKing 1.880” | [2026 Bullet Guide poster, OCR] 55 or. TVK #1455 BL. .271 12” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1455C (500 ct), 1455Z (2000 ct). Base item #1455: box quantity 100. Diameter and weight confirmed by the bullet header line for #1455 in 4 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [None, 12.0, None]); not used."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 1455C (500 ct), 1455Z (2000 ct). Base item #1455: box quantity 100. Diameter and weight confirmed by the bullet header line for #1455 in 4 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [12.0]); not used."
     },
     {
       "id": "sierra-1375",
@@ -5149,7 +5149,7 @@
         }
       ],
       "evidence": "\"4062\":{\"Item #\":\"4062\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"64\",\"G1 BC\":\"0.323\",\"G7 BC\":\"0.159\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Varmint\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763040621\",\"Tipped/Non-Tipped\":\"Tipped\"} | [load data p.3] #4062 .224\" 64gr. TGK 2.420\" | [2026 Bullet Guide poster, OCR] 407. GK #4062 B.C. .323 10” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4062C (500 ct). Base item #4062: box quantity 100. Diameter and weight confirmed by the bullet header line for #4062 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:10 from the 2026 Bullet Guide poster twist tag (\"10\\\" TWIST\", OCR, two passes agree); treat as minimum (fastest-needed) twist."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4062C (500 ct). Base item #4062: box quantity 100. Diameter and weight confirmed by the bullet header line for #4062 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:10 from the 2026 Bullet Guide poster twist tag (\"10\\\" TWIST\", OCR reads [10.0, 10.0], all usable reads agree); treat as minimum (fastest-needed) twist."
     },
     {
       "id": "sierra-1395",
@@ -5310,7 +5310,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"7169\":{\"Item #\":\"7169\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"69\",\"G1 BC\":\"0.375\",\"G7 BC\":\"0.178\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763071694\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×10” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.7] #7169 .224” 69gr. TMK Match 2.260” | [2026 Bullet Guide poster, OCR] 69oqr. TMK #7169 BL. .375",
+      "evidence": "\"7169\":{\"Item #\":\"7169\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"69\",\"G1 BC\":\"0.375\",\"G7 BC\":\"0.178\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763071694\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×10” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.7] #7169 .224” 69gr. TMK Match 2.260” | [2026 Bullet Guide poster, OCR] 69 qr. TMK #7169 BC. .375",
       "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7169C (500 ct). Base item #7169: box quantity 100. Diameter and weight confirmed by the bullet header line for #7169 in 3 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -5612,7 +5612,7 @@
         }
       ],
       "evidence": "\"9390T\":{\"Item #\":\"9390T\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"80\",\"G1 BC\":\"0.461\",\"G7 BC\":\"0.229\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763393901\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | Because of its extreme length, the 80 grain MatchKing® requires a twist rate not slower than 1×8 inches. | This bullet requires a barrel twist rate of 1×8” or faster. | [2026 Bullet Guide poster, OCR] 80 gr. HPBT-CN MK #9390 B.C. .461",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9390 (500 ct). Base item #9390T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [None, None, 8.0, None, None]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9390 (500 ct). Base item #9390T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0]); not used."
     },
     {
       "id": "sierra-7188",
@@ -5687,8 +5687,8 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"9290T\":{\"Item #\":\"9290T\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"90\",\"G1 BC\":\"0.563\",\"G7 BC\":\"0.278\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763392904\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | Sierra recommends a 6.5” twist barrel for the #9290 22 cal 90 gr HPBT bullet when pushed at muzzle velocities lower than 2650 fps. | In cartridges like the Valkyrie with muzzle velocities above 2650 fps, a 1×7” twist barrel will stabilize the bullet correctly. | [2026 Bullet Guide poster, OCR] 90 gr. HPBT-CN MK #9290 B.C. .563",
-      "notes": "Product description mentions twist but no single recommended rate could be parsed unambiguously; see evidence. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9290 (500 ct). Base item #9290T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:6.5 from the 2026 Bullet Guide poster twist tag (\"6.5\\\" TWIST\", OCR, two passes agree); treat as minimum (fastest-needed) twist."
+      "evidence": "\"9290T\":{\"Item #\":\"9290T\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.224\",\"Bullet Weight (Grains)\":\"90\",\"G1 BC\":\"0.563\",\"G7 BC\":\"0.278\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763392904\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | Sierra recommends a 6.5” twist barrel for the #9290 22 cal 90 gr HPBT bullet when pushed at muzzle velocities lower than 2650 fps. | In cartridges like the Valkyrie with muzzle velocities above 2650 fps, a 1×7” twist barrel will stabilize the bullet correctly. | [2026 Bullet Guide poster, OCR] 90 gr. HPBT-CN MK #9290 B.C. .563 6.5” TWIST",
+      "notes": "Product description mentions twist but no single recommended rate could be parsed unambiguously; see evidence. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9290 (500 ct). Base item #9290T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:6.5 from the 2026 Bullet Guide poster twist tag (\"6.5\\\" TWIST\", OCR reads [6.5, 6.5], all usable reads agree); treat as minimum (fastest-needed) twist."
     },
     {
       "id": "sierra-1396",
@@ -6266,7 +6266,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"7295\":{\"Item #\":\"7295\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"95\",\"G1 BC\":\"0.500\",\"G7 BC\":\"0.246\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763072950\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×9” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.5] #7295 .243” 95gr. TMK Match 2.700” | [2026 Bullet Guide poster, OCR] 95ogr. MK #7295 B.C. .500",
+      "evidence": "\"7295\":{\"Item #\":\"7295\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"95\",\"G1 BC\":\"0.500\",\"G7 BC\":\"0.246\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763072950\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×9” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.5] #7295 .243” 95gr. TMK Match 2.700” | [2026 Bullet Guide poster, OCR] 95 or TMK #7295 B.C. .500",
       "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7295C (500 ct). Base item #7295: box quantity 100. Diameter and weight confirmed by the bullet header line for #7295 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -6589,7 +6589,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"7207\":{\"Item #\":\"7207\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"107\",\"G1 BC\":\"0.574\",\"G7 BC\":\"0.292\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763072073\",\"Tipped/Non-Tipped\":\"Tipped\"} | A barrel twist rate of 1×7.5\" or faster is required for the 6mm 107gr TMK. | Sierra enhanced select MatchKing designs by adding an acetal resin tip, creating the Tipped MatchKing® (TMK) line. | [2026 Bullet Guide poster, OCR] 107 oh TMK #7207",
+      "evidence": "\"7207\":{\"Item #\":\"7207\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.243\",\"Bullet Weight (Grains)\":\"107\",\"G1 BC\":\"0.574\",\"G7 BC\":\"0.292\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763072073\",\"Tipped/Non-Tipped\":\"Tipped\"} | A barrel twist rate of 1×7.5\" or faster is required for the 6mm 107gr TMK. | Sierra enhanced select MatchKing designs by adding an acetal resin tip, creating the Tipped MatchKing® (TMK) line. | [2026 Bullet Guide poster, OCR] 107 or. TMK #7207 BL. .574",
       "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7207C (500 ct). Base item #7207: box quantity 100."
     },
     {
@@ -7148,7 +7148,7 @@
         }
       ],
       "evidence": "\"9631\": { \"Item #\": \"9631\", \"Bullet Type\": \"Hollow Point Boat Tail (HPBT)\", \"Bullet Diameter\": \"0.257\", \"Bullet Weight (Grains)\": \"131\", \"G1 BC\": \"0.571\", \"G7 BC\": \"0.291\", \"Purpose\": \"Match/Target\", \"Pursuit\": \"Match/Target\", \"Box Quantity\": \"100\", \"Bullet Material\": \"Jacketed Lead\", \"Box UPC\": \"92763896310\", \"Tipped/Non-Tipped\": \"Non-Tipped\" } | [load data p.8] #9631 0.257 131gr MK-CN 3.230\" | [2026 Bullet Guide poster, OCR] 131 gr. HPBI-CN MK #9631 B.C. .596 75” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9631MP (250 ct), 9631C (500 ct). Base item #9631: box quantity 100. Listed under several caliber categories: 25 Caliber, 6.5mm. Diameter and weight confirmed by the bullet header line for #9631 in 2 Sierra load-data PDF page(s) (sources[1:]). CHECK: 2026 Bullet Guide poster prints B.C. 0.596 vs product page G1 BC 0.571; product-page value kept, see conflicts. Poster line carries a twist tag that OCR could not read reliably (reads: [None, None, 75.0, 75.0, 25.0]); not used.",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9631MP (250 ct), 9631C (500 ct). Base item #9631: box quantity 100. Listed under several caliber categories: 25 Caliber, 6.5mm. Diameter and weight confirmed by the bullet header line for #9631 in 2 Sierra load-data PDF page(s) (sources[1:]). CHECK: 2026 Bullet Guide poster prints B.C. 0.596 vs product page G1 BC 0.571; product-page value kept, see conflicts. Poster line carries a twist tag that OCR could not read reliably (reads: [75.0, 75.0, 25.0]; [75.0, 75.0, 25.0] outside the 5-20 OCR sanity range); not used.",
       "conflicts": [
         {
           "field": "bcG1",
@@ -7681,8 +7681,8 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"1729T\":{\"Item #\":\"1729T\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.584\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763317297\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 130 gr HPBI-CN MK #1729 B.C. .584",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1729 (100 ct), 1729C (500 ct). Base item #1729T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8 from the 2026 Bullet Guide poster twist tag (\"8\\\" TWIST\", OCR, two passes agree); treat as minimum (fastest-needed) twist."
+      "evidence": "\"1729T\":{\"Item #\":\"1729T\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.584\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763317297\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 130 gr HPBI-CN MK #1729 B.C. .584 8” TWIST",
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1729 (100 ct), 1729C (500 ct). Base item #1729T: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8 from the 2026 Bullet Guide poster twist tag (\"8\\\" TWIST\", OCR reads [8.0, 8.0], all usable reads agree); treat as minimum (fastest-needed) twist."
     },
     {
       "id": "sierra-4330t",
@@ -7811,7 +7811,7 @@
         }
       ],
       "evidence": "\"7430\":{\"Item #\":\"7430\",\"Bullet Type\":\"Tipped MatchKing (TMK)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"130\",\"G1 BC\":\"0.518\",\"G7 BC\":\"0.262\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763074305\",\"Tipped/Non-Tipped\":\"Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | Sierra has enhanced a segment of the MatchKing line by adding the acetal resin tip, thus crowning the Tipped MatchKing (TMK) bullet line. | [load data p.7] #7430 .264” 130gr. TMK Match 2.810” | [2026 Bullet Guide poster, OCR] 130 or. TMK #7430 BC. .518 8” TWIST",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7430C (500 ct). Base item #7430: box quantity 100. Diameter and weight confirmed by the bullet header line for #7430 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0, None, None, None]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 7430C (500 ct). Base item #7430: box quantity 100. Diameter and weight confirmed by the bullet header line for #7430 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0]); not used."
     },
     {
       "id": "sierra-1730",
@@ -8099,7 +8099,7 @@
         }
       ],
       "evidence": "\"1744\":{\"Item #\":\"1744\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"144\",\"G1 BC\":\"0.550\",\"G7 BC\":\"0.271\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017449\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.4] #1744 0.264\" 144gr. MK 2.850\" | [2026 Bullet Guide poster, OCR] 144 gr. HPBT MK #1744 B.C. .550 8” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1744C (500 ct). Base item #1744: box quantity 100. Diameter and weight confirmed by the bullet header line for #1744 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8 from the 2026 Bullet Guide poster twist tag (\"8\\\" TWIST\", OCR, two passes agree); treat as minimum (fastest-needed) twist."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1744C (500 ct). Base item #1744: box quantity 100. Diameter and weight confirmed by the bullet header line for #1744 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8 from the 2026 Bullet Guide poster twist tag (\"8\\\" TWIST\", OCR reads [8.0, 8.0, 8.0], all usable reads agree); treat as minimum (fastest-needed) twist."
     },
     {
       "id": "sierra-4345",
@@ -8199,7 +8199,7 @@
         }
       ],
       "evidence": "\"1755\":{\"Item #\":\"1755\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.264\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.713\",\"G7 BC\":\"0.354\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763017555\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×7.5” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention. | [load data p.9] #1755 .264” 150gr. HPBT Match 2.810” | [2026 Bullet Guide poster, OCR] 150 gr. HPBT-CN MK #1755 B.C. .713 7.5” TWIST",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1755C (500 ct). Base item #1755: box quantity 100. Diameter and weight confirmed by the bullet header line for #1755 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [None, None, 75.0, 7.5, 75.0]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1755C (500 ct). Base item #1755: box quantity 100. Diameter and weight confirmed by the bullet header line for #1755 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [75.0, 7.5, 75.0]; [75.0, 75.0] outside the 5-20 OCR sanity range); not used."
     },
     {
       "id": "sierra-7450",
@@ -8688,7 +8688,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"1840\":{\"Item #\":\"1840\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.277\",\"Bullet Weight\":\"150\",\"G1 BC\":\"0.483\",\"G7 BC\":\"0.236\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763018408\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.6] #1840 .277” 150gr. SBT 3.270” | [2026 Bullet Guide poster, OCR] 190 gr. SBI GK #1840 B.C. .483",
+      "evidence": "\"1840\":{\"Item #\":\"1840\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.277\",\"Bullet Weight\":\"150\",\"G1 BC\":\"0.483\",\"G7 BC\":\"0.236\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763018408\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.6] #1840 .277” 150gr. SBT 3.270” | [2026 Bullet Guide poster, OCR] 150 gr. SBT GK #1840 BC. .483",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1840: box quantity 100. Diameter and weight confirmed by the bullet header line for #1840 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -8993,7 +8993,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"4540\":{\"Item #\":\"4540\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"140\",\"G1 BC\":\"0.545\",\"G7 BC\":\"0.272\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763045404\",\"Tipped/Non-Tipped\":\"Tipped\"} | The thicker jacket for expansion held to industry leading standards combined with the sleek ogive and resin tip results in a highly accurate long range capable hunting bullet. | [2026 Bullet Guide poster, OCR] 140 gr. TGK #4540 B.C. 545",
+      "evidence": "\"4540\":{\"Item #\":\"4540\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"140\",\"G1 BC\":\"0.545\",\"G7 BC\":\"0.272\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763045404\",\"Tipped/Non-Tipped\":\"Tipped\"} | The thicker jacket for expansion held to industry leading standards combined with the sleek ogive and resin tip results in a highly accurate long range capable hunting bullet. | [2026 Bullet Guide poster, OCR] 140 or. 1GK #4540 BL. .545",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Base item #4540: box quantity 100. G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -9496,7 +9496,7 @@
         }
       ],
       "evidence": "\"1975\":{\"Item #\":\"1975\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"175\",\"G1 BC\":\"0.608\",\"G7 BC\":\"0.302\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019757\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×8.5” or faster. | [load data p.9] #1975 .284” 175gr. HPBT Match 3.290” | [2026 Bullet Guide poster, OCR] 175 gr. HPBT MK #1975 B.C. .608",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1975: box quantity 100. Diameter and weight confirmed by the bullet header line for #1975 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.5, None, None, None, None]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #1975: box quantity 100. Diameter and weight confirmed by the bullet header line for #1975 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.5]); not used."
     },
     {
       "id": "sierra-1976",
@@ -9583,7 +9583,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"1980\":{\"Item #\":\"1980\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.660\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019801\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | This bullet’s 12 caliber secant ogive and lengthened boat tail make it the perfect choice for the discerning 7mm long range shooter. | [load data p.10] #1980 .284” 180gr. HPBT Match 3.290” | [2026 Bullet Guide poster, OCR] 180 gr. HPBT MK #1980 B.C. .660",
+      "evidence": "\"1980\":{\"Item #\":\"1980\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.660\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019801\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | This bullet’s 12 caliber secant ogive and lengthened boat tail make it the perfect choice for the discerning 7mm long range shooter. | [load data p.10] #1980 .284” 180gr. HPBT Match 3.290” | [2026 Bullet Guide poster, OCR] 180 gr. HPBT MK #1980 B.C. .660 8” TWIST",
       "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 12 caliber secant ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1980C (500 ct). Base item #1980: box quantity 100. Diameter and weight confirmed by the bullet header line for #1980 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Twist also printed on the 2026 Bullet Guide poster (agrees)."
     },
     {
@@ -9628,7 +9628,7 @@
         }
       ],
       "evidence": "\"1981\":{\"Item #\":\"1981\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.676\",\"G7 BC\":\"0.335\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019818\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.7] #1981 0.284 180gr. MK-CN 3.310\" | [2026 Bullet Guide poster, OCR] 180 gr. HPBT-CN MK #1981 B.C. .676 8.5” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1981C (500 ct). Base item #1981: box quantity 100. Diameter and weight confirmed by the bullet header line for #1981 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8.5 from the 2026 Bullet Guide poster twist tag (\"8.5\\\" TWIST\", OCR, two passes agree); treat as minimum (fastest-needed) twist."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1981C (500 ct). Base item #1981: box quantity 100. Diameter and weight confirmed by the bullet header line for #1981 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. recommendedTwist 1:8.5 from the 2026 Bullet Guide poster twist tag (\"8.5\\\" TWIST\", OCR reads [8.5, 8.5, 8.5], all usable reads agree); treat as minimum (fastest-needed) twist."
     },
     {
       "id": "sierra-4580",
@@ -9672,7 +9672,7 @@
         }
       ],
       "evidence": "\"4580\":{\"Item #\":\"4580\",\"Bullet Type\":\"Tipped GameKing (TGK)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"180\",\"G1 BC\":\"0.632\",\"G7 BC\":\"0.305\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"9.28E+10\",\"Tipped/Non-Tipped\":\"Tipped\"} | [load data p.6] #4580 0.284 180gr. TGK 3.310\" | [2026 Bullet Guide poster, OCR] 180 gr. TGK #4580 B.C..632",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4580C (500 ct). Base item #4580: box quantity 100. Diameter and weight confirmed by the bullet header line for #4580 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [None, None, 8.0, None, None]); not used."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Tipped. Other packagings on the same page (same spec table): 4580C (500 ct). Base item #4580: box quantity 100. Diameter and weight confirmed by the bullet header line for #4580 in 1 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0]); not used."
     },
     {
       "id": "sierra-1983",
@@ -9722,7 +9722,7 @@
         }
       ],
       "evidence": "\"1983\":{\"Item #\":\"1983\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.284\",\"Bullet Weight (Grains)\":\"183\",\"G1 BC\":\"0.707\",\"G7 BC\":\"0.351\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763019832\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention. | [load data p.10] #1983 .284” 183gr. HPBT Match 3.290” | [2026 Bullet Guide poster, OCR] 183 gr. HPBT-CN MK #1983 B.C. .707",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1983C (500 ct). Base item #1983: box quantity 100. Diameter and weight confirmed by the bullet header line for #1983 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [None, 8.0, None, None, None]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 1983C (500 ct). Base item #1983: box quantity 100. Diameter and weight confirmed by the bullet header line for #1983 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0]); not used."
     },
     {
       "id": "sierra-7685",
@@ -10461,7 +10461,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"2125\":{\"Item #\":\"2125\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.380\",\"G7 BC\":\"0.188\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021255\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.5] #2125 .308” 150gr. SBT 3.225” | [2026 Bullet Guide poster, OCR] 190 gr. SBI GK #2125 BL. .380",
+      "evidence": "\"2125\":{\"Item #\":\"2125\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"150\",\"G1 BC\":\"0.380\",\"G7 BC\":\"0.188\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021255\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.5] #2125 .308” 150gr. SBT 3.225” | [2026 Bullet Guide poster, OCR] 150 gr. SBT GK #2125 BL. .380",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2125: box quantity 100. Diameter and weight confirmed by the bullet header line for #2125 in 3 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -10923,7 +10923,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"2145\":{\"Item #\":\"2145\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"165\",\"G1 BC\":\"0.404\",\"G7 BC\":\"0.207\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021453\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.6] #2145 .308” 165gr. SBT 3.320” | [2026 Bullet Guide poster, OCR] 165o0r. SBT GK #2145 BL. .404",
+      "evidence": "\"2145\":{\"Item #\":\"2145\",\"Bullet Type\":\"Spitzer Boat Tail (SBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"165\",\"G1 BC\":\"0.404\",\"G7 BC\":\"0.207\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021453\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.6] #2145 .308” 165gr. SBT 3.320” | [2026 Bullet Guide poster, OCR] 165 gr. SBT GK #2145 BC. .404",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2145: box quantity 100. Diameter and weight confirmed by the bullet header line for #2145 in 4 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -11205,7 +11205,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"2175\":{\"Item #\":\"2175\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"175\",\"G1 BC\":\"0.505\",\"G7 BC\":\"0.250\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021750\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 175 or. MKX #2175 BC. 505",
+      "evidence": "\"2175\":{\"Item #\":\"2175\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"175\",\"G1 BC\":\"0.505\",\"G7 BC\":\"0.250\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763021750\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 175 or. MKX #2175 BL. .505",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2175C (500 ct). Base item #2175: box quantity 100. G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -11979,7 +11979,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"2232\":{\"Item #\":\"2232\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"200\",\"G1 BC\":\"0.553\",\"G7 BC\":\"0.275\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763022320\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 200 o-. HPBT MKXx #2232 B.C. 553",
+      "evidence": "\"2232\":{\"Item #\":\"2232\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"200\",\"G1 BC\":\"0.553\",\"G7 BC\":\"0.275\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"100\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"092763022320\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 200 or HPBT MKX #2232 B.C. .553",
       "notes": "Product description also references item number(s) #2232C (description text may be shared with/compare to another product). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2232: box quantity 100. G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -12126,7 +12126,7 @@
         }
       ],
       "evidence": "\"2237\":{\"Item #\":\"2237\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"215\",\"G1 BC\":\"0.680\",\"G7 BC\":\"0.336\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [2026 Bullet Guide poster, OCR] 215 gr. HPBT-CN MK #2237 B.C. .680 9.5” TWIST",
-      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2237C (500 ct). Base item #2237: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [3.5, 9.5, 9.5, 9.5, None]); not used."
+      "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2237C (500 ct). Base item #2237: box quantity 50. G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [3.5, 9.5, 9.5, 9.5]; [3.5] outside the 5-20 OCR sanity range); not used."
     },
     {
       "id": "sierra-2180",
@@ -12332,7 +12332,7 @@
         }
       ],
       "evidence": "\"2251\":{\"Item #\":\"2251\",\"Bullet Type\":\"Hollow Point Boat Tail - Closed Nose (HPBT-CN)\",\"Bullet Diameter\":\"0.308\",\"Bullet Weight (Grains)\":\"230\",\"G1 BC\":\"0.800\",\"G7 BC\":\"0.399\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763022511\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | This bullet requires a barrel twist rate of 1×8” or faster. | A sleek 27 caliber elongated ogive and a final meplat reducing operation (pointing) provide an increased ballistic coefficient for optimal wind resistance and velocity retention. | [load data p.13] #2251 .308” 230gr. HPBT Match 3.680” | [2026 Bullet Guide poster, OCR] 230 gr. HPBT-CN MK #2251 B.C. .800 8” TWIST",
-      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2251C (500 ct). Base item #2251: box quantity 50. Diameter and weight confirmed by the bullet header line for #2251 in 4 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0, None, None]); not used."
+      "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Profile details from the product description (quoted in evidence): 27 caliber elongated ogive. Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 2251C (500 ct). Base item #2251: box quantity 50. Diameter and weight confirmed by the bullet header line for #2251 in 4 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster. Poster line carries a twist tag that OCR could not read reliably (reads: [8.0]); not used."
     },
     {
       "id": "sierra-2305",
@@ -12783,7 +12783,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"2620\":{\"Item #\":\"2620\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.338\",\"Bullet Weight (Grains)\":\"225\",\"G1 BC\":\"0.462\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763026205\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.3] #2620 .338” 225gr. SPT 3.575” | [2026 Bullet Guide poster, OCR] 209 OF. Spitzer PH #2620 BL. .462",
+      "evidence": "\"2620\":{\"Item #\":\"2620\",\"Bullet Type\":\"Spitzer (SPT)\",\"Bullet Diameter\":\"0.338\",\"Bullet Weight (Grains)\":\"225\",\"G1 BC\":\"0.462\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game, Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763026205\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.3] #2620 .338” 225gr. SPT 3.575” | [2026 Bullet Guide poster, OCR] 225 OF. Spitzer PH #2620 B.C. .462",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #2620: box quantity 50. Diameter and weight confirmed by the bullet header line for #2620 in 2 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {
@@ -12921,7 +12921,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"9300T\":{\"Item #\":\"9300T\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.338\",\"Bullet Weight (Grains)\":\"300\",\"G1 BC\":\"0.768\",\"G7 BC\":\"0.383\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763393000\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | The #9300 bullet requires at least a 1×10″ twist barrel. | [2026 Bullet Guide poster, OCR] 300 gr HPBI MK #9300",
+      "evidence": "\"9300T\":{\"Item #\":\"9300T\",\"Bullet Type\":\"Hollow Point Boat Tail (HPBT)\",\"Bullet Diameter\":\"0.338\",\"Bullet Weight (Grains)\":\"300\",\"G1 BC\":\"0.768\",\"G7 BC\":\"0.383\",\"Purpose\":\"Match/Target\",\"Pursuit\":\"Match/Target\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763393000\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | The #9300 bullet requires at least a 1×10″ twist barrel. | [2026 Bullet Guide poster, OCR] 300 gr. HPBT MK #9300 B.C. .768",
       "notes": "recommendedTwist taken from the product description sentence quoted in evidence (not from the spec table). Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Other packagings on the same page (same spec table): 9300 (500 ct). Base item #9300T: box quantity 50."
     },
     {
@@ -13328,7 +13328,7 @@
           "retrieved": "2026-11-23"
         }
       ],
-      "evidence": "\"8900\":{\"Item #\":\"8900\",\"Bullet Type\":\"Hollow Point - Flatnose (HP-FN)\",\"Bullet Diameter\":\"0.458\",\"Bullet Weight (Grains)\":\"300\",\"G1 BC\":\"0.120\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763089002\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.2] #8900 0.458\" 300gr. PH 2.520\" | [2026 Bullet Guide poster, OCR] 300 of. HP/FN PH #8900 BC. 120",
+      "evidence": "\"8900\":{\"Item #\":\"8900\",\"Bullet Type\":\"Hollow Point - Flatnose (HP-FN)\",\"Bullet Diameter\":\"0.458\",\"Bullet Weight (Grains)\":\"300\",\"G1 BC\":\"0.120\",\"Purpose\":\"Hunting\",\"Pursuit\":\"Big Game\",\"Box Quantity\":\"50\",\"Bullet Material\":\"Jacketed Lead\",\"Box UPC\":\"92763089002\",\"Tipped/Non-Tipped\":\"Non-Tipped\"} | [load data p.2] #8900 0.458\" 300gr. PH 2.520\" | [2026 Bullet Guide poster, OCR] 300 gr. HP/FN PH #8900 B.C. .120",
       "notes": "Maker's \"Bullet Material\": Jacketed Lead -> construction \"cup-and-core\". Maker's \"Tipped/Non-Tipped\": Non-Tipped. Base item #8900: box quantity 50. Listed under several caliber categories: 45 Caliber, 45 Caliber. Diameter and weight confirmed by the bullet header line for #8900 in 3 Sierra load-data PDF page(s) (sources[1:]). G1 BC confirmed by the 2026 Bullet Guide poster."
     },
     {

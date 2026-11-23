@@ -37,6 +37,19 @@ export function StatusChip({ status }: { status: ModelStatus }) {
   );
 }
 
+/** Fit quality of a calibrated model: RMS pressure error of the fit (and held-out error when measured). */
+export function FitGrade({ model }: { model?: { status: string; calibration?: { grade?: string; rmsPressurePct?: number | null; heldOutPressurePct?: number | null } } | null }) {
+  const c = model?.calibration;
+  if (!model || (model.status !== 'calibrated' && model.status !== 'user-calibrated') || !c || typeof c.rmsPressurePct !== 'number') return null;
+  const grade = c.grade ?? (c.rmsPressurePct <= 10 ? 'good' : c.rmsPressurePct <= 20 ? 'fair' : 'poor');
+  const title = `Fit to published pressure data: RMS error ${c.rmsPressurePct.toFixed(1)} %${typeof c.heldOutPressurePct === 'number' ? `; median error on held-out cartridges ${c.heldOutPressurePct.toFixed(1)} %` : ''}.`;
+  return (
+    <span className={`chip fit-${grade}`} title={title} data-testid="fit-grade">
+      fit ±{c.rmsPressurePct.toFixed(0)} % · {grade}
+    </span>
+  );
+}
+
 export function EstimateWarning({ status }: { status: ModelStatus }) {
   if (status !== 'estimated') return null;
   return (

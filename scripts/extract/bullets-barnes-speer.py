@@ -353,11 +353,13 @@ def barnes_records(log):
         groups, loose = barnes_cf_groups(d.get('customFields') or [])
         # the items sold on this page are the customFields "Item #" values
         item_ids = list(groups.keys()) or list(spec.keys())
-        for extra in [k for k in spec if k not in item_ids]:
+        extras = [k for k in spec if k not in item_ids]
+        for extra in extras:
             log.append(f'Barnes {url}: specsJson also holds item {extra} '
-                       f'({spec[extra].get("Bullet Weight (Grains)")} gr) which is not an item of this page; ignored here')
+                       f'({spec[extra].get("Bullet Weight (Grains)")} gr) which is not an item of this page')
         page_recs = []
-        for item in item_ids:
+        for item in item_ids + extras:
+            orphan = item in extras
             sj = spec.get(item)
             cg = groups.get(item, {})
             notes = []
@@ -365,16 +367,16 @@ def barnes_records(log):
             vals = {}
             for k, a, b in dupkeys:
                 notes.append(f'specsJson prints key "{k}" twice on this page ("{a}" / "{b}")')
-            wcands = []
+            cands = {'weightGr': [], 'diameterIn': []}
             origin = {}
             for fld, sk, ck in B_FIELDS:
-                if fld == 'weightGr':
+                if fld in cands:
                     a_raw = sj.get(sk) if sj else None
                     b_raw = next((cg[k] for k in ck if k in cg), None)
                     if num(a_raw) is not None:
-                        wcands.append((num(a_raw), f'{url} (page data "specsJson", item {item}, "{sk}": "{a_raw}")'))
+                        cands[fld].append((num(a_raw), 'specsJson', f'{url} (page data "specsJson", item {item}, "{sk}": "{a_raw}")'))
                     if num(b_raw) is not None:
-                        wcands.append((num(b_raw), f'{url} (page data "customFields", item {item}, "Bullet Weight": "{b_raw}")'))
+                        cands[fld].append((num(b_raw), 'customFields', f'{url} (page data "customFields", item {item}, "{ck[0]}": "{b_raw}")'))
                     continue
                 a_raw = sj.get(sk) if sj else None
                 b_raw = next((cg[k] for k in ck if k in cg), None)
@@ -395,31 +397,50 @@ def barnes_records(log):
             style = (sj or {}).get('Bullet Style') or cg.get('Bullet Style')
             if not sj:
                 notes.append('item absent from specsJson; values from customFields only')
-            # weight: specsJson, customFields and the weight printed in the product name must agree;
-            # on disagreement keep a value only if the printed sectional density corroborates exactly one.
+            # weight and diameter: specsJson, customFields and the product name ('0.308"' ... '32 GR') are three
+            # copies that must agree.  On disagreement in ONE of the two, keep the candidate that alone matches the
+            # printed sectional density (w / (7000 d^2), +-0.0006 for 3-decimal rounding); otherwise null.
             nm_w = re.search(r'(\d+)\s*GR\b', name, re.I)
-            if nm_w and len(item_ids) == 1:
-                wcands.append((float(nm_w.group(1)), f'{url} (product name "{name}")'))
-            distinct = sorted({w for w, _ in wcands})
-            vals['weightGr'] = distinct[0] if len(distinct) == 1 else None
-            if len(distinct) > 1:
-                conflicts.append({'field': 'weightGr', 'values': [{'value': w, 'source': s_} for w, s_ in wcands]})
-                sd, dia = vals.get('sectionalDensity'), vals.get('diameterIn')
-                ok = [w for w in distinct if sd is not None and dia and abs(w / (7000 * dia * dia) - sd) <= 0.0015]
+            if nm_w and len(item_ids) == 1 and not orphan:
+                cands['weightGr'].append((float(nm_w.group(1)), 'name', f'{url} (product name "{name}")'))
+            nm_d = re.match(r'^(0?\.\d{3})"', name)
+            if nm_d and not orphan:
+                cands['diameterIn'].append((float(nm_d.group(1)), 'name', f'{url} (product name "{name}")'))
+            dist = {f: sorted({v for v, _, _ in cands[f]}) for f in cands}
+            for f in cands:
+                vals[f] = dist[f][0] if len(dist[f]) == 1 else None
+                kinds = {k for _, k, _ in cands[f]}
+                origin[f] = 'both' if len(kinds) > 1 else (next(iter(kinds)) if kinds else None)
+                if len(dist[f]) > 1:
+                    conflicts.append({'field': f, 'values': [{'value': v, 'source': s_} for v, _, s_ in cands[f]]})
+            sd = vals.get('sectionalDensity')
+            for f, other in (('weightGr', 'diameterIn'), ('diameterIn', 'weightGr')):
+                if len(dist[f]) <= 1:
+                    continue
+                o = vals.get(other)
+                ok = []
+                if sd is not None and o is not None:
+                    for v in dist[f]:
+                        w_, d_ = (v, o) if f == 'weightGr' else (o, v)
+                        if abs(w_ / (7000 * d_ * d_) - sd) <= 0.0006:
+                            ok.append(v)
                 if len(ok) == 1:
-                    vals['weightGr'] = ok[0]
-                    notes.append(f'weight sources disagree ({", ".join(f"{w:g}" for w in distinct)}); {ok[0]:g} gr kept because '
-                                 f'the printed sectional density {sd:.3f} matches {ok[0]:g}/(7000*{dia:.3f}^2) and no other candidate')
-                    # a copy whose weight was wrong is not trusted for values nobody else confirms
-                    bad_copies = {('specsJson' if 'specsJson' in s_ else 'customFields' if 'customFields' in s_ else 'name')
-                                  for w, s_ in wcands if not same(w, ok[0])}
-                    for fld in ('lengthIn', 'bcG1', 'bcG7', 'minTwistIn', 'diameterIn'):
-                        if vals.get(fld) is not None and origin.get(fld) in bad_copies:
-                            notes.append(f'{fld} {vals[fld]:g} printed only in the {origin[fld]} copy whose weight was wrong; left null')
+                    vals[f] = ok[0]
+                    origin[f] = 'both'
+                    notes.append(f'{f} sources disagree ({", ".join(f"{v:g}" for v in dist[f])}); {ok[0]:g} kept because only it '
+                                 f'matches the printed sectional density {sd:.3f} with {other} {o:g}')
+                    bad_copies = {k for v, k, _ in cands[f] if not same(v, ok[0])}
+                    for fld in ('lengthIn', 'bcG1', 'bcG7', 'minTwistIn', 'diameterIn', 'weightGr'):
+                        if fld != f and vals.get(fld) is not None and origin.get(fld) in bad_copies:
+                            notes.append(f'{fld} {vals[fld]:g} printed only in the {origin[fld]} copy whose {f} was wrong; left null')
                             vals[fld] = None
                 else:
-                    notes.append(f'weight sources disagree ({", ".join(f"{w:g}" for w in distinct)}); left null')
-            ev_parts = [f'productName: {name}']
+                    notes.append(f'{f} sources disagree ({", ".join(f"{v:g}" for v in dist[f])}); left null')
+            if vals.get('diameterIn') is None and not dist['diameterIn']:
+                calp = (sj or {}).get('Caliber') or cg.get('Caliber')
+                if calp:
+                    notes.append(f'Barnes prints only "Caliber: {calp}" for this muzzleloader bullet; no bullet diameter published')
+            ev_parts = [f'productName: {name}' if not orphan else f'(item found only in specsJson of page "{name}")']
             st = barnes_spec_text(spec_raw, item) if sj else None
             if st:
                 ev_parts.append(f'specsJson: {st}')
@@ -455,13 +476,18 @@ def barnes_records(log):
                 style = ws(style)
                 kinds = [BARNES_STYLE[t] for t in style.split() if t in BARNES_STYLE]
                 prof = style + (f' ({", ".join(kinds)})' if kinds else '')
+            if new_cat:
+                notes.append('listed in the Barnes "2026 New Products" category')
+            if orphan:
+                notes.insert(0, f'Item {item} appears only inside the specsJson spec sheet of {url}, where it is not an item '
+                                f'for sale and no product page of its own was found; values uncorroborated, status unknown')
             rec = {
                 'id': f'barnes-{kebab(item)}',
                 'manufacturer': 'Barnes',
                 'line': line,
-                'name': name,
+                'name': name if not orphan else None,
                 'sku': item,
-                'caliberLabel': cal,
+                'caliberLabel': cal if not orphan else None,
                 'diameterIn': vals['diameterIn'],
                 'weightGr': vals['weightGr'],
                 'lengthIn': vals['lengthIn'],
@@ -474,7 +500,7 @@ def barnes_records(log):
                 'tip': tip,
                 'construction': construction,
                 'recommendedTwist': twist_text(vals['minTwistIn'], 'Barnes "Minimum Twist Rate"'),
-                'status': 'current',
+                'status': 'current' if not orphan else 'unknown',
                 'sources': [src(url)],
                 'evidence': ws(' | '.join(ev_parts)),
                 'notes': None,
@@ -483,11 +509,14 @@ def barnes_records(log):
                 '_sd': vals['sectionalDensity'],
                 '_style': style,
                 '_new': new_cat,
+                '_orphan': orphan,
             }
             page_recs.append(rec)
         # same bullet in several box counts on one page must print identical specs
         by_key = {}
         for r in page_recs:
+            if r['_orphan']:
+                continue
             by_key.setdefault((r['diameterIn'], r['weightGr'], r['_style'], r['line']), []).append(r)
         for k, rs in by_key.items():
             if len(rs) < 2 or k[1] is None:
@@ -501,7 +530,14 @@ def barnes_records(log):
                         r[fld] = None
                         r['_notes'].append(f'{fld.strip("_")} differs between box-count variants of the same {k[1]:g} gr bullet on this page; left null')
         recs += page_recs
-    return recs, docs
+    sold = {r['sku'] for r in recs if not r['_orphan']}
+    keep = []
+    for r in recs:
+        if r['_orphan'] and r['sku'] in sold:
+            log.append(f'Barnes item {r["sku"]}: stray copy in another page\'s specsJson ignored (item has its own product page)')
+            continue
+        keep.append(r)
+    return keep, docs
 
 
 # --------------------------------------------------------------------------- Speer catalog
@@ -559,7 +595,7 @@ def speer_page(t):
     out = {}
     m = re.search(r'<h1[^>]*class="[^"]*product-name[^"]*"[^>]*>(.*?)</h1>', t, re.S)
     out['name'] = strip_tags(m.group(1)) if m else None
-    m = re.search(r'Part\s*#\s*(?:</[^>]+>\s*<[^>]+>\s*)*\s*([0-9A-Z][0-9A-Za-z-]*)\s*<', t)
+    m = re.search(r'Part\s*#\s*<span class="product-id">\s*([^<\s]+)\s*</span>', t)
     out['part'] = m.group(1) if m else None
     specs = []
     m = re.search(r'<div class="spec-datasheet">(.*?)</table>', t, re.S)
@@ -661,14 +697,24 @@ def speer_records(log):
         notes, conflicts = [], []
         w_web, d_web = num(sp.get('Grain Weight')), num(sp.get('Diameter In'))
         bc_web, sd_web, len_web = num(sp.get('Ballistic Coefficient')), num(sp.get('Sectional Density')), num(sp.get('Bullet Length In'))
+        lraw = sp.get('Bullet Length In')
+        if lraw and len_web is None:
+            ml = re.fullmatch(r'(\d*\.\d+)\s*in\.?\s*/\s*(\d*\.?\d+)\s*mm', lraw.strip())
+            if ml and abs(float(ml.group(1)) * 25.4 - float(ml.group(2))) <= 0.02:
+                len_web = float(ml.group(1))
+                notes.append(f'length printed as "{lraw}" (inch value used; mm value consistent)')
+            else:
+                notes.append(f'"Bullet Length In" printed as "{lraw}" (not parsed)')
+        # velocity-banded BCs ("3,000-2,500 - G1: .567, G7: .284 | ...")
+        bands = []
+        bv = sp.get('Ballistic Coefficient with Velocity')
+        if bv:
+            for lo_hi, g1s, g7s in re.findall(r'([\d,]+\s*-\s*[\d,]+)\s*-\s*G1:\s*(\d*\.\d+),\s*G7:\s*(\d*\.\d+)', bv):
+                bands.append((tuple(sorted(int(x.replace(',', '')) for x in re.split(r'\s*-\s*', lo_hi))), num(g1s), num(g7s)))
         g7_web = None
-        for k, v in sp.items():
-            if re.search(r'G7', k, re.I):
-                g7_web = num(v)
-            if re.search(r'G1', k, re.I) and bc_web is None:
-                bc_web = num(v)
         unknown = [k for k in sp if k not in ('Caliber', 'Grain Weight', 'Bullet Style', 'Ballistic Coefficient', 'Bullet Length In',
-                                              'Sectional Density', 'Diameter In', 'Diameter Mm', 'Package Quantity', 'Usage')]
+                                              'Sectional Density', 'Diameter In', 'Diameter Mm', 'Package Quantity', 'Usage',
+                                              'Ballistic Coefficient with Velocity')]
         if unknown:
             notes.append('other spec rows: ' + '; '.join(f'{k}: {sp[k]}' for k in unknown))
         row = rows.get(part) if part else None
@@ -694,8 +740,26 @@ def speer_records(log):
         vals['weightGr'] = pick('weightGr', w_web, row['wt'] if row else None, 'Weight',
                                 (float(nm.group(2)), f'{url} (product name "{pg["name"]}")') if nm else None)
         vals['diameterIn'] = pick('diameterIn', d_web, row['dia'] if row else None, 'Diameter')
-        vals['bcG1'] = pick('bcG1', bc_web, row['g1'] if row else None, 'G1 BC' if row and row['vel'] else 'BC')
-        vals['bcG7'] = pick('bcG7', g7_web, row['g7'] if row else None, 'G7 BC')
+        bcn = None
+        if row and row['vel']:
+            # Impact: the catalog G1/G7 belong to one velocity band; compare them with the web value for the
+            # same band.  The web's single "Ballistic Coefficient" names neither band nor model: notes only.
+            band = tuple(sorted(int(x.replace(',', '')) for x in re.split(r'\s*[–-]\s*', row['vel'])))
+            wb = [b_ for b_ in bands if b_[0] == band]
+            vals['bcG1'] = pick('bcG1', wb[0][1] if wb else None, row['g1'], 'G1 BC')
+            vals['bcG7'] = pick('bcG7', wb[0][2] if wb else None, row['g7'], 'G7 BC')
+            bcn = f'G1/G7 for {row["vel"]} ft/s (2026 catalog Impact table)'
+            if bands:
+                bcn += '; web "Ballistic Coefficient with Velocity": ' + bv
+            if bc_web is not None:
+                bcn += f'; web page also prints "Ballistic Coefficient: {sp.get("Ballistic Coefficient")}" with no velocity band or drag model (not used)'
+        else:
+            vals['bcG1'] = pick('bcG1', bc_web, row['g1'] if row else None, 'BC')
+            vals['bcG7'] = None
+            if bc_web is not None or (row and row['g1'] is not None):
+                bcn = 'Printed as "Ballistic Coefficient"/"BC" without naming the drag model (stored as G1)'
+            if bands:
+                bcn = (bcn or '') + '; web "Ballistic Coefficient with Velocity": ' + bv
         vals['sd'] = pick('sectionalDensity', sd_web, row['sd'] if row else None, 'SD')
         vals['lengthIn'] = len_web
         if row and row['diaRaw'] != f'{row["dia"]:.3f}':
@@ -706,14 +770,10 @@ def speer_records(log):
             vals['bcG1'] = vals['bcG7'] = None
         if row is None:
             notes.append('Part # not found in the 2026 catalog tables (web page only)')
-        bcn = None
-        if row and row['vel']:
-            bcn = f'Catalog prints G1/G7 BC for velocity {row["vel"]} ft/s'
-        elif bc_web is not None or (row and row['g1'] is not None):
-            bcn = 'Printed as "Ballistic Coefficient"/"BC" without naming the drag model (stored as G1)'
-        con, cq, tip, tq = rules.get(slug, (None, None, None, None))
+        rslug = slug if slug in rules else (SPEER_TABLE_LINE.get(row['table']) if row else None)
+        con, cq, tip, tq = rules.get(rslug, (None, None, None, None))
         if cq:
-            notes.append(f'construction per catalog wording: "{cq}"')
+            notes.append(f'construction per catalog wording: "{cq}"' + (f' (catalog table {row["table"]})' if rslug != slug else ''))
         if tq:
             notes.append(f'tip per catalog wording: "{tq}"')
         if pg['overview']:
@@ -820,6 +880,13 @@ def speer_records(log):
 # --------------------------------------------------------------------------- output
 def finalize(r):
     notes = r.pop('_notes', [])
+    for n in list(notes):
+        m = re.match(r'Printed sectional density (\d\.\d+)$', n)
+        if m and r['weightGr'] and r['diameterIn']:
+            c = r['weightGr'] / (7000 * r['diameterIn'] ** 2)
+            if abs(c - float(m.group(1))) > 0.0015:
+                notes.append(f'QA: printed sectional density {m.group(1)} does not match {r["weightGr"]:g} gr at '
+                             f'{r["diameterIn"]:.3f} in (w/(7000 d^2) = {c:.3f}); one printed value may be wrong')
     for k in [k for k in r if k.startswith('_')]:
         r.pop(k)
     if r['conflicts']:
