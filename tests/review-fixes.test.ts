@@ -4,7 +4,8 @@ import { monteCarlo, sensitivities, specForPowderModel } from '../src/engine/unc
 import { parseUserImport, BASE_DB } from '../src/data/db';
 import { publishedReference } from '../src/ui/CrossCheck';
 import * as U from '../src/engine/units';
-import type { LoadSetup, ValidationLoad } from '../src/data/schema';
+import type { ValidationLoad } from '../src/data/schema';
+import type { LoadSetup } from '../src/engine/types';
 
 const setup: LoadSetup = {
   caseCapacityM3: U.grH2OToM3(56), caseLengthM: U.inToM(2.005), boreDiameterM: U.inToM(0.3), grooveDiameterM: U.inToM(0.308),

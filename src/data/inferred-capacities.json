@@ -2,7 +2,7 @@
  {
   "cartridgeId": "30-06-springfield",
   "caseBrand": "lapua",
-  "grH2O": 69.5,
+  "grH2O": 69.4,
   "loads": 40,
   "powders": 11,
   "priorFromOtherBrands": 67.2,
@@ -16,7 +16,7 @@
   "loads": 40,
   "powders": 23,
   "priorFromOtherBrands": 53.5,
-  "rmsPressurePct": 15.985526456528131,
+  "rmsPressurePct": 15.959528143660345,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 23 powders) — not a measurement"
  },
  {
@@ -36,78 +36,78 @@
   "loads": 40,
   "powders": 20,
   "priorFromOtherBrands": 53.55,
-  "rmsPressurePct": 12.59801415819961,
+  "rmsPressurePct": 12.651750731247361,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 20 powders) — not a measurement"
  },
  {
   "cartridgeId": "270-winchester",
   "caseBrand": "winchester",
-  "grH2O": 62.8,
+  "grH2O": 62.7,
   "loads": 40,
   "powders": 24,
   "priorFromOtherBrands": 66.7,
-  "rmsPressurePct": 16.36506191486112,
+  "rmsPressurePct": 16.520201618168457,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 24 powders) — not a measurement"
  },
  {
-  "cartridgeId": "6.8-western",
-  "caseBrand": "browning",
-  "grH2O": 73.7,
+  "cartridgeId": "45-70-government",
+  "caseBrand": "remington",
+  "grH2O": 100.4,
   "loads": 40,
-  "powders": 17,
-  "priorFromOtherBrands": 73.8,
-  "rmsPressurePct": 13.306435649195937,
-  "basis": "model-inferred effective capacity of the browning cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
+  "powders": 9,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 23.36475519207072,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "6.5-precision-rifle",
   "caseBrand": "lapua",
-  "grH2O": 63.5,
+  "grH2O": 63.6,
   "loads": 40,
   "powders": 12,
   "priorFromOtherBrands": 67.2,
-  "rmsPressurePct": 11.833857490805492,
+  "rmsPressurePct": 11.764154872963035,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
  },
  {
   "cartridgeId": "22-250-remington",
   "caseBrand": "winchester",
-  "grH2O": 42.9,
+  "grH2O": 42.8,
   "loads": 40,
   "powders": 16,
   "priorFromOtherBrands": 44.9,
-  "rmsPressurePct": 11.25731065217533,
+  "rmsPressurePct": 11.269499676858912,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
  },
  {
   "cartridgeId": "45-70-government",
   "caseBrand": "winchester",
-  "grH2O": 101.2,
+  "grH2O": 100.9,
   "loads": 40,
   "powders": 12,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.361868096959219,
+  "rmsPressurePct": 14.169153700235466,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
  },
  {
   "cartridgeId": "222-remington",
   "caseBrand": "winchester",
-  "grH2O": 27.8,
+  "grH2O": 27.7,
   "loads": 40,
   "powders": 19,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 18.683142869106167,
+  "rmsPressurePct": 17.53489579165256,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 19 powders) — not a measurement"
  },
  {
-  "cartridgeId": "224-valkyrie",
-  "caseBrand": "federal",
-  "grH2O": 31.7,
+  "cartridgeId": "338-winchester-magnum",
+  "caseBrand": "winchester",
+  "grH2O": 82.2,
   "loads": 40,
-  "powders": 16,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.819100394229697,
-  "basis": "model-inferred effective capacity of the federal cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
+  "powders": 14,
+  "priorFromOtherBrands": 84.2,
+  "rmsPressurePct": 11.923092813875744,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-advanced-rifle",
@@ -122,7 +122,7 @@
  {
   "cartridgeId": "9.3x62",
   "caseBrand": "lapua",
-  "grH2O": 80.4,
+  "grH2O": 80.3,
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": null,
@@ -130,14 +130,14 @@
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
-  "cartridgeId": "22-nosler",
-  "caseBrand": "nosler",
-  "grH2O": 34.2,
+  "cartridgeId": "7x64-brenneke",
+  "caseBrand": "norma",
+  "grH2O": 67.9,
   "loads": 40,
-  "powders": 7,
+  "powders": 12,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 7 powders) — not a measurement"
+  "rmsPressurePct": 8.35853290252429,
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
  },
  {
   "cartridgeId": "338-federal",
@@ -146,28 +146,28 @@
   "loads": 40,
   "powders": 15,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.764188898860393,
+  "rmsPressurePct": 15.526900051367054,
   "basis": "model-inferred effective capacity of the federal cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-blackout",
   "caseBrand": "hornady",
-  "grH2O": 33,
+  "grH2O": 33.1,
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 38.6590733030609,
+  "rmsPressurePct": 38.37600065605621,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
   "cartridgeId": "338-lapua-magnum",
-  "caseBrand": "lapua",
-  "grH2O": 110.7,
+  "caseBrand": "norma",
+  "grH2O": 111.4,
   "loads": 40,
-  "powders": 10,
+  "powders": 9,
   "priorFromOtherBrands": 114.8,
-  "rmsPressurePct": 11.633374426912987,
-  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
+  "rmsPressurePct": 8.759079286836883,
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-advanced-rifle",
@@ -176,7 +176,7 @@
   "loads": 40,
   "powders": 17,
   "priorFromOtherBrands": 32.8,
-  "rmsPressurePct": 13.49609168327905,
+  "rmsPressurePct": 13.667751714028576,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
@@ -192,11 +192,11 @@
  {
   "cartridgeId": "264-winchester-magnum",
   "caseBrand": "winchester",
-  "grH2O": 81.4,
+  "grH2O": 81.5,
   "loads": 40,
   "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.99885448912956,
+  "rmsPressurePct": 14.9787267891201,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
@@ -210,44 +210,44 @@
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 4 powders) — not a measurement"
  },
  {
-  "cartridgeId": "350-legend",
-  "caseBrand": "winchester",
-  "grH2O": 39.9,
+  "cartridgeId": "338-weatherby-rebated-precision-magnum",
+  "caseBrand": "weatherby",
+  "grH2O": 83,
   "loads": 40,
-  "powders": 6,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 31.510022391824222,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 6 powders) — not a measurement"
+  "powders": 16,
+  "priorFromOtherBrands": 82.1,
+  "rmsPressurePct": 12.393673914252016,
+  "basis": "model-inferred effective capacity of the weatherby cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
  },
  {
-  "cartridgeId": "6.8-remington-spc",
-  "caseBrand": "remington",
-  "grH2O": 40.8,
-  "loads": 40,
-  "powders": 14,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.968853302352672,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
- },
- {
-  "cartridgeId": "6.5-grendel",
-  "caseBrand": "hornady",
-  "grH2O": 38.7,
+  "cartridgeId": "7.62x53r",
+  "caseBrand": "lapua",
+  "grH2O": 64.5,
   "loads": 40,
   "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.793013707543826,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "7mm-precision-rifle",
+  "caseBrand": "hornady",
+  "grH2O": 79,
+  "loads": 40,
+  "powders": 9,
+  "priorFromOtherBrands": 80.1,
+  "rmsPressurePct": 5.894583514508574,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
-  "cartridgeId": "35-remington",
+  "cartridgeId": "338-remington-ultra-magnum",
   "caseBrand": "remington",
-  "grH2O": 61.2,
+  "grH2O": 112.4,
   "loads": 40,
-  "powders": 16,
+  "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 36.7583045878459,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
+  "rmsPressurePct": 7.252528595677328,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "8mm-mauser-8x57",
@@ -272,11 +272,11 @@
  {
   "cartridgeId": "6.5-precision-rifle",
   "caseBrand": "hornady",
-  "grH2O": 68.8,
+  "grH2O": 68.9,
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": 67.2,
-  "rmsPressurePct": 9.860619414654753,
+  "rmsPressurePct": 9.884518812958252,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
@@ -296,7 +296,7 @@
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 67.2,
-  "rmsPressurePct": 11.104019526646715,
+  "rmsPressurePct": 11.128120690392812,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
@@ -306,13 +306,13 @@
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 88.8,
-  "rmsPressurePct": 15.950749270088375,
+  "rmsPressurePct": 16.054329957948855,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "22-250-remington",
   "caseBrand": "lapua .22-250 remington",
-  "grH2O": 38.4,
+  "grH2O": 38.3,
   "loads": 40,
   "powders": 6,
   "priorFromOtherBrands": 44.9,
@@ -320,14 +320,14 @@
   "basis": "model-inferred effective capacity of the lapua .22-250 remington cases used in published pressure tests (40 loads, 6 powders) — not a measurement"
  },
  {
-  "cartridgeId": "6-xc",
-  "caseBrand": "norma",
-  "grH2O": 44.7,
+  "cartridgeId": "6mm-dasher",
+  "caseBrand": "lapua (ref)",
+  "grH2O": 41.6,
   "loads": 40,
-  "powders": 10,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 16.939958959393287,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
+  "powders": 9,
+  "priorFromOtherBrands": 40,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the lapua (ref) cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "7.62x39",
@@ -336,17 +336,17 @@
   "loads": 38,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.944587050142903,
+  "rmsPressurePct": 16.048779826505715,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (38 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "257-roberts-+p",
   "caseBrand": "remington",
-  "grH2O": 56.5,
+  "grH2O": 56.3,
   "loads": 40,
   "powders": 11,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 10.782497630250186,
+  "rmsPressurePct": 10.814598081576976,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 11 powders) — not a measurement"
  },
  {
@@ -362,11 +362,11 @@
  {
   "cartridgeId": "6mm-remington",
   "caseBrand": "remington",
-  "grH2O": 51.5,
+  "grH2O": 51.4,
   "loads": 40,
   "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 19.780572065324577,
+  "rmsPressurePct": 19.749297451414918,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
@@ -376,13 +376,13 @@
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 30.1,
-  "rmsPressurePct": 14.476026595166214,
+  "rmsPressurePct": 14.90879464775088,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "9.3x74r",
   "caseBrand": "rws",
-  "grH2O": 84.5,
+  "grH2O": 84.4,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": null,
@@ -400,44 +400,44 @@
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "30-carbine",
-  "caseBrand": "winchester",
-  "grH2O": 20.4,
-  "loads": 20,
-  "powders": 4,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (20 loads, 4 powders) — not a measurement"
- },
- {
-  "cartridgeId": "240-weatherby-magnum",
-  "caseBrand": "norma",
-  "grH2O": 63.8,
-  "loads": 30,
+  "cartridgeId": "30-30-winchester",
+  "caseBrand": "remington",
+  "grH2O": 40.8,
+  "loads": 32,
   "powders": 5,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (30 loads, 5 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (32 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "32-20-winchester",
+  "cartridgeId": "300-savage",
   "caseBrand": "remington",
-  "grH2O": 14,
-  "loads": 14,
-  "powders": 2,
+  "grH2O": 55.5,
+  "loads": 30,
+  "powders": 6,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (14 loads, 2 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (30 loads, 6 powders) — not a measurement"
  },
  {
-  "cartridgeId": "6mm-dasher",
+  "cartridgeId": "416-rigby",
   "caseBrand": "norma",
-  "grH2O": 40.1,
+  "grH2O": 123.5,
+  "loads": 30,
+  "powders": 3,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (30 loads, 3 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "8x57-irs",
+  "caseBrand": "rws",
+  "grH2O": 73.6,
   "loads": 26,
   "powders": 2,
-  "priorFromOtherBrands": 40,
-  "rmsPressurePct": 11.256915716444633,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (26 loads, 2 powders) — not a measurement"
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 13.54904697214134,
+  "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (26 loads, 2 powders) — not a measurement"
  },
  {
   "cartridgeId": "222-remington",
@@ -446,7 +446,7 @@
   "loads": 24,
   "powders": 5,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 11.234561439900306,
+  "rmsPressurePct": 11.163852479645444,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (24 loads, 5 powders) — not a measurement"
  },
  {
@@ -466,7 +466,7 @@
   "loads": 22,
   "powders": 2,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 11.179445806143416,
+  "rmsPressurePct": 11.249906381520027,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (22 loads, 2 powders) — not a measurement"
  },
  {
@@ -492,11 +492,11 @@
  {
   "cartridgeId": "45-70-government",
   "caseBrand": "starline",
-  "grH2O": 88.1,
+  "grH2O": 88,
   "loads": 18,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 20.0928385395389,
+  "rmsPressurePct": 23.457713151989108,
   "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (18 loads, 3 powders) — not a measurement"
  },
  {
@@ -512,7 +512,7 @@
  {
   "cartridgeId": "300-hh-magnum",
   "caseBrand": "winchester",
-  "grH2O": 79.6,
+  "grH2O": 79.5,
   "loads": 18,
   "powders": 5,
   "priorFromOtherBrands": null,
@@ -522,21 +522,21 @@
  {
   "cartridgeId": "338-lapua-magnum",
   "caseBrand": "rws",
-  "grH2O": 112,
+  "grH2O": 112.7,
   "loads": 16,
   "powders": 3,
   "priorFromOtherBrands": 114.8,
-  "rmsPressurePct": 8.561173655285888,
+  "rmsPressurePct": 8.751265142454324,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (16 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "444-marlin",
   "caseBrand": "hornady",
-  "grH2O": 84.2,
+  "grH2O": 83,
   "loads": 6,
   "powders": 2,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 30.773658787278467,
+  "rmsPressurePct": 32.57105950277518,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (6 loads, 2 powders) — not a measurement"
  },
  {
@@ -546,23 +546,23 @@
   "loads": 12,
   "powders": 5,
   "priorFromOtherBrands": 60.1,
-  "rmsPressurePct": 6.231145574046053,
+  "rmsPressurePct": 6.226174048544383,
   "basis": "model-inferred effective capacity of the ppu cases used in published pressure tests (12 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "375-hh-magnum",
   "caseBrand": "winchester",
-  "grH2O": 96.3,
+  "grH2O": 96.2,
   "loads": 10,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.146706651652226,
+  "rmsPressurePct": 15.170443562609414,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (10 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-ppc-usa",
   "caseBrand": "sako",
-  "grH2O": 35.5,
+  "grH2O": 35.6,
   "loads": 10,
   "powders": 3,
   "priorFromOtherBrands": null,
@@ -572,21 +572,21 @@
  {
   "cartridgeId": "7.5x55-swiss",
   "caseBrand": "unstated",
-  "grH2O": 78.3,
+  "grH2O": 80.1,
   "loads": 8,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 25.61641753737473,
+  "rmsPressurePct": 23.87788184448173,
   "basis": "model-inferred effective capacity of the unstated cases used in published pressure tests (8 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "9.3x74r",
   "caseBrand": "norma",
-  "grH2O": 88.8,
+  "grH2O": 88.6,
   "loads": 6,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 12.078318825825713,
+  "rmsPressurePct": 12.126380196981213,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (6 loads, 3 powders) — not a measurement"
  },
  {
@@ -596,17 +596,17 @@
   "loads": 40,
   "powders": 10,
   "priorFromOtherBrands": 50.4,
-  "rmsPressurePct": 13.277436985595475,
+  "rmsPressurePct": 13.067112577147167,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "30-06-springfield",
   "caseBrand": "winchester",
-  "grH2O": 70.2,
+  "grH2O": 70,
   "loads": 40,
   "powders": 19,
   "priorFromOtherBrands": 67.2,
-  "rmsPressurePct": 23.260876020093928,
+  "rmsPressurePct": 23.303275433936584,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 19 powders) — not a measurement"
  },
  {
@@ -622,11 +622,11 @@
  {
   "cartridgeId": "300-precision-rifle",
   "caseBrand": "lapua",
-  "grH2O": 92.4,
+  "grH2O": 92.5,
   "loads": 40,
   "powders": 10,
   "priorFromOtherBrands": 94.8,
-  "rmsPressurePct": 9.553700125370325,
+  "rmsPressurePct": 10.674776623791296,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
@@ -636,23 +636,23 @@
   "loads": 40,
   "powders": 10,
   "priorFromOtherBrands": 64.4,
-  "rmsPressurePct": 13.113023590223,
+  "rmsPressurePct": 13.099423645320185,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "30-30-winchester",
   "caseBrand": "winchester",
-  "grH2O": 47.4,
+  "grH2O": 48.1,
   "loads": 40,
-  "powders": 24,
+  "powders": 22,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 19.5426642180069,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 24 powders) — not a measurement"
+  "rmsPressurePct": 21.154417312631292,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 22 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-creedmoor",
   "caseBrand": "lapua",
-  "grH2O": 49.7,
+  "grH2O": 49.6,
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": 49.650000000000006,
@@ -666,68 +666,68 @@
   "loads": 40,
   "powders": 21,
   "priorFromOtherBrands": 88.8,
-  "rmsPressurePct": 7.307294456467775,
+  "rmsPressurePct": 7.306752058786464,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 21 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-winchester-short-magnum",
   "caseBrand": "winchester",
-  "grH2O": 84.6,
+  "grH2O": 84.3,
   "loads": 40,
   "powders": 16,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 10.17660365690599,
+  "rmsPressurePct": 10.159943138644383,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
  },
  {
-  "cartridgeId": "338-winchester-magnum",
+  "cartridgeId": "7mm-remington-magnum",
   "caseBrand": "winchester",
-  "grH2O": 82.5,
+  "grH2O": 87.8,
   "loads": 40,
-  "powders": 14,
-  "priorFromOtherBrands": 84.2,
-  "rmsPressurePct": 11.836414262944055,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
+  "powders": 16,
+  "priorFromOtherBrands": 82.7,
+  "rmsPressurePct": 12.366735389879235,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
  },
  {
-  "cartridgeId": "243-winchester",
-  "caseBrand": "lapua",
-  "grH2O": 51.9,
+  "cartridgeId": "22-advanced-rifle",
+  "caseBrand": "hornady",
+  "grH2O": 36.2,
   "loads": 40,
-  "powders": 9,
-  "priorFromOtherBrands": 53.5,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+  "powders": 14,
+  "priorFromOtherBrands": 33.7,
+  "rmsPressurePct": 12.594499745688559,
+  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
   "cartridgeId": "220-swift",
   "caseBrand": "winchester",
-  "grH2O": 44.8,
+  "grH2O": 44.7,
   "loads": 40,
   "powders": 17,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 20.686703888631726,
+  "rmsPressurePct": 20.45857485976474,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
- },
- {
-  "cartridgeId": "375-hh-magnum",
-  "caseBrand": "remington",
-  "grH2O": 96.6,
-  "loads": 40,
-  "powders": 15,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
  },
  {
   "cartridgeId": "303-british",
   "caseBrand": "remington",
-  "grH2O": 55.2,
+  "grH2O": 57,
   "loads": 40,
-  "powders": 24,
+  "powders": 22,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 23.763031146966078,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 24 powders) — not a measurement"
+  "rmsPressurePct": 23.701634576527283,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 22 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "22-nosler",
+  "caseBrand": "nosler",
+  "grH2O": 34.2,
+  "loads": 40,
+  "powders": 7,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 7 powders) — not a measurement"
  },
  {
   "cartridgeId": "30-nosler",
@@ -736,37 +736,37 @@
   "loads": 40,
   "powders": 11,
   "priorFromOtherBrands": 97.2,
-  "rmsPressurePct": 8.406866346751428,
+  "rmsPressurePct": 8.437378900251673,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 11 powders) — not a measurement"
  },
  {
-  "cartridgeId": "28-nosler",
-  "caseBrand": "nosler",
-  "grH2O": 103.5,
+  "cartridgeId": "444-marlin",
+  "caseBrand": "remington",
+  "grH2O": 85.4,
   "loads": 40,
-  "powders": 12,
-  "priorFromOtherBrands": 98.55,
-  "rmsPressurePct": 5.990566260456165,
-  "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
+  "powders": 17,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 16.272323833883924,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
-  "cartridgeId": "300-precision-rifle",
-  "caseBrand": "hornady",
-  "grH2O": 92.7,
+  "cartridgeId": "338-lapua-magnum",
+  "caseBrand": "lapua",
+  "grH2O": 110.6,
   "loads": 40,
   "powders": 10,
-  "priorFromOtherBrands": 94.8,
-  "rmsPressurePct": 10.22964010285378,
-  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
+  "priorFromOtherBrands": 114.8,
+  "rmsPressurePct": 11.62144155380533,
+  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-remington-ultra-magnum",
   "caseBrand": "remington",
-  "grH2O": 115,
+  "grH2O": 114.9,
   "loads": 40,
   "powders": 14,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 6.649524454150978,
+  "rmsPressurePct": 6.62965319758454,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
@@ -776,43 +776,43 @@
   "loads": 40,
   "powders": 16,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 18.13179178341791,
+  "rmsPressurePct": 18.154228510286366,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
  },
  {
   "cartridgeId": "458-socom",
   "caseBrand": "starline",
-  "grH2O": 78.9,
+  "grH2O": 78,
   "loads": 40,
-  "powders": 12,
+  "powders": 13,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 26.603738786938948,
-  "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
+  "rmsPressurePct": 29.32915933656125,
+  "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (40 loads, 13 powders) — not a measurement"
  },
  {
-  "cartridgeId": "204-ruger",
-  "caseBrand": "hornady",
-  "grH2O": 32.4,
+  "cartridgeId": "6.8-remington-spc",
+  "caseBrand": "remington",
+  "grH2O": 40.7,
   "loads": 40,
-  "powders": 17,
+  "powders": 14,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.405193875415026,
-  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
+  "rmsPressurePct": 13.666264284698077,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
-  "cartridgeId": "6.5x55-swedish",
+  "cartridgeId": "350-legend",
   "caseBrand": "winchester",
-  "grH2O": 56.9,
+  "grH2O": 40,
   "loads": 40,
-  "powders": 15,
+  "powders": 6,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
+  "rmsPressurePct": 31.554406407040492,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 6 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-weatherby-magnum",
   "caseBrand": "remington",
-  "grH2O": 97.3,
+  "grH2O": 97.2,
   "loads": 40,
   "powders": 14,
   "priorFromOtherBrands": 95.85,
@@ -820,14 +820,14 @@
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
-  "cartridgeId": "257-weatherby-magnum",
-  "caseBrand": "weatherby",
-  "grH2O": 89.3,
+  "cartridgeId": "6.5-grendel",
+  "caseBrand": "hornady",
+  "grH2O": 38.6,
   "loads": 40,
   "powders": 9,
-  "priorFromOtherBrands": 81.4,
-  "rmsPressurePct": 18.02484759362391,
-  "basis": "model-inferred effective capacity of the weatherby cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 15.96694672680517,
+  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "6.5-grendel",
@@ -836,7 +836,7 @@
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.732779113298172,
+  "rmsPressurePct": 13.744208031086307,
   "basis": "model-inferred effective capacity of the alexander cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
@@ -856,13 +856,13 @@
   "loads": 40,
   "powders": 10,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.187086032278144,
+  "rmsPressurePct": 14.186974738879874,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "7mm-remington-magnum",
   "caseBrand": "lapua",
-  "grH2O": 76.6,
+  "grH2O": 76.5,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 82.7,
@@ -882,11 +882,11 @@
  {
   "cartridgeId": "450-bushmaster",
   "caseBrand": "hornady",
-  "grH2O": 66.2,
+  "grH2O": 66,
   "loads": 14,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 19.78287308866466,
+  "rmsPressurePct": 19.677127490274067,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (14 loads, 1 powders) — not a measurement"
  },
  {
@@ -902,7 +902,7 @@
  {
   "cartridgeId": "50-browning",
   "caseBrand": "imi",
-  "grH2O": 294.8,
+  "grH2O": 288.8,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": null,
@@ -910,19 +910,19 @@
   "basis": "model-inferred effective capacity of the imi cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "17-hornet",
-  "caseBrand": "hornady",
-  "grH2O": 14.5,
+  "cartridgeId": "6-xc",
+  "caseBrand": "norma",
+  "grH2O": 44.7,
   "loads": 40,
   "powders": 10,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 46.20185621962033,
-  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
+  "rmsPressurePct": 17.25668371395372,
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "8x68-s",
   "caseBrand": "unstated",
-  "grH2O": 81.5,
+  "grH2O": 81.4,
   "loads": 40,
   "powders": 7,
   "priorFromOtherBrands": null,
@@ -936,7 +936,7 @@
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 53.5,
-  "rmsPressurePct": 11.931979168223837,
+  "rmsPressurePct": 11.892621595927617,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
@@ -952,11 +952,11 @@
  {
   "cartridgeId": "7mm-remington-magnum",
   "caseBrand": "norma",
-  "grH2O": 84.4,
+  "grH2O": 84.1,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 82.7,
-  "rmsPressurePct": 13.77772154274641,
+  "rmsPressurePct": 13.732350352861545,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
@@ -966,23 +966,23 @@
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 54.1,
-  "rmsPressurePct": 14.612456420283177,
+  "rmsPressurePct": 15.008758709354582,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "450-bushmaster",
   "caseBrand": "starline",
-  "grH2O": 73.7,
+  "grH2O": 73.1,
   "loads": 33,
   "powders": 5,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 45.59686515058636,
+  "rmsPressurePct": 44.719761146369606,
   "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (33 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "338-winchester-magnum",
   "caseBrand": "lapua",
-  "grH2O": 91.2,
+  "grH2O": 91.1,
   "loads": 36,
   "powders": 4,
   "priorFromOtherBrands": 84.2,
@@ -990,29 +990,39 @@
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (36 loads, 4 powders) — not a measurement"
  },
  {
-  "cartridgeId": "7mm-winchester-short-magnum",
+  "cartridgeId": "30-carbine",
   "caseBrand": "winchester",
-  "grH2O": 76.7,
+  "grH2O": 20.5,
+  "loads": 20,
+  "powders": 4,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (20 loads, 4 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "240-weatherby-magnum",
+  "caseBrand": "norma",
+  "grH2O": 63.9,
   "loads": 30,
   "powders": 5,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (30 loads, 5 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (30 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "300-blackout",
-  "caseBrand": "lapua 221 rem. fireball",
-  "grH2O": 28.2,
-  "loads": 10,
-  "powders": 1,
+  "cartridgeId": "32-20-winchester",
+  "caseBrand": "remington",
+  "grH2O": 14.1,
+  "loads": 14,
+  "powders": 2,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the lapua 221 rem. fireball cases used in published pressure tests (10 loads, 1 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (14 loads, 2 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-lapua-magnum",
   "caseBrand": "lapua",
-  "grH2O": 102.4,
+  "grH2O": 102.3,
   "loads": 24,
   "powders": 4,
   "priorFromOtherBrands": null,
@@ -1026,27 +1036,27 @@
   "loads": 24,
   "powders": 5,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 10.570751924618477,
+  "rmsPressurePct": 10.638978334695587,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (24 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "44-40-winchester",
   "caseBrand": "winchester",
-  "grH2O": 26,
+  "grH2O": 46.4,
   "loads": 6,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.79092657293774,
+  "rmsPressurePct": 9.708609048239513,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (6 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "260-remington",
   "caseBrand": "nosler",
-  "grH2O": 54.4,
+  "grH2O": 54.5,
   "loads": 22,
   "powders": 4,
   "priorFromOtherBrands": 53.8,
-  "rmsPressurePct": 6.45721293513338,
+  "rmsPressurePct": 6.398131541965042,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (22 loads, 4 powders) — not a measurement"
  },
  {
@@ -1056,7 +1066,7 @@
   "loads": 20,
   "powders": 4,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 8.017849942276657,
+  "rmsPressurePct": 8.019707210383878,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (20 loads, 4 powders) — not a measurement"
  },
  {
@@ -1066,13 +1076,13 @@
   "loads": 8,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.112314443092698,
+  "rmsPressurePct": 13.094424105296804,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (8 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "458-winchester-magnum",
   "caseBrand": "winchester",
-  "grH2O": 114.9,
+  "grH2O": 114.7,
   "loads": 18,
   "powders": 4,
   "priorFromOtherBrands": null,
@@ -1092,11 +1102,11 @@
  {
   "cartridgeId": "470-nitro",
   "caseBrand": "hornady",
-  "grH2O": 167.5,
+  "grH2O": 167.6,
   "loads": 16,
   "powders": 8,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 8.114852623061878,
+  "rmsPressurePct": 8.105661859266007,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (16 loads, 8 powders) — not a measurement"
  },
  {
@@ -1112,21 +1122,21 @@
  {
   "cartridgeId": "10.3x60r",
   "caseBrand": "rws",
-  "grH2O": 112.5,
+  "grH2O": 112.3,
   "loads": 12,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 28.371415198971984,
+  "rmsPressurePct": 28.36488546858224,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (12 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "50-browning",
   "caseBrand": "rws",
-  "grH2O": 279.9,
+  "grH2O": 280.8,
   "loads": 12,
   "powders": 2,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 24.704503181620012,
+  "rmsPressurePct": 23.95674118586049,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (12 loads, 2 powders) — not a measurement"
  },
  {
@@ -1136,37 +1146,37 @@
   "loads": 10,
   "powders": 3,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 10.273492665675775,
+  "rmsPressurePct": 10.224423942346396,
   "basis": "model-inferred effective capacity of the ppu cases used in published pressure tests (10 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "7.62x39",
   "caseBrand": "unstated",
-  "grH2O": 38.1,
+  "grH2O": 37.7,
   "loads": 6,
   "powders": 2,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 6.407914103007261,
+  "rmsPressurePct": 5.29570439560686,
   "basis": "model-inferred effective capacity of the unstated cases used in published pressure tests (6 loads, 2 powders) — not a measurement"
  },
  {
   "cartridgeId": "338-norma-magnum",
   "caseBrand": "norma",
-  "grH2O": 107.2,
+  "grH2O": 107.8,
   "loads": 8,
   "powders": 1,
   "priorFromOtherBrands": 106.15,
-  "rmsPressurePct": 12.524542086355488,
+  "rmsPressurePct": 13.380953515057097,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (8 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "444-marlin",
   "caseBrand": "starline",
-  "grH2O": 82.6,
+  "grH2O": 82.2,
   "loads": 6,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 16.039652546622076,
+  "rmsPressurePct": 15.776722007653465,
   "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (6 loads, 1 powders) — not a measurement"
  },
  {
@@ -1176,13 +1186,13 @@
   "loads": 4,
   "powders": 1,
   "priorFromOtherBrands": 114.8,
-  "rmsPressurePct": 15.908808249607198,
+  "rmsPressurePct": 13.532475066270063,
   "basis": "model-inferred effective capacity of the unstated cases used in published pressure tests (4 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-winchester-magnum",
   "caseBrand": "lapua",
-  "grH2O": 90.8,
+  "grH2O": 90.7,
   "loads": 40,
   "powders": 9,
   "priorFromOtherBrands": 88.8,
@@ -1196,27 +1206,27 @@
   "loads": 40,
   "powders": 22,
   "priorFromOtherBrands": 50.4,
-  "rmsPressurePct": 42.4043282886117,
+  "rmsPressurePct": 42.51330945480528,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 22 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-remington",
   "caseBrand": "winchester",
-  "grH2O": 55.7,
+  "grH2O": 55.6,
   "loads": 40,
   "powders": 17,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.858029017631328,
+  "rmsPressurePct": 14.912477673652216,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
   "cartridgeId": "6mm-creedmoor",
   "caseBrand": "hornady",
-  "grH2O": 52,
+  "grH2O": 51.9,
   "loads": 40,
   "powders": 21,
   "priorFromOtherBrands": 49.650000000000006,
-  "rmsPressurePct": 11.771865773788383,
+  "rmsPressurePct": 11.753242834944318,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 21 powders) — not a measurement"
  },
  {
@@ -1226,18 +1236,18 @@
   "loads": 40,
   "powders": 20,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 12.190102229035404,
+  "rmsPressurePct": 12.197325370958072,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 20 powders) — not a measurement"
  },
  {
-  "cartridgeId": "45-70-government",
-  "caseBrand": "remington",
-  "grH2O": 100.1,
+  "cartridgeId": "6.8-western",
+  "caseBrand": "browning",
+  "grH2O": 73.7,
   "loads": 40,
-  "powders": 8,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 23.660169278208077,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
+  "powders": 17,
+  "priorFromOtherBrands": 73.8,
+  "rmsPressurePct": 13.309091313640334,
+  "basis": "model-inferred effective capacity of the browning cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
   "cartridgeId": "6.5x55-swedish",
@@ -1256,58 +1266,58 @@
   "loads": 40,
   "powders": 20,
   "priorFromOtherBrands": 77.7,
-  "rmsPressurePct": 10.367317632371872,
+  "rmsPressurePct": 10.37781947267956,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 20 powders) — not a measurement"
- },
- {
-  "cartridgeId": "7mm-remington-magnum",
-  "caseBrand": "winchester",
-  "grH2O": 87.8,
-  "loads": 40,
-  "powders": 16,
-  "priorFromOtherBrands": 82.7,
-  "rmsPressurePct": 12.335371683355246,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
- },
- {
-  "cartridgeId": "22-advanced-rifle",
-  "caseBrand": "hornady",
-  "grH2O": 36.3,
-  "loads": 40,
-  "powders": 14,
-  "priorFromOtherBrands": 33.7,
-  "rmsPressurePct": 12.520950354174312,
-  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
   "cartridgeId": "35-whelen",
   "caseBrand": "remington",
-  "grH2O": 78.5,
+  "grH2O": 78.3,
   "loads": 40,
   "powders": 14,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.158435021816516,
+  "rmsPressurePct": 13.846666879678057,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "224-valkyrie",
+  "caseBrand": "federal",
+  "grH2O": 32,
+  "loads": 40,
+  "powders": 18,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 13.094853309645114,
+  "basis": "model-inferred effective capacity of the federal cases used in published pressure tests (40 loads, 18 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "243-winchester",
+  "caseBrand": "lapua",
+  "grH2O": 52,
+  "loads": 40,
+  "powders": 9,
+  "priorFromOtherBrands": 53.5,
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "257-roberts",
   "caseBrand": "remington",
-  "grH2O": 55.7,
+  "grH2O": 55.6,
   "loads": 40,
   "powders": 15,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.431199700799535,
+  "rmsPressurePct": 13.476034882595595,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
  },
  {
-  "cartridgeId": "7x64-brenneke",
-  "caseBrand": "norma",
-  "grH2O": 67.9,
+  "cartridgeId": "375-hh-magnum",
+  "caseBrand": "remington",
+  "grH2O": 96.3,
   "loads": 40,
-  "powders": 12,
+  "powders": 15,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 8.33516202676776,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
+  "rmsPressurePct": null,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
  },
  {
   "cartridgeId": "260-remington",
@@ -1316,38 +1326,38 @@
   "loads": 40,
   "powders": 17,
   "priorFromOtherBrands": 53.8,
-  "rmsPressurePct": 9.858145539271126,
+  "rmsPressurePct": 9.866789692864597,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-norma-magnum",
   "caseBrand": "lapua",
-  "grH2O": 100.4,
+  "grH2O": 100.3,
   "loads": 40,
   "powders": 14,
   "priorFromOtherBrands": 103.95,
-  "rmsPressurePct": 10.073528547481384,
+  "rmsPressurePct": 10.056310242266797,
   "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
  },
  {
-  "cartridgeId": "338-lapua-magnum",
-  "caseBrand": "norma",
-  "grH2O": 111.5,
+  "cartridgeId": "28-nosler",
+  "caseBrand": "nosler",
+  "grH2O": 103.5,
   "loads": 40,
-  "powders": 9,
-  "priorFromOtherBrands": 114.8,
-  "rmsPressurePct": 8.860680580666386,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+  "powders": 12,
+  "priorFromOtherBrands": 98.55,
+  "rmsPressurePct": 5.980697876699478,
+  "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 12 powders) — not a measurement"
  },
  {
-  "cartridgeId": "444-marlin",
-  "caseBrand": "remington",
-  "grH2O": 85.3,
+  "cartridgeId": "300-precision-rifle",
+  "caseBrand": "hornady",
+  "grH2O": 92.7,
   "loads": 40,
-  "powders": 14,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.034656180850257,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 14 powders) — not a measurement"
+  "powders": 10,
+  "priorFromOtherBrands": 94.8,
+  "rmsPressurePct": 10.278962851342396,
+  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "224-valkyrie",
@@ -1366,58 +1376,58 @@
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": 93.95,
-  "rmsPressurePct": 7.260474961227631,
+  "rmsPressurePct": 7.246557503194345,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
   "cartridgeId": "30-06-springfield",
   "caseBrand": "remington",
-  "grH2O": 65.7,
+  "grH2O": 65.6,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": 67.2,
-  "rmsPressurePct": 15.199710774328068,
+  "rmsPressurePct": 15.224737626000358,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "338-weatherby-rebated-precision-magnum",
-  "caseBrand": "weatherby",
-  "grH2O": 83.1,
+  "cartridgeId": "204-ruger",
+  "caseBrand": "hornady",
+  "grH2O": 32,
   "loads": 40,
-  "powders": 16,
-  "priorFromOtherBrands": 82.1,
-  "rmsPressurePct": 12.2999173966684,
-  "basis": "model-inferred effective capacity of the weatherby cases used in published pressure tests (40 loads, 16 powders) — not a measurement"
+  "powders": 17,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 15.093890164344636,
+  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 17 powders) — not a measurement"
  },
  {
-  "cartridgeId": "7.62x53r",
-  "caseBrand": "lapua",
-  "grH2O": 64.6,
+  "cartridgeId": "6.5x55-swedish",
+  "caseBrand": "winchester",
+  "grH2O": 56.7,
   "loads": 40,
-  "powders": 9,
+  "powders": 15,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the lapua cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 15 powders) — not a measurement"
  },
  {
-  "cartridgeId": "7mm-precision-rifle",
-  "caseBrand": "hornady",
-  "grH2O": 79,
-  "loads": 40,
-  "powders": 9,
-  "priorFromOtherBrands": 80.1,
-  "rmsPressurePct": 5.933760941390576,
-  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
- },
- {
-  "cartridgeId": "338-remington-ultra-magnum",
+  "cartridgeId": "35-remington",
   "caseBrand": "remington",
-  "grH2O": 112.5,
+  "grH2O": 61.1,
+  "loads": 40,
+  "powders": 18,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 25.06377579778108,
+  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 18 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "257-weatherby-magnum",
+  "caseBrand": "weatherby",
+  "grH2O": 89.3,
   "loads": 40,
   "powders": 9,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 7.232374854449401,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+  "priorFromOtherBrands": 81.4,
+  "rmsPressurePct": 18.05154275717287,
+  "basis": "model-inferred effective capacity of the weatherby cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "27-nosler",
@@ -1426,7 +1436,7 @@
   "loads": 40,
   "powders": 7,
   "priorFromOtherBrands": 95.9,
-  "rmsPressurePct": 5.010896221731451,
+  "rmsPressurePct": 5.014539992771094,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 7 powders) — not a measurement"
  },
  {
@@ -1452,11 +1462,11 @@
  {
   "cartridgeId": "400-legend",
   "caseBrand": "winchester",
-  "grH2O": 48.6,
+  "grH2O": 48.5,
   "loads": 40,
   "powders": 6,
   "priorFromOtherBrands": 44,
-  "rmsPressurePct": 32.82813699834672,
+  "rmsPressurePct": 32.10354667578786,
   "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 6 powders) — not a measurement"
  },
  {
@@ -1466,7 +1476,7 @@
   "loads": 31,
   "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 42.41050095284515,
+  "rmsPressurePct": 42.299500269398266,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (31 loads, 9 powders) — not a measurement"
  },
  {
@@ -1476,7 +1486,7 @@
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 11.400941315357763,
+  "rmsPressurePct": 11.427714143953239,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
@@ -1486,47 +1496,47 @@
   "loads": 40,
   "powders": 4,
   "priorFromOtherBrands": 54.1,
-  "rmsPressurePct": 14.334548081901954,
+  "rmsPressurePct": 14.379967064305141,
   "basis": "model-inferred effective capacity of the starline cases used in published pressure tests (40 loads, 4 powders) — not a measurement"
- },
- {
-  "cartridgeId": "6mm-dasher",
-  "caseBrand": "lapua (ref)",
-  "grH2O": 41.6,
-  "loads": 40,
-  "powders": 9,
-  "priorFromOtherBrands": 40,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the lapua (ref) cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
  },
  {
   "cartridgeId": "7.62x39",
   "caseBrand": "winchester",
-  "grH2O": 38.9,
+  "grH2O": 38.7,
   "loads": 40,
-  "powders": 8,
+  "powders": 9,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 21.61513297462612,
-  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
+  "rmsPressurePct": 21.82713143935909,
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (40 loads, 9 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "17-hornet",
+  "caseBrand": "hornady",
+  "grH2O": 14.5,
+  "loads": 40,
+  "powders": 10,
+  "priorFromOtherBrands": null,
+  "rmsPressurePct": 45.55411078995771,
+  "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (40 loads, 10 powders) — not a measurement"
  },
  {
   "cartridgeId": "360-buckhammer",
   "caseBrand": "remington",
-  "grH2O": 50.4,
+  "grH2O": 50.3,
   "loads": 36,
   "powders": 11,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 36.33122572686981,
+  "rmsPressurePct": 35.143868585149605,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (36 loads, 11 powders) — not a measurement"
  },
  {
   "cartridgeId": "7mm-mauser-7x57",
   "caseBrand": "norma",
-  "grH2O": 61.7,
+  "grH2O": 61.8,
   "loads": 40,
   "powders": 5,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 10.674864018570831,
+  "rmsPressurePct": 10.692791827087065,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (40 loads, 5 powders) — not a measurement"
  },
  {
@@ -1536,7 +1546,7 @@
   "loads": 40,
   "powders": 6,
   "priorFromOtherBrands": 98,
-  "rmsPressurePct": 10.58130740868163,
+  "rmsPressurePct": 10.57039653661715,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (40 loads, 6 powders) — not a measurement"
  },
  {
@@ -1552,7 +1562,7 @@
  {
   "cartridgeId": "7.62x39",
   "caseBrand": "midway",
-  "grH2O": 38.2,
+  "grH2O": 37.1,
   "loads": 36,
   "powders": 8,
   "priorFromOtherBrands": null,
@@ -1562,52 +1572,42 @@
  {
   "cartridgeId": "204-ruger",
   "caseBrand": "remington",
-  "grH2O": 32.1,
+  "grH2O": 31.8,
   "loads": 40,
   "powders": 8,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 17.95752020204486,
+  "rmsPressurePct": 18.554863995452024,
   "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (40 loads, 8 powders) — not a measurement"
  },
  {
-  "cartridgeId": "30-30-winchester",
-  "caseBrand": "remington",
-  "grH2O": 40.8,
+  "cartridgeId": "6mm-dasher",
+  "caseBrand": "norma",
+  "grH2O": 40.2,
   "loads": 32,
+  "powders": 3,
+  "priorFromOtherBrands": 40,
+  "rmsPressurePct": 10.207984182019004,
+  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (32 loads, 3 powders) — not a measurement"
+ },
+ {
+  "cartridgeId": "7mm-winchester-short-magnum",
+  "caseBrand": "winchester",
+  "grH2O": 76.7,
+  "loads": 30,
   "powders": 5,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (32 loads, 5 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the winchester cases used in published pressure tests (30 loads, 5 powders) — not a measurement"
  },
  {
-  "cartridgeId": "300-savage",
-  "caseBrand": "remington",
-  "grH2O": 55.5,
-  "loads": 30,
-  "powders": 6,
+  "cartridgeId": "300-blackout",
+  "caseBrand": "lapua 221 rem. fireball",
+  "grH2O": 28.1,
+  "loads": 10,
+  "powders": 1,
   "priorFromOtherBrands": null,
   "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the remington cases used in published pressure tests (30 loads, 6 powders) — not a measurement"
- },
- {
-  "cartridgeId": "416-rigby",
-  "caseBrand": "norma",
-  "grH2O": 123.8,
-  "loads": 30,
-  "powders": 3,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": null,
-  "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (30 loads, 3 powders) — not a measurement"
- },
- {
-  "cartridgeId": "8x57-irs",
-  "caseBrand": "rws",
-  "grH2O": 73.5,
-  "loads": 26,
-  "powders": 2,
-  "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.501363083514997,
-  "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (26 loads, 2 powders) — not a measurement"
+  "basis": "model-inferred effective capacity of the lapua 221 rem. fireball cases used in published pressure tests (10 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "270-winchester",
@@ -1616,17 +1616,17 @@
   "loads": 24,
   "powders": 3,
   "priorFromOtherBrands": 66.7,
-  "rmsPressurePct": 9.174184951484957,
+  "rmsPressurePct": 9.137072287011952,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (24 loads, 3 powders) — not a measurement"
  },
  {
   "cartridgeId": "375-hh-magnum",
   "caseBrand": "norma",
-  "grH2O": 94.9,
+  "grH2O": 94.8,
   "loads": 22,
   "powders": 4,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 13.747929683330607,
+  "rmsPressurePct": 13.818138340045236,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (22 loads, 4 powders) — not a measurement"
  },
  {
@@ -1636,27 +1636,27 @@
   "loads": 22,
   "powders": 4,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 8.412862687949234,
+  "rmsPressurePct": 8.384065238692658,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (22 loads, 4 powders) — not a measurement"
  },
  {
   "cartridgeId": "338-winchester-magnum",
   "caseBrand": "norma",
-  "grH2O": 88.2,
+  "grH2O": 88,
   "loads": 20,
   "powders": 4,
   "priorFromOtherBrands": 84.2,
-  "rmsPressurePct": 14.768361876152836,
+  "rmsPressurePct": 14.67185987285166,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (20 loads, 4 powders) — not a measurement"
  },
  {
   "cartridgeId": "300-blackout",
   "caseBrand": "norma",
-  "grH2O": 30.5,
+  "grH2O": 30.6,
   "loads": 4,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 6.366805845604705,
+  "rmsPressurePct": 7.068585642200327,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (4 loads, 1 powders) — not a measurement"
  },
  {
@@ -1672,7 +1672,7 @@
  {
   "cartridgeId": "370-sako-magnum",
   "caseBrand": "sako",
-  "grH2O": 85,
+  "grH2O": 84.8,
   "loads": 18,
   "powders": 4,
   "priorFromOtherBrands": null,
@@ -1686,13 +1686,13 @@
   "loads": 16,
   "powders": 5,
   "priorFromOtherBrands": 44.9,
-  "rmsPressurePct": 6.466434214711439,
+  "rmsPressurePct": 6.502739239667448,
   "basis": "model-inferred effective capacity of the nosler cases used in published pressure tests (16 loads, 5 powders) — not a measurement"
  },
  {
   "cartridgeId": "22-ppc-usa",
   "caseBrand": "sako",
-  "grH2O": 33.3,
+  "grH2O": 33.2,
   "loads": 14,
   "powders": 4,
   "priorFromOtherBrands": null,
@@ -1702,17 +1702,17 @@
  {
   "cartridgeId": "5.6x50r-magnum",
   "caseBrand": "rws",
-  "grH2O": 34.4,
+  "grH2O": 34.5,
   "loads": 12,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 30.164173617742897,
+  "rmsPressurePct": 30.12151289189564,
   "basis": "model-inferred effective capacity of the rws cases used in published pressure tests (12 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "22-hornet",
   "caseBrand": "sako",
-  "grH2O": 17.3,
+  "grH2O": 17.2,
   "loads": 4,
   "powders": 1,
   "priorFromOtherBrands": null,
@@ -1722,11 +1722,11 @@
  {
   "cartridgeId": "270-winchester-short-magnum",
   "caseBrand": "hornady",
-  "grH2O": 75.3,
+  "grH2O": 75.4,
   "loads": 10,
   "powders": 3,
   "priorFromOtherBrands": 77.7,
-  "rmsPressurePct": 4.824548203088569,
+  "rmsPressurePct": 4.7973924272791155,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (10 loads, 3 powders) — not a measurement"
  },
  {
@@ -1736,27 +1736,27 @@
   "loads": 8,
   "powders": 1,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 8.311071155261917,
+  "rmsPressurePct": 8.399263124630146,
   "basis": "model-inferred effective capacity of the norma cases used in published pressure tests (8 loads, 1 powders) — not a measurement"
  },
  {
   "cartridgeId": "350-legend",
   "caseBrand": "hornady",
-  "grH2O": 44.5,
+  "grH2O": 44.2,
   "loads": 6,
   "powders": 6,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 15.191725318611402,
+  "rmsPressurePct": 15.24978628185135,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (6 loads, 6 powders) — not a measurement"
  },
  {
   "cartridgeId": "45-70-government",
   "caseBrand": "hornady",
-  "grH2O": 85.4,
+  "grH2O": 85.2,
   "loads": 6,
   "powders": 2,
   "priorFromOtherBrands": null,
-  "rmsPressurePct": 14.971782952595412,
+  "rmsPressurePct": 15.344286514570241,
   "basis": "model-inferred effective capacity of the hornady cases used in published pressure tests (6 loads, 2 powders) — not a measurement"
  }
 ]

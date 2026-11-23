@@ -52,7 +52,9 @@ export function FitGrade({ model }: { model?: { status: string; calibration?: { 
   const title = `Fit to published pressure data: RMS error ${c.rmsPressurePct.toFixed(1)} %${typeof c.heldOutPressurePct === 'number' ? `; median error on held-out cartridges ${c.heldOutPressurePct.toFixed(1)} %` : ''}.`;
   return (
     <span className={`chip fit-${grade}`} title={title} data-testid="fit-grade">
-      fit ±{c.rmsPressurePct.toFixed(0)} % · {grade}
+      {typeof c.heldOutPressurePct === 'number' && c.heldOutPressurePct > c.rmsPressurePct
+        ? `held-out ±${c.heldOutPressurePct.toFixed(0)} % · ${grade}`
+        : `fit ±${c.rmsPressurePct.toFixed(0)} % · ${grade}`}
     </span>
   );
 }

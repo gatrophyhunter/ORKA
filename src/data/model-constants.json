@@ -1,13 +1,13 @@
 {
-  "generated": "2026-11-23T17:04:42.269Z",
+  "generated": "2026-11-23T18:24:07.276Z",
   "shotStartMPa": {
     "jacketed": {
       "value": 25,
       "basis": "Reference value: widely reported QuickLOAD default for jacketed lead-core bullets (research/raw/physics.md [50][150][151]); within the 24-44 MPa first engraving peak reported for 6.5-9.3 mm jacketed bullets [47]."
     },
     "monolithic": {
-      "value": 49.5,
-      "basis": "Fitted to 60 published pressure-tested loads with monolithic bullets (33 powders), relative to the 25 MPa jacketed reference, by scripts/calibrate-powders.ts."
+      "value": 49.8,
+      "basis": "Fitted to 60 published pressure-tested loads with monolithic bullets (32 powders), relative to the 25 MPa jacketed reference, by scripts/calibrate-powders.ts."
     },
     "lead": {
       "value": 30,
@@ -15,17 +15,17 @@
     }
   },
   "validation": {
-    "heldOutPressureN": 359,
-    "heldOutPressureP50Pct": 12.8,
-    "heldOutPressureP90Pct": 31.2,
-    "heldOutPressureBiasPct": -4.8,
-    "heldOutWithin10Pct": 37,
+    "heldOutPressureN": 375,
+    "heldOutPressureP50Pct": 12.7,
+    "heldOutPressureP90Pct": 30.9,
+    "heldOutPressureBiasPct": -4.4,
+    "heldOutWithin10Pct": 39,
     "scope": "held-out pressure comparisons exist only for: 308 Winchester, 223 Remington",
     "heldOutCartridgeIds": [
       "308-winchester",
       "223-remington"
     ],
-    "heldOutPowders": 40,
-    "generated": "2026-11-23T17:04:42.269Z"
+    "heldOutPowders": 41,
+    "generated": "2026-11-23T18:24:07.276Z"
   }
 }

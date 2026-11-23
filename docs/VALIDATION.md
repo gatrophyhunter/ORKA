@@ -19,25 +19,22 @@ ORKA covers **centerfire rifle** only. These numbers are the honest answer to "i
 
 ## Results (held out)
 
+Powder models (rifle build): 106 calibrated (11 good, 54 fair, 20 poor; 21 **unvalidated**, i.e. fitted to velocities only because their makers publish no piezo pressures, such as Vihtavuori, or only CUP), 36 chart-interpolated estimates, 36 without a model.
+
+
 | Measure | Value |
 |---|---|
-| Pressure comparisons | 359 (48 powders) |
-| Median absolute pressure error | **12.8 %** |
-| 90th-percentile absolute pressure error | **31.2 %** |
-| Mean signed pressure error (bias) | **−4.8 %**, i.e. the model predicts *lower* pressure on average, which is the unsafe direction |
-| Predictions within ±10 % | 37 % |
-| Velocity comparisons | 570 |
-| Median / 90th-percentile velocity error | 71 fps / 230 fps |
+| Pressure comparisons | 375 (41 powders; .308 Win and .223 Rem only) |
+| Median absolute pressure error | **12.7 %** |
+| 90th-percentile absolute pressure error | **30.9 %** |
+| Mean signed pressure error (bias) | **−4.4 %**, i.e. the model predicts *lower* pressure on average, which is the unsafe direction |
+| Predictions within ±10 % | 39 % |
+| Velocity comparisons | 586 |
+| Median / 90th-percentile velocity error | 73 fps / 227 fps |
 
-In-sample (the fitted data itself) the median is 9.1 % (90th percentile 24.4 %). The powder models are fitted on rifle loads only.
+In-sample (the fitted data itself) the median is 9.2 % (90th percentile 24.8 %). The powder models are fitted on rifle loads only.
 
-Breakdowns (also in the app):
-
-| Group | n (pressure) | p50 | p90 |
-|---|---|---|---|
-| Bullet length published by the maker | 80 | 16.2 % | 35.8 % |
-| Bullet length estimated (maker publishes none) | 279 | 12.3 % | 31.0 % |
-| Monolithic bullets | 75 | 16.6 % | 35.8 % |
+Breakdowns by bullet-length source and bullet construction, including the signed bias of each group, are on the app's **Validation** tab. They are regenerated with the data.
 
 ## What this means
 
@@ -53,16 +50,16 @@ Breakdowns (also in the app):
 ## Known contributors to the error
 
 1. **Test-case capacity.** Most publisher test cases (Winchester, Hornady, Remington brass) have no published capacity. For 8,685 of 23,336 loads, an "effective capacity" was inferred from the data itself.
-2. **Bullet length.** Hornady and Sierra publish no bullet lengths, so 17,344 of 23,336 loads use an estimated length. The leave-one-out error of the estimator is 6.9 % for pointed bullets and 6.1 % for blunt (flat-nose) bullets.
-3. **Model structure.** There is one shot-start pressure per construction class (fitted: monolithic 49.5 MPa vs the 25 MPa jacketed reference), no bearing-surface or jump effects, a single form function per powder, and Lagrange gradients.
-4. **Burn-rate charts.** Chart-interpolated "estimated" powders have an RMS burn-rate error of 40 % when re-estimated for calibrated powders. They are labelled "not for load development".
+2. **Bullet length.** Hornady and Sierra publish no bullet lengths, so 17,394 of 23,336 loads use an estimated length. The leave-one-out error of the estimator is 6.1 % for pointed bullets and 5.9 % for blunt (flat-nose) bullets. Published lengths that fail a physical plausibility screen (13 bullets) are withheld.
+3. **Model structure.** There is one shot-start pressure per construction class (fitted: monolithic 49.8 MPa vs the 25 MPa jacketed reference), no bearing-surface or jump effects, a single form function per powder, and Lagrange gradients.
+4. **Burn-rate charts.** Chart-interpolated "estimated" powders have an RMS burn-rate error of 42 % when re-estimated for calibrated powders. They are labelled "not for load development".
 
 ## Data that could not be used
 
 - **Rifle loads that could not be simulated** (out of 24,907):
   - 762 loads in cartridges without bore/groove dimensions in the standards
   - 809 loads without COAL or barrel length
-  - 315 loads whose powder isn't in the database
+  - 160 loads whose powder isn't in the database
   - 64 loads with no capacity that could be inferred
 
   Loads in wildcat cartridges (no SAAMI/C.I.P. standard) are outside the rifle database and are not counted here.

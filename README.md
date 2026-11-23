@@ -23,9 +23,9 @@ The app runs entirely in the browser: no account, no server, and no network requ
 
 Measured on published pressure-tested data the model never saw (leave-one-cartridge-out; **only .308 Win and .223 Rem could be tested this way**; see [docs/VALIDATION.md](docs/VALIDATION.md)):
 
-- **Pressure error:** median **±12.8 %**, and 1 in 10 predictions is off by more than **±31 %**.
-- **Bias:** on average the model reads **5 % low**, which is the unsafe direction.
-- **Velocity error:** median 71 fps.
+- **Pressure error:** median **±12.7 %**, and 1 in 10 predictions is off by more than **±31 %**.
+- **Bias:** on average the model reads **4.4 % low**, which is the unsafe direction.
+- **Velocity error:** median 73 fps.
 
 That is not accurate enough to develop loads from, and for other cartridges the error is simply unmeasured. ORKA shows this error on every prediction, sizes its uncertainty band from each powder's own fit, and puts the maker's published loads for your components beside every prediction.
 
