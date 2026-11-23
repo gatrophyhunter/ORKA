@@ -1,0 +1,32 @@
+{
+  "records": [],
+  "charts": [],
+  "meta": {
+    "task": "Powder catalog, part B: Alliant (incl. Reloder, Power Pro, AR-Comp), Accurate and Ramshot (Western Powders; verify current ownership), Vihtavuori (N1xx, N3xx, N5xx, 3Nxx, VV pistol/shotgun), plus each publisher's own relative burn-rate chart",
+    "generatedOn": "2026-11-23",
+    "status": "empty - no data could be sourced in this session",
+    "reason": "No page or search result could be read. (1) WebSearch returned 'budget used up' on this agent's first query: the 200-call per-turn limit shared by every agent in the turn was already spent. (2) WebFetch of https://www.alliantpowder.com/products/ failed with DNS ENOTFOUND because the host is outside this cloud session's allowed network domains. get_environment confirms the session environment ('Default') has limited network access, an empty allowed-hosts list and only package registries and MCP servers reachable, so every manufacturer site (Alliant, Western Powders / Accurate / Ramshot, Vihtavuori) is blocked. The tool told the agent to stop trying further hosts after the failure, so no other hosts were tried. (3) No web-fetch subagent tool was available. (4) The PubMed connector was not used: its tool description limits it to biomedical research, and powder catalog data is out of scope. Per the safety rules, no powder names, forms, bases, nitroglycerin percentages, densities, heats of explosion, burn-rate ranks or ownership facts were filled from memory. records and charts are left empty on purpose rather than partly guessed.",
+    "pagesFetched": 0,
+    "searchesRun": 0,
+    "hostsBlocked": [
+      "www.alliantpowder.com"
+    ],
+    "hostsNotTriedButCertainlyBlocked": "Every host outside package registries; the environment's allowed-hosts list is empty.",
+    "westernPowdersOwnership": {
+      "value": null,
+      "verified": false,
+      "notes": "Could not be verified this session. Do not assume an owner."
+    },
+    "crossReferenceUnverified": {
+      "file": "/home/user/ORKA/research/raw/physics.md",
+      "section": "7.2 Commercial powders: manufacturer-published values (refs [85]-[91])",
+      "notes": "Another agent recorded Vihtavuori N500-series heat-of-explosion values, an N565 bulk density and an N140 third-party bulk density from its own search results. It cites vihtavuori.com pages, the Vihtavuori Reloading Guide 2022 and 2026 PDFs and an N500-series SDS. This agent did NOT see those pages or snippets and did NOT copy the values into records. Re-verify them against the cited URLs before use. physics.md also flags a possible N530 absence from the 2026 guide [UNCERTAIN]."
+    },
+    "toRetry": [
+      "Alliant: the full canister-powder list (rifle including the Reloder line and AR-Comp; handgun and shotgun including the Power Pro line where applicable). Use each product page for form, applications and temperature-stability claim text, and the Alliant relative burn-rate chart (charts[]). Also check Alliant SDS sheets for single-base or double-base and NG content. Candidate host: www.alliantpowder.com (blocked).",
+      "Western Powders: current owner (the task asks to verify it), the full Accurate and Ramshot canister lists (rifle, handgun, shotgun) and the Western Powders burn-rate chart covering both brands (charts[]). Candidate hosts, not verified this session: westernpowders.com, accuratepowder.com, ramshot.com.",
+      "Vihtavuori: the full N100, N300, N500, 3N and VV pistol/shotgun lines, product pages (grain geometry, bulk density, energy content, temperature-stability claims), the Vihtavuori relative burn-rate chart, the Reloading Guide 2026 PDF and the SDS sheets for base and NG percentage. Candidate hosts: www.vihtavuori.com and vihtavuori.com (blocked; URLs cited in physics.md refs [85]-[90])."
+    ],
+    "unblockHint": "Allow www.alliantpowder.com, alliantpowder.com, westernpowders.com, accuratepowder.com, ramshot.com, www.vihtavuori.com and vihtavuori.com in the session's network settings, then rerun this task with a fresh WebSearch budget. With only the network fixed, WebFetch of the manufacturer pages alone would cover most fields."
+  }
+}

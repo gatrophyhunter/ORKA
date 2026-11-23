@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "task": "Berger bullet catalog (Hybrid Target, Long Range Hybrid Target, VLD Target, VLD Hunting, Elite Hunter, Classic Hunter, Hybrid Hunter, FB Target, Match Grade Varmint) and Lapua bullet catalog (Scenar, Scenar-L, Naturalis, FMJ, Mega, Lock Base)",
+    "collectedOn": "2026-11-23",
+    "status": "empty - no sources could be opened",
+    "notes": "No records were written. WebFetch could not resolve bergerbullets.com or www.lapua.com (both are outside this cloud session's allowed network domains), and the shared WebSearch budget for this turn (200 calls) was already used up before this agent's first search. Under the safety rules, no value may be filled from memory, so the records array is left empty rather than populated with unverified SKUs, BCs, or lengths. To fill it, allow bergerbullets.com (product pages and the Berger bullet reference chart / catalog PDF) and www.lapua.com (bullet product pages and catalog PDF) in the session's network settings, then re-run this task.",
+    "attempted": [
+      {"url": "https://bergerbullets.com/products/rifle-bullets/", "result": "getaddrinfo ENOTFOUND (host not in allowed network domains)"},
+      {"url": "https://www.lapua.com/products/bullets/", "result": "getaddrinfo ENOTFOUND (host not in allowed network domains)"},
+      {"tool": "WebSearch", "query": "Berger Bullets reference chart Hybrid Target SKU BC length", "result": "not performed: shared per-turn web search budget (200) exhausted"}
+    ]
+  },
+  "records": []
+}

@@ -1,0 +1,33 @@
+{
+  "brands": [],
+  "cases": [],
+  "meta": {
+    "task": "Brass (case) manufacturers and per-cartridge case data (water capacity, case weight, primer size / pocket type)",
+    "generatedOn": "2026-11-23",
+    "status": "empty - no data could be sourced in this session",
+    "reason": "The first WebSearch call returned 'web search budget used up' (the 200-call per-turn limit shared by all agents in this run was already exhausted before this agent ran). WebFetch could not resolve www.lapua.com or www.starlinebrass.com (ENOTFOUND: hosts are outside this cloud session's allowed network domains), and after two hosts failed the same way no further sites were tried, as instructed by the tool. No Agent / web-fetch subagent tool was available. Under the safety rules no brand facts (country, parent company, product lines, primer pocket notes) and no case values (weight, water capacity, primer size) were filled from memory, so brands[] and cases[] are intentionally empty rather than partially guessed. Brand names below are the coverage checklist copied from the task, not sourced records.",
+    "pagesFetched": 0,
+    "searchesRun": 0,
+    "hostsBlocked": ["www.lapua.com", "www.starlinebrass.com"],
+    "searchBudgetExhausted": true,
+    "pendingBrands": [
+      "Lapua", "Lapua Palma", "Norma", "Peterson", "Alpha Munitions", "Starline", "Hornady", "Hornady Match", "Hornady/Frontier",
+      "Nosler", "Winchester", "Remington", "Federal", "PPU (Prvi Partizan)", "Sellier & Bellot", "RWS", "Sako",
+      "Lake City", "IMI", "Fiocchi", "Bertram", "Jamison", "ADG", "Gunwerks", "Atlas", "Quality Cartridge",
+      "Aguila", "Magtech", "Doubletap", "Shell Shock (NAS3)"
+    ],
+    "pendingCartridgesForCapacity": [
+      ".223 Rem", ".22-250", "6mm Creedmoor", "6.5 Creedmoor", ".243 Win", "6.5x55", ".260 Rem", "6.5 PRC",
+      ".270 Win", "7mm-08", "7mm Rem Mag", "7mm PRC", ".308 Win", ".30-06", ".300 Win Mag", ".300 WSM", ".300 PRC", ".338 Lapua"
+    ],
+    "toRetry": [
+      "Manufacturer brass catalog / product pages (Lapua, Norma, Peterson Cartridge, Alpha Munitions, Starline, Hornady, Nosler, ADG, Gunwerks, Atlas, Quality Cartridge, Bertram, Jamison, PPU, Sellier & Bellot, RWS, Fiocchi, Aguila, Magtech, Doubletap, Shell Shock/NAS3) for published case capacity, case weight, primer pocket size and SKU",
+      "Lapua and Alpha Munitions product pages, which may publish case capacity per cartridge",
+      "Peterson Cartridge and Norma product pages for case weight / capacity",
+      "Starline Brass product pages for rifle and pistol cases (primer pocket, SRP conversions)",
+      "AccurateShooter.com / 6mmBR.com case capacity comparison articles (record measurement method: fired vs new, to mouth, H2O grains)",
+      "Applied Ballistics / Bryan Litz published case capacity measurements"
+    ],
+    "unblock": "Re-run this research step with a fresh WebSearch budget (or raise CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION) and/or allow the manufacturer hosts in the session's network settings (e.g. www.lapua.com, www.starlinebrass.com, and the other brass makers' domains plus accurateshooter.com / 6mmbr.com)."
+  }
+}

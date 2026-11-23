@@ -1,0 +1,17 @@
+{
+  "_meta": {
+    "task": "Sierra bullet catalog (MatchKing, Tipped MatchKing, GameChanger, GameKing, Pro-Hunter, BlitzKing, Varminter, Sports Master, JHC/JHP/FMJ handgun)",
+    "scope": "Rifle .224, .243, .257, .264, .277, .284, .308, .311, .323, .338, .375; handgun .355, .357, .400, .429, .451/.452",
+    "collectedOn": "2026-11-23",
+    "status": "empty - no sources could be opened",
+    "pagesFetched": 0,
+    "hostsBlocked": ["www.sierrabullets.com", "sierrabullets.com"],
+    "notes": "No records were written. WebFetch could not resolve www.sierrabullets.com or sierrabullets.com (both are outside this cloud session's allowed network domains), and the shared WebSearch budget for this turn (200 calls) was already used up before this agent's first search. Under the safety rules, no value may be filled from memory, so the records array is left empty rather than populated with unverified SKUs, BCs, or lengths. To fill it, allow www.sierrabullets.com (product pages, which list SKU, diameter, weight, velocity-banded G1 BCs, G7 BCs, length, and recommended twist; plus the downloadable catalog PDF) in the session's network settings, then re-run this task.",
+    "toRetry": [
+      "www.sierrabullets.com product pages by line (MatchKing, Tipped MatchKing, GameChanger, GameKing, Pro-Hunter, BlitzKing, Varminter, Sports Master, Pistol & Revolver)",
+      "Sierra current catalog PDF (SKU, weight, diameter, BC bands)",
+      "Sierra bullet length / BC chart if published"
+    ]
+  },
+  "records": []
+}

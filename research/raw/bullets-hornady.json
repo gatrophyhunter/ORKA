@@ -1,0 +1,9 @@
+{
+  "_meta": {
+    "task": "Hornady bullet catalog (ELD Match, A-Tip Match, ELD-X, CX, SST, InterLock, InterBond, V-MAX, BTHP Match, FMJ, XTP, HAP, FTX, Sub-X, DGX/DGS)",
+    "collectedOn": "2026-11-23",
+    "status": "empty - no sources could be opened",
+    "notes": "No records were written. WebFetch could not resolve www.hornady.com or www.jbmballistics.com (both are outside this cloud session's allowed network domains), and the shared WebSearch budget for this turn (200 calls) was already used up before this agent's first search. Under the safety rules, no value may be filled from memory, so the records array is left empty rather than populated with unverified SKUs, BCs, or lengths. To fill it, allow www.hornady.com (product pages and catalog PDFs) in the session's network settings, and optionally a third-party length/BC reference such as www.jbmballistics.com, then re-run this task."
+  },
+  "records": []
+}

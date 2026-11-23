@@ -1,0 +1,21 @@
+{
+  "records": [],
+  "charts": [],
+  "meta": {
+    "task": "Powder catalog, part A: Hodgdon, IMR, Winchester (Hodgdon-family brands) plus Hodgdon's published relative burn-rate chart",
+    "generatedOn": "2026-11-23",
+    "status": "empty - no data could be sourced in this session",
+    "reason": "WebSearch returned 'budget used up' on the first query (the 200-call per-turn limit shared by all agents was already exhausted), and WebFetch could not resolve hodgdon.com or www.hodgdon.com (host outside this cloud session's allowed network domains). Per the safety rules, no powder names, burn-rate positions, densities or other values were filled from memory, so records and charts are intentionally empty rather than partially guessed.",
+    "pagesFetched": 0,
+    "searchesRun": 0,
+    "hostsBlocked": ["hodgdon.com", "www.hodgdon.com"],
+    "toRetry": [
+      "hodgdon.com/powders (full Hodgdon / IMR / Winchester canister-powder listing; individual powder pages for form, applications, temperature-stability claims)",
+      "Hodgdon relative burn rate chart (PDF linked from hodgdon.com / Hodgdon Reloading Data Center) -> charts[] with orderedPowderIds",
+      "hodgdonreloading.com (Reloading Data Center, may host the burn-rate chart and product pages)",
+      "imrpowder.com and wwpowder.com (legacy IMR and Winchester brand pages, which may now redirect to hodgdon.com)",
+      "Hodgdon / IMR safety data sheets (SDS) for base (single/double) and nitroglycerin content"
+    ],
+    "unblockHint": "Allow hodgdon.com, www.hodgdon.com, hodgdonreloading.com, imrpowder.com and wwpowder.com in the session's network settings and rerun with a fresh WebSearch budget."
+  }
+}

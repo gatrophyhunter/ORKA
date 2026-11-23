@@ -1,0 +1,21 @@
+{
+  "records": [],
+  "meta": {
+    "generatedOn": "2026-11-23",
+    "status": "empty - no data could be sourced in this session",
+    "reason": "WebFetch could not resolve hodgdonreloading.com or www.hodgdon.com (the cloud session's network is limited to package registries, with no allowed hosts), and the shared WebSearch budget for this turn was already used up before the first query ran. Per the safety rules, no values were filled from memory.",
+    "pagesFetched": 0,
+    "hostsBlocked": ["hodgdonreloading.com", "www.hodgdon.com"],
+    "toRetry": [
+      "hodgdonreloading.com / www.hodgdon.com (Reloading Data Center)",
+      "westernpowders.com (Accurate/Ramshot load data PDFs)",
+      "alliantpowder.com (Reloaders Guide)",
+      "vihtavuori.com (reloading data)",
+      "shootersworldpowder.com",
+      "norma-ammunition.com",
+      "reloadswiss.ch",
+      "adi-powders.com.au",
+      "lapua.com"
+    ]
+  }
+}

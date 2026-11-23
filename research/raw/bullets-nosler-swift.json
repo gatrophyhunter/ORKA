@@ -1,0 +1,14 @@
+{
+  "_meta": {
+    "task": "Nosler bullet catalog (AccuBond, AccuBond Long Range, Partition, Ballistic Tip Hunting/Varmint, RDF, Custom Competition, E-Tip, Expansion Tip, Sporting Handgun / JHP) and Swift bullet catalog (A-Frame, Scirocco II, Breakaway)",
+    "collectedOn": "2026-11-23",
+    "status": "empty - no sources could be opened",
+    "notes": "No records were written. WebFetch could not resolve www.nosler.com or www.swiftbullets.com. Both hosts are outside this cloud session's allowed network domains. The shared WebSearch budget for this turn (200 calls) was already used up before this agent's first search. No Agent/web-fetch fallback tool was available. The safety rules forbid filling any value from memory, so the records array is left empty rather than holding unverified SKUs, BCs or lengths. To fill it, allow www.nosler.com and www.swiftbullets.com in the session's network settings, then re-run this task. Use Nosler's product pages and its catalog / load-data PDFs, and Swift's product pages and bullet spec charts.",
+    "attempted": [
+      {"url": "https://www.nosler.com/accubond-bullets", "result": "getaddrinfo ENOTFOUND (host not in allowed network domains)"},
+      {"url": "https://www.swiftbullets.com/", "result": "getaddrinfo ENOTFOUND (host not in allowed network domains)"},
+      {"tool": "WebSearch", "query": "Nosler AccuBond bullet specifications SKU ballistic coefficient length", "result": "not performed: shared per-turn web search budget (200) exhausted"}
+    ]
+  },
+  "records": []
+}

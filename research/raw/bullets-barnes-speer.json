@@ -1,0 +1,18 @@
+{
+  "_meta": {
+    "task": "Bullet catalog: Barnes (TSX, TTSX, LRX, Match Burner, Varmint Grenade, Banded Solid, TAC-X, XPB) and Speer (Hot-Cor, Grand Slam, Boat-Tail, Impact, Gold Dot, TMJ, DeepCurl)",
+    "scope": "Rifle .224, .243, .257, .264, .277, .284, .308, .311, .323, .338, .375; handgun .355, .357, .400, .429, .451/.452",
+    "collectedOn": "2026-11-23",
+    "status": "empty - no sources could be opened",
+    "pagesFetched": 0,
+    "hostsBlocked": ["www.barnesbullets.com", "www.speer.com"],
+    "notes": "No records were written. WebFetch could not resolve www.barnesbullets.com or www.speer.com (both are outside this cloud session's allowed network domains), and the shared WebSearch budget for this turn (200 calls) was already used up before this agent's first search, so not even search-snippet sources were available. Under the safety rules, no value may be filled from memory, so the records array is left empty rather than populated with unverified SKUs, BCs, or lengths. To fill it, allow www.barnesbullets.com and www.speer.com in the session's network settings (and any CDN/asset host the catalog PDFs are served from), then re-run this task.",
+    "toRetry": [
+      "www.barnesbullets.com product pages by line (TSX, TTSX, LRX, Match Burner, Varmint Grenade, Banded Solid, TAC-X rifle and pistol, XPB) - list SKU, diameter, weight, G1/G7 BC, recommended twist, and often bullet length",
+      "Barnes current catalog PDF and bullet length / BC chart",
+      "www.speer.com reloading bullet pages (Hot-Cor, Grand Slam, Boat-Tail, Impact, Gold Dot rifle and handgun, TMJ, DeepCurl) - list part number, diameter, weight, BC",
+      "Speer reloading catalog PDF (part numbers, BCs, discontinued status)"
+    ]
+  },
+  "records": []
+}
