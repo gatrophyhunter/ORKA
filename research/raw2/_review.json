@@ -16,6 +16,120 @@
       "field": "bcG1",
       "value": null,
       "reason": "Hornady's page shows sectional density .141 for a 100 gr .355 bullet (should be .113): its spec block appears copied from another item, so its BC is withheld (bullets-hornady verifier)"
+    },
+    {
+      "id": "sierra-1380",
+      "field": "bcNotes",
+      "value": "Sierra product page G1 0.341; Sierra 2026 Bullet Guide poster prints .301 (unresolved disagreement between two Sierra documents)",
+      "reason": "bullets-sierra verifier"
+    },
+    {
+      "id": "sierra-2237",
+      "field": "recommendedTwist",
+      "value": "1:9.5",
+      "reason": "Sierra 2026 Bullet Guide poster: '215 gr. HPBT-CN MK #2237 B.C. .680 9.5\" TWIST' (bullets-sierra verifier)"
+    },
+    {
+      "id": "sierra-9631",
+      "field": "recommendedTwist",
+      "value": "1:7.5",
+      "reason": "Sierra 2026 Bullet Guide poster prints 7.5\" twist (bullets-sierra verifier)"
+    },
+    {
+      "id": "sierra-2755",
+      "field": "bcNotes",
+      "value": "Product page item 2755: G1 0.176; variant 2755C and the 2026 Bullet Guide poster: 0.182",
+      "reason": "bullets-sierra verifier"
+    },
+    {
+      "id": "nosler-25075",
+      "field": "name",
+      "value": "6mm 70gr FB Tipped Varmageddon",
+      "reason": "name taken from a description block; page h1 and Product Name read 70 gr (bullets-nosler-swift verifier)"
+    },
+    {
+      "id": "nosler-30181",
+      "field": "name",
+      "value": "30 Caliber 220gr RN Ballistic Tip Hunting",
+      "reason": "name polluted by description text (bullets-nosler-swift verifier)"
+    },
+    {
+      "id": "nosler-58456",
+      "field": "status",
+      "value": "current",
+      "reason": "listed in the Nosler 2026 Product Guide p.6 (bullets-nosler-swift verifier)"
+    },
+    {
+      "id": "barnes-30700",
+      "field": "profile",
+      "value": null,
+      "reason": "web page says flat-base, Barnes 2026 poster says TSX BT (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "barnes-30190",
+      "field": "bcNotes",
+      "value": "Barnes web G1 0.296; Barnes 2026 poster catalog G1 .287",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "barnes-32549",
+      "field": "recommendedTwist",
+      "value": "1:8 minimum",
+      "reason": "web specsJson 'Minimum Twist': '8' (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "barnes-30284",
+      "field": "recommendedTwist",
+      "value": "1:8 minimum",
+      "reason": "web specsJson 'Minimum Twist': '8'; poster footnote 1:8\" (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "barnes-30187",
+      "field": "bcNotes",
+      "value": "Twist: web minimum 1:10; Barnes 2026 poster footnote recommends 1:9\"",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "barnes-30188",
+      "field": "bcNotes",
+      "value": "Twist: web minimum 1:9; Barnes 2026 poster footnote recommends 1:8\"",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "barnes-30204",
+      "field": "bcNotes",
+      "value": "Twist: web minimum 1:7; Barnes 2026 poster footnote recommends 1:8\"",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "barnes-30269",
+      "field": "bcNotes",
+      "value": "Twist: web minimum 1:10; Barnes 2026 poster footnote recommends 1:9.5\"",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "barnes-30100",
+      "field": "bcG1",
+      "value": 0.703,
+      "reason": "Barnes web G1 0.703 for item 30100 and the 2026 poster B.C. .703 agree (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "speer-tb264h1",
+      "field": "bcNotes",
+      "value": "Speer 2026 catalog p.17: G1 0.646 / G7 0.323 (3,000-2,500 ft/s); product page 'Ballistic Coefficient: .526'",
+      "reason": "bullets-barnes-speer verifier"
+    },
+    {
+      "id": "speer-tb264h2",
+      "field": "bcG1",
+      "value": null,
+      "reason": "Speer catalog prints G1 0.315 / G7 0.628 for this bullet; G7 cannot exceed G1, so both are withheld as a misprint (bullets-barnes-speer verifier)"
+    },
+    {
+      "id": "speer-tb264h2",
+      "field": "bcG7",
+      "value": null,
+      "reason": "see bcG1 (bullets-barnes-speer verifier)"
     }
   ]
 }
