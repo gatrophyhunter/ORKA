@@ -181,3 +181,52 @@ def find_twists(desc):
         else:
             out.append(([], s))
     return out
+
+
+def field_map(boot):
+    """customFields -> dict name -> list of values (in page order)."""
+    out = {}
+    for c in boot.get('customFields') or []:
+        out.setdefault(c['name'], []).append(c['value'])
+    return out
+
+
+def family_from_categories(cats):
+    fams = [c.split('/', 2)[2] for c in cats if c.startswith('Bullets/Product Family/')]
+    return fams
+
+
+def caliber_label(name):
+    m = re.match(r'^\s*(.*?)\s+\d+(?:\.\d+)?\s*GR\b', name, re.I)
+    return ws(m.group(1)) if m else None
+
+
+def name_weight(name):
+    m = re.search(r'\b(\d+(?:\.\d+)?)\s*GR\b', name, re.I)
+    return float(m.group(1)) if m else None
+
+
+def construction_of(btype, material):
+    bt = (btype or '').lower()
+    mat = (material or '').strip().lower()
+    if 'full metal jacket' in bt or re.search(r'\bfmj', bt):
+        return 'FMJ'
+    if mat == 'jacketed lead':
+        return 'cup-and-core'
+    if mat in ('lead', 'cast lead'):
+        return 'lead'
+    if mat in ('copper', 'solid copper', 'monolithic copper'):
+        return 'monolithic-copper'
+    return None
+
+
+def kebab(s):
+    return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
+
+
+GENERIC_KEYS = {
+    'length': re.compile(r'\blength\b', re.I),
+    'twist': re.compile(r'\btwist\b', re.I),
+    'ogive': re.compile(r'ogive', re.I),
+    'boattail': re.compile(r'boat\s*tail\s*length', re.I),
+}
