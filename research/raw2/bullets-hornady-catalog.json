@@ -1,0 +1,566 @@
+{
+  "meta": {
+    "documents": [
+      {
+        "url": "https://static.hornady.media/presscenter/docs/1411010468-1794610803-Hornady-2027-Product-Catalog.pdf",
+        "localPath": "/tmp/claude-0/-home-user-ORKA/29ce603d-ccc3-55ef-b8fe-c585397ac7c1/scratchpad/sources/hornady-catalog/1411010468-1794610803-Hornady-2027-Product-Catalog.pdf",
+        "title": "Hornady 2027 Product Catalog"
+      }
+    ],
+    "notes": "Parsed 258 rifle-bullet columns from 30 tables on PDF pages 76-98 with pdftotext version 24.02.0 (pdftotext -bbox word coordinates; columns anchored on the Item # row and verified against the -layout Item # lines; every word inside a table span assigned or the run aborts). Skipped: muzzleloader tables (PDF pp. 72-73) and handgun sections (PDF pp. 99-103: FTX® Handgun (Flex Tip eXpanding), XTP® (eXtreme Terminal Performance), FMJ Handgun (Full Metal Jacket), HAP® (Hornady Action Pistol), DGH® (Dangerous Game Handgun)). Rifle bullets in pistol diameters inside rifle sections (e.g. 350 Legend .355\", 450 Bushmaster .452\") are kept. PDF page 5 (new-products teaser) repeats items printed in the main tables and was not parsed. The catalog prints no bullet length (lengthIn null). Tables headed \"Ballistic Coef.\" (SST, InterLock, DGX Bonded, DGS, V-MAX, NTX, Traditional Varmint, Sub-X, MonoFlex, Traditional & FMJ Rifle, FTX) print one BC without naming a drag model; it is compared with / stored as G1 because hornady.com types these bullets' BC \"(G1)\" (156 of 157 matched web records; with no web BC: 1; typed otherwise: 0; web G1 equals the catalog value in 155 of 157). The Match(TM) tables print only \"G1 Ballistic Coef.\". G7 is compared only for tables with a \"G7 Ballistic Coef.\" row; a printed dash = not published (null). Evidence order: CALIBER+TYPE | Diameter | Weight | G1 | G7 | Sec. Den. | Item # (single-BC tables: CALIBER+TYPE | Diameter | Weight | Ballistic Coef. | Sec. Den. | Item #), values as printed, \"(blank)\" = empty cell. Matching: a web sku equal to any slash-separated catalog item number, else a web sku whose digits before a letter/-NN suffix equal one (7 suffix matches: 22791B->22791, 22834B->22834, 24561B->24561, 26331B->26331/263311, 26333B->26333/263331, 3031-75->3031, 30506B->30506). 255 catalog bullets matched 295 web records (rifle 295); 3 catalog bullets have no web record (in \"bullets\"). crossCheck has 47 entries (value-mismatch 9, web-missing 38): value-mismatch = both print different values; web-missing = web record null where the catalog prints a value; catalog-missing = the reverse; catalogCheck carries any failed catalog self-check for that bullet. agreements = matched catalog bullets with no disagreement on any paired web record. Catalog self-checks: printed Sec. Den. vs weight/7000/d^2 for 256 columns (2 printed blank) and G7/G1 ratio; flagged (catalog-internal inconsistencies, not parse errors - each verified against the printed page): p86 25 Cal. CX® | .257\" | 90 gr. | .273 | .246 | .195 | 254104: printed G7 0.246 / G1 0.273 = 0.901, outside the 0.499-0.513 range of every other bullet in the catalog: one of the two printed BCs is probably a misprint; do not adopt either without confirmation; p92 470 Cal. DGX® Bonded | .474\" | 500 gr. | .290 | .316 | 47474: printed Sec. Den. 0.316 does not equal weight/7000/diameter^2 = 0.3179 (diameter/weight cross-checked against the web record instead); p93 470 Cal. DGS® | .474\" | 500 gr. | .290 | .316 | 4748: printed Sec. Den. 0.316 does not equal weight/7000/diameter^2 = 0.3179 (diameter/weight cross-checked against the web record instead); p98 35 Cal. FTX® (350 Legend) | .355\" | 165 gr. | .250 | .193 | 3502: printed Sec. Den. 0.193 does not equal weight/7000/diameter^2 = 0.1870 (diameter/weight cross-checked against the web record instead). Web rifle records with no catalog item number (13; mostly ECX, absent from the 2027 catalog): 224034, 2446, 26112, 263364, 28214, 3017, 3017B, 301944, 30372, 304714, 32314, 33272, 35614. Web handgun records not compared: 70."
+  },
+  "bullets": [
+    {
+      "id": "hornady-25417",
+      "manufacturer": "Hornady",
+      "line": "ELD-X®",
+      "name": "25 Cal. 128 gr. ELD-X®",
+      "sku": "25417",
+      "caliberLabel": "25 Cal.",
+      "diameterIn": 0.257,
+      "weightGr": 128.0,
+      "lengthIn": null,
+      "bcG1": 0.633,
+      "bcG7": 0.319,
+      "construction": null,
+      "status": "current",
+      "kind": "rifle",
+      "sources": [
+        {
+          "url": "https://static.hornady.media/presscenter/docs/1411010468-1794610803-Hornady-2027-Product-Catalog.pdf",
+          "type": "manufacturer",
+          "page": 84,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "25 Cal. ELD-X® | .257\" | 128 gr. | .633 | .319 | .277 | 25417",
+      "notes": "catalog section \"ELD-X® (Extremely Low Drag - eXpanding)\", PDF page 84, table 1; item #(s) 25417, box count 100; printed sectional density 0.277"
+    },
+    {
+      "id": "hornady-271904",
+      "manufacturer": "Hornady",
+      "line": "CX®",
+      "name": "6.8mm/270 Cal. 100 gr. CX®",
+      "sku": "271904",
+      "caliberLabel": "6.8mm/270 Cal.",
+      "diameterIn": 0.277,
+      "weightGr": 100.0,
+      "lengthIn": null,
+      "bcG1": 0.262,
+      "bcG7": null,
+      "construction": null,
+      "status": "current",
+      "kind": "rifle",
+      "sources": [
+        {
+          "url": "https://static.hornady.media/presscenter/docs/1411010468-1794610803-Hornady-2027-Product-Catalog.pdf",
+          "type": "manufacturer",
+          "page": 86,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "6.8mm/270 Cal. CX® | .277\" | 100 gr. | .262 | — | .186 | 271904",
+      "notes": "catalog section \"CX® (Copper alloy eXpanding)\", PDF page 86, table 1; item #(s) 271904, box count 50; caliber cell wraps onto the TYPE line in the catalog (\"6.8mm/\" / \"270 Cal. CX®\"); G7 cell printed as '—'; printed sectional density 0.186"
+    },
+    {
+      "id": "hornady-2542",
+      "manufacturer": "Hornady",
+      "line": "FTX®",
+      "name": "25 Cal. 110 gr. FTX®",
+      "sku": "2542",
+      "caliberLabel": "25 Cal.",
+      "diameterIn": 0.257,
+      "weightGr": 110.0,
+      "lengthIn": null,
+      "bcG1": 0.34,
+      "bcG7": null,
+      "construction": null,
+      "status": "current",
+      "kind": "rifle",
+      "sources": [
+        {
+          "url": "https://static.hornady.media/presscenter/docs/1411010468-1794610803-Hornady-2027-Product-Catalog.pdf",
+          "type": "manufacturer",
+          "page": 98,
+          "retrieved": "2026-11-23"
+        }
+      ],
+      "evidence": "25 Cal. FTX® | .257\" | 110 gr. | .340 | .238 | 2542",
+      "notes": "catalog section \"FTX® Rifle (Flex Tip eXpanding)\", PDF page 98, table 1; item #(s) 2542, box count 100; catalog prints a single \"Ballistic Coef.\" row (drag model not stated on the page); stored as bcG1 because hornady.com types the BC of the matched bullets of these tables \"(G1)\" (156 of 157 matched web records; with no web BC: 1; typed otherwise: 0) and their G1 equals the catalog value in 155 of 157; printed sectional density 0.238"
+    }
+  ],
+  "crossCheck": [
+    {
+      "id": "hornady-22772",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.214,
+      "page": 80,
+      "evidence": "22 Cal. ELD-VT® | .224\" | 69 gr. | .424 | .214 | .196 | 22772",
+      "kind": "web-missing",
+      "match": "exact (web sku 22772)"
+    },
+    {
+      "id": "hornady-24372",
+      "field": "bcG1",
+      "web": 0.41,
+      "catalog": 0.405,
+      "page": 80,
+      "evidence": "6mm ELD-VT® | .243\" | 80 gr. | .405 | .202 | .194 | 24372",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 24372)"
+    },
+    {
+      "id": "hornady-24372",
+      "field": "bcG7",
+      "web": 0.206,
+      "catalog": 0.202,
+      "page": 80,
+      "evidence": "6mm ELD-VT® | .243\" | 80 gr. | .405 | .202 | .194 | 24372",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 24372)"
+    },
+    {
+      "id": "hornady-25412",
+      "field": "bcG1",
+      "web": 0.433,
+      "catalog": 0.453,
+      "page": 80,
+      "evidence": "25 Cal. ELD-VT® | .257\" | 95 gr. | .453 | .228 | .205 | 25412",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 25412)"
+    },
+    {
+      "id": "hornady-25412",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.228,
+      "page": 80,
+      "evidence": "25 Cal. ELD-VT® | .257\" | 95 gr. | .453 | .228 | .205 | 25412",
+      "kind": "web-missing",
+      "match": "exact (web sku 25412)"
+    },
+    {
+      "id": "hornady-22771",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.159,
+      "page": 81,
+      "evidence": "22 Cal. HPBT AEROMATCH® | .224\" | 69 gr. | .315 | .159 | .196 | 22771/227711",
+      "kind": "web-missing",
+      "match": "exact (web sku 22771)"
+    },
+    {
+      "id": "hornady-227711",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.159,
+      "page": 81,
+      "evidence": "22 Cal. HPBT AEROMATCH® | .224\" | 69 gr. | .315 | .159 | .196 | 22771/227711",
+      "kind": "web-missing",
+      "match": "exact (web sku 227711)"
+    },
+    {
+      "id": "hornady-22777",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.179,
+      "page": 81,
+      "evidence": "22 Cal. HPBT AEROMATCH® | .224\" | 77 gr. | .355 | .179 | .219 | 22777/227771",
+      "kind": "web-missing",
+      "match": "exact (web sku 22777)"
+    },
+    {
+      "id": "hornady-227771",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.179,
+      "page": 81,
+      "evidence": "22 Cal. HPBT AEROMATCH® | .224\" | 77 gr. | .355 | .179 | .219 | 22777/227771",
+      "kind": "web-missing",
+      "match": "exact (web sku 227771)"
+    },
+    {
+      "id": "hornady-30507",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.221,
+      "page": 81,
+      "evidence": "30 Cal. HPBT AEROMATCH® | .308\" | 168 gr. | .440 | .221 | .253 | 30507/305071",
+      "kind": "web-missing",
+      "match": "exact (web sku 30507)"
+    },
+    {
+      "id": "hornady-305071",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.221,
+      "page": 81,
+      "evidence": "30 Cal. HPBT AEROMATCH® | .308\" | 168 gr. | .440 | .221 | .253 | 30507/305071",
+      "kind": "web-missing",
+      "match": "exact (web sku 305071)"
+    },
+    {
+      "id": "hornady-30719",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.242,
+      "page": 81,
+      "evidence": "30 Cal. HPBT AEROMATCH® | .308\" | 175 gr. | .485 | .242 | .264 | 30719/307191",
+      "kind": "web-missing",
+      "match": "exact (web sku 30719)"
+    },
+    {
+      "id": "hornady-307191",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.242,
+      "page": 81,
+      "evidence": "30 Cal. HPBT AEROMATCH® | .308\" | 175 gr. | .485 | .242 | .264 | 30719/307191",
+      "kind": "web-missing",
+      "match": "exact (web sku 307191)"
+    },
+    {
+      "id": "hornady-24573",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.275,
+      "page": 81,
+      "evidence": "6mm BTHP AEROMATCH® | .243\" | 105 gr. | .536 | .275 | .254 | 24573/245731",
+      "kind": "web-missing",
+      "match": "exact (web sku 24573)"
+    },
+    {
+      "id": "hornady-245731",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.275,
+      "page": 81,
+      "evidence": "6mm BTHP AEROMATCH® | .243\" | 105 gr. | .536 | .275 | .254 | 24573/245731",
+      "kind": "web-missing",
+      "match": "exact (web sku 245731)"
+    },
+    {
+      "id": "hornady-26303",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.305,
+      "page": 81,
+      "evidence": "6.5mm BTHP AEROMATCH® | .264\" | 140 gr. | .608 | .305 | .287 | 26303/263031",
+      "kind": "web-missing",
+      "match": "exact (web sku 26303)"
+    },
+    {
+      "id": "hornady-263031",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.305,
+      "page": 81,
+      "evidence": "6.5mm BTHP AEROMATCH® | .264\" | 140 gr. | .608 | .305 | .287 | 26303/263031",
+      "kind": "web-missing",
+      "match": "exact (web sku 263031)"
+    },
+    {
+      "id": "hornady-28504",
+      "field": "bcG1",
+      "web": null,
+      "catalog": 0.68,
+      "page": 81,
+      "evidence": "7mm BTHP AEROMATCH® | .284\" | 180 gr. | .680 | .349 | (blank) | 28504/285041",
+      "kind": "web-missing",
+      "match": "exact (web sku 28504)"
+    },
+    {
+      "id": "hornady-28504",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.349,
+      "page": 81,
+      "evidence": "7mm BTHP AEROMATCH® | .284\" | 180 gr. | .680 | .349 | (blank) | 28504/285041",
+      "kind": "web-missing",
+      "match": "exact (web sku 28504)"
+    },
+    {
+      "id": "hornady-285041",
+      "field": "bcG1",
+      "web": null,
+      "catalog": 0.68,
+      "page": 81,
+      "evidence": "7mm BTHP AEROMATCH® | .284\" | 180 gr. | .680 | .349 | (blank) | 28504/285041",
+      "kind": "web-missing",
+      "match": "exact (web sku 285041)"
+    },
+    {
+      "id": "hornady-285041",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.349,
+      "page": 81,
+      "evidence": "7mm BTHP AEROMATCH® | .284\" | 180 gr. | .680 | .349 | (blank) | 28504/285041",
+      "kind": "web-missing",
+      "match": "exact (web sku 285041)"
+    },
+    {
+      "id": "hornady-2635",
+      "field": "bcG1",
+      "web": 0.625,
+      "catalog": 0.623,
+      "page": 84,
+      "evidence": "6.5mm ELD-X® | .264\" | 143 gr. | .623 | .314 | .293 | 2635",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 2635)"
+    },
+    {
+      "id": "hornady-2635",
+      "field": "bcG7",
+      "web": 0.315,
+      "catalog": 0.314,
+      "page": 84,
+      "evidence": "6.5mm ELD-X® | .264\" | 143 gr. | .623 | .314 | .293 | 2635",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 2635)"
+    },
+    {
+      "id": "hornady-2749",
+      "field": "bcG1",
+      "web": null,
+      "catalog": 0.68,
+      "page": 84,
+      "evidence": "270 Cal. ELD-X® | .277\" | 176 gr. | .680 | .342 | (blank) | 2749",
+      "kind": "web-missing",
+      "match": "exact (web sku 2749)"
+    },
+    {
+      "id": "hornady-2749",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.342,
+      "page": 84,
+      "evidence": "270 Cal. ELD-X® | .277\" | 176 gr. | .680 | .342 | (blank) | 2749",
+      "kind": "web-missing",
+      "match": "exact (web sku 2749)"
+    },
+    {
+      "id": "hornady-2840",
+      "field": "bcG1",
+      "web": 0.63,
+      "catalog": 0.631,
+      "page": 85,
+      "evidence": "7mm ELD-X® | .284\" | 162 gr. | .631 | .318 | .287 | 2840",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 2840)"
+    },
+    {
+      "id": "hornady-2840",
+      "field": "bcG7",
+      "web": 0.315,
+      "catalog": 0.318,
+      "page": 85,
+      "evidence": "7mm ELD-X® | .284\" | 162 gr. | .631 | .318 | .287 | 2840",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 2840)"
+    },
+    {
+      "id": "hornady-3078",
+      "field": "bcG7",
+      "web": 0.325,
+      "catalog": 0.329,
+      "page": 85,
+      "evidence": "30 Cal. ELD-X® | .308\" | 220 gr. | .654 | .329 | .331 | 3078",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 3078)"
+    },
+    {
+      "id": "hornady-22765",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.184,
+      "page": 86,
+      "evidence": "22 Cal. CX® | .224\" | 65 gr. | .365 | .184 | .185 | 22765",
+      "kind": "web-missing",
+      "match": "exact (web sku 22765)"
+    },
+    {
+      "id": "hornady-24444",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.21,
+      "page": 86,
+      "evidence": "6mm CX® | .243\" | 90 gr. | .418 | .210 | .218 | 24444",
+      "kind": "web-missing",
+      "match": "exact (web sku 24444)"
+    },
+    {
+      "id": "hornady-254104",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.246,
+      "page": 86,
+      "evidence": "25 Cal. CX® | .257\" | 90 gr. | .273 | .246 | .195 | 254104",
+      "kind": "web-missing",
+      "match": "exact (web sku 254104)",
+      "catalogCheck": "printed G7 0.246 / G1 0.273 = 0.901, outside the 0.499-0.513 range of every other bullet in the catalog: one of the two printed BCs is probably a misprint; do not adopt either without confirmation"
+    },
+    {
+      "id": "hornady-26111",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.179,
+      "page": 86,
+      "evidence": "6.5mm CX® | .264\" | 90 gr. | .356 | .179 | .184 | 26111",
+      "kind": "web-missing",
+      "match": "exact (web sku 26111)"
+    },
+    {
+      "id": "hornady-261104",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.215,
+      "page": 86,
+      "evidence": "6.5mm CX® | .264\" | 120 gr. | .428 | .215 | .246 | 261104",
+      "kind": "web-missing",
+      "match": "exact (web sku 261104)"
+    },
+    {
+      "id": "hornady-26178",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.246,
+      "page": 86,
+      "evidence": "6.5mm CX® | .264\" | 130 gr. | .489 | .246 | .267 | 26178",
+      "kind": "web-missing",
+      "match": "exact (web sku 26178)"
+    },
+    {
+      "id": "hornady-273704",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.203,
+      "page": 86,
+      "evidence": "270 Cal. CX® | .277\" | 130 gr. | .403 | .203 | .242 | 273704",
+      "kind": "web-missing",
+      "match": "exact (web sku 273704)"
+    },
+    {
+      "id": "hornady-282704",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.216,
+      "page": 87,
+      "evidence": "7mm CX® | .284\" | 139 gr. | .429 | .216 | .246 | 282704",
+      "kind": "web-missing",
+      "match": "exact (web sku 282704)"
+    },
+    {
+      "id": "hornady-28284",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.229,
+      "page": 87,
+      "evidence": "7mm CX® | .284\" | 150 gr. | .455 | .229 | .266 | 28284",
+      "kind": "web-missing",
+      "match": "exact (web sku 28284)"
+    },
+    {
+      "id": "hornady-2837",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.3,
+      "page": 87,
+      "evidence": "7mm CX® | .284\" | 160 gr. | .596 | .300 | .283 | 2837",
+      "kind": "web-missing",
+      "match": "exact (web sku 2837)"
+    },
+    {
+      "id": "hornady-303704",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.21,
+      "page": 87,
+      "evidence": "30 Cal. CX® | .308\" | 150 gr | .418 | .210 | .226 | 303704",
+      "kind": "web-missing",
+      "match": "exact (web sku 303704)"
+    },
+    {
+      "id": "hornady-304704",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.221,
+      "page": 87,
+      "evidence": "30 Cal. CX® | .308\" | 165 gr. | .440 | .221 | .248 | 304704",
+      "kind": "web-missing",
+      "match": "exact (web sku 304704)"
+    },
+    {
+      "id": "hornady-301934",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.236,
+      "page": 87,
+      "evidence": "30 Cal. CX® | .308\" | 180 gr. | .469 | .236 | .271 | 301934",
+      "kind": "web-missing",
+      "match": "exact (web sku 301934)"
+    },
+    {
+      "id": "hornady-332704",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.205,
+      "page": 87,
+      "evidence": "338 Cal. CX® | .338\" | 185 gr. | .407 | .205 | .231 | 332704",
+      "kind": "web-missing",
+      "match": "exact (web sku 332704)"
+    },
+    {
+      "id": "hornady-332014",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.247,
+      "page": 87,
+      "evidence": "338 Cal. CX® | .338\" | 225 gr. | .490 | .247 | .281 | 332014",
+      "kind": "web-missing",
+      "match": "exact (web sku 332014)"
+    },
+    {
+      "id": "hornady-33283",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.308,
+      "page": 87,
+      "evidence": "338 Cal. CX® | .338\" | 240 gr. | .611 | .308 | .300 | 33283",
+      "kind": "web-missing",
+      "match": "exact (web sku 33283)"
+    },
+    {
+      "id": "hornady-37084",
+      "field": "bcG7",
+      "web": null,
+      "catalog": 0.203,
+      "page": 87,
+      "evidence": "375 Cal. CX® | .375\" | 250 gr. | .403 | .203 | .254 | 37084",
+      "kind": "web-missing",
+      "match": "exact (web sku 37084)"
+    },
+    {
+      "id": "hornady-3031-75",
+      "field": "bcG1",
+      "web": null,
+      "catalog": 0.338,
+      "page": 91,
+      "evidence": "30 Cal. SP | .308\" | 150 gr. | .338 | .226 | 3031",
+      "kind": "web-missing",
+      "match": "suffix (web sku 3031-75)"
+    },
+    {
+      "id": "hornady-45010",
+      "field": "bcG1",
+      "web": 0.175,
+      "catalog": 0.182,
+      "page": 97,
+      "evidence": "45 Cal. MonoFlex® (45-70 Govt) | .458\" | 250 gr. | .182 | .170 | 45010",
+      "kind": "value-mismatch",
+      "match": "exact (web sku 45010)"
+    }
+  ],
+  "agreements": 222
+}
