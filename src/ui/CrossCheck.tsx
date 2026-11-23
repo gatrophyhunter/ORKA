@@ -62,6 +62,7 @@ export function PublishedCrossCheck({ db, d, chargeGr, bulletWeightGr }: { db: D
               <tr key={i} className={r.loadType === 'max' && over ? 'over' : undefined}>
                 <td>
                   {r.bulletMfr} {fmtNum(r.bulletWeightGr, 0)} gr {r.bulletModel}
+                  {/\(/.test(r.cartridge) && <div className="small muted">{r.cartridge}</div>}
                 </td>
                 <td>{r.loadType}</td>
                 <td className="num">{fmtNum(r.chargeGr, 1)}</td>

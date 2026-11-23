@@ -7,6 +7,7 @@ interface Compact {
   c: string; p: string; w: number; bm: string; bt: string; t: string; ch: number; v: number;
   pr: number | null; pu: 'psi' | 'CUP' | 'bar' | null; b: number | null; oal: number | null;
   cs: string | null; pm: string | null; u: string | null; pg: number | string | null; cp: boolean | null;
+  cn?: string | null;
 }
 
 interface Packed {
@@ -24,7 +25,7 @@ function unpack(p: Packed | Compact[]): Compact[] {
   return p.r.map((x) => ({
     c: S(x[0]) as string, p: S(x[1]) as string, w: x[2] as number, bm: S(x[3]) ?? '', bt: S(x[4]) ?? '', t: S(x[5]) ?? 'other',
     ch: x[6] as number, v: x[7] as number, pr: x[8], pu: S(x[9]) as Compact['pu'], b: x[10], oal: x[11], cs: S(x[12]), pm: S(x[13]),
-    u: S(x[14]), pg: x[15], cp: x[16] === -1 ? null : x[16] === 1,
+    u: S(x[14]), pg: x[15], cp: x[16] === -1 ? null : x[16] === 1, cn: x.length > 17 ? S(x[17]) : null,
   }));
 }
 let cache: ValidationLoad[] | null = null;
@@ -32,7 +33,7 @@ let pending: Promise<ValidationLoad[]> | null = null;
 
 function expand(r: Compact): ValidationLoad {
   return {
-    cartridge: r.c, cartridgeId: r.c, bulletMfr: r.bm ?? '', bulletModel: r.bt ?? '', bulletWeightGr: r.w,
+    cartridge: r.cn ?? r.c, cartridgeId: r.c, bulletMfr: r.bm ?? '', bulletModel: r.bt ?? '', bulletWeightGr: r.w,
     caseBrand: r.cs, primer: r.pm, coalIn: r.oal ?? NaN, barrelLengthIn: r.b ?? NaN, powder: r.p, powderId: r.p,
     chargeGr: r.ch, velocityFps: r.v, pressure: r.pr, pressureUnit: r.pu, loadType: r.t, compressed: r.cp,
     sources: r.u ? [{ url: r.u, type: 'manufacturer', page: r.pg }] : [],

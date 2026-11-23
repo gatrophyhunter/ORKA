@@ -565,7 +565,7 @@ function main() {
     return i;
   };
   const rowsOut = (SHIP_PUBLISHED ? compact : []).map((x) => [
-    si(x.c), si(x.p), x.w, si(x.bm), si(x.bt), si(x.t), x.ch, x.v, x.pr, si(x.pu), x.b, x.oal, si(x.cs), si(x.pm), si(x.u), x.pg ?? null, x.cp === null ? -1 : x.cp ? 1 : 0,
+    si(x.c), si(x.p), x.w, si(x.bm), si(x.bt), si(x.t), x.ch, x.v, x.pr, si(x.pu), x.b, x.oal, si(x.cs), si(x.pm), si(x.u), x.pg ?? null, x.cp === null ? -1 : x.cp ? 1 : 0, si(x.cn),
   ]);
   fs.writeFileSync(PUBLISHED, JSON.stringify({ v: 1, s: strings, r: rowsOut }));
   const modelCounts: Record<string, number> = {};
