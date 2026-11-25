@@ -555,11 +555,21 @@ async function main() {
     const all = rowsOf.get(o.powderId)!;
     const carts = [...new Set(all.map((r) => r.cartridgeId))];
     const nInferred = all.filter((r) => r.tier !== 'A').length;
+    const rangeByCart: Record<string, [number, number]> = {};
+    for (const r of all) {
+      const cur = rangeByCart[r.cartridgeId];
+      rangeByCart[r.cartridgeId] = cur ? [Math.min(cur[0], r.load.chargeGr), Math.max(cur[1], r.load.chargeGr)] : [r.load.chargeGr, r.load.chargeGr];
+    }
+    // No fitted row had a published pressure: say so instead of "pressure-tested".
+    const fitWhat =
+      o.rmsPressurePct === null
+        ? `Velocity-only fit (no pressure data): fitted to the velocities of ${o.points} of ${all.length} usable published loads`
+        : `Fitted to ${o.points} of ${all.length} usable published pressure-tested loads`;
     models[o.powderId] = {
       status: 'calibrated',
       params: o.params,
       derivation:
-        `Fitted to ${o.points} of ${all.length} usable published pressure-tested loads (cartridge-stratified sample) across ${carts.length} cartridge(s); ` +
+        `${fitWhat} (cartridge-stratified sample) across ${carts.length} cartridge(s); ` +
         `${nInferred ? `${nInferred} of those loads use an inferred or other-brand case capacity. ` : ''}` +
         `Fitted: ${o.fitted.join(', ')}; other thermochemistry from class priors${p.heatOfExplosionJg ? ` and the maker's heat of explosion (${p.heatOfExplosionJg} J/g)` : ''}. ` +
         `${o.warnings.join(' ')}`.trim(),
@@ -570,6 +580,7 @@ async function main() {
         cartridges: carts,
         sources: [...new Set(all.flatMap((r) => r.load.sources.map((s) => s.url)))],
         chargeRangeGr: [Math.min(...all.map((r) => r.load.chargeGr)), Math.max(...all.map((r) => r.load.chargeGr))],
+        chargeRangeByCartridge: rangeByCart,
         grade: o.rmsPressurePct === null ? 'fair' : o.rmsPressurePct <= 10 ? 'good' : o.rmsPressurePct <= 20 ? 'fair' : 'poor',
         heldOutPressurePct: o.heldOutP.length >= 3 ? Math.round([...o.heldOutP].map(Math.abs).sort((a, b) => a - b)[Math.floor(o.heldOutP.length / 2)] * 1000) / 10 : null,
       },

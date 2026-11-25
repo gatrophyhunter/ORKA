@@ -15,16 +15,21 @@ export function estimateFromCharts(
   betaRelSigma = DEFAULT_ESTIMATE_BETA_SIGMA,
 ): Record<string, PowderModelEntry> {
   const byId = new Map(powders.map((p) => [p.id, p]));
+  const hasFit = (id: string) => byId.get(id)?.model?.status === 'calibrated';
+  // Anchors must have pressure data: a velocity-only fit (grade 'unvalidated') never had its burn rate checked against pressure.
   const calibrated = (id: string) => {
     const m = byId.get(id)?.model;
-    return m && m.status === 'calibrated' ? m : null;
+    if (!m || m.status !== 'calibrated') return null;
+    const c = m.calibration;
+    if (c && (c.grade === 'unvalidated' || !(typeof c.rmsPressurePct === 'number' && c.rmsPressurePct > 0))) return null;
+    return m;
   };
   const acc: Record<string, { logBeta: number[]; lambda: number[]; n: number[]; notes: string[] }> = {};
   for (const c of charts) {
     const ids = c.orderedPowderIds;
     ids.forEach((id, i) => {
       const p = byId.get(id);
-      if (!p || calibrated(id)) return;
+      if (!p || hasFit(id)) return;
       let a = -1;
       let b = -1;
       for (let j = i - 1; j >= 0; j--) if (calibrated(ids[j])) { a = j; break; }

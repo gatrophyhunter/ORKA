@@ -1,9 +1,7 @@
 {
   "_doc": "Post-verification corrections applied by scripts/build-data.ts. Each entry cites the verifier finding it resolves.",
   "excludeSources": [],
-  "excludeRecords": {
-    "9mm": "C.I.P. list row '9 mm' links to the 416 Weatherby Magnum sheet (tabiiical-en-page33.pdf); its data are not for a '9 mm' cartridge (cartridges-standards verifier)."
-  },
+  "excludeRecords": {},
   "fixes": [
     {
       "id": "hornady-33389",
@@ -142,6 +140,12 @@
       "field": "notes",
       "value": "SAAMI Z299.4 disagrees with itself: 47,500 psi in the velocity-and-pressure table vs 60,000 psi in the transducer-calibration and proof-pressure tables; the lower value is shipped (code-review finding).",
       "reason": "code-review finding"
+    },
+    {
+      "id": "221-remington-fireball",
+      "field": "type",
+      "value": "rifle",
+      "reason": "SAAMI Z299.4 (centerfire rifle) standardizes it: velocity-and-pressure table p.28 (221 Remington Fireball, MAP 60,000 psi / 52,000 CUP), drawing p.81, test barrel p.294, names list p.15; it is also in Z299.3 (pistol and revolver) with the same MAP (code-review finding)"
     }
   ]
 }

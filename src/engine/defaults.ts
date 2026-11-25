@@ -16,7 +16,7 @@ import modelConstants from '../data/model-constants.json';
  */
 const MPA_TO_PSI = 145.03773773020923;
 
-type ShotClass = 'monolithic' | 'lead' | 'jacketed';
+export type ShotClass = 'monolithic' | 'lead' | 'jacketed';
 /** Shot-start pressure (MPa) per construction class: reference value for jacketed bullets; monolithic and lead values are
  * fitted to published pressure-tested loads by scripts/calibrate-powders.ts (see src/data/model-constants.json for basis). */
 export function shotStartMPa(cls: ShotClass): number {
@@ -114,15 +114,30 @@ export function priorParams(opts: { heatOfExplosionJg?: number | null; base?: 's
 export const PRIOR_SINGLE_BASE: PowderModelParams = priorParams({ base: 'single', beta: 5 });
 export const PRIOR_DOUBLE_BASE: PowderModelParams = priorParams({ base: 'double', beta: 5 });
 
+export interface ClassValidation {
+  n: number;
+  p50Pct: number;
+  p90Pct: number;
+  biasPct: number;
+}
 export interface ModelValidationSummary {
   heldOutPressureN: number;
   heldOutPressureP50Pct: number;
   heldOutPressureP90Pct: number;
   heldOutPressureBiasPct: number;
   heldOutWithin10Pct: number;
+  /** Held-out pressure error per bullet construction class (shot-start class), when the report has it. */
+  byShotClass?: Partial<Record<ShotClass, ClassValidation>>;
   scope: string;
   heldOutCartridgeIds?: string[];
   heldOutPowders?: number;
+}
+/** Fewest held-out comparisons for a construction class to be shown on its own. */
+export const MIN_CLASS_VALIDATION_N = 20;
+/** Held-out figures for one bullet construction class, or null when that class has too few held-out comparisons. */
+export function classValidation(v: ModelValidationSummary | null, cls: ShotClass | null): ClassValidation | null {
+  const c = cls ? v?.byShotClass?.[cls] : undefined;
+  return c && c.n >= MIN_CLASS_VALIDATION_N && [c.p50Pct, c.p90Pct, c.biasPct].every(Number.isFinite) ? c : null;
 }
 /** Headline held-out validation of the calibrated models (scripts/validation-summary.ts), or null before calibration. */
 export function modelValidation(): ModelValidationSummary | null {

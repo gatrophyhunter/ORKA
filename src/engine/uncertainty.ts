@@ -178,30 +178,49 @@ export const DEFAULT_PRESSURE_PER_BETA = 1.7;
 /** Pressure spread (1σ, relative) assumed when a model's pressure was never validated against measurements. */
 export const UNVALIDATED_PRESSURE_SIGMA = 0.25;
 
+type SpreadModel = {
+  status: string;
+  betaRelSigma?: number;
+  calibration?: { rmsPressurePct?: number | null; heldOutPressurePct?: number | null };
+};
+
 /**
  * Default spreads for a powder model, sized from its measured error:
- *  - calibrated with pressure data: σP = max(in-sample RMS × 1.45, held-out median × 1.48);
- *  - calibrated or user-calibrated WITHOUT pressure data (velocity-only): σP = UNVALIDATED_PRESSURE_SIGMA;
+ *  - calibrated or user-calibrated with pressure data: σP = max(in-sample RMS × 1.45, held-out median × 1.48);
+ *  - calibrated or user-calibrated WITHOUT pressure data (velocity-only): never narrower than an estimated powder
+ *    (DEFAULT_SPEC_ESTIMATED), than σP = UNVALIDATED_PRESSURE_SIGMA, or than the model it replaced (`parent`);
  *  - estimated: the measured chart-interpolation error (already a burn-rate spread).
  * σP is converted to a burn-rate spread with the load's own elasticity d ln p / d ln β (from sensitivities()),
  * so the Monte Carlo band reproduces the intended pressure spread.
  */
 export function specForPowderModel(
-  m?: {
-    status: string;
-    betaRelSigma?: number;
-    calibration?: { rmsPressurePct?: number | null; heldOutPressurePct?: number | null };
-  } | null,
+  m?: SpreadModel | null,
   pressurePerBeta: number = DEFAULT_PRESSURE_PER_BETA,
+  parent?: SpreadModel | null,
 ): UncertaintySpec {
   const k = Number.isFinite(pressurePerBeta) && pressurePerBeta > 0.2 ? pressurePerBeta : DEFAULT_PRESSURE_PER_BETA;
   if (!m) return DEFAULT_SPEC_ESTIMATED;
   if (m.status === 'estimated') return { ...DEFAULT_SPEC_ESTIMATED, betaRel: m.betaRelSigma && m.betaRelSigma > 0 ? m.betaRelSigma : DEFAULT_SPEC_ESTIMATED.betaRel };
   const rms = m.calibration?.rmsPressurePct;
   const held = m.calibration?.heldOutPressurePct;
-  let sigmaP = UNVALIDATED_PRESSURE_SIGMA;
   if (typeof rms === 'number' && rms > 0) {
-    sigmaP = Math.max((rms * 1.45) / 100, typeof held === 'number' && held > 0 ? (held * 1.48) / 100 : 0);
+    const sigmaP = Math.max((rms * 1.45) / 100, typeof held === 'number' && held > 0 ? (held * 1.48) / 100 : 0);
+    return { ...DEFAULT_SPEC_CALIBRATED, betaRel: Math.min(0.6, Math.max(0.03, sigmaP / k)) };
   }
-  return { ...DEFAULT_SPEC_CALIBRATED, betaRel: Math.min(0.6, Math.max(0.03, sigmaP / k)) };
+  // Velocity-only: a fit to velocities says nothing about pressure, so it cannot narrow the band.
+  const up = parent && parent !== m ? specForPowderModel(parent, k) : null;
+  const own = typeof m.betaRelSigma === 'number' && m.betaRelSigma > 0 ? m.betaRelSigma : 0;
+  const floor = Math.min(0.6, Math.max(UNVALIDATED_PRESSURE_SIGMA / k, DEFAULT_SPEC_ESTIMATED.betaRel));
+  return {
+    ...DEFAULT_SPEC_ESTIMATED,
+    forceRel: Math.max(DEFAULT_SPEC_ESTIMATED.forceRel, up?.forceRel ?? 0),
+    betaRel: Math.max(floor, up?.betaRel ?? 0, own),
+  };
+}
+
+/** True when a calibrated or user-calibrated model has no pressure data behind it (velocity-only fit). */
+export function isVelocityOnly(m?: { status: string; calibration?: { grade?: string; rmsPressurePct?: number | null } } | null): boolean {
+  if (!m || (m.status !== 'calibrated' && m.status !== 'user-calibrated')) return false;
+  const c = m.calibration;
+  return !c || c.grade === 'unvalidated' || !(typeof c.rmsPressurePct === 'number' && c.rmsPressurePct > 0);
 }

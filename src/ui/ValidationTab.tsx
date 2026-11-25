@@ -11,13 +11,14 @@ const PSI_PER_BAR = 14.503773773020923;
 const obsPsi = (r: { pObs: number | null; pObsUnit: string | null }) =>
   r.pObs === null ? null : r.pObsUnit === 'psi' ? r.pObs : r.pObsUnit === 'bar' ? r.pObs * PSI_PER_BAR : null;
 
-/** Held-out error broken down by cartridge type and by whether the bullet length was published or estimated. */
+/** Held-out error broken down by bullet construction and by whether the bullet length was published or estimated. */
 function Breakdown({ rows }: { rows: ValidationRow[] }) {
   const held = rows.filter((r) => r.heldOut);
   const groups: { label: string; f: (r: ValidationRow) => boolean }[] = [
     { label: 'All held-out', f: () => true },
     { label: 'Bullet length published by maker', f: (r) => r.lengthEstimated === false },
     { label: 'Bullet length estimated (maker publishes none)', f: (r) => r.lengthEstimated === true },
+    { label: 'Jacketed bullets', f: (r) => r.shotClass === 'jacketed' },
     { label: 'Monolithic bullets', f: (r) => r.shotClass === 'monolithic' },
   ];
   const stats = (rs: ValidationRow[]) => {
@@ -37,7 +38,7 @@ function Breakdown({ rows }: { rows: ValidationRow[] }) {
   return (
     <div className="card" data-testid="validation-breakdown">
       <h3>Held-out error by group</h3>
-      <p className="small muted">Absolute errors of held-out predictions. p50 = median, p90 = 90th percentile (one prediction in ten is worse than this). Bias is the mean signed pressure error: negative means the model predicts <strong>lower</strong> pressure than was measured — the unsafe direction.</p>
+      <p className="small muted">Absolute errors of held-out predictions. p50 = median, p90 = 90th percentile (one prediction in ten is worse than this). Bias is the mean signed pressure error: negative means the model predicts <strong>lower</strong> pressure than was measured — the unsafe direction. The all-held-out bias mixes jacketed and monolithic bullets: read the row for your bullet's construction (the Predict tab shows it for the selected bullet).</p>
       <div className="table-wrap">
         <table className="data">
           <thead>

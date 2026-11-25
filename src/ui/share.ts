@@ -1,6 +1,8 @@
 // Shareable load links: the builder state is encoded in the URL fragment (never sent to any server).
 
 import { EMPTY_BUILDER, type BuilderState } from './state';
+import type { Cartridge } from '../data/schema';
+import { exceededMaxima, pressureLimit, standardForCartridge } from './useLoad';
 
 const PREFIX = '#load=';
 
@@ -51,11 +53,35 @@ export function decodeBuilder(hash: string): DecodedShare | null {
       powderId: str(b.powderId),
       inputs,
       standard: b.standard === 'CIP' || b.standard === 'custom' ? b.standard : 'SAAMI',
-      customLimitPsi: typeof b.customLimitPsi === 'number' ? b.customLimitPsi : NaN,
-      marginPct: typeof b.marginPct === 'number' ? b.marginPct : EMPTY_BUILDER.marginPct,
+      customLimitPsi: typeof b.customLimitPsi === 'number' && Number.isFinite(b.customLimitPsi) && b.customLimitPsi > 0 ? b.customLimitPsi : NaN,
+      marginPct: typeof b.marginPct === 'number' && Number.isFinite(b.marginPct) ? b.marginPct : EMPTY_BUILDER.marginPct,
     };
     return { builder, dbVersion: typeof obj.db === 'string' ? obj.db : null };
   } catch {
     return null;
   }
+}
+
+export interface SharedLimitReview {
+  /** The link's standard, limit and margin, in words. */
+  summary: string;
+  /** Set when the link's custom limit is above the cartridge's published maximum. */
+  warning: string | null;
+  /** The link's builder with an over-maximum custom limit replaced by the cartridge's own standard. */
+  safeBuilder: BuilderState;
+}
+
+/** What pressure limit a shared link would set, and a safe alternative when its custom limit is above the cartridge's maximum. */
+export function reviewSharedLimit(b: BuilderState, cartridge: Cartridge | null): SharedLimitReview {
+  const lim = pressureLimit(b, cartridge);
+  const std = b.standard === 'CIP' ? 'C.I.P.' : b.standard === 'custom' ? 'custom' : 'SAAMI';
+  const note = lim.note ? ` (${lim.note.replace(/\.$/, '')})` : '';
+  const summary = lim.limitPa !== null ? `${lim.label}${note}` : `${std} standard, no limit set${note}`;
+  const over = b.standard === 'custom' ? exceededMaxima(b.customLimitPsi, cartridge) : [];
+  if (!over.length || !cartridge) return { summary, warning: null, safeBuilder: b };
+  return {
+    summary,
+    warning: `This link's custom limit (${Math.round(b.customLimitPsi).toLocaleString('en-US')} psi) is above this cartridge's ${over.join(' and ')}. Loading it with the standard limit is recommended.`,
+    safeBuilder: { ...b, standard: standardForCartridge('SAAMI', cartridge), customLimitPsi: NaN },
+  };
 }
