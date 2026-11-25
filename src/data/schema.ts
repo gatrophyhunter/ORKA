@@ -91,8 +91,6 @@ export interface PowderModelEntry {
     sources: string[];
     /** Charge range covered by the calibration data, grains (predictions outside it are extrapolations). */
     chargeRangeGr?: [number, number];
-    /** Charge range of the calibration data per cartridge id, grains (min, max). */
-    chargeRangeByCartridge?: Record<string, [number, number]>;
     /** Fit quality from the RMS pressure error: good ≤ 10 %, fair ≤ 20 %, poor > 20 %. */
     grade?: 'good' | 'fair' | 'poor' | 'unvalidated';
     /** Median absolute held-out pressure error for this powder (leave-one-cartridge-out), percent, when measured. */

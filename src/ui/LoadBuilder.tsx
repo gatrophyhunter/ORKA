@@ -7,7 +7,7 @@ import { NumberField, PlainNumber, SearchPicker, StatusChip, EstimateWarning, ty
 import { fmtInput, fmtP } from './format';
 import { bulletFeatures, fitLengthModel } from '../engine/bulletLength';
 import { useApp, type PressureStandard } from './state';
-import { capacityOptions, limitForCartridge, modelStatus, useLoad } from './useLoad';
+import { capacityOptions, modelStatus, useLoad } from './useLoad';
 
 export function cartridgeItems(cs: Cartridge[]): PickerItem[] {
   return cs.map((c) => ({
@@ -71,8 +71,8 @@ export function LoadBuilder() {
   const pickCartridge = (id: string | null) => {
     const c = id ? db.cartridges.find((x) => x.id === id) ?? null : null;
     setBuilder((b) => {
-      // A custom limit typed for another cartridge must not carry over; an explicit C.I.P. choice is kept (review finding).
-      if (!c) return { ...b, ...limitForCartridge(b, null, null), cartridgeId: null, brassKey: null, brassBrandId: null };
+      if (!c) return { ...b, cartridgeId: null, brassKey: null, brassBrandId: null };
+      const standard: PressureStandard = c.saamiMapPsi ? 'SAAMI' : c.cipPmaxBar ? 'CIP' : 'custom';
       const keep = (v: number | null | undefined, cur: number) => (typeof v === 'number' && v > 0 ? v : cur);
       return {
         ...b,
@@ -80,7 +80,9 @@ export function LoadBuilder() {
         brassKey: null,
         brassBrandId: null,
         capacityBasis: '',
-        ...limitForCartridge(b, c.id, c),
+        standard,
+        // A custom limit typed for another cartridge must not carry over (review finding).
+        customLimitPsi: standard === 'custom' ? NaN : b.customLimitPsi,
         bulletId: b.bulletId && c.bulletDiameterIn && Math.abs((db.bullets.find((x) => x.id === b.bulletId)?.diameterIn ?? 0) - c.bulletDiameterIn) > 0.0015 ? null : b.bulletId,
         inputs: {
           ...b.inputs,
@@ -157,11 +159,6 @@ export function LoadBuilder() {
         {head}
         <div className="builder-summary">{bits.join(' · ')}</div>
         {d.limit.limitPa !== null && <div className="builder-summary">Working limit {fmtP(d.limit.limitPa, sys)}</div>}
-        {d.limit.warning && (
-          <div className="alert warn small" role="alert" data-testid="limit-warning">
-            {d.limit.warning}
-          </div>
-        )}
       </div>
     );
   }
@@ -315,11 +312,6 @@ export function LoadBuilder() {
           )}
         </div>
         {d.limit.limitPa !== null && d.limit.note && <div className="small muted">{d.limit.note}</div>}
-        {d.limit.warning && (
-          <div className="alert warn small" role="alert" style={{ marginTop: 6 }} data-testid="limit-warning">
-            {d.limit.warning}
-          </div>
-        )}
       </div>
 
       {d.powder && (

@@ -2,17 +2,14 @@
 
 import { useMemo, useState } from 'react';
 import { simulate } from '../engine/model';
-import { monteCarlo, sensitivities, temperatureSweep, specForPowderModel, isVelocityOnly, DEFAULT_PRESSURE_PER_BETA, type MonteCarloResult, type UncertaintySpec } from '../engine/uncertainty';
+import { monteCarlo, sensitivities, temperatureSweep, specForPowderModel, type MonteCarloResult, type UncertaintySpec } from '../engine/uncertainty';
 import * as U from '../engine/units';
 import { FitGrade, ErrorList, EstimateWarning, PlainNumber, StatusChip, Tile, useDebounced } from './components';
 import { fmtChargeKg, fmtE, fmtLen, fmtMs, fmtNum, fmtP, fmtPct, fmtTempC, fmtV, lenUnit, lenVal, pUnit, pVal, vUnit, vVal } from './format';
 import { LineChart } from './LineChart';
 import { useApp } from './state';
 import { PublishedCrossCheck, ScopeWarnings } from './CrossCheck';
-import { classValidation, modelValidation, shotStartClass, type ModelValidationSummary, type ShotClass } from '../engine/defaults';
-import { shippedModel } from '../data/db';
-import type { ModelStatus, PowderModelEntry } from '../data/schema';
-import type { PressureStandard } from './state';
+import { modelValidation } from '../engine/defaults';
 import { encodeBuilder } from './share';
 import { useLoad } from './useLoad';
 
@@ -24,98 +21,6 @@ export function pressureState(peakPa: number, limitPa: number | null): 'ok' | 'w
   if (r > 1) return 'danger';
   if (r > 0.95) return 'warn';
   return 'ok';
-}
-
-export interface ModelErrorView {
-  /** Caveat shown first, in bold (velocity-only, imported or user fit); empty when none. */
-  lead: string;
-  /** Plain-language statement of how far off this prediction may be. */
-  text: string;
-  /** Upper estimate of peak pressure, Pa. */
-  upperPa: number;
-  /** True when the upper estimate is above the maximum in use. */
-  over: boolean;
-}
-
-/**
- * Model-error statement for the peak-pressure tile.
- *  - calibrated / user-calibrated: held-out error measured on the shipped pressure-fitted models, for the bullet's
- *    construction class when that class has enough comparisons; velocity-only fits are flagged.
- *  - estimated: no held-out validation exists; the powder's own chart-interpolation spread is shown instead.
- */
-export function modelErrorView(a: {
-  peakPa: number;
-  mapPa: number | null;
-  standard: PressureStandard;
-  status: ModelStatus;
-  model: PowderModelEntry | null | undefined;
-  mv: ModelValidationSummary | null;
-  shotClass: ShotClass | null;
-  cartridgeId: string | null;
-  /** Burn-rate spread (1σ, relative) of an estimated powder. */
-  estimateBetaRel: number;
-  /** d ln p / d ln β at this load. */
-  elasticity: number | undefined;
-  fmt: (pa: number) => string;
-}): ModelErrorView | null {
-  const maxWord = a.standard === 'custom' ? 'your custom limit' : 'the maximum';
-  const tail = (upper: number) => (a.mapPa !== null && upper > a.mapPa ? ` — above ${maxWord}.` : '.');
-  if (a.status === 'estimated') {
-    const k = a.elasticity !== undefined && Number.isFinite(a.elasticity) && a.elasticity > 0.2 ? a.elasticity : DEFAULT_PRESSURE_PER_BETA;
-    const s = a.estimateBetaRel;
-    const upper = a.peakPa * Math.exp(1.645 * k * s);
-    return {
-      lead: 'No held-out validation exists for estimated powders. ',
-      upperPa: upper,
-      over: a.mapPa !== null && upper > a.mapPa,
-      text:
-        `This burn rate is interpolated from burn-rate charts, with a spread of ±${Math.round(s * 100)} % (1σ). ` +
-        `At this load that alone moves peak pressure by a factor of about ${(Math.exp(k * s)).toFixed(1)} either way (1σ). ` +
-        `Rough upper estimate (burn-rate spread only, about 1 in 20 higher) ${a.fmt(upper)}${tail(upper)}`,
-    };
-  }
-  if ((a.status !== 'calibrated' && a.status !== 'user-calibrated') || !a.mv) return null;
-  const mv = a.mv;
-  const cls = classValidation(mv, a.shotClass);
-  const p50 = cls?.p50Pct ?? mv.heldOutPressureP50Pct;
-  const p90 = cls?.p90Pct ?? mv.heldOutPressureP90Pct;
-  const bias = cls?.biasPct ?? mv.heldOutPressureBiasPct;
-  // Never use a smaller error than the all-bullets figure for the upper estimate.
-  const p90Upper = Math.max(p90, mv.heldOutPressureP90Pct);
-  const upper = a.peakPa * (1 + p90Upper / 100);
-  const user = a.status === 'user-calibrated';
-  const imported = user && typeof a.model?.derivation === 'string' && a.model.derivation.startsWith('Imported from a file.');
-  const velOnly = isVelocityOnly(a.model);
-  const rms = a.model?.calibration?.rmsPressurePct;
-  let lead = '';
-  let note = '';
-  if (imported) {
-    lead = 'Imported model: its pressure fit is not on record, so it is treated as velocity-only. ';
-    note = 'The error below was measured on the shipped pressure-fitted models, not on this one. ';
-  } else if (user && velOnly) {
-    lead = 'Velocity-only calibration: your calibration was fitted to velocities only and does not check pressure. ';
-    note = 'The error below was measured on the shipped pressure-fitted models, not on your calibration. ';
-  } else if (user && typeof rms === 'number') {
-    note = `Your calibration fits your pressure data to ±${rms.toFixed(1)} % (in-sample). The error below was measured on the shipped pressure-fitted models. `;
-  } else if (velOnly) lead = "This powder's model was fitted to velocities only — its pressure has never been checked against a measurement. ";
-  const where = mv.heldOutCartridgeIds?.length ? `measured on ${mv.scope.replace(/^held-out pressure comparisons exist only for: /, '')} only` : 'see Validation';
-  const outside = mv.heldOutCartridgeIds?.length && a.cartridgeId && !mv.heldOutCartridgeIds.includes(a.cartridgeId) ? '; this cartridge is outside the validated set' : '';
-  const group = cls && a.shotClass ? `${a.shotClass} bullets, ${cls.n} published loads; ` : '';
-  const own = !user && typeof a.model?.calibration?.heldOutPressurePct === 'number' ? `; this powder: median ±${a.model.calibration.heldOutPressurePct} %` : '';
-  return {
-    lead,
-    upperPa: upper,
-    over: a.mapPa !== null && upper > a.mapPa,
-    text:
-      `${note}Model error on held-out published data (${group}${where}${outside}): median ±${p50} %, 1 in 10 worse than ±${p90} %` +
-      `${bias < 0 ? ` (on average ${Math.abs(bias)} % low: real pressure tends to be higher than shown)` : ''}${own}. ` +
-      `Upper estimate (+${p90Upper} %) ${a.fmt(upper)}${tail(upper)}`,
-  };
-}
-
-/** Construction class of the selected bullet, or null when no bullet is selected or its construction is not recorded. */
-export function bulletShotClass(construction: string | null | undefined): ShotClass | null {
-  return construction && construction.trim() ? shotStartClass(construction) : null;
 }
 
 export function PredictTab() {
@@ -131,9 +36,7 @@ export function PredictTab() {
   // Elasticity of peak pressure to burn rate for THIS load (sensitivities() perturbs beta by a factor e^0.03).
   const betaSens = sens?.find((x) => x.key === 'beta');
   const elasticity = betaSens ? betaSens.peakPct / (100 * (Math.exp(0.03) - 1)) : undefined;
-  // A user calibration without pressure data must not narrow the band of the shipped model it replaced.
-  const parentModel = d.powder?.model?.status === 'user-calibrated' ? shippedModel(d.powder.id) : null;
-  const defaultSpec = specForPowderModel(d.powder?.model, elasticity, parentModel);
+  const defaultSpec = specForPowderModel(d.powder?.model, elasticity);
   const [spec, setSpec] = useState<UncertaintySpec | null>(null);
   const activeSpec = spec ?? defaultSpec;
   const [mc, setMc] = useState<{ r: MonteCarloResult; key: unknown } | null>(null);
@@ -174,23 +77,6 @@ export function PredictTab() {
   const refLines = limit ? [{ y: pVal(limit, sys), label: 'working limit', color: 'var(--danger)' }] : [];
   const stale = d.setup !== setup;
   const mv = modelValidation();
-  const maxWord = builder.standard === 'custom' ? 'your custom limit' : "the standard's maximum";
-  const modelErr =
-    res && d.powder
-      ? modelErrorView({
-          peakPa: res.peakBreechPa,
-          mapPa: d.limit.mapPa,
-          standard: builder.standard,
-          status: d.status,
-          model: d.powder.model,
-          mv,
-          shotClass: d.bullet ? bulletShotClass(d.bullet.construction) : null,
-          cartridgeId: d.cartridge?.id ?? null,
-          estimateBetaRel: defaultSpec.betaRel,
-          elasticity,
-          fmt: (pa) => fmtP(pa, sys),
-        })
-      : null;
   const shareUrl = () => `${window.location.origin}${window.location.pathname}${encodeBuilder(builder, db.version)}`;
   const copyLink = async () => {
     const url = shareUrl();
@@ -228,7 +114,7 @@ export function PredictTab() {
           </div>
         )}
         <div className="print-only small" data-testid="print-summary">
-          <strong>Inputs:</strong> {d.cartridge?.name ?? 'custom chamber'} · case capacity {builder.inputs.caseCapacityGrH2O} gr H₂O ({builder.capacityBasis || 'entered'}) · case length {builder.inputs.caseLengthIn} in · bore/groove {builder.inputs.boreDiameterIn}/{builder.inputs.grooveDiameterIn} in · barrel {builder.inputs.barrelLengthIn} in · bullet {d.bullet ? `${d.bullet.manufacturer} ${d.bullet.name}` : 'custom'} {builder.inputs.bulletWeightGr} gr, {builder.inputs.bulletLengthIn} in long · COAL {builder.inputs.coalIn} in · {d.powder?.manufacturer} {d.powder?.name} ({d.status}) {builder.inputs.chargeGr} gr at {builder.inputs.powderTempF} °F · shot-start {builder.inputs.shotStartPsi} psi · limit {d.limit.label}.{d.limit.warning ? ` ${d.limit.warning}` : ''}
+          <strong>Inputs:</strong> {d.cartridge?.name ?? 'custom chamber'} · case capacity {builder.inputs.caseCapacityGrH2O} gr H₂O ({builder.capacityBasis || 'entered'}) · case length {builder.inputs.caseLengthIn} in · bore/groove {builder.inputs.boreDiameterIn}/{builder.inputs.grooveDiameterIn} in · barrel {builder.inputs.barrelLengthIn} in · bullet {d.bullet ? `${d.bullet.manufacturer} ${d.bullet.name}` : 'custom'} {builder.inputs.bulletWeightGr} gr, {builder.inputs.bulletLengthIn} in long · COAL {builder.inputs.coalIn} in · {d.powder?.manufacturer} {d.powder?.name} ({d.status}) {builder.inputs.chargeGr} gr at {builder.inputs.powderTempF} °F · shot-start {builder.inputs.shotStartPsi} psi · limit {d.limit.label}.
           <br />
           ORKA database {db.version}. Printed {new Date().toLocaleString()}. A prediction, not load data.
         </div>
@@ -252,26 +138,26 @@ export function PredictTab() {
                   <div style={{ width: `${Math.min(ratio, 1) * 100}%` }} />
                 </div>
               )}
-              {d.limit.warning && (
-                <div className="small warn-text" data-testid="predict-limit-warning">
-                  {d.limit.warning}
-                </div>
-              )}
-              {modelErr && (
-                <div className={`small ${modelErr.over ? 'warn-text' : 'muted'}`} data-testid="model-error">
-                  {modelErr.lead && <strong>{modelErr.lead}</strong>}
-                  {modelErr.text}
+              {mv && (d.status === 'calibrated' || d.status === 'estimated') && !d.powder?.user && !(d.powder && d.powder.model?.status === 'user-calibrated') && (
+                <div className={`small ${d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? 'warn-text' : 'muted'}`} data-testid="model-error">
+                  {d.powder?.model?.calibration?.grade === 'unvalidated' && <strong>This powder's model was fitted to velocities only — its pressure has never been checked against a measurement. </strong>}
+                  Model error on held-out published data ({mv.heldOutCartridgeIds?.length ? `measured on ${mv.scope.replace(/^held-out pressure comparisons exist only for: /, '')} only` : 'see Validation'}
+                  {mv.heldOutCartridgeIds?.length && d.cartridge && !mv.heldOutCartridgeIds.includes(d.cartridge.id) ? '; this cartridge is outside the validated set' : ''}): median ±{mv.heldOutPressureP50Pct} %, 1 in 10 worse than ±{mv.heldOutPressureP90Pct} %
+                  {mv.heldOutPressureBiasPct < 0 ? ` (on average ${Math.abs(mv.heldOutPressureBiasPct)} % low)` : ''}
+                  {typeof d.powder?.model?.calibration?.heldOutPressurePct === 'number' ? `; this powder: median ±${d.powder.model.calibration.heldOutPressurePct} %` : ''}.
+                  {' '}Upper estimate {fmtP(res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100), sys)}
+                  {d.limit.mapPa !== null && res.peakBreechPa * (1 + mv.heldOutPressureP90Pct / 100) > d.limit.mapPa ? ' — above the maximum.' : '.'}
                 </div>
               )}
               {d.limit.mapPa !== null && (
                 <div className="small muted" data-testid="pressure-bands">
                   {res.peakBreechPa > d.limit.mapPa
-                    ? `ABOVE ${maxWord} (${fmtP(d.limit.mapPa, sys)})`
+                    ? `ABOVE the standard's maximum (${fmtP(d.limit.mapPa, sys)})`
                     : res.peakBreechPa > d.limit.mapPa * 0.85
-                      ? `within 15 % of ${maxWord} (${fmtP(d.limit.mapPa, sys)})`
+                      ? `within 15 % of the maximum (${fmtP(d.limit.mapPa, sys)})`
                       : res.peakBreechPa > d.limit.mapPa * 0.75
-                        ? `between 75 % and 85 % of ${maxWord}`
-                        : `below 75 % of ${maxWord}`}
+                        ? 'between 75 % and 85 % of the maximum'
+                        : 'below 75 % of the maximum'}
                   {' · '}gauge-station estimate {fmtP(res.peakGaugePa, sys)}
                 </div>
               )}

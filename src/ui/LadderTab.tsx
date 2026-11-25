@@ -6,56 +6,10 @@ import { DEFAULT_MAX_FILL } from '../engine/defaults';
 import * as U from '../engine/units';
 import { ErrorList, EstimateWarning, NumberField, PlainNumber, StatusChip } from './components';
 import { fmtChargeKg, fmtP, fmtPct, fmtV, fmtMs } from './format';
-import { useApp, type BuilderState } from './state';
-import { useLoad, type DerivedLoad } from './useLoad';
-import { joinAnd, limitContext, loadsAboveReference, PublishedFailed, publishedMatches, publishedReference, ReferencePressureNote, ScopeWarnings } from './CrossCheck';
-import type { ValidationLoad } from '../data/schema';
-import { usePublished } from './published';
-
-/**
- * Ladder and solver results depend on the geometry, powder model, temperature and shot-start, not on the builder's
- * charge (they sweep or solve their own). This key leaves the charge out so 'use' does not clear them.
- */
-export function ladderRunKey(builder: BuilderState, d: Pick<DerivedLoad, 'propellant' | 'heatScale'>): string {
-  const { chargeGr: _charge, ...rest } = builder.inputs;
-  return JSON.stringify([rest, builder.cartridgeId, builder.bulletId, builder.powderId, d.propellant, d.heatScale]);
-}
-
-/**
- * Start/end charges shown in the ladder fields: the typed value, else the range of the rows on screen (so 'use', which
- * changes the builder charge, does not move the fields away from the table), else a default around the builder charge.
- */
-export function ladderFieldRange(typed: [number, number], shown: [number, number] | null, chargeGr: number): [number, number] {
-  const s0 = Number.isFinite(typed[0]) ? typed[0] : shown ? shown[0] : Math.max(0.1, +(chargeGr * 0.9).toFixed(1));
-  const s1 = Number.isFinite(typed[1]) ? typed[1] : shown ? shown[1] : +(chargeGr * 1.05).toFixed(1);
-  return [s0, s1];
-}
-
-/** The maker's reference charge for the ladder; a single-load reference is not called a maximum. */
-export function PublishedRefBanner({ reference, rows }: { reference: { charge: number; kind: 'max' | 'single' } | null; rows: ValidationLoad[] }) {
-  if (!reference) return null;
-  const x = reference.charge.toFixed(1);
-  const higher = reference.kind === 'single' ? loadsAboveReference(rows, reference.charge) : [];
-  const lead = rows.some((r) => r.loadType === 'section-max')
-    ? 'The maker publishes no maximum for these components at the cartridge standard.'
-    : rows.every((r) => r.loadType === 'other')
-      ? 'The maker publishes no maximum for these components, only single loads.'
-      : 'The maker publishes no maximum for these components.';
-  return (
-    <div className="alert info small" data-testid="ladder-pub-ref">
-      {reference.kind === 'single' ? (
-        <>
-          {lead} The highest single load is <strong>{x} gr</strong>; rows above it are marked “above pub”.
-          {higher.length > 0 && ` The maker's loads above ${x} gr are ${joinAnd(higher)}, which ORKA does not use as a ceiling. Check which firearm each load in the maker's data is for.`}
-        </>
-      ) : (
-        <>
-          Maker's published maximum for these components: <strong>{x} gr</strong>. Rows above it are marked “pub max”.
-        </>
-      )}
-    </div>
-  );
-}
+import { useApp } from './state';
+import { useLoad } from './useLoad';
+import { publishedMatches, publishedReference, ScopeWarnings } from './CrossCheck';
+import { usePublishedLoads } from './published';
 
 export function LadderTab() {
   const { prefs, patchInputs, db, builder } = useApp();
@@ -66,22 +20,18 @@ export function LadderTab() {
   const [endGr, setEndGr] = useState<number>(NaN);
   const [steps, setSteps] = useState<number>(10);
   const [rows, setRows] = useState<LadderRow[] | null>(null);
-  // Start/end charges the rows on screen were computed for.
-  const [ran, setRan] = useState<[number, number] | null>(null);
   const [maxFillPct, setMaxFillPct] = useState<number>(Math.round(DEFAULT_MAX_FILL * 1000) / 10);
   const [maxSol, setMaxSol] = useState<ChargeSolution | null>(null);
   const [targetFps, setTargetFps] = useState<number>(NaN);
   const [velSol, setVelSol] = useState<ChargeSolution | null | 'unreachable'>(null);
   const [busy, setBusy] = useState(false);
   const limit = d.limit.limitPa;
-  // Results belong to the setup they were computed for: clear them when the geometry, powder or conditions change.
-  const runKey = ladderRunKey(builder, d);
+  // Results belong to the setup they were computed for: clear them when the load or its geometry changes (review finding).
   useEffect(() => {
     setRows(null);
-    setRan(null);
     setMaxSol(null);
     setVelSol(null);
-  }, [runKey]);
+  }, [base]);
   // A solved maximum belongs to the limit it was solved for.
   useEffect(() => {
     setMaxSol(null);
@@ -89,11 +39,11 @@ export function LadderTab() {
   }, [limit]);
   // Over-limit state is evaluated against the CURRENT limit at render time; non-finite peaks count as over.
   const overNow = (peakPa: number) => limit !== null && !(peakPa <= limit);
-  const { rows: published, failed: pubFailed, retry: pubRetry } = usePublished();
-  const pubRows = publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr, published);
-  const pubRef = publishedReference(pubRows);
-  const pubMax = pubRef ? pubRef.charge : null;
-  const pubTag = pubRef?.kind === 'single' ? 'above pub' : 'pub max';
+  const published = usePublishedLoads();
+  const pubMax = (() => {
+    const ref = publishedReference(publishedMatches(db, d.cartridge?.id ?? null, d.powder?.id ?? null, builder.inputs.bulletWeightGr, published));
+    return ref ? ref.charge : null;
+  })();
 
   if (!base) {
     return (
@@ -115,7 +65,8 @@ export function LadderTab() {
     }, 20);
   };
 
-  const [s0, s1] = ladderFieldRange([startGr, endGr], rows ? ran : null, base.chargeKg / U.KG_PER_GRAIN);
+  const s0 = Number.isFinite(startGr) ? startGr : Math.max(0.1, +(base.chargeKg / U.KG_PER_GRAIN * 0.9).toFixed(1));
+  const s1 = Number.isFinite(endGr) ? endGr : +(base.chargeKg / U.KG_PER_GRAIN * 1.05).toFixed(1);
   const opt = { maxFillRatio: (Number.isFinite(maxFillPct) ? maxFillPct : DEFAULT_MAX_FILL * 100) / 100, tolKg: 1e-6 };
   const applyCharge = (kg: number) => patchInputs({ chargeGr: +U.kgToGr(kg).toFixed(2) });
 
@@ -132,27 +83,16 @@ export function LadderTab() {
         </div>
         <EstimateWarning status={d.status} />
         <ScopeWarnings d={d} chargeGr={builder.inputs.chargeGr} />
-        {d.cartridge && d.powder && published === null && <div className="small muted">Loading published maker data…</div>}
-        {d.cartridge && d.powder && pubFailed && <PublishedFailed retry={pubRetry} what="ladder rows are not checked against the maker's maximum" />}
-        <PublishedRefBanner reference={pubRef} rows={pubRows} />
-        <ReferencePressureNote rows={pubRows} reference={pubRef} ctx={limitContext(d, builder.standard)} />
+        {pubMax !== null && (
+          <div className="alert info small">Maker's published maximum for these components: <strong>{pubMax.toFixed(1)} gr</strong>. Rows above it are marked “pub max”.</div>
+        )}
         {limit === null && <div className="alert warn">No pressure limit set — rows cannot be flagged. {d.limit.note}</div>}
         <div className="grid-4" style={{ marginTop: 8 }}>
           <NumberField label="Start charge" qty="charge" value={s0} onChange={setStartGr} testId="ladder-start" />
           <NumberField label="End charge" qty="charge" value={s1} onChange={setEndGr} testId="ladder-end" />
           <PlainNumber label="Steps" value={steps} onChange={(v) => setSteps(Math.max(1, Math.min(60, Math.round(v || 1))))} testId="ladder-steps" />
           <div className="field" style={{ justifyContent: 'flex-end' }}>
-            <button
-              className="btn primary"
-              disabled={busy || !(s1 > s0)}
-              onClick={() =>
-                later(() => {
-                  setRows(ladder(base, U.grToKg(s0), U.grToKg(s1), steps, limit ?? Infinity));
-                  setRan([s0, s1]);
-                })
-              }
-              data-testid="run-ladder"
-            >
+            <button className="btn primary" disabled={busy || !(s1 > s0)} onClick={() => later(() => setRows(ladder(base, U.grToKg(s0), U.grToKg(s1), steps, limit ?? Infinity)))} data-testid="run-ladder">
               Run ladder
             </button>
           </div>
@@ -185,7 +125,7 @@ export function LadderTab() {
                           </span>
                         )}
                         {fmtChargeKg(r.chargeKg, sys)}
-                        {overPub && <span className="small" style={{ marginLeft: 6, color: 'var(--danger)' }}>{pubTag}</span>}
+                        {overPub && <span className="small" style={{ marginLeft: 6, color: 'var(--danger)' }}>pub max</span>}
                       </td>
                       <td className="num">{fmtP(r.result.peakBreechPa, sys)}</td>
                       <td className="num">{limit !== null ? fmtPct(r.result.peakBreechPa / limit, 0) : '—'}</td>

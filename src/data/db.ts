@@ -61,28 +61,10 @@ function mergeById<T extends { id: string }>(base: T[], extra: T[]): T[] {
   return [...map.values()];
 }
 
-/** The shipped model of a powder, by id (the model a user calibration replaces), or null. */
-export function shippedModel(powderId: string | null | undefined, base: Database = BASE_DB): PowderModelEntry | null {
-  if (!powderId) return null;
-  return base.powders.find((p) => p.id === powderId)?.model ?? null;
-}
-
 export function mergedDb(user: UserData, base: Database = BASE_DB): Database {
-  // The app never writes a model into a user powder record, so one there came from a file: re-check it (older imports too).
-  const own = user.powders.map((p) => {
-    if (!p || typeof p !== 'object' || p.model === undefined) return p;
-    const { model, ...rest } = p;
-    const m = sanitizeImportedModel(model);
-    return m ? { ...rest, model: m } : rest;
-  });
-  const userModel = (id: string) => {
-    const m = user.powderModels[id];
-    return m && typeof m.derivation === 'string' && m.derivation.startsWith(IMPORTED) ? sanitizeImportedModel(m) : m;
-  };
-  const powders = mergeById(base.powders, own).map((p) => {
-    const m = user.powderModels[p.id] ? userModel(p.id) : undefined;
-    return m ? { ...p, model: m } : p;
-  });
+  const powders = mergeById(base.powders, user.powders).map((p) =>
+    user.powderModels[p.id] ? { ...p, model: user.powderModels[p.id] } : p,
+  );
   return {
     ...base,
     cartridges: mergeById(base.cartridges, user.cartridges),
@@ -107,18 +89,24 @@ export function parseUserImport(text: string): UserData {
     if (typeof obj.powderModels !== 'object' || obj.powderModels === null || Array.isArray(obj.powderModels)) throw new Error('"powderModels" must be an object.');
     const models: Record<string, PowderModelEntry> = {};
     for (const [id, m] of Object.entries(obj.powderModels as Record<string, any>)) {
-      const clean = sanitizeImportedModel(m);
-      if (clean) models[id] = clean;
+      if (!m || typeof m !== 'object' || !m.params || typeof m.params !== 'object') continue;
+      const nums = ['forceJg', 'flameTempK', 'gamma', 'covolumeCm3g', 'solidDensityGcc', 'beta', 'n', 'lambda', 'mu', 'tempCoeffPerK', 'refTempC'];
+      if (!nums.every((k) => Number.isFinite(m.params[k]))) continue;
+      // An imported model is always "your calibration": a file cannot claim shipped status or fit statistics (review finding).
+      const cal = m.calibration && typeof m.calibration === 'object' ? { ...m.calibration } : undefined;
+      if (cal) {
+        delete cal.grade;
+        delete cal.heldOutPressurePct;
+      }
+      models[id] = {
+        status: 'user-calibrated',
+        params: m.params,
+        derivation: `Imported from a file. ${typeof m.derivation === 'string' ? m.derivation : ''}`.trim(),
+        ...(cal ? { calibration: cal } : {}),
+      };
     }
     out.powderModels = models;
   }
-  // A model embedded in an imported powder record goes through the same check (or is dropped).
-  out.powders = (out.powders as any[]).map((p) => {
-    if (!p || typeof p !== 'object' || p.model === undefined) return p;
-    const { model, ...rest } = p;
-    const clean = sanitizeImportedModel(model);
-    return clean ? { ...rest, model: clean } : rest;
-  });
   // Imported records must not silently replace shipped ones: re-identify any that reuse a shipped id.
   const shipped = { cartridges: new Set(BASE_DB.cartridges.map((x) => x.id)), powders: new Set(BASE_DB.powders.map((x) => x.id)), bullets: new Set(BASE_DB.bullets.map((x) => x.id)) };
   for (const k of ['cartridges', 'powders', 'bullets'] as const) {
@@ -127,29 +115,4 @@ export function parseUserImport(text: string): UserData {
     );
   }
   return out;
-}
-
-const IMPORTED = 'Imported from a file.';
-const PARAM_KEYS = ['forceJg', 'flameTempK', 'gamma', 'covolumeCm3g', 'solidDensityGcc', 'beta', 'n', 'lambda', 'mu', 'tempCoeffPerK', 'refTempC'];
-
-/**
- * An imported model is always "your calibration": a file cannot claim shipped status, a fit grade, held-out or
- * in-sample pressure error, or its own uncertainty spread, so it gets the velocity-only (widest) band.
- * Returns null when the parameters are unusable or the file says the powder has no model.
- */
-export function sanitizeImportedModel(m: any): PowderModelEntry | null {
-  if (!m || typeof m !== 'object' || m.status === 'none' || !m.params || typeof m.params !== 'object') return null;
-  if (!PARAM_KEYS.every((k) => Number.isFinite(m.params[k]))) return null;
-  const cal = m.calibration && typeof m.calibration === 'object' ? { ...m.calibration } : undefined;
-  if (cal) {
-    delete cal.grade;
-    delete cal.heldOutPressurePct;
-    cal.rmsPressurePct = null;
-  }
-  return {
-    status: 'user-calibrated',
-    params: m.params,
-    derivation: typeof m.derivation === 'string' && m.derivation.startsWith(IMPORTED) ? m.derivation : `${IMPORTED} ${typeof m.derivation === 'string' ? m.derivation : ''}`.trim(),
-    ...(cal ? { calibration: cal } : {}),
-  };
 }

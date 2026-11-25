@@ -1,5 +1,5 @@
 import { useRef, useState, type KeyboardEvent } from 'react';
-import { decodeBuilder, reviewSharedLimit } from './ui/share';
+import { decodeBuilder } from './ui/share';
 import { AppProvider, useApp, type TabId, type ThemePref } from './ui/state';
 import { Modal } from './ui/components';
 import { LoadBuilder } from './ui/LoadBuilder';
@@ -65,44 +65,23 @@ function SharedLoadPrompt() {
     }
     setShared(null);
   };
-  const cartridge = shared.builder.cartridgeId ? db.cartridges.find((c) => c.id === shared.builder.cartridgeId) ?? null : null;
-  const review = reviewSharedLimit(shared.builder, cartridge);
-  const apply = (b: typeof shared.builder) => {
-    setBuilder(() => b);
-    clear();
-  };
   return (
     <div className="alert info" role="status" style={{ margin: '8px 16px' }} data-testid="shared-load">
-      <strong>This link contains a shared load.</strong> Loading it replaces your current builder inputs, including the pressure limit.
-      {shared.dbVersion && shared.dbVersion !== db.version ? ` It was made with database ${shared.dbVersion}; this app has ${db.version}, so component values may differ.` : ''}
-      <div className="small" style={{ marginTop: 4 }} data-testid="shared-load-limit">
-        Pressure limit in the link: {review.summary}
-        {shared.builder.cartridgeId && !cartridge ? ' (its cartridge is not in this database).' : '.'}
-      </div>
-      {review.warning && (
-        <div className="alert warn small" role="alert" style={{ marginTop: 6 }} data-testid="shared-load-warning">
-          {review.warning}
-        </div>
-      )}
-      <div className="row" style={{ marginTop: 6 }}>
-        {review.warning ? (
-          <>
-            <button className="btn small primary" onClick={() => apply(review.safeBuilder)} data-testid="shared-load-apply">
-              Load it with the standard limit
-            </button>{' '}
-            <button className="btn small danger" onClick={() => apply(shared.builder)} data-testid="shared-load-apply-custom">
-              Load it with the link's higher limit
-            </button>
-          </>
-        ) : (
-          <button className="btn small primary" onClick={() => apply(shared.builder)} data-testid="shared-load-apply">
-            Load it
-          </button>
-        )}{' '}
-        <button className="btn small" onClick={clear}>
-          Dismiss
-        </button>
-      </div>
+      <strong>This link contains a shared load.</strong> Loading it replaces your current builder inputs.
+      {shared.dbVersion && shared.dbVersion !== db.version ? ` It was made with database ${shared.dbVersion}; this app has ${db.version}, so component values may differ.` : ''}{' '}
+      <button
+        className="btn small primary"
+        onClick={() => {
+          setBuilder(() => shared.builder);
+          clear();
+        }}
+        data-testid="shared-load-apply"
+      >
+        Load it
+      </button>{' '}
+      <button className="btn small" onClick={clear}>
+        Dismiss
+      </button>
     </div>
   );
 }

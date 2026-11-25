@@ -8,18 +8,9 @@ import type { Powder } from '../data/schema';
 import type { SearchMessage, SearchRequest } from '../workers/search.worker';
 import { DataTable, ErrorList, FitGrade, NumberField, PlainNumber, StatusChip, type Column } from './components';
 import { fmtChargeKg, fmtMs, fmtP, fmtPct, fmtV } from './format';
-import { useApp, type BuilderState } from './state';
+import { useApp } from './state';
 import { createSearchWorker } from './workers';
 import { geometryErrors, modelStatus, powderPropellant, setupForPowder, useLoad } from './useLoad';
-
-/**
- * Search results depend on the geometry and the pressure limit, not on the builder's charge or powder (the search
- * solves its own charge for every powder). This key leaves those out so loading a result row does not clear the table.
- */
-export function searchRunKey(b: BuilderState): string {
-  const { chargeGr: _charge, ...rest } = b.inputs;
-  return JSON.stringify([rest, b.cartridgeId, b.standard, b.customLimitPsi, b.marginPct]);
-}
 
 export function SearchTab() {
   const { db, builder, setBuilder, prefs } = useApp();
@@ -40,8 +31,8 @@ export function SearchTab() {
   const workerRef = useRef<Worker | null>(null);
 
   useEffect(() => () => workerRef.current?.terminate(), []);
-  // Results belong to the geometry and limit they were computed for: clear them when either changes.
-  const runKey = searchRunKey(builder);
+  // Results belong to the builder state and limit they were computed for: clear them on any change (review finding).
+  const runKey = JSON.stringify([builder.inputs, builder.cartridgeId, builder.standard, builder.customLimitPsi, builder.marginPct]);
   useEffect(() => {
     workerRef.current?.terminate();
     workerRef.current = null;

@@ -4,25 +4,7 @@ import { useState } from 'react';
 import type { SavedLoad } from '../data/db';
 import { PlainNumber, TextField } from './components';
 import { fmtInput } from './format';
-import { reviveInputs, useApp, type BuilderState } from './state';
-import { limitForCartridge } from './useLoad';
-import type { Cartridge } from '../data/schema';
-
-/** Builder state after recalling a saved load. The pressure limit follows the same rule as picking the cartridge. */
-export function recallLoad(b: BuilderState, l: SavedLoad, cartridges: Cartridge[]): BuilderState {
-  const c = l.cartridgeId ? cartridges.find((x) => x.id === l.cartridgeId) ?? null : null;
-  return {
-    ...b,
-    ...limitForCartridge(b, l.cartridgeId, c),
-    cartridgeId: l.cartridgeId,
-    powderId: l.powderId,
-    bulletId: l.bulletId,
-    brassBrandId: l.brassBrandId,
-    brassKey: 'measured',
-    capacityBasis: `saved load “${l.name}”`,
-    inputs: reviveInputs(l.inputs as never),
-  };
-}
+import { reviveInputs, useApp } from './state';
 
 export function LoadBookTab() {
   const { user, updateUser, builder, setBuilder, db, prefs, setTab } = useApp();
@@ -55,7 +37,16 @@ export function LoadBookTab() {
   };
 
   const recall = (l: SavedLoad) => {
-    setBuilder((b) => recallLoad(b, l, db.cartridges));
+    setBuilder((b) => ({
+      ...b,
+      cartridgeId: l.cartridgeId,
+      powderId: l.powderId,
+      bulletId: l.bulletId,
+      brassBrandId: l.brassBrandId,
+      brassKey: 'measured',
+      capacityBasis: `saved load “${l.name}”`,
+      inputs: reviveInputs(l.inputs as never),
+    }));
     setTab('predict');
   };
 

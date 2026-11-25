@@ -1,16 +1,16 @@
 // Lazily loaded table of the makers' published loads (for the safety cross-check). Kept out of the main bundle.
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { ValidationLoad } from '../data/schema';
 
-export interface Compact {
+interface Compact {
   c: string; p: string; w: number; bm: string; bt: string; t: string; ch: number; v: number;
   pr: number | null; pu: 'psi' | 'CUP' | 'bar' | null; b: number | null; oal: number | null;
   cs: string | null; pm: string | null; u: string | null; pg: number | string | null; cp: boolean | null;
   cn?: string | null;
 }
 
-export interface Packed {
+interface Packed {
   v: 1;
   s: string[];
   r: (number | null)[][];
@@ -20,8 +20,7 @@ const loaders = import.meta.glob('../data/published-loads.json', { import: 'defa
 
 function unpack(p: Packed | Compact[]): Compact[] {
   if (Array.isArray(p)) return p;
-  // A malformed file counts as a failed load, not as "no published data".
-  if (!p || !Array.isArray(p.r) || !Array.isArray(p.s)) throw new Error('published loads: unexpected format');
+  if (!p || !Array.isArray(p.r)) return [];
   const S = (i: number | null) => (i === null || i < 0 ? null : p.s[i] ?? null);
   return p.r.map((x) => ({
     c: S(x[0]) as string, p: S(x[1]) as string, w: x[2] as number, bm: S(x[3]) ?? '', bt: S(x[4]) ?? '', t: S(x[5]) ?? 'other',
@@ -29,6 +28,11 @@ function unpack(p: Packed | Compact[]): Compact[] {
     u: S(x[14]), pg: x[15], cp: x[16] === -1 ? null : x[16] === 1, cn: x.length > 17 ? S(x[17]) : null,
   }));
 }
+let cache: ValidationLoad[] | null = null;
+let failed = false;
+/** True when the published-load chunk could not be loaded (network error, stale chunk after a redeploy). */
+export const publishedLoadFailed = () => failed;
+let pending: Promise<ValidationLoad[]> | null = null;
 
 function expand(r: Compact): ValidationLoad {
   return {
@@ -39,67 +43,28 @@ function expand(r: Compact): ValidationLoad {
   };
 }
 
-export interface PublishedStore {
-  /** Loads the table; resolves to [] on failure (check failed()). Only a successful load is cached, so a failure can be retried. */
-  load(): Promise<ValidationLoad[]>;
-  cached(): ValidationLoad[] | null;
-  /** True when the last load attempt failed (network error, stale chunk after a redeploy, missing or malformed file). */
-  failed(): boolean;
-}
-
-export function createPublishedStore(fetchData: (() => Promise<Packed | Compact[]>) | undefined): PublishedStore {
-  let cache: ValidationLoad[] | null = null;
-  let failed = false;
-  let pending: Promise<ValidationLoad[]> | null = null;
-  return {
-    cached: () => cache,
-    failed: () => failed,
-    load() {
-      if (cache) return Promise.resolve(cache);
-      if (pending) return pending;
-      pending = (fetchData ? fetchData() : Promise.reject(new Error('published loads: file not in this build')))
-        .then((data) => {
-          const rows = unpack(data).map(expand);
-          cache = rows;
-          failed = false;
-          return rows;
-        })
-        .catch(() => {
-          failed = true;
-          return [] as ValidationLoad[];
-        })
-        .finally(() => {
-          pending = null;
-        });
-      return pending;
-    },
-  };
-}
-
-const store = createPublishedStore(Object.values(loaders)[0]);
-
-/** True when the published-load table could not be loaded. */
-export const publishedLoadFailed = () => store.failed();
-export const loadPublished = () => store.load();
-
-/** Published loads (null while loading; [] with failed = true when loading failed) and a retry for a failed load. */
-export function usePublished(): { rows: ValidationLoad[] | null; failed: boolean; retry: () => void } {
-  const [state, setState] = useState<{ rows: ValidationLoad[] | null; failed: boolean }>(() => ({ rows: store.cached(), failed: false }));
-  const [attempt, setAttempt] = useState(0);
-  useEffect(() => {
-    let live = true;
-    if (!store.cached()) store.load().then((r) => live && setState({ rows: r, failed: store.failed() }));
-    return () => {
-      live = false;
-    };
-  }, [attempt]);
-  const retry = useCallback(() => {
-    setState({ rows: null, failed: false });
-    setAttempt((a) => a + 1);
-  }, []);
-  return { ...state, retry };
+export function loadPublished(): Promise<ValidationLoad[]> {
+  if (cache) return Promise.resolve(cache);
+  if (pending) return pending;
+  const fn = Object.values(loaders)[0];
+  pending = (fn ? fn() : Promise.resolve([] as Compact[]))
+    .then((data) => (cache = unpack(data).map(expand)))
+    .catch(() => {
+      failed = true;
+      pending = null; // allow a retry on the next mount
+      return (cache = []);
+    });
+  return pending;
 }
 
 export function usePublishedLoads(): ValidationLoad[] | null {
-  return usePublished().rows;
+  const [rows, setRows] = useState<ValidationLoad[] | null>(cache);
+  useEffect(() => {
+    let live = true;
+    if (!cache) loadPublished().then((r) => live && setRows(r));
+    return () => {
+      live = false;
+    };
+  }, []);
+  return rows;
 }

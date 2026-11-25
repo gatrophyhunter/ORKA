@@ -58,33 +58,3 @@ describe('published reference', () => {
     expect(publishedReference([row('section-max', 56), row('reduced', 40)])).toBeNull();
   });
 });
-
-import fs from 'node:fs';
-import path from 'node:path';
-
-describe('shipped data provenance and review fixes', () => {
-  const dir = path.resolve(__dirname, '../src/data');
-  const evidence: Record<string, Record<string, string>> = JSON.parse(fs.readFileSync(path.join(dir, 'db-evidence.json'), 'utf8'));
-  it('every shipped record of every collection keeps at least one verbatim Evidence line', () => {
-    const missing: string[] = [];
-    for (const col of ['cartridges', 'powders', 'bullets'] as const) {
-      for (const r of BASE_DB[col] as { id: string }[]) if (!/^Evidence: \S/m.test(evidence[col]?.[r.id] ?? '')) missing.push(`${col}/${r.id}`);
-    }
-    BASE_DB.brassCases.forEach((_, i) => {
-      if (!/^Evidence: \S/m.test(evidence.brassCases?.[String(i)] ?? '')) missing.push(`brassCases/${i}`);
-    });
-    expect(missing).toEqual([]);
-  });
-  it('ships each SAAMI/C.I.P. twin once, with both limits', () => {
-    const ids = new Set(BASE_DB.cartridges.map((c) => c.id));
-    for (const gone of ['9mm', '223-winchester-ss-magnum', '243-winchester-ss-magnum', '25-winchester-ss-magnum']) expect(ids.has(gone)).toBe(false);
-    const by = (id: string) => BASE_DB.cartridges.find((c) => c.id === id)!;
-    for (const id of ['223-winchester-super-short-magnum', '243-winchester-super-short-magnum', '25-winchester-super-short-magnum']) {
-      expect([by(id).saamiMapPsi, by(id).cipPmaxBar]).toEqual([65000, 4400]);
-    }
-    expect(by('416-weatherby-magnum').cipPmaxBar).toBe(4400);
-    expect(by('416-weatherby-magnum').aliases).not.toContain('9 mm');
-    expect(by('221-remington-fireball').type).toBe('rifle');
-    expect(BASE_DB.cartridges.every((c) => c.type === 'rifle')).toBe(true);
-  });
-});

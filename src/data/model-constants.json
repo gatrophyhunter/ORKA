@@ -20,20 +20,6 @@
     "heldOutPressureP90Pct": 30.9,
     "heldOutPressureBiasPct": -4.4,
     "heldOutWithin10Pct": 39,
-    "byShotClass": {
-      "jacketed": {
-        "n": 297,
-        "p50Pct": 12.4,
-        "p90Pct": 30.8,
-        "biasPct": -8.2
-      },
-      "monolithic": {
-        "n": 78,
-        "p50Pct": 17,
-        "p90Pct": 36.9,
-        "biasPct": 9.7
-      }
-    },
     "scope": "held-out pressure comparisons exist only for: 308 Winchester, 223 Remington",
     "heldOutCartridgeIds": [
       "308-winchester",
